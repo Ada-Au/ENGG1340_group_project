@@ -6,8 +6,8 @@ const int map_height = 30;
 const int map_width = 60;
 const int map_maxTunnels = 1200;
 const int maxLength = 10;
-const int max_debuff = 12; // +4 is the min map size
-const std::string debuffs[max_debuff] = {
+const int max_debuff = 12, max_buff = 2; // these 2 + 8 is the min map size
+const std::string allDebuffs[max_debuff] = {
     "Burning",
     "Freezing",
     "Blind",
@@ -19,6 +19,12 @@ const std::string debuffs[max_debuff] = {
     "Wet",
     "Cursed",
     "Paralyzed",
-    "Hallucination"};
+    "Hallucination",
+};
+
+const std::string allBuffs[max_buff] = {
+    "Full",
+    "Anger",
+};
 
 #endif
