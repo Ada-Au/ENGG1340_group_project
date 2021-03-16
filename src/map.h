@@ -2,13 +2,13 @@
 #define Map_h
 #endif
 
+#include "constants.h"
+
 class Map
 {
-    public: 
-    void Fill();                   // Creating Map
+public:
+    void fill();
 
-    public: 
-    static int height;
-    static int width;
-    char** layout;         // The Walls on the map
+public:
+    char layout[map_height][map_width];
 };
