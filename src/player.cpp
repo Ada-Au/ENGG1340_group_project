@@ -1,6 +1,5 @@
 #include "player.h"
 
-Player::Player() //constructor
+Player::Player()
 {
-    
 }
