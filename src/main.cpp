@@ -1,7 +1,6 @@
 #include "map.h"
 #include "player.h"
 #include "screen.h"
-#include "constants.h"
 #include <iostream>
 #include "../lib/conio/conio.h"
 
@@ -23,7 +22,6 @@ int main()
     while (key != 'q')
     {
         waitKey(key);
-        scr.log = "";
         switch (key)
         {
         case 'w':

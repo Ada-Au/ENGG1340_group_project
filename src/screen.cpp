@@ -1,5 +1,6 @@
 #include "screen.h"
-#include "constants.h"
+#include "env.h"
+#include <iomanip>
 
 void Screen::renderScreen(Map map, Player player) // "capturing" the screen and printing it
 {
@@ -14,15 +15,20 @@ void Screen::renderScreen(Map map, Player player) // "capturing" the screen and 
         }
         std::cout << std::endl;
     }
-    std::cout << log << '\n';
+    std::cout << "\n"
+              << std::setfill('*') << '*'
+              << std::setw(map_width) << "\n\n"
+              << log << "\n\n"
+              << std::setw(map_width)
+              << '\n';
     // std::cout << '\t' << help[i] << '\n'; // printing help
-    // log = "";
+    log = "";
 }
 
-// void Screen::fillHelp() //filling help
+// void Screen::fillHelp()
 // {
-//     help[0] = "\"Numpad\"... - Movement"; //help message № 1
-//     help[1] = "";                         //help message № 2
-//     for (int i = 2; i < 21; i++)          //blanket messages
+//     help[0] = "\"Numpad\"... - Movement";
+//     help[1] = "";
+//     for (int i = 2; i < 21; i++)
 //         help[i] = "";
 // }

@@ -6,10 +6,8 @@ map.o:src/map.cpp src/map.h
 	g++ -c src/map.cpp -o map.o 
 player.o:src/player.cpp src/player.h
 	g++ -c src/player.cpp -o player.o
-screen.o:src/screen.cpp src/screen.h map.o player.o
-	g++ -c src/screen.cpp -o screen.o map.o player.o
-# constants.o:src/constants.cpp src/constants.h
-# 	g++ -c src/constants.cpp -o constants.o
+screen.o:src/screen.cpp src/screen.h 
+	g++ -c src/screen.cpp -o screen.o 
 
 clean:
-	rm -f map.o main.o player.o screen.o constants.o
+	rm -f map.o main.o player.o screen.o
