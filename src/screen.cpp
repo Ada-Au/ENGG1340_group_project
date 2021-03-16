@@ -13,14 +13,21 @@ void Screen::renderScreen(Map map, Player player) // "capturing" the screen and 
             else
                 std::cout << map.layout[h][w];
         }
-        std::cout << std::endl;
+        std::cout << "      ";
+        if (h == 0 || h == map_height - 1)
+        {
+            std::cout << "*******************************" << std::endl;
+        }
+        else
+            std::cout << "*" << std::setfill(' ') << std::setw(30) << "*" << std::endl;
     }
     std::cout << "\n"
-              << std::setfill('*') << '*'
-              << std::setw(map_width) << "\n\n"
-              << log << "\n\n"
-              << std::setw(map_width)
-              << '\n';
+              << std::setfill('*') << std::setw(map_width + 2)
+              << "\n\n"
+              << log << "\n"
+              << std::setw(map_width + 2)
+              << std::endl
+              << "\n\n";
     // std::cout << '\t' << help[i] << '\n'; // printing help
     log = "";
 }
