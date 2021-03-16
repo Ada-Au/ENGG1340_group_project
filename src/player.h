@@ -8,31 +8,32 @@
 #include <time.h>
 using namespace std;
 
-const int max_role = 12;
-const int max_race = 4;
-const int max_gender = 2;
-
 class Player
 {
 public:
     Player();
     string name;
 
-    string roleList[max_role] = {"Archeologist", "Barbarian", "Caveman/Cavewoman", "Healer", "Knight", "Monk", "Priest/Priestess", "Rogue", "Ranger", "Samurai", "Tourist", "Wizard"};
-    string raceList[max_race] = {"human", "drawf", "elf", "orc"};
-    string genderList[max_gender] = {"male", "female"};
+    // string roleList[12] = {"Archeologist", "Barbarian", "Caveman/Cavewoman", "Healer", "Knight", "Monk", "Priest/Priestess", "Rogue", "Ranger", "Samurai", "Tourist", "Wizard"};
+    // string raceList[4] = {"humen", "drawf", "elf", "orc"};
+    // string genderList[2] = {"male", "female"};
 
-    string role;
-    string gender;
-    string race = "human";
+    // string role;
+    // string race;
+    // string gender;
 
-    void randomRole(string &role)
-    {
-        role = roleList[rand() % max_role];
-    }
+    // void randomRole(string &role, string roleList[])
+    // {
+    //     role = roleList[rand() % sizeof(roleList)];
+    // }
 
-    void randomGender(string &gender)
-    {
-        gender = genderList[rand() % max_gender];
-    }
+    // void randomRace(string &race, string raceList[])
+    // {
+    //     race = raceList[rand() % sizeof(raceList)];
+    // }
+
+    // void randomGender(string &gender, string genderList[])
+    // {
+    //     gender = genderList[rand() % sizeof(genderList)];
+    // }
 };
