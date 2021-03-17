@@ -8,4 +8,4 @@ start: start.o player.o
 	g++ start.o player.o -o start
 
 clean:
-	rm -f start.o player.o start.tgz
+	rm -f start.o player.o

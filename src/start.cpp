@@ -8,7 +8,7 @@ using namespace std;
 PrintID printID;
 Player player;
 
-int main()
+PrintID::PrintID()
 {
     cout << "YOU DIED. Welome to the Underworld!\n"
          << "Do you remember your name?\t";
@@ -27,13 +27,11 @@ int main()
 
     while(key == 'n')
     {
-        printID.PrintChoice();
-
         char flag = ' ';
         cin >> flag;
         while (flag != 'y'){
 
-            if (flag == '1'){          //input player's role
+            if (flag == '1'){                //input player's role
                 printID.PrintRole();
                 cin >> flag;
                 printID.DealInput(flag, max_role);
@@ -56,7 +54,4 @@ int main()
         cin >> key;
         break;
     }
-    
-
-    return 0;
 }

@@ -12,8 +12,9 @@ class PrintID
     Player player;
 
     public:
-    PrintID();
 
+    PrintID();
+    
     void PrintInform()
     {
         cout << "> Name: " << player.name << "\n"
