@@ -25,19 +25,5 @@ public:
     string gender;
     string race = "human";
 
-    void randomRole(string &role)
-    {
-        role = roleList[rand() % max_role];
-    }
-
-    void randomRace(string &race)
-    {
-        race = raceList[rand() % max_race];
-    }
-
-    void randomGender(string &gender)
-    {
-        gender = genderList[rand() % max_gender];
-    }
 };
 #endif

@@ -35,6 +35,7 @@
         "xmemory0": "c",
         "xstddef": "c",
         "xtr1common": "c",
-        "xutility": "c"
+        "xutility": "c",
+        "iomanip": "cpp"
     }
 }
