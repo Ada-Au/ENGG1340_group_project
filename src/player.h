@@ -13,17 +13,16 @@ const int max_gender = 2;
 
 class Player
 {
-public:
-    Player();
-    string name;
-
-    string roleList[max_role] = {"Archeologist", "Barbarian", "Caveman/Cavewoman", "Healer", "Knight", "Monk", "Priest/Priestess", "Rogue", "Ranger", "Samurai", "Tourist", "Wizard"};
-    string raceList[max_race] = {"human", "drawf", "elf", "orc"};
-    string genderList[max_gender] = {"male", "female"};
-
-    string role;
-    string gender;
-    string race = "human";
-
+    public:
+        string name;
+        string role;
+        string gender;
+        string race = "human";
+        string roleList[max_role] = {"Archeologist", "Barbarian", "Caveman/Cavewoman", "Healer", "Knight", "Monk", "Priest/Priestess", "Rogue", "Ranger", "Samurai", "Tourist", "Wizard"};
+        string raceList[max_race] = {"human", "drawf", "elf", "orc"};
+        string genderList[max_gender] = {"male", "female"};
+        Player();
+        void setData(char flag, int max, string &role, string &race, string &gender);
+        void PrintInform();
 };
 #endif
