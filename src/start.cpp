@@ -1,17 +1,17 @@
-#include "player.h"
+//#include "player.h"
+#include "start.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
 
 using namespace std;
 
+PrintID printID;
+Player player;
+
 int main()
 {
-    Player player;
-
     cout << "YOU DIED. Welome to the Underworld!\n"
-         << "Do you remember your name?\t"
-         << "Enter your name: ";
+         << "Do you remember your name?\t";
 
     cin >> player.name;
     cout << endl;
@@ -19,39 +19,44 @@ int main()
     player.randomRole(player.role);
     player.randomGender(player.gender);
 
-    cout << "Here is your indentity information\n"
-    << "> Name: " << player.name << "\n"
-    << "> Role: " << player.role << "\n"
-    << "> Race: " << player.race << "\n"
-    << "> Gender: " << player.gender << "\n\n";
-
-    cout << "Is this ok? \n\n" << player.name << ", " << player.gender << " " << player.race << " " << player.role << "\n\n";
-    cout << "y -Yes: start my exploration in Hell\n" << "n -No: correct my role, race and gender again\n" << "q -I QUIT NOW\n";
+    cout << "Here is your indentity information\n";
+    printID.PrintInform();
 
     char key = ' ';
     cin >> key;
 
-    switch(key)
+    while(key == 'n')
     {
-    case 'y':
-        break;
+        printID.PrintChoice();
 
-    case 'n':
         char flag = ' ';
-        
-        cout << "Pick a role or profession\n\n";
-        for (char i = 'a'; i < 'a' + max_role; i++){
-            int iflag = i - 'a';
-            cout << i <<" -"<< player.roleList[iflag] << endl;
+        cin >> flag;
+        while (flag != 'y'){
+
+            if (flag == '1'){          //input player's role
+                printID.PrintRole();
+                cin >> flag;
+                printID.DealInput(flag, max_role);
+            }
+
+            else if (flag == '2'){          //input player's race
+                printID.PrintRace();
+                cin >> flag;
+                printID.DealInput(flag, max_race);
+            }
+
+            else if (flag == '3'){          //input player's gender
+                printID.PrintGender();
+                cin >> flag;
+                printID.DealInput(flag, max_gender);
+            }
         }
-        cout << '*' << " -Random\n\n\n";
 
-
-        break;
-
-    case 'q':
+        printID.PrintInform();
+        cin >> key;
         break;
     }
+    
 
     return 0;
 }
