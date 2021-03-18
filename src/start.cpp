@@ -1,8 +1,10 @@
 #include "player.h"
 #include "start.h"
-#include <stdio.h>
+
 #include <iostream>
+#include <stdio.h>
 #include <iomanip>
+
 
 using namespace std;
 
@@ -147,6 +149,10 @@ int main()
             case 'y':
             {
                 break;
+            }
+            case 'q':
+            {   
+                return 0;
             }
         }
         PrintInform();
