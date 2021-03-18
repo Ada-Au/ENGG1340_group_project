@@ -37,10 +37,15 @@ In this game, you control a dead man who falls into hell with plenty of monsters
     - The values of attack, the dodge chance of player and the damages to player etc. are generated randomly according to the ability of player and the monsters<br>
 
 2. **Data structures for storing game status**
-    - array for saving plenty of player's status and items
+    - A class is used to defind all the status of player, it contain:
+        - array for saving plenty of player's status and items
+        - player x, y corrdination
+        - player name, role, gender
+    - Map is store in a 2D array for the landscape and monsters location
 
 3. **Dynamic memory management**
     - array and pointer using in map generation
+    - more array for player status, image, interaction, items
 
 4. **File input/output**
     - savings are the file input and output. Savings should include the following types of information:<br>
@@ -59,3 +64,6 @@ In this game, you control a dead man who falls into hell with plenty of monsters
         - random output of the monsters' attack damage/ defense/ dodge according; and the probability of items appearing on map/ sold by special NPC
         - interface of home page
         - interface for battles
+        - interface for shop and communication
+        - interface for backpack
+        - interface for map
