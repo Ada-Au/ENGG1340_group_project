@@ -1,16 +1,16 @@
 #ifndef NPC_h
 #define NPC_h
-#endif
+
 #include <iostream>
 
 using namespace std;
 
 const int max_size = 20;
 
-class Charon
+class NPC
 {   
     public:
-        string _Charon_[max_size] = {
+        string Charon[max_size] = {
             "                      .---.                        ", // length ~50
             "                     ,      `                      ",
             "                    / _.-._  1                     ",
@@ -27,14 +27,9 @@ class Charon
             "SGGG.RRS   /                       .=== }          ",
             " `--RRRRS  /                       .--- )         ",
             "     RRRRS|                        .____)          ",
-
-    };
-};
-
-class Grief
-{
-    public:
-    string _Grief_[max_size] = {
+        };
+        
+    string Grief[max_size] = {
         "                         .---.                         ",
         "                       ,       `.                      ",
         "                      /  .~^~.   }                     ",
@@ -52,4 +47,6 @@ class Grief
         "                 |||||\\ \\  |||||        \\         ",
         "                 vvvv   v  vvvv          \\            ",
         };
+
 };
+#endif
