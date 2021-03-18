@@ -2,6 +2,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+using namespace std;
+
+int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
 void Map::fill()
 {
@@ -16,7 +19,6 @@ void Map::fill()
 
     srand(time(NULL));
     int currentRow = 1, currentCol = 1;
-    int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     int temp[2] = {0, 0};
     int *lastDirection = temp, *randomDirection;
 
@@ -44,7 +46,12 @@ void Map::fill()
             }
             else
             {
-                layout[currentRow][currentCol] = ' ';
+                if (!(currentRow == 1 && currentCol == 1) && rand() % 100 >= 90 && layout[currentRow][currentCol] != ' ')
+                {
+                    layout[currentRow][currentCol] = 'M';
+                }
+                else
+                    layout[currentRow][currentCol] = ' ';
                 currentRow += randomDirection[0];
                 currentCol += randomDirection[1];
                 tunnelLength++;
@@ -57,11 +64,38 @@ void Map::fill()
         }
         if (maxTunnels >= 0)
         {
-            std::cout << "generating: " << map_maxTunnels - maxTunnels << "/" << map_maxTunnels << std::endl;
+            cout << "generating: " << map_maxTunnels - maxTunnels << "/" << map_maxTunnels << endl;
         }
     }
 
-    std::cout << std::endl
-              << "done:D " << std::endl
-              << std::endl;
+    cout << endl
+         << "done:D " << endl
+         << endl;
+
+    cout << endl;
+}
+
+void Map::update()
+{
+    for (int h = 0; h < map_height; h++)
+    {
+        for (int w = 0; w < map_width; w++)
+        {
+            if (layout[h][w] == 'M')
+            {
+                int randomN = rand() % 4;
+                int randomDirection[2] = {directions[randomN][0], directions[randomN][1]};
+                if (layout[h + randomDirection[0]][w + randomDirection[1]] == ' ')
+                {
+                    layout[h][w] = ' ';
+                    layout[h + randomDirection[0]][w + randomDirection[1]] = 'M';
+                }
+            }
+        }
+    }
+}
+
+void Map::removeMonster(int x, int y)
+{
+    layout[x][y] = ' ';
 }
