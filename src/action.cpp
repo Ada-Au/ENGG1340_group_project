@@ -11,30 +11,31 @@ void action(Screen scr, Map map, Player player)
     char key = ' ';
     while (key != 'q')
     {
+        bool wall = false;
         key = getch();
         switch (key)
         {
         case 'w':
             if (map.layout[player.y - 1][player.x] == '#')
-                scr.log = "There is a wall in my way";
+                wall = true;
             else
                 player.y--;
             break;
         case 'a':
             if (map.layout[player.y][player.x - 1] == '#')
-                scr.log = "There is a wall in my way";
+                wall = true;
             else
                 player.x--;
             break;
         case 's':
             if (map.layout[player.y + 1][player.x] == '#')
-                scr.log = "There is a wall in my way";
+                wall = true;
             else
                 player.y++;
             break;
         case 'd':
             if (map.layout[player.y][player.x + 1] == '#')
-                scr.log = "There is a wall in my way";
+                wall = true;
             else
                 player.x++;
             break;
@@ -53,6 +54,13 @@ void action(Screen scr, Map map, Player player)
         {
             scr.renderScreen(map, player);
         }
-        map.update();
+
+        if (wall)
+            scr.log = "There is a wall in my way";
+        else
+        {
+            player.energy--;
+            map.update();
+        }
     }
 }
