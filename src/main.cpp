@@ -2,6 +2,7 @@
 #include "player.h"
 #include "screen.h"
 #include "action.h"
+#include "setup.h"
 #include <iostream>
 
 int main()
@@ -10,6 +11,8 @@ int main()
     Screen scr;
     Map map;
     Player player;
+
+    setupScreen(player);
 
     map.fill();
     scr.renderScreen(map, player);

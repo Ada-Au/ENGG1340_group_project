@@ -27,4 +27,11 @@ const std::string allBuffs[max_buff] = {
     "Anger",
 };
 
+const int max_role = 12;
+const int max_race = 4;
+const int max_gender = 2;
+const std::string roleList[max_role] = {"Archeologist", "Barbarian", "Caveman/Cavewoman", "Healer", "Knight", "Monk", "Priest/Priestess", "Rogue", "Ranger", "Samurai", "Tourist", "Wizard"};
+const std::string raceList[max_race] = {"human", "drawf", "elf", "orc"};
+const std::string genderList[max_gender] = {"male", "female"};
+
 #endif
