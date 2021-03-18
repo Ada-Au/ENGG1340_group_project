@@ -1,4 +1,4 @@
-#  What the HELL (temporary)
+#  What A HELL
 A roguelike and turn-based RPG game
 
 ## Members
