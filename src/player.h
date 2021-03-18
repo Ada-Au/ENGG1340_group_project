@@ -22,7 +22,7 @@ class Player
         string raceList[max_race] = {"human", "drawf", "elf", "orc"};
         string genderList[max_gender] = {"male", "female"};
         Player();
-        void setData(char flag, int max, string &role, string &race, string &gender);
+        void setData(char flag, int max);
         void PrintInform();
 };
 #endif
