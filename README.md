@@ -40,7 +40,7 @@ In this game, you control a dead man who falls into hell with plenty of monsters
     - array for saving plenty of player's status and items
 
 3. **Dynamic memory management**
-    -array and pointer using in map generation
+    - array and pointer using in map generation
 
 4. **File input/output**
     - savings are the file input and output. Savings should include the following types of information:<br>
