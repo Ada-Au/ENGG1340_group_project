@@ -17,7 +17,7 @@ In this game, you control a dead man who falls into hell with plenty of monsters
 
 1. Enjoy is the first most important :D<br>
 2. Turn-based battles with your strategy<br>
-3. WASD and ← ↑ → ↓ for movement control<br>
+3. WASD for movement control<br>
 4. When HP goes zero, player dies with permadeath<br>
 5. When MP goes zero, player cannot release any magic skills<br>
 6. When Energy goes zero, there are random debuffs for the player. (e.g. max. strength & movement speed decrease...)<br>

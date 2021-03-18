@@ -1,25 +1,19 @@
 #include "map.h"
+#include "player.h"
+#include "screen.h"
+#include "action.h"
 #include <iostream>
 
-void WaitKey(char& key) 
-{
-    std::cin>>key;
-}
-
 int main()
-{   
-    char key=' ';
-    bool quit=false;
+{
+    char key = ' ';
+    Screen scr;
     Map map;
+    Player player;
 
-    map.Fill();
-    for (int h = 0; h < 20; h++)
-    {
-        for (int w = 0; w < 20; w++)
-        {
-            std::cout <<  map.layout[h][w];
-        }
-        std::cout << std::endl;
-    }
+    map.fill();
+    scr.renderScreen(map, player);
+    action(scr, map, player);
+
     return 0;
 }

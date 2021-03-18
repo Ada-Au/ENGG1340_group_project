@@ -1,14 +1,13 @@
 #ifndef Map_h
 #define Map_h
-#endif
+
+#include "env.h"
 
 class Map
 {
-    public: 
-    void Fill();                   // Creating Map
-
-    public: 
-    static int height;
-    static int width;
-    char** layout;         // The Walls on the map
+public:
+    void fill();
+    char layout[map_height][map_width];
 };
+
+#endif
