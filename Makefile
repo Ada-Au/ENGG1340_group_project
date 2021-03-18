@@ -1,5 +1,5 @@
-main:main.o map.o screen.o player.o action.o 
-	g++ -o main main.o map.o screen.o player.o action.o 
+main:main.o map.o screen.o player.o action.o setup.o 
+	g++ -o main main.o map.o screen.o player.o action.o setup.o 
 main.o:src/main.cpp
 	g++ -c src/main.cpp -o main.o
 map.o:src/map.cpp src/map.h 
@@ -10,6 +10,8 @@ screen.o:src/screen.cpp src/screen.h
 	g++ -c src/screen.cpp -o screen.o
 action.o:src/action.cpp src/action.h 
 	g++ -c src/action.cpp -o action.o 
+setup.o:src/setup.cpp src/setup.h 
+	g++ -c src/setup.cpp -o setup.o 
 
 clean:
-	rm -f map.o main.o player.o screen.o action.o 
+	rm -f map.o main.o player.o screen.o action.o setup.o 
