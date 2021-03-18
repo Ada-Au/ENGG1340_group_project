@@ -18,7 +18,6 @@ In this game, you control a dead man who falls into hell with plenty of monsters
 4. When MP goes zero, player cannot release any magic skills<br>
 5. When Energy goes zero, there are random debuffs for the player. (e.g. max. strength & movement speed decrease...)<br>
 6. Energy decreases when time passes/ player makes any steps.<br>
-7. Players cannot cross special floors. ( except rivers —>  slower the speed/ cannot move across unless a boat is equipped<br>
 
 ## Features
 - Level-up system with points/experience level to upgrade player's ability <br>
@@ -29,7 +28,6 @@ In this game, you control a dead man who falls into hell with plenty of monsters
 - NO AUTO SAVING and permadeath(i.e. player character loses all health are considered as dead and cannot be used anymore), is included. <br>
 - But there is a saving point after defeating the boss for each level.<br>
 - The difficulty (or type) of monsters and the rareness of equipments are shown in different colors.<br>
-- Possible types of floors: Water (river), mountain, walls, fire, snow, traps.<br>
 
 ## How do the features match requirements
 1. **Generation of random game sets or events**
