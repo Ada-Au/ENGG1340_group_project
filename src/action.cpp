@@ -1,5 +1,6 @@
 #include "action.h"
 #include "../lib/conio/conio.h"
+#include <thread>
 
 void action(Screen scr, Map map, Player player)
 {
@@ -36,6 +37,18 @@ void action(Screen scr, Map map, Player player)
         default:
             scr.log = "Please input again";
         }
-        scr.renderScreen(map, player);
+
+        if (map.layout[player.y][player.x] == 'M')
+        {
+            scr.log = "Monster";
+            scr.renderScreen(map, player);
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            std::cout << "into fight screen";
+        }
+        else
+        {
+            scr.renderScreen(map, player);
+        }
+        map.update();
     }
 }

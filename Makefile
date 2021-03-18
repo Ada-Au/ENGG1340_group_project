@@ -1,5 +1,5 @@
-main:main.o map.o screen.o player.o action.o
-	g++ -o main main.o map.o screen.o player.o action.o
+main:main.o map.o screen.o player.o action.o 
+	g++ -o main main.o map.o screen.o player.o action.o 
 main.o:src/main.cpp
 	g++ -c src/main.cpp -o main.o
 map.o:src/map.cpp src/map.h 
@@ -12,4 +12,4 @@ action.o:src/action.cpp src/action.h
 	g++ -c src/action.cpp -o action.o 
 
 clean:
-	rm -f map.o main.o player.o screen.o action.o
+	rm -f map.o main.o player.o screen.o action.o 
