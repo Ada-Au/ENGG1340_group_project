@@ -22,24 +22,24 @@ In this game, you control a dead man who falls into hell with plenty of monsters
 
 ## Features
 - Level-up system with points/experience level to upgrade player's ability <br>
-- Total 10 levels in the dungeon (hell) . Different levels of the dungeon offers a range of difficulty in monsters corresponding with the range of value in treasure.<br>
+- Total 10 levels in the dungeon (hell). Different levels of the dungeon offer a range of difficulty in monsters corresponding with the range of value in treasure.<br>
 - Generally, the difficulty in monsters increases with procedurally generated levels of the dungeon.<br>
 - Rare treasures could be found in secret places.<br>
 - Each level has a different theme and boss. Also, there are 3 floors for each level.<br>
 - NO AUTO SAVING and permadeath(i.e. player character loses all health are considered as dead and cannot be used anymore), is included. <br>
 - But there is a saving point after defeating the boss for each level.<br>
-- The difficulty (or type) of monsters and the rareness of equipments are shown with different colours.<br>
+- The difficulty (or type) of monsters and the rareness of equipments are shown in different colors.<br>
 - Possible types of floors: Water (river), mountain, walls, fire, snow, traps.<br>
 
-## How do the features match reqirments
+## How do the features match requirements
 1. **Generation of random game sets or events**
     - Generation of map, monsters, NPCs and equipments, such as weapons and tools, is random <br>
     - The values of attack, the dodge chance of player and the damages to player etc. are generated randomly according to the ability of player and the monsters<br>
 
 2. **Data structures for storing game status**
-    - A class is used to defind all the status of player, it contain:
+    - A class is used to define all the status of player, it contains:
         - array for saving plenty of player's status and items
-        - player x, y corrdination
+        - player x, y coordination
         - player name, role, gender
     - Map is store in a 2D array for the landscape and monsters location
 
@@ -52,11 +52,11 @@ In this game, you control a dead man who falls into hell with plenty of monsters
         1. Level of the player<br>
         2. The game progress and X, Y world location of the player<br>
         3. The states (inc. health, MP and energy) of the player<br>
-        4. The ability of players (inc. strength, intelligent, luck etc.)<br>
-        5. The items in player's backpack (inc. money, weapons, armor, food, special tools like boat, keys)<br>
-        6. The seed of the map (confirm the player is in the current floor)<br>
+        4. The ability of players (inc. strength, intelligence, luck etc.)<br>
+        5. The items in player's backpack (inc. money, weapons, armor, food, special tools like a boat, keys)<br>
+        6. The seed of the map (confirm the player is on the current floor)<br>
 5. **Program codes in multiple files**
-    - programes are planed to be divided into:
+    - programs are planned to be divided into:
         - movement of player character
         - states of player character
         - generation of map, monsters and NPCs
