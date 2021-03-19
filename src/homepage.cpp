@@ -21,21 +21,21 @@ int main()
     int choices = 3;
     bool selecting = true;
     bool updated = false;
-
+    string log = "";
     //To-do: Press any key to continue
     //       add reminder: plz play this game with full screen
     for(int i = 0; i < 10; i++)
         cout << homepage.homepage[i] << "\n";
 
-    cout << "START\n" << "LOAD\n" << "HELP\n";
+    cout << "_START_\n" << "_LOAD_\n" << "_HELP_\n\n";
 
     char c;
 
+    //Press UP DOWN to choose
     while(selecting)
     {
         switch(c = getch())
         {   
-            default: break;
             case KEY_UP:
                 if (selected > 0){
                     selected--;
@@ -51,17 +51,22 @@ int main()
             case KEY_ENTER:
                 selecting = false;
                 break;
+            
+            default:
+                break;
         }
         if (updated){
-            if (selected == 0)
-                cout << "Selected START\n";
+            if (selected <= 0)
+                log = "Selected START";
 
             else if (selected == 1)
-                cout << "Selected LOAD\n";
+                log = "Selected LOAD";
 
-            else if (selected == 2)
-                cout << "Selected HELP\n";
-            updated = false; 
+            else if (selected >= 2)
+                log = "Selected HELP";
+            
+            cout << log << "\t<Press Enter to Continue...>\n";
+            updated = false;
         }
     }
     return 0;
