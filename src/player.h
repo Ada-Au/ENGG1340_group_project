@@ -32,4 +32,4 @@ class Player
     void setData(char flag, int max);
     void PrintInform();
 };
-#endif;
+#endif
