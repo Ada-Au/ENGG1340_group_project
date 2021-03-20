@@ -1,0 +1,4 @@
+Language: Cpp
+AlignAfterOpenBracket: DontAlign
+IndentWidth: 4
+SpacesBeforeTrailingComments: 4

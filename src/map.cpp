@@ -1,18 +1,12 @@
 #include "map.h"
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
 using namespace std;
 
 int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-void Map::fill()
-{
+void Map::fill() {
     int maxTunnels = map_maxTunnels;
-    for (int h = 0; h < map_height; h++)
-    {
-        for (int w = 0; w < map_width; w++)
-        {
+    for (int h = 0; h < map_height; h++) {
+        for (int w = 0; w < map_width; w++) {
             layout[h][w] = '#';
         }
     }
@@ -22,80 +16,63 @@ void Map::fill()
     int temp[2] = {0, 0};
     int *lastDirection = temp, *randomDirection;
 
-    while (maxTunnels > 0 && map_height > 0 && map_width > 0 && maxLength > 0)
-    {
+    cout << "generating... ";
+
+    while (maxTunnels > 0 && map_height > 0 && map_width > 0 && maxLength > 0) {
         randomDirection = directions[rand() % 4];
-        while (
-            (randomDirection[0] == -lastDirection[0] &&
-             randomDirection[1] == -lastDirection[1]) ||
-            (randomDirection[0] == lastDirection[0] &&
-             randomDirection[1] == lastDirection[1]))
-        {
+        while ((randomDirection[0] == -lastDirection[0] &&
+                   randomDirection[1] == -lastDirection[1]) ||
+               (randomDirection[0] == lastDirection[0] &&
+                   randomDirection[1] == lastDirection[1])) {
             randomDirection = directions[rand() % 4];
         }
 
         int randomLength = rand() % maxLength, tunnelLength = 0;
-        while (tunnelLength < randomLength)
-        {
+        while (tunnelLength < randomLength) {
             if (((currentRow == 1) && (randomDirection[0] == -1)) ||
                 ((currentCol == 1) && (randomDirection[1] == -1)) ||
                 ((currentRow == map_height - 2) && (randomDirection[0] == 1)) ||
-                ((currentCol == map_width - 2) && (randomDirection[1] == 1)))
-            {
+                ((currentCol == map_width - 2) && (randomDirection[1] == 1))) {
                 break;
-            }
-            else
-            {
-                if (!(currentRow == 1 && currentCol == 1) && rand() % 100 >= 90 && layout[currentRow][currentCol] != ' ')
-                {
+            } else {
+                if (!(currentRow == 1 && currentCol == 1) &&
+                    rand() % 100 >= 90 &&
+                    layout[currentRow][currentCol] != ' ') {
                     layout[currentRow][currentCol] = 'M';
-                }
-                else
+                } else
                     layout[currentRow][currentCol] = ' ';
                 currentRow += randomDirection[0];
                 currentCol += randomDirection[1];
                 tunnelLength++;
             }
-            if (tunnelLength > 0)
-            {
+            if (tunnelLength > 0) {
                 lastDirection = randomDirection;
                 maxTunnels--;
             }
         }
-        if (maxTunnels >= 0)
-        {
-            cout << "generating: " << map_maxTunnels - maxTunnels << "/" << map_maxTunnels << endl;
-        }
     }
 
-    cout << endl
-         << "done:D " << endl
-         << endl;
+    cout << endl << "done:D " << endl << endl;
 
     cout << endl;
 }
 
-void Map::update()
-{
-    for (int h = 0; h < map_height; h++)
-    {
-        for (int w = 0; w < map_width; w++)
-        {
-            if (layout[h][w] == 'M')
-            {
+void Map::update() {
+    for (int h = 0; h < map_height; h++) {
+        for (int w = 0; w < map_width; w++) {
+            if (layout[h][w] == 'M') {
                 int randomN = rand() % 4;
-                int randomDirection[2] = {directions[randomN][0], directions[randomN][1]};
-                if (layout[h + randomDirection[0]][w + randomDirection[1]] == ' ')
-                {
+                int randomDirection[2] = {
+                    directions[randomN][0], directions[randomN][1]};
+                if (layout[h + randomDirection[0]][w + randomDirection[1]] ==
+                    ' ') {
                     layout[h][w] = ' ';
-                    layout[h + randomDirection[0]][w + randomDirection[1]] = 'M';
+                    layout[h + randomDirection[0]][w + randomDirection[1]] =
+                        'M';
                 }
             }
         }
     }
 }
 
-void Map::removeMonster(int x, int y)
-{
-    layout[x][y] = ' ';
-}
+void Map::removeMonster(int x, int y) { layout[x][y] = ' '; }

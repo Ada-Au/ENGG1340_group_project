@@ -1,11 +1,11 @@
 #ifndef Setup_h
 #define Setup_h
 
+#include "env.h"
+#include "player.h"
+#include <iomanip>
 #include <iostream>
 #include <stdio.h>
-#include <iomanip>
-#include "player.h"
-#include "env.h"
 
 using namespace std;
 

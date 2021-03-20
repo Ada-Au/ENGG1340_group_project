@@ -6,15 +6,12 @@
 #include "../lib/conio/conio.h"
 #endif
 
-void action(Screen scr, Map map, Player player)
-{
+void action(Screen scr, Map map, Player player) {
     char key = ' ';
-    while (key != 'q')
-    {
+    while (key != 'q') {
         bool wall = false;
         key = getch();
-        switch (key)
-        {
+        switch (key) {
         case 'w':
             if (map.layout[player.y - 1][player.x] == '#')
                 wall = true;
@@ -43,22 +40,18 @@ void action(Screen scr, Map map, Player player)
             scr.log = "Please input again";
         }
 
-        if (map.layout[player.y][player.x] == 'M')
-        {
+        if (map.layout[player.y][player.x] == 'M') {
             scr.log = "Monster";
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             std::cout << "into fight screen";
-        }
-        else
-        {
+        } else {
             scr.renderScreen(map, player);
         }
 
         if (wall)
             scr.log = "There is a wall in my way";
-        else
-        {
+        else {
             player.energy--;
             map.update();
         }
