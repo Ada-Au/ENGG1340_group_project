@@ -1,6 +1,7 @@
 #ifndef Screen_h
 #define Screen_h
 
+#include "env.h"
 #include "map.h"
 #include "player.h"
 #include <iomanip>

@@ -1,12 +1,17 @@
 #include "screen.h"
-#include "env.h"
 
 using namespace std;
 
 void Screen::renderScreen(Map map, Player player) {
-    string stat[9] = {"[name]", "", "HP: " + to_string(player.hp),
-        "MP: " + to_string(player.mp), "Energy: " + to_string(player.energy),
-        "", "Debuffs: ", "", "Buffs: "};
+    string stat[9] = {"[name]",
+                      "",
+                      "HP: " + to_string(player.hp),
+                      "MP: " + to_string(player.mp),
+                      "Energy: " + to_string(player.energy),
+                      "",
+                      "Debuffs: ",
+                      "",
+                      "Buffs: "};
 
     int debuffSize = player.debuffs->size();
     for (int h = 0; h < map_height; h++) {
