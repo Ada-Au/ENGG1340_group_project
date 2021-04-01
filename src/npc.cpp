@@ -30,4 +30,31 @@ void renderNpc(string npc, string talk) {
     else if (npc == "grief") {
         printNpc(talk, grief);
     }
+    else if (npc == "anxiety"){
+        printNpc(talk, anxiety);
+    }
+    else if (npc == "diseases"){
+        printNpc(talk, diseases);
+    }
+    else if (npc == "oldAge"){
+        printNpc(talk, oldAge);
+    }    
+    else if (npc == "fear"){
+        printNpc(talk, fear);
+    }
+    else if (npc == "hunger"){
+        printNpc(talk, hunger);
+    }
+    else if (npc == "need"){
+        printNpc(talk, need);
+    }
+    else if (npc == "death"){
+        printNpc(talk, death);
+    }
+    else if (npc == "agony"){
+        printNpc(talk, agony);
+    }
+    else if (npc == "sleep"){
+        printNpc(talk, sleep);
+    }
 }
