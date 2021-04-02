@@ -47,11 +47,11 @@ void action(Screen scr, Map map, Player player) {
             scr.log = "Monster";
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            std::cout << "into fight screen";
+            std::cout << "into fight screen" << endl;
             fightScreen(player);
         } else {
-            scr.renderScreen(map, player);
             map.update();
+            scr.renderScreen(map, player);
         }
 
         if (wall)

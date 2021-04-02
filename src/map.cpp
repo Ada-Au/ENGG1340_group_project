@@ -84,16 +84,11 @@ void Map::update() {
             }
         }
     }
-    int count = 0;
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
             layout[h][w] = newMap[h][w];
-            if (newMap[h][w] == 'M') {
-                count++;
-            }
         }
     }
-    cout << "M num: " << count;
 }
 
 void Map::removeMonster(int x, int y) { layout[x][y] = ' '; }

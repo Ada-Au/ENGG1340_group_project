@@ -8,15 +8,18 @@ using namespace std;
 void fightScreen(Player player) {
     srand(time(NULL));
     int monsterN = rand() % monsterSize;
-    float Mhp = monsters[monsterN].hp;
-
-    cout << "player.name: " << player.name << endl;
-
-    // while (Mhp != 0 && player.hp != 0) {
-    //     cout << '|' << string('*', Mhp / monsters[monsterN].hp) << setfill(' ')
-    //          << setw(50) << '|';
-    //     renderNpc("", "monster");
-    //     cout << '|' << string('*', player.hp / 100) << setfill(' ') << setw(50)
-    //          << '|';
-    // }
+    float mHp = monsters[monsterN].hp;
+    char key;
+    while (mHp != 0 && player.hp != 0) {
+        cout << "Monster's HP: " << mHp << '/' << monsters[monsterN].hp << endl;
+        cout << '|' << setfill(' ')
+             << string(mHp / monsters[monsterN].hp * 50, '*')
+             << setw(50 - mHp / monsters[monsterN].hp * 50) << '|' << endl;
+        renderNpc("monster", "");
+        cout << "Player's HP" << endl;
+        cout << '|' << string(player.hp / 2, '*') << setfill(' ')
+             << setw(50 - player.hp / 2) << '|';
+        cin >> key;
+        cout << key;
+    }
 }
