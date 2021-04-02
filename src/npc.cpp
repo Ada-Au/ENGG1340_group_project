@@ -1,4 +1,6 @@
 #include "npc.h"
+#include <iomanip>
+#include <iostream>
 
 void printNpc(string talk, const string npc[npcSize]) {
     bool isTalk = talk.length() > 0;
@@ -25,36 +27,29 @@ void printNpc(string talk, const string npc[npcSize]) {
 }
 
 void renderNpc(string npc, string talk) {
-    if (npc == "charon")
+    if (npc == "monster")
+        printNpc(talk, monster);
+    else if (npc == "charon")
         printNpc(talk, charon);
     else if (npc == "grief") {
         printNpc(talk, grief);
-    }
-    else if (npc == "anxiety"){
+    } else if (npc == "anxiety") {
         printNpc(talk, anxiety);
-    }
-    else if (npc == "diseases"){
+    } else if (npc == "diseases") {
         printNpc(talk, diseases);
-    }
-    else if (npc == "oldAge"){
+    } else if (npc == "oldAge") {
         printNpc(talk, oldAge);
-    }    
-    else if (npc == "fear"){
+    } else if (npc == "fear") {
         printNpc(talk, fear);
-    }
-    else if (npc == "hunger"){
+    } else if (npc == "hunger") {
         printNpc(talk, hunger);
-    }
-    else if (npc == "need"){
+    } else if (npc == "need") {
         printNpc(talk, need);
-    }
-    else if (npc == "death"){
+    } else if (npc == "death") {
         printNpc(talk, death);
-    }
-    else if (npc == "agony"){
+    } else if (npc == "agony") {
         printNpc(talk, agony);
-    }
-    else if (npc == "sleep"){
-        printNpc(talk, sleep);
+    } else if (npc == "insomnia") {
+        printNpc(talk, insomnia);
     }
 }

@@ -1,10 +1,13 @@
 #include "action.h"
+#include <iostream>
 #include <thread>
 #if defined _WIN32 || defined _WIN64
 #include <conio.h>
 #else
 #include "../lib/conio/conio.h"
 #endif
+
+using namespace std;
 
 void action(Screen scr, Map map, Player player) {
     char key = ' ';
@@ -45,15 +48,16 @@ void action(Screen scr, Map map, Player player) {
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             std::cout << "into fight screen";
+            fightScreen(player);
         } else {
             scr.renderScreen(map, player);
+            map.update();
         }
 
         if (wall)
             scr.log = "There is a wall in my way";
         else {
             player.energy--;
-            map.update();
         }
     }
 }

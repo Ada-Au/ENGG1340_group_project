@@ -1,4 +1,7 @@
 #include "setup.h"
+#include <iomanip>
+#include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
@@ -91,7 +94,7 @@ void setData(char key, int max, Player &player) {
     }
 }
 
-void setupScreen(Player player) {
+void setupScreen(Player &player) {
     cout << "YOU DIED, Welcome to the Underworld!\n"
          << "Do you remember your name?\t";
     cin >> player.name;

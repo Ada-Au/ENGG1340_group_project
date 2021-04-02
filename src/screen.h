@@ -4,8 +4,6 @@
 #include "env.h"
 #include "map.h"
 #include "player.h"
-#include <iomanip>
-#include <iostream>
 
 class Screen {
   public:

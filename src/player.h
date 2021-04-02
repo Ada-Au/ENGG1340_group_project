@@ -2,8 +2,6 @@
 #define Player_h
 
 #include "env.h"
-#include <iostream>
-#include <stdlib.h>
 #include <string>
 #include <vector>
 
@@ -14,7 +12,7 @@ class Player {
     Player();
     char mark;
     int x, y;
-    float mp, hp, energy;
+    float mp, hp, energy, maxMp, maxHp;
     // void setData(char key, int max);
     std::vector<std::string> debuffs[max_debuff];
     std::vector<std::string> buffs[max_buff];

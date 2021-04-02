@@ -1,4 +1,6 @@
 #include "screen.h"
+#include <iomanip>
+#include <iostream>
 
 using namespace std;
 
@@ -17,7 +19,7 @@ void Screen::renderScreen(Map map, Player player) {
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
             if (h == player.y && w == player.x)
-                cout << player.mark;
+                cout << GREEN << player.mark << RESET;
             else {
                 if (map.layout[h][w] == 'M') {
                     cout << RED << 'M' << RESET;
