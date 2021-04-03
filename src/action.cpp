@@ -1,4 +1,5 @@
 #include "action.h"
+#include "items.h"
 #include <thread>
 #if defined _WIN32 || defined _WIN64
 #include <conio.h>
@@ -35,6 +36,9 @@ void action(Screen scr, Map map, Player player) {
                 wall = true;
             else
                 player.x++;
+            break;
+        case 'b':
+            backpack( item );
             break;
         default:
             scr.log = "Please input again";

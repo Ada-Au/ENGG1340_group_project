@@ -18,7 +18,7 @@ int findItem(string Name, items item[maxSpace])
 //To-do:
 // 1) input items after monster fighting / getting things on ground
 // 2) update number of items
-// 3) sort by time(new to old)
+// 3) sort by time(old to new)
 void updateItems(string Name, int N, char flag) // flag - A for adding, D for delet
 {
     if (N > maxNum)
@@ -44,5 +44,5 @@ void updateItems(string Name, int N, char flag) // flag - A for adding, D for de
     
     for (int i = 0; i < maxSpace; i++)
         if (item[i].name != "")
-            cout << "Name: " << item[i].name << " Num: " << item[i].num << '\n';
+            cout << "Name: " << item[i].name << " Number: " << item[i].num << '\n';
 }
