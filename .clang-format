@@ -2,3 +2,4 @@ Language: Cpp
 IndentWidth: 4
 SpacesBeforeTrailingComments: 4
 ReflowComments: false
+ColumnLimit: 0
