@@ -12,7 +12,7 @@ struct Item {
     int num;
 };
 
-void updateItems(string, int, char, Item[maxSpace]);
-void openBackpack(Item[maxSpace]);
+void updateItems(string, int, char);
+void openBackpack();
 
 #endif

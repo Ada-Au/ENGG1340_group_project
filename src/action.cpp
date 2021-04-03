@@ -10,8 +10,6 @@
 
 using namespace std;
 
-Item items[maxSpace] = {};
-
 void action(Screen scr, Map map, Player player) {
 
     char key = ' ';
@@ -49,7 +47,7 @@ void action(Screen scr, Map map, Player player) {
             break;
         case 'b':
         case 'B':
-            openBackpack(items);
+            openBackpack();
             break;
         default:
             scr.log = "Please input again";

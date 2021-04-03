@@ -15,7 +15,7 @@ using namespace std;
 
 Homepage homepage;
 
-int main()
+void home()
 {
     int selected = 0;
     int choices = 3;
@@ -108,5 +108,4 @@ int main()
                 updated = false;             
         }
     }
-    return 0;
 }

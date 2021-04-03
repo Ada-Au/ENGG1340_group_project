@@ -2,6 +2,8 @@
 #include <iomanip>
 #include <iostream>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -68,6 +70,7 @@ void setData(char key, int choice, Player &player) {
     //       if players input invalid key, print LOGs
     //       close the screen and open next options
     int i = key - 'a';
+    srand(time(NULL));
     switch (choice) {
     case 1:    // role
         if (key >= 'a' && key <= 'a' + max_role)
@@ -101,7 +104,7 @@ void setupScreen(Player &player) {
          << "Do you remember your name?\t";
     cin >> player.name;
     cout << endl;
-
+    srand(time(NULL));
     player.role = roleList[rand() % max_role];
     player.gender = genderList[rand() % max_gender];
 
