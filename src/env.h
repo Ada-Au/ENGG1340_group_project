@@ -23,6 +23,9 @@ const std::string roleList[max_role] = {"Archeologist", "Barbarian",
 const std::string raceList[max_race] = {"human", "drawf", "elf", "orc"};
 const std::string genderList[max_gender] = {"male", "female"};
 
+const int maxNum = 99;
+const int maxSpace = 50;
+
 #define RESET "\033[0m"
 #define BLACK "\033[30m"              /* Black */
 #define RED "\033[31m"                /* Red (Monster) */
