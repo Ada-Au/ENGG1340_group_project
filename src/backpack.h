@@ -3,17 +3,16 @@
 
 #include "env.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-struct items{
+struct Items{
     string name = "";
     int num = 0;
 };
 
-items item[maxSpace];
-
-void updateItems(string, int, char);
-void backpack(items);
+void updateItems(string, int, char, Items[maxSpace]);
+void backpack(Items[maxSpace]);
 
 #endif
