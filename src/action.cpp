@@ -1,5 +1,5 @@
 #include "action.h"
-#include "items.h"
+#include "backpack.h"
 #include <thread>
 #if defined _WIN32 || defined _WIN64
 #include <conio.h>
@@ -38,8 +38,9 @@ void action(Screen scr, Map map, Player player) {
                 player.x++;
             break;
         case 'b':
-            backpack( item );
+            backpack( item[maxSpace] );
             break;
+            
         default:
             scr.log = "Please input again";
         }

@@ -1,5 +1,7 @@
-#ifndef Items_h
-#define Items_h
+#ifndef Backpack_h
+#define Backpack_h
+
+#include "env.h"
 #include <iostream>
 
 using namespace std;
@@ -11,6 +13,7 @@ struct items{
 
 items item[maxSpace];
 
-void updateItems(string Name, int N, char flag);
+void updateItems(string, int, char);
+void backpack(items);
 
-#endif;
+#endif
