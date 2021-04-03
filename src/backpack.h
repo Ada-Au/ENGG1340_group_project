@@ -7,12 +7,12 @@
 
 using namespace std;
 
-struct Items{
+struct Item {
     string name;
     int num;
 };
 
-void updateItems(string, int, char, Items[maxSpace]);
-void backpack(Items[maxSpace]);
+void updateItems(string, int, char, Item[maxSpace]);
+void openBackpack(Item[maxSpace]);
 
 #endif

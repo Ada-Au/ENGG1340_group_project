@@ -7,9 +7,10 @@
 #else
 #include "../lib/conio/conio.h"
 #endif
-Items item[maxSpace];
 
 using namespace std;
+
+Item items[maxSpace] = {};
 
 void action(Screen scr, Map map, Player player) {
 
@@ -47,9 +48,9 @@ void action(Screen scr, Map map, Player player) {
                 player.x++;
             break;
         case 'b':
-            backpack(item);
+        case 'B':
+            openBackpack(items);
             break;
-
         default:
             scr.log = "Please input again";
         }
