@@ -6,8 +6,9 @@
 #else
 #include "../lib/conio/conio.h"
 #endif
-
+struct items item[maxSpace];
 void action(Screen scr, Map map, Player player) {
+
     char key = ' ';
     while (key != 'q') {
         bool wall = false;

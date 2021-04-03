@@ -14,12 +14,12 @@ setup.o:src/setup.cpp src/setup.h
 	g++ -c src/setup.cpp -o setup.o
 npc.o:src/npc.cpp src/npc.h 
     g++ -c src/npc.cpp -o npc.o 
-fight.o:src/fight.cpp src/fight.h 
-    g++ -c src/fight.cpp -o fight.o
-backpack.o:src/backpack.cpp
-	g++ -c src/backpack.cpp src/backpack.o
+# fight.o:src/fight.cpp src/fight.h 
+#     g++ -c src/fight.cpp -o fight.o
+backpack.o:src/backpack.cpp src/backpack.h
+	g++ -c src/backpack.cpp -o backpack.o
 main:main.o map.o screen.o player.o action.o setup.o backpack.o
-	g++ -o main.o map.o screen.o player.o action.o setup.o npc.o fight.o backpack.o 
+	g++ -o main.o map.o screen.o player.o action.o setup.o npc.o backpack.o 
 
 clean:
 	rm -f map.o main.o player.o screen.o action.o setup.o npc.o fight.o backpack.o
