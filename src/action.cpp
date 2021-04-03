@@ -46,18 +46,18 @@ void action(Screen scr, Map map, Player player) {
         default:
             scr.log = "Please input again";
         }
+        scr.renderScreen(map, player);
 
         if (map.layout[player.y][player.x] == 'M') {
             scr.log = "Monster!";
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            std::cout << "into fight screen" << endl;
-            fightScreen(player, map);
+            fightScreen(player);
+            map.removeMonster(player.x, player.y);
             key = getch();
+        } else {
+            map.update();
         }
-
-        map.update();
-        scr.renderScreen(map, player);
 
         if (wall)
             scr.log = "There is a wall in my way";

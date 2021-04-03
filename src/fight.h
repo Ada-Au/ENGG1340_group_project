@@ -6,7 +6,7 @@
 #include "player.h"
 #include <string>
 
-void fightScreen(Player, Map);
+void fightScreen(Player &);
 // void bossScreen(Player);
 
 #endif

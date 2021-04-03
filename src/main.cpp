@@ -13,7 +13,7 @@ int main() {
     Map map;
     Player player;
 
-    // setupScreen(player);
+    setupScreen(player);
 
     map.fill();
     scr.renderScreen(map, player);

@@ -57,12 +57,11 @@ void Map::fill() {
         }
     }
 
-    cout << endl << "done:D " << endl << endl;
-
-    cout << endl;
+    cout << "\ndone:D\n\n\n";
 }
 
 void Map::update() {
+    srand(time(NULL));
     char newMap[map_height][map_width];
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
@@ -73,7 +72,7 @@ void Map::update() {
         for (int w = 0; w < map_width; w++) {
             if (newMap[h][w] != 'M') {
                 newMap[h][w] = layout[h][w];
-                if (layout[h][w] == 'M') {
+                if (layout[h][w] == 'M' && rand() % 100 < 70) {
                     int randomN = rand() % 4;
                     int randomDirection[2] = {directions[randomN][0],
                                               directions[randomN][1]};
@@ -82,8 +81,7 @@ void Map::update() {
                         newMap[h + randomDirection[0]]
                               [w + randomDirection[1]] != 'M') {
                         newMap[h][w] = ' ';
-                        newMap[h + randomDirection[0]][w + randomDirection[1]] =
-                            'M';
+                        newMap[h + randomDirection[0]][w + randomDirection[1]] = 'M';
                     }
                 }
             }
@@ -96,15 +94,4 @@ void Map::update() {
     }
 }
 
-void Map::removeMonster(int x, int y) {
-    cout << layout[y][x] << ": ";
-    layout[y][x] = ' ';
-    cout << "removed monster" << endl;
-
-    for (int h = 0; h < map_height; h++) {
-        for (int w = 0; w < map_width; w++) {
-            cout << layout[h][w];
-        }
-        cout << endl;
-    }
-}
+void Map::removeMonster(int x, int y) { layout[y][x] = ' '; }

@@ -5,12 +5,13 @@
 #include <iostream>
 
 using namespace std;
-void fightScreen(Player player, Map map) {
+
+void fightScreen(Player &player) {
     srand(time(NULL));
     int monsterN = rand() % monsterSize;
     float mHp = monsters[monsterN].hp;
     char key;
-    while (mHp != 0 && player.hp != 0) {
+    while (mHp >= 0 && player.hp >= 0) {
         int showMHp = mHp / monsters[monsterN].hp * 50;
         cout << "Monster's HP: " << mHp << '/' << monsters[monsterN].hp << endl;
         cout << '|' << setfill(' ') << string(showMHp, '*')
@@ -26,25 +27,27 @@ void fightScreen(Player player, Map map) {
         if (key == '1') {
             // need to get player weapon first...
             if (rand() % 10 >= 0) {    // rate of hitting
-                mHp -= 10;             // should be weapon damage
-                cout << "Player: Successfully make " << 1 << " damage." << endl;
+                mHp -= 2;              // should be weapon damage
+                cout << "Player: Successfully make " << 2 << " damage." << endl;
             } else {
                 cout << "Player: Miss!" << endl;
             }
             // monster strongness? (6)
-            if (rand() % 10 >= 6 && mHp > 0) {
-                player.hp -= 10;
-                cout << "Monster: Got you!" << endl;
-            } else {
-                cout << "Monster: Miss!" << endl;
+            if (mHp > 0) {
+                if (rand() % 10 >= 6) {
+                    player.hp -= 10;
+                    cout << "Monster: Got you!" << endl;
+                } else {
+                    cout << "Monster: Miss!" << endl;
+                }
             }
         }
         cout << endl;
     }
+
     if (player.hp == 0) {
         cout << "You die!" << endl;
     } else {
         cout << "You kill the monster!" << endl;
-        map.removeMonster(player.x, player.y);
     }
 }
