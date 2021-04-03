@@ -1,60 +1,62 @@
 #include "screen.h"
-#include "env.h"
 #include <iomanip>
-// #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
-void Screen::renderScreen(Map map, Player player) // "capturing" the screen and printing it
-{
-    string stat[9] = {"[name]", "", "HP: " + to_string(player.hp), "MP: " + to_string(player.mp), "Energy: " + to_string(player.energy), "", "Debuffs: ", "", "Buffs: "};
+void Screen::renderScreen(Map map, Player player) {
+    string stat[9] = {"[name]",
+                      "",
+                      "HP: " + to_string(player.hp),
+                      "MP: " + to_string(player.mp),
+                      "Energy: " + to_string(player.energy),
+                      "",
+                      "Debuffs: ",
+                      "",
+                      "Buffs: "};
+
     int debuffSize = player.debuffs->size();
-    for (int h = 0; h < map_height; h++)
-    {
-        for (int w = 0; w < map_width; w++)
-        {
-            if (h == player.y && w == player.x)
-                cout << player.mark;
-            else
-            {
-                if (map.layout[h][w] == 'M')
-                {
+    for (int h = 0; h < map_height; h++) {
+        for (int w = 0; w < map_width; w++) {
+            if (h == player.y && w == player.x) {
+                if (map.layout[h][w] == 'M') {
+                    cout << RED << player.mark << RESET;
+                } else
+                    cout << GREEN << player.mark << RESET;
+            } else {
+                if (map.layout[h][w] == 'M') {
                     cout << RED << 'M' << RESET;
-                }
-                else
+                } else
                     cout << map.layout[h][w];
             }
         }
 
         cout << "      ";
-        if (h == 0 || h == map_height - 1)
-        {
+        if (h == 0 || h == map_height - 1) {
             cout << "*******************************" << endl;
-        }
-        else if (h <= 7)
-            cout << "*  " << stat[h - 1] << setw(28 - stat[h - 1].length()) << setfill(' ') << "*" << endl;
-        else if (h - 8 < debuffSize)
-        {
-            cout << "*   - " << player.debuffs->at(h - 8) << setw(25 - player.debuffs->at(h - 8).length()) << setfill(' ') << "*" << endl;
-        }
-        else if (h - 8 < debuffSize + 2)
-        {
-            cout << "*  " << stat[h - 1 - debuffSize] << setw(28 - stat[h - 1 - debuffSize].length()) << setfill(' ') << "*" << endl;
-        }
-        else if (h - 10 - debuffSize < player.buffs->size())
-        {
-            cout << "*   - " << player.buffs->at(h - 10 - debuffSize) << setw(25 - player.buffs->at(h - 10 - debuffSize).length()) << setfill(' ') << "*" << endl;
-        }
-        else
+        } else if (h <= 7)
+            cout << "*  " << stat[h - 1] << setw(28 - stat[h - 1].length())
+                 << setfill(' ') << "*" << endl;
+        else if (h - 8 < debuffSize) {
+            cout << "*   - " << player.debuffs->at(h - 8)
+                 << setw(25 - player.debuffs->at(h - 8).length())
+                 << setfill(' ') << "*" << endl;
+        } else if (h - 8 < debuffSize + 2) {
+            cout << "*  " << stat[h - 1 - debuffSize]
+                 << setw(28 - stat[h - 1 - debuffSize].length()) << setfill(' ')
+                 << "*" << endl;
+        } else if (h - 10 - debuffSize < player.buffs->size()) {
+            cout << "*   - " << player.buffs->at(h - 10 - debuffSize)
+                 << setw(25 - player.buffs->at(h - 10 - debuffSize).length())
+                 << setfill(' ') << "*" << endl;
+        } else
             cout << "*" << setfill(' ') << setw(30) << "*" << endl;
     }
 
     cout << "\n"
-         << setfill('*') << setw(map_width + 2)
-         << "\n\n"
+         << setfill('*') << setw(map_width + 2) << "\n\n"
          << log << "\n"
-         << setw(map_width + 2)
-         << endl
+         << setw(map_width + 2) << endl
          << "\n\n";
 
     //  cout << '\t' << help[i] << '\n';

@@ -1,6 +1,7 @@
 #ifndef Action_h
 #define Action_h
 
+#include "fight.h"
 #include "map.h"
 #include "player.h"
 #include "screen.h"
