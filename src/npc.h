@@ -8,12 +8,13 @@ using namespace std;
 void renderNpc(string, string);
 const int npcSize = 16;
 const int monsterSize = 2;
+
 struct Monster {
     string name;
     float hp, mp;
+    int damage, rate;
 };
-
-const Monster monsters[monsterSize] = {{"a", 10, 20}, {"b", 30, 40}};
+const Monster monsters[monsterSize] = {{"a", 10, 20, 2, 80}, {"b", 30, 40, 3, 85}};
 
 const string monster[npcSize] = {
     "                                                   ",    // length ~50
