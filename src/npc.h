@@ -16,22 +16,22 @@ struct Monster {
 const Monster monsters[monsterSize] = {{"a", 10, 20}, {"b", 30, 40}};
 
 const string monster[npcSize] = {
-    "      MMMMMM                           MMMMMM      ",    // length ~50
-    "      MMMMMMM                         MMMMMMM      ",    // the boat guy
-    "      MMMMMMMMM                     MMMMMMMMM      ",
-    "      MMMMMMMMMMM                 MMMMMMMMMMM      ",
-    "      MMMMMMMMMMMMM             MMMMMMMMMMMMM      ",
-    "      MMMMMM  MMMMMMM         MMMMMMM  MMMMMM      ",
-    "      MMMMMM    MMMMMMM     MMMMMMM    MMMMMM      ",
-    "      MMMMMM       MMMMMMMMMMMMMM      MMMMMM      ",
-    "      MMMMMM         MMMMMMMMMM        MMMMMM      ",
-    "      MMMMMM           MMMMMM          MMMMMM      ",
-    "      MMMMMM             MM            MMMMMM      ",
-    "      MMMMMM                           MMMMMM      ",
-    "      MMMMMM                           MMMMMM      ",
-    "      MMMMMM                           MMMMMM      ",
-    "      MMMMMM                           MMMMMM      ",
-    "      MMMMMM                           MMMMMM      ",
+    "                                                   ",    // length ~50
+    "                                                   ",    // the boat guy
+    "                                                   ",
+    "             MMMMM               MMMMM             ",
+    "             MMMMMMM           MMMMMMM             ",
+    "             MMMMMMMMM       MMMMMMMMM             ",
+    "             MMMMMMMMMMM   MMMMMMMMMMM             ",
+    "             MMMMM  MMMMMMMMMMM  MMMMM             ",
+    "             MMMMM     MMMMM     MMMMM             ",
+    "             MMMMM       M       MMMMM             ",
+    "             MMMMM               MMMMM             ",
+    "             MMMMM               MMMMM             ",
+    "             MMMMM               MMMMM             ",
+    "                                                   ",
+    "                                                   ",
+    "                                                   ",
 };
 
 const string charon[npcSize] = {

@@ -16,24 +16,28 @@ void action(Screen scr, Map map, Player player) {
         key = getch();
         switch (key) {
         case 'w':
+        case 'W':
             if (map.layout[player.y - 1][player.x] == '#')
                 wall = true;
             else
                 player.y--;
             break;
         case 'a':
+        case 'A':
             if (map.layout[player.y][player.x - 1] == '#')
                 wall = true;
             else
                 player.x--;
             break;
         case 's':
+        case 'S':
             if (map.layout[player.y + 1][player.x] == '#')
                 wall = true;
             else
                 player.y++;
             break;
         case 'd':
+        case 'D':
             if (map.layout[player.y][player.x + 1] == '#')
                 wall = true;
             else
@@ -44,15 +48,16 @@ void action(Screen scr, Map map, Player player) {
         }
 
         if (map.layout[player.y][player.x] == 'M') {
-            scr.log = "Monster";
+            scr.log = "Monster!";
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             std::cout << "into fight screen" << endl;
-            fightScreen(player);
-        } else {
-            map.update();
-            scr.renderScreen(map, player);
+            fightScreen(player, map);
+            key = getch();
         }
+
+        map.update();
+        scr.renderScreen(map, player);
 
         if (wall)
             scr.log = "There is a wall in my way";
