@@ -8,8 +8,8 @@
 using namespace std;
 
 struct Items{
-    string name = "";
-    int num = 0;
+    string name;
+    int num;
 };
 
 void updateItems(string, int, char, Items[maxSpace]);

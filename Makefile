@@ -18,7 +18,7 @@ npc.o:src/npc.cpp src/npc.h
 #     g++ -c src/fight.cpp -o fight.o
 backpack.o:src/backpack.cpp src/backpack.h
 	g++ -c src/backpack.cpp -o backpack.o
-main:main.o map.o screen.o player.o action.o setup.o backpack.o
+main:main.o map.o screen.o player.o action.o setup.o npc.o backpack.o 
 	g++ -o main.o map.o screen.o player.o action.o setup.o npc.o backpack.o 
 
 clean:

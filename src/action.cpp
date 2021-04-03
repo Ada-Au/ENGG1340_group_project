@@ -6,7 +6,7 @@
 #else
 #include "../lib/conio/conio.h"
 #endif
-struct items item[maxSpace];
+Items item[maxSpace];
 void action(Screen scr, Map map, Player player) {
 
     char key = ' ';
@@ -39,7 +39,7 @@ void action(Screen scr, Map map, Player player) {
                 player.x++;
             break;
         case 'b':
-            backpack( item[maxSpace] );
+            backpack( item );
             break;
             
         default:

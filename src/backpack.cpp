@@ -2,11 +2,6 @@
 #include "backpack.h"
 #include <iostream>
 #include <iomanip>
-#include <conio.h>
-// #else
-// #include "../lib/conio/conio.h"
-
-#define KEY_ESC 27
 
 using namespace std;
 
@@ -23,7 +18,7 @@ int findItem(string name, Items item[])
 // 1) input items after monster fighting / getting things on ground
 // 2) update number of items
 // 3) sort by time(old to new)
-void updateItems(string name, int number, char flag, struct Items item[]) // flag - A for adding, D for delet
+void updateItems(string name, int number, char flag, Items item[]) // flag - A for adding, D for delet
 {
     if (number > maxNum)
         number =  maxNum;
@@ -51,7 +46,7 @@ void updateItems(string name, int number, char flag, struct Items item[]) // fla
             cout << "Name: " << item[i].name << " Number: " << item[i].num << '\n';
 }
 
-void backpack( struct Items item[] )
+void backpack(  Items item[] )
 {
     string log = "";
     for (int i = 0; i < maxSpace; i++){
@@ -75,7 +70,7 @@ void backpack( struct Items item[] )
                 while(n > item[i].num || n < 0){
                     scanf("Exceeds amount, enter a valid number please: %i", &n);
                 }
-                updateItems(item[i].name, n, 'D', item[]);
+                updateItems(item[i].name, n, 'D', item);
                 break;
             }
         }
