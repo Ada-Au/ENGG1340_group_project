@@ -8,35 +8,43 @@
 
 using namespace std;
 
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_ENTER '\r'
+#define KEY_ESC 27
 
-int main()
+void backpack()
 {
     int selected = 0;
     int choices = 3;
-    bool selecting = true;
     bool updated = false;
     string log = "";
     // Press UP DOWN to choose
 
     for (int i = 0; i < maxSpace; i++){
         if (i == 0)
-            cout <<  setw(map_width) << "\t\tItems\t\t\t\t\t\t\tNumber\t\t\t\n";
+            cout << setw(map_width) << "\t\tItems\t\t\t\t\t\t\tNumber\t\t\t\n";
         if (item[i].name != "")
             cout << setw(map_width) << (i+1) << "  " << item[i].name << "\t\t\t\t\t\t" << item[i].num << '\n';
     }
-    int ch, n;
-    while (selecting){
-            cin >> ch;
-            for (int i = 0; i < maxSpace; i++){
-                if (ch = i)
-                    log = item[i].name + "is selected\n";
-                    cout << log;
-                    scanf("Amount to use: %i", &n);
-                    updateItems(item[i].name, n, 'D');
+
+    char key;
+    key = getch();
+    while (key != KEY_ESC){
+        int ch, n;
+        cin >> ch;
+        switch (key){
+            defalut:{
+                cout << "Press number to select items or ESC to close\n";
             }
         }
+        for (int i = 0; i < maxSpace; i++){
+            if (ch = i)
+                log = item[i].name + "is selected\n";
+                cout << log;
+                scanf("Amount to use: %i", &n);
+                updateItems(item[i].name, n, 'D');
+                break;
+        }
+        key = getch();
+
+    }
     
 }

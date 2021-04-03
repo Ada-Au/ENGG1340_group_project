@@ -64,11 +64,9 @@ void Map::update() {
                 int randomN = rand() % 4;
                 int randomDirection[2] = {
                     directions[randomN][0], directions[randomN][1]};
-                if (layout[h + randomDirection[0]][w + randomDirection[1]] ==
-                    ' ') {
+                if (layout[h + randomDirection[0]][w + randomDirection[1]] == ' ') {
                     layout[h][w] = ' ';
-                    layout[h + randomDirection[0]][w + randomDirection[1]] =
-                        'M';
+                    layout[h + randomDirection[0]][w + randomDirection[1]] = 'M';
                 }
             }
         }
