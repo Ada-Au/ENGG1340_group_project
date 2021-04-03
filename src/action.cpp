@@ -59,6 +59,10 @@ void action(Screen scr, Map map, Player player) {
             map.update();
         }
 
+        if (player.hp <= 0) {
+            cout << "You die!\n Wanna restart?\ny - Yes     q - Quit game\n";
+        }
+
         if (wall)
             scr.log = "There is a wall in my way";
         else {

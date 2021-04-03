@@ -14,8 +14,8 @@ int main() {
     Player player;
 
     setupScreen(player);
-
     map.fill();
+    cout << "Start your adventure!" << endl;
     scr.renderScreen(map, player);
     action(scr, map, player);
 

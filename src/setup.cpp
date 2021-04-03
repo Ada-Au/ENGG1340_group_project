@@ -16,17 +16,17 @@ void PrintInform(Player player) {
     cout << "\nIs this ok?\n\n"
          << player.name << ", " << player.role << ' ' << player.race << ' '
          << player.gender << "\n\n";
-    cout << "y- Yes: start my exploration in Hell\n"
-         << "n- No: correct my role, race and gnender\n"
-         << "q- I QUIT NOW\n\n";
+    cout << "y - Yes: start my exploration in Hell\n"
+         << "n - No: correct my role, race and gender\n"
+         << "q - I QUIT NOW\n\n";
 }
 
 void PrintChoice() {
     cout << "\n1 -Pick a ROLE\n"
-         << "2 -Pick a RACE\n"
-         << "3 -Pick a GENDER\n"
-         << "y -Yes: All are alright now\n"
-         << "q -I QUIT NOW\n"
+         << "2 - Pick a RACE\n"
+         << "3 - Pick a GENDER\n"
+         << "y - Yes: All are alright now\n"
+         << "q - I QUIT NOW\n"
          << "Enter your choice: ";
 }
 
@@ -38,7 +38,7 @@ void PrintRole() {
         int j = i - 'a';
         cout << i << " -" << roleList[j] << "\n";
     }
-    cout << "* -Random\n";
+    cout << "* - Random\n";
 }
 
 void PrintRace() {
@@ -49,7 +49,7 @@ void PrintRace() {
         int j = i - 'a';
         cout << i << " -" << raceList[j] << "\n";
     }
-    cout << "* -Random\n";
+    cout << "* - Random\n";
 }
 
 void PrintGender() {
@@ -60,36 +60,38 @@ void PrintGender() {
         int j = i - 'a';
         cout << i << " -" << genderList[j] << "\n";
     }
-    cout << "* -Random\n";
+    cout << "* - Random\n";
 }
 
-void setData(char key, int max, Player &player) {
+void setData(char key, int choice, Player &player) {
     // To-do: only allow players input one char & game response immediately
     //       if players input invalid key, print LOGs
     //       close the screen and open next options
     int i = key - 'a';
-    switch (max) {
-    case '1':    // role
-    {
-        if (key <= 'a' && key >= 'a' + max_role) {
+    switch (choice) {
+    case 1:    // role
+        if (key >= 'a' && key <= 'a' + max_role)
             player.role = roleList[i];
-        } else if (key == '*')
+        else if (key == '*')
             player.role = roleList[rand() % max_role];
+        else
+            cout << "Please input again";
         break;
-    }
-    case '2':    // race
-    {
-        if (key <= 'a' && key >= 'a' + max_race) {
+    case 2:    // race
+        if (key >= 'a' && key <= 'a' + max_race)
             player.race = raceList[i];
-        } else if (key == '*')
+        else if (key == '*')
             player.race = raceList[rand() % max_race];
+        else
+            cout << "Please input again";
         break;
-    }
-    case '3':    // gender
-        if (key <= 'a' && key >= 'a' + max_gender) {
+    case 3:    // gender
+        if (key >= 'a' && key <= 'a' + max_gender)
             player.gender = genderList[i];
-        } else if (key == '*')
-            player.gender = genderList[rand() % max_role];
+        else if (key == '*')
+            player.gender = genderList[rand() % 2];
+        else
+            cout << "Please input again";
         break;
     }
 }
@@ -137,6 +139,5 @@ void setupScreen(Player &player) {
         }
         PrintInform(player);
         cin >> key;
-        break;
     }
 }

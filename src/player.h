@@ -5,8 +5,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 class Player {
   public:
     Player();
@@ -16,7 +14,7 @@ class Player {
     // void setData(char key, int max);
     std::vector<std::string> debuffs[max_debuff];
     std::vector<std::string> buffs[max_buff];
-    string name, role, gender, race;
+    std::string name, role, gender, race;
 };
 
 #endif
