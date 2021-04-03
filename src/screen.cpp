@@ -1,4 +1,6 @@
 #include "screen.h"
+#include <iomanip>
+#include <iostream>
 
 using namespace std;
 
@@ -16,9 +18,12 @@ void Screen::renderScreen(Map map, Player player) {
     int debuffSize = player.debuffs->size();
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
-            if (h == player.y && w == player.x)
-                cout << player.mark;
-            else {
+            if (h == player.y && w == player.x) {
+                if (map.layout[h][w] == 'M') {
+                    cout << RED << player.mark << RESET;
+                } else
+                    cout << GREEN << player.mark << RESET;
+            } else {
                 if (map.layout[h][w] == 'M') {
                     cout << RED << 'M' << RESET;
                 } else

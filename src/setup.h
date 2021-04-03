@@ -3,12 +3,9 @@
 
 #include "env.h"
 #include "player.h"
-#include <iomanip>
-#include <iostream>
-#include <stdio.h>
 
 using namespace std;
 
-void setupScreen(Player);
+void setupScreen(Player &);
 
 #endif

@@ -1,9 +1,11 @@
 #include "player.h"
+// #include <stdlib.h>
+#include <iostream>
 
 Player::Player() {
     mark = '@';
     x = 1, y = 1;
-    mp = 100, hp = 100, energy = 100;
+    mp = 100, hp = 100, energy = 100, mp = 100, hp = 100;
     race = "human";
     debuffs->push_back(allDebuffs[1]);
     debuffs->push_back(allDebuffs[0]);

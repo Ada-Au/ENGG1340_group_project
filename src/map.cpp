@@ -1,4 +1,9 @@
 #include "map.h"
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
+
 using namespace std;
 
 int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
@@ -21,9 +26,9 @@ void Map::fill() {
     while (maxTunnels > 0 && map_height > 0 && map_width > 0 && maxLength > 0) {
         randomDirection = directions[rand() % 4];
         while ((randomDirection[0] == -lastDirection[0] &&
-                   randomDirection[1] == -lastDirection[1]) ||
+                randomDirection[1] == -lastDirection[1]) ||
                (randomDirection[0] == lastDirection[0] &&
-                   randomDirection[1] == lastDirection[1])) {
+                randomDirection[1] == lastDirection[1])) {
             randomDirection = directions[rand() % 4];
         }
 
@@ -52,25 +57,41 @@ void Map::fill() {
         }
     }
 
-    cout << endl << "done:D " << endl << endl;
-
-    cout << endl;
+    cout << "\ndone:D\n\n\n";
 }
 
 void Map::update() {
+    srand(time(NULL));
+    char newMap[map_height][map_width];
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
-            if (layout[h][w] == 'M') {
-                int randomN = rand() % 4;
-                int randomDirection[2] = {
-                    directions[randomN][0], directions[randomN][1]};
-                if (layout[h + randomDirection[0]][w + randomDirection[1]] == ' ') {
-                    layout[h][w] = ' ';
-                    layout[h + randomDirection[0]][w + randomDirection[1]] = 'M';
+            newMap[h][w] = ' ';
+        }
+    }
+    for (int h = 0; h < map_height; h++) {
+        for (int w = 0; w < map_width; w++) {
+            if (newMap[h][w] != 'M') {
+                newMap[h][w] = layout[h][w];
+                if (layout[h][w] == 'M' && rand() % 100 < 70) {
+                    int randomN = rand() % 4;
+                    int randomDirection[2] = {directions[randomN][0],
+                                              directions[randomN][1]};
+                    if (layout[h + randomDirection[0]]
+                              [w + randomDirection[1]] == ' ' &&
+                        newMap[h + randomDirection[0]]
+                              [w + randomDirection[1]] != 'M') {
+                        newMap[h][w] = ' ';
+                        newMap[h + randomDirection[0]][w + randomDirection[1]] = 'M';
+                    }
                 }
             }
         }
     }
+    for (int h = 0; h < map_height; h++) {
+        for (int w = 0; w < map_width; w++) {
+            layout[h][w] = newMap[h][w];
+        }
+    }
 }
 
-void Map::removeMonster(int x, int y) { layout[x][y] = ' '; }
+void Map::removeMonster(int x, int y) { layout[y][x] = ' '; }

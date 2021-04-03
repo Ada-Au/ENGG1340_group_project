@@ -2,10 +2,6 @@
 #define Map_h
 
 #include "env.h"
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
-#include <vector>
 
 class Map {
   public:

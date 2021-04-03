@@ -2,16 +2,42 @@
 #define NPC_h
 
 #include "player.h"
-#include <iomanip>
-#include <iostream>
+#include <string>
 using namespace std;
 
 void renderNpc(string, string);
 const int npcSize = 16;
+const int monsterSize = 2;
+struct Monster {
+    string name;
+    float hp, mp;
+};
+
+const Monster monsters[monsterSize] = {{"a", 10, 20}, {"b", 30, 40}};
+
+const string monster[npcSize] = {
+    "                                                   ",    // length ~50
+    "                                                   ",    // the boat guy
+    "                                                   ",
+    "             MMMMM               MMMMM             ",
+    "             MMMMMMM           MMMMMMM             ",
+    "             MMMMMMMMM       MMMMMMMMM             ",
+    "             MMMMMMMMMMM   MMMMMMMMMMM             ",
+    "             MMMMM  MMMMMMMMMMM  MMMMM             ",
+    "             MMMMM     MMMMM     MMMMM             ",
+    "             MMMMM       M       MMMMM             ",
+    "             MMMMM               MMMMM             ",
+    "             MMMMM               MMMMM             ",
+    "             MMMMM               MMMMM             ",
+    "                                                   ",
+    "                                                   ",
+    "                                                   ",
+};
+
 const string charon[npcSize] = {
     "                      .---.                        ",    // length ~50
     "                     ,      `                      ",    // the boat guy
-    "                    / _.-._  1                     ",
+    "                    / _.-._  l                     ",
     "                   / /:::::\\  \\                  ",
     "                   > |:::::|  |                    ",
     "                   } |:::::|  {    ____            ",
@@ -90,7 +116,6 @@ const string hunger[npcSize] = {};
 const string need[npcSize] = {};
 const string death[npcSize] = {};
 const string agony[npcSize] = {};
-const string sleep[npcSize] = {};
-
+const string insomnia[npcSize] = {};
 
 #endif
