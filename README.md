@@ -62,6 +62,5 @@ In this game, you control a dead man who falls into hell with plenty of monsters
         - random output of the monsters' attack damage/ defense/ dodge according; and the probability of items appearing on map/ sold by special NPC
         - interface of home page
         - interface for battles
-        - interface for shop and communication
         - interface for backpack
         - interface for map
