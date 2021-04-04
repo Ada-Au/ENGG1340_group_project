@@ -3,6 +3,7 @@
 #include "player.h"
 #include "screen.h"
 #include "setup.h"
+#include "homepage.h"
 #include <iostream>
 
 using namespace std;
@@ -12,7 +13,8 @@ int main() {
     Screen scr;
     Map map;
     Player player;
-
+    
+    home();
     setupScreen(player);
     map.fill();
     cout << "Start your adventure!" << endl;

@@ -21,7 +21,7 @@ class Homepage
         " WWW WWW   WWW  WWW    HHH         HHH   AAA        AAA      TTTTT              AAA        AAA         HHH         HHH   EEE             LLL           LLL          ",
         "  WWWW        WWWW     HHH         HHH   AAA        AAA      TTTTT              AAA        AAA         HHH         HHH   EEEEEEEEEEEEE   LLLLLLLLLLLL  LLLLLLLLLLLL ",
     };
-    void home();
 };
+void home();
 
 #endif

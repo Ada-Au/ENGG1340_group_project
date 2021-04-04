@@ -6,6 +6,7 @@
 using namespace std;
 
 Item item[maxSpace] = {};
+int coin = 0;
 
 void displayBackpack(){
     for (int i = 0; i < maxSpace; i++) {
@@ -14,6 +15,7 @@ void displayBackpack(){
         if (item[i].name != "")
             cout << (i + 1) << "  " << item[i].name << "\t\t\t\t\t\t" << item[i].num << '\n';
     }
+    cout << "Coin: " << coin << " G\n";
     cout << "Press number to select items or q to exist\n";
 }
 

@@ -35,7 +35,7 @@ const Heals poorHealing = {"poorHealing", 0, 10, 8, 30};
 const Heals mediumHealing = {"mediumHealing", 0, 50, 25, 90};
 const Heals highHealing = {"highHealing", 0, 100, 50, 200};
 
-const Armors cloths = {"cloths", 1.05, 10, 35}
+const Armors cloths = {"cloths", 1.05, 10, 35};
 const Armors woodChest = {"wood chest", 1.1, 20, 70};
 const Armors leatherChest = {"leather chest", 1.25, 35, 122};
 const Armors silverChest = {"silver chest", 1.5, 100, 350};
@@ -45,7 +45,7 @@ const Weapons greatSword = {"great sword", 1.5, 15, 0, 40, 140};
 const Weapons longSword = {"long sword", 1.25, 5, 0, 36, 126};
 const Weapons spear = {"spear", 1.1, 10, 0, 32, 112};
 const Weapons sword = {"sword", 1, 1, 0, 12, 36};
-const wand = {"wand", 1.5, 0, 15, 50, 275};
+const Weapons wand = {"wand", 1.5, 0, 15, 50, 275};
 
 
 

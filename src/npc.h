@@ -14,10 +14,22 @@ struct Monster {
 };
 
 const Monster monsters[monsterSize] = {{"a", 10, 20}, {"b", 30, 40}};
+const Monster boss1 = {"grief", 200, 200};
+const Monster boss2 = {"anxiety", 350, 300};
+const Monster boss3 = {"diseases", 400, 345};
+const Monster boss4 = {"oldAge", 450, 600};
+const Monster boss5 = {"fear", 500, 555};
+const Monster boss6 = {"hunger", 550, 650};
+const Monster boss7 = {"need", 600, 200};
+const Monster boss8 = {"death", 666, 444};
+const Monster boss9 = {"agony", 750, 450};
+const Monster boss9 = {"insomnia", 700, 999};
+const Monster boss10 = {"hades", 1000, 666};
+
 
 const string monster[npcSize] = {
     "                                                   ",    // length ~50
-    "                                                   ",    // the boat guy
+    "                                                   ",    // monster
     "                                                   ",
     "             MMMMM               MMMMM             ",
     "             MMMMMMM           MMMMMMM             ",
@@ -55,7 +67,7 @@ const string charon[npcSize] = {
 
 const string grief[npcSize] = {
     "                         .---.                         ",    // level1 boss
-    "                       ,       `.                      ",
+    "                       ,       `.                      ",    // freezing
     "                      /  .~^~.    }                     ",
     "                     /  /_) (_ \\  \\                  ",
     "                    |  | : ^  :_ \\  \\                ",
@@ -63,7 +75,7 @@ const string grief[npcSize] = {
     "                    | >  :    ;    \\_|                ",
     "                    --        --  |   |               ",
     "                  /    \\    /    /   \\              ",
-    "                 |||||\\ \\  |||||     |            ",
+    "                 |||||\\ \\  |||||     |             ",
     "                 vvvv   v  vvvv        |              ",
     "                    |    ;    :        |               ",
     "                    |         ;        |               ",
@@ -110,9 +122,46 @@ const string diseases[npcSize] = {
     "                           ^~^*                  ",
 };
 
-const string oldAge[npcSize] = {};
-const string fear[npcSize] = {};
-const string hunger[npcSize] = {};
+const string oldAge[npcSize] = {
+    "                        ____                     ",
+    "                      .  __  `                   ",
+    "                     /   __   \\                 ",
+    "                    / (#)   () \\                 ",
+    "        .-----.     |     7    |                 ",
+    "       /       \\    ` ^....;^./                  ",
+    "       \\       / .--+ `^....^;/+--.               ",
+    "         `----` /    \\      /     \\             ",
+    "           \\/  /       \\.-./       \\            ",
+    "           || /         |  +|     .--.           ",
+    "           ||/ XXXXXXXXX `-^   XX/ '_`\\     ____  ",
+    "           ||               .--.  \\ \\ `. *  / .-.)      ",
+    "         ( ===.            ( .  `.)  \\    / /   *      ",
+    "         ( ]--.              * \\   ___  `-' /       ",
+    "         ( ---'                /  (   )   _'       ",
+
+
+};
+const string fear[npcSize] = {
+    "                       .-.                        ",
+    "                      /   \\                      ",
+    "                     | .-. |         ^            ",
+    "                     | `-' |        |o|           ",
+    "       / \\            \\   /          v            ",
+    "      |O  |            `-'                         ",
+    "       \\ /                    /\\                  ",
+    "                 .-.         |O |                  ",
+    "                /.-.\\         \\/                   ",
+    "               | `-' |               _            ",
+    "               |     |              /  \\          ",
+    "                \\   /              |  O |          ",
+    "     / \\         `-'                \\_ /          ",
+    "    |  O|                                         ",
+    "     \\ /                                          ",
+
+};
+const string hunger[npcSize] = {
+    "                                 "
+};
 const string need[npcSize] = {};
 const string death[npcSize] = {};
 const string agony[npcSize] = {};

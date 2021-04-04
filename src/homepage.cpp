@@ -81,11 +81,11 @@ void home()
             default:
                 break;
             case '1':
-                log = "Selected START";
+                log = "Selected START";  //start a new game
                 updated = true;
                 break;
             case '2':
-                log = "Selected LOAD";
+                log = "Selected LOAD";  // input files
                 updated = true;
                 break;      
             case '3':
