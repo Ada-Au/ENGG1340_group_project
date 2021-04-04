@@ -22,8 +22,8 @@ void fightScreen(Player &player) {
         cout << "Player's HP" << endl;
         cout << '|' << string(player.hp / 2, '*') << setfill(' ')
              << setw(50 - player.hp / 2) << '|' << endl;
-        cout << "Player's Energy: " << player.energy << "/100" << endl;
-        cout << "Player's MP: " << player.mp << '/' << player.maxMp << endl;
+        cout << "Player's Energy: " << player.energy << "/100" 
+             << setw(map_width - 40) << "Player's MP: " << player.mp << '/' << player.maxMp << endl;
         cout << "ACTION (please input number 1-4)" << endl
              << "1 - Attack               2 - Defence " << endl
              << "3 - Use Something        4 - Escape" << endl;

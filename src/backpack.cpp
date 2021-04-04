@@ -1,21 +1,21 @@
 #include "backpack.h"
 #include "env.h"
+#include "things.h"
+#include "player.h"
 #include <iomanip>
 #include <iostream>
 
 using namespace std;
 
-Item item[maxSpace] = {};
-int coin = 0;
+Item item[maxSpace] = {"", 0};
 
 void displayBackpack(){
     for (int i = 0; i < maxSpace; i++) {
         if (i == 0)
             cout << "Items\t\t\t\t\t\tNumber\n";
         if (item[i].name != "")
-            cout << (i + 1) << "  " << item[i].name << "\t\t\t\t\t\t" << item[i].num << '\n';
+            cout << (i + 1) << "  " << item[i].name << setw(48 - item[i].name.length()) << item[i].num << '\n';
     }
-    cout << "Coin: " << coin << " G\n";
     cout << "Press number to select items or q to exist\n";
 }
 
@@ -67,14 +67,30 @@ void openBackpack() {
         for (int i = 0; i < maxSpace; i++) {
             if (flag == to_string(i+1)) {
                 cout << item[i].name + "is selected\n";
-                cout << "Amount to use: ";
-                cin >> n;
-                cout << '\n';
-                while (n > item[i].num || n < 0) {
-                    cout << "Exceeds amount, enter a valid number please: ";
-                    cin >> n;
-                    cout << '\n';
+                for (int i = 0; i < healNum; i++){
+                    if (heals[i].name == item[i].name){         // To-do: update state of player
+                        cout << "Amount to use: ";
+                        cin >> n;
+                        cout << '\n';
+                        while (n > item[i].num || n < 0) {
+                            cout << "Exceeds amount, enter a valid number please: ";
+                            cin >> n;
+                            cout << '\n';
+                        }
+                        break;                      
+                    }
                 }
+                for (int i = 0; i < armorNum; i++)              // To do: also exchanges weapon and armor
+                    if (armors[i].name == item[i].name){
+                        n = 1;
+                        break;
+                    }
+                        
+                for (int i = 0; i < weaponNum; i++)
+                    if (weapons[i].name == item[i].name){
+                        n = 1;
+                        break;
+                    }
                 updateItems(item[i].name, n, 'D');
                 break;
             }
@@ -83,3 +99,4 @@ void openBackpack() {
         cin >> flag;
     }
 }
+

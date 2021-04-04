@@ -7,6 +7,8 @@ Player::Player() {
     x = 1, y = 1;
     mp = 100, hp = 100, energy = 100, maxMp = 100, maxHp = 100;
     race = "human";
+    armor = "";
+    weapon = "fist";
     debuffs->push_back(allDebuffs[1]);
     debuffs->push_back(allDebuffs[0]);
     debuffs->push_back(allDebuffs[2]);

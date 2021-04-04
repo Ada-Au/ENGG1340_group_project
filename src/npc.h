@@ -23,8 +23,8 @@ const Monster boss6 = {"hunger", 550, 650};
 const Monster boss7 = {"need", 600, 200};
 const Monster boss8 = {"death", 666, 444};
 const Monster boss9 = {"agony", 750, 450};
-const Monster boss9 = {"insomnia", 700, 999};
-const Monster boss10 = {"hades", 1000, 666};
+const Monster boss10 = {"insomnia", 700, 999};
+const Monster boss11 = {"hades", 1000, 666};
 
 
 const string monster[npcSize] = {

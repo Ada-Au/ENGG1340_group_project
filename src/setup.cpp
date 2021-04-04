@@ -66,6 +66,7 @@ void PrintGender() {
 }
 
 void setData(char key, int choice, Player &player) {
+    string log;
     // To-do: only allow players input one char & game response immediately
     //       if players input invalid key, print LOGs
     //       close the screen and open next options
@@ -81,12 +82,22 @@ void setData(char key, int choice, Player &player) {
             cout << "Please input again";
         break;
     case 2:    // race
-        if (key >= 'a' && key <= 'a' + max_race)
+        if (key >= 'a' && key <= 'a' + max_race){
             player.race = raceList[i];
-        else if (key == '*')
-            player.race = raceList[rand() % max_race];
-        else
-            cout << "Please input again";
+        }else if (key == '*'){
+            player.race = raceList[rand() % max_race];            
+        } else{
+            cout << "Please input again";            
+        }
+
+        if (player.race == "elf"){
+            log = "Charon: So you had been alone for thousands years so that you got the magic power?\n";            
+        }else if (player.race == "drawf"){
+            log = "Charon: No wonder why you are such...short?\n";            
+        }else if (player.race == "orc"){
+            log = "Charon: So you are a brute in human face. Got it.\n";            
+        }
+        cout << log;
         break;
     case 3:    // gender
         if (key >= 'a' && key <= 'a' + max_gender)
