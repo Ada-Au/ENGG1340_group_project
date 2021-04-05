@@ -6,6 +6,6 @@
 #include "player.h"
 #include "screen.h"
 
-void action(Screen, Map, Player);
+void action(Screen, Map, Player, Item[maxSpace]);
 
 #endif

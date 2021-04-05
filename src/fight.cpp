@@ -1,5 +1,6 @@
 #include "fight.h"
 #include "backpack.h"
+#include "things.h"
 #include <iomanip>
 #include <time.h>
 
@@ -7,8 +8,7 @@
 
 using namespace std;
 
-
-void fightScreen(Player &player) {
+void fightScreen(Player &player, Item item[]) {
     srand(time(NULL));
     int monsterN = rand() % monsterSize;
     float mHp = monsters[monsterN].hp;
@@ -52,7 +52,7 @@ void fightScreen(Player &player) {
                 break;
             
             case '3':
-                openBackpack();
+                openBackpack(item, player);
                 break;
             
             case '4':
@@ -84,5 +84,7 @@ void fightScreen(Player &player) {
         cout << "You die!" << endl;
     } else {
         cout << "You kill the monster!" << endl;
+        generateThings(item);
+        //need to annouce what player got after battle?
     }
 }

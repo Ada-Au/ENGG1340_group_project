@@ -10,7 +10,7 @@
 
 using namespace std;
 
-void action(Screen scr, Map map, Player player) {
+void action(Screen scr, Map map, Player player, Item item[]) {
 
     char key = ' ';
     while (key != 'q') {
@@ -47,7 +47,7 @@ void action(Screen scr, Map map, Player player) {
             break;
         case 'b':
         case 'B':
-            openBackpack();
+            openBackpack(item, player);
             break;
         default:
             scr.log = "Please input again";
@@ -58,7 +58,7 @@ void action(Screen scr, Map map, Player player) {
             scr.log = "Monster!";
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            fightScreen(player);
+            fightScreen(player, item);
             map.removeMonster(player.x, player.y);
             key = getch();
         } else {

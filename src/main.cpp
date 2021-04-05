@@ -4,6 +4,7 @@
 #include "screen.h"
 #include "setup.h"
 #include "homepage.h"
+#include "backpack.h"
 #include <iostream>
 
 using namespace std;
@@ -13,13 +14,14 @@ int main() {
     Screen scr;
     Map map;
     Player player;
+    Item item[maxSpace] = {"", 0};
     
     home();
     setupScreen(player);
     map.fill();
     cout << "Start your adventure!" << endl;
     scr.renderScreen(map, player);
-    action(scr, map, player);
+    action(scr, map, player, item);
 
     // std::cout << "COLOR" << std::endl
     //           << BLACK << " BLACK" << RED << " RED" << GREEN << " GREEN"

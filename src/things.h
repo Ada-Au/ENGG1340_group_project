@@ -2,12 +2,14 @@
 #define Things_h
 #include <iostream>
 #include <string>
+#include "backpack.h"
 
 using namespace std;
 
-const int healNum = 5;
-const int armorNum = 5;
-const int weaponNum = 7;
+const int maxHealNum = 5;
+const int maxArmorNum = 4;
+const int maxWeaponNum = 6;
+
 struct Heal{
     string name;
     int fullness;
@@ -26,25 +28,24 @@ struct Weapon{
     int mpLose;         //consume of mp for each magic attack
 };
 
-const Heal heals[healNum] = {{"monster meat", 25, -10},
+const Heal heals[maxHealNum] = {{"monster meat", 25, -10},
                              {"bread", 30, 5},
                              {"poor healing", 0, 10},
-                             {"mediumHealing", 0, 50},
-                             {"highHealing", 0, 100}};
+                             {"medium healing", 0, 50},
+                             {"high healing", 0, 100}};
 
-const Armor armors[armorNum] = {{"", 1},
-                                {"cloths", 1.05},
+const Armor armors[maxArmorNum] = {{"cloths", 1.05},
                                 {"wood chest", 1.1},
                                 {"leather chest", 1.25},
                                 {"silver chest", 1.5}};
 
-const Weapon weapons[weaponNum] = {{"fist", 1},
-                                   {"hammer", 2, 30, 0},
+const Weapon weapons[maxWeaponNum] = {{"hammer", 2, 30, 0},
                                    {"great sword", 1.5, 15, 0},
                                    {"long sword", 1.25, 5, 0},
                                    {"spear", 1.1, 10, 0},
                                    {"sword", 1, 1, 0},
                                    {"wand", 1.5, 0, 15}};
 
+void generateThings(Item[maxSpace]);
 
 #endif

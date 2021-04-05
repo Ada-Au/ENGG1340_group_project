@@ -20,9 +20,11 @@ backpack.o:src/backpack.cpp src/backpack.h
 	g++ -c src/backpack.cpp -o backpack.o 
 homepage.o:src/homepage.cpp src/homepage.h
 	g++ -c src/homepage.cpp -o homepage.o
+things.o:src/things.cpp src/things.h
+	g++ -c src/things.cpp -o things.o
 
-main:main.o map.o screen.o player.o action.o setup.o npc.o fight.o backpack.o homepage.o
-	g++ -o main main.o map.o screen.o player.o action.o setup.o npc.o fight.o backpack.o homepage.o
+main:main.o map.o screen.o player.o action.o setup.o npc.o fight.o backpack.o homepage.o things.o
+	g++ -o main main.o map.o screen.o player.o action.o setup.o npc.o fight.o backpack.o homepage.o things.o
 	
 clean:
-	rm -f map.o main.o player.o screen.o action.o setup.o npc.o fight.o backpack.o homepage.o
+	rm -f map.o main.o player.o screen.o action.o setup.o npc.o fight.o backpack.o homepage.o things.o
