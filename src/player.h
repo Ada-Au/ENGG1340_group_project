@@ -10,7 +10,9 @@ class Player {
     Player();
     char mark;
     int x, y;
-    float mp, hp, energy, maxMp, maxHp;
+    float mp, hp, energy, maxMp, maxHp, exp, maxExp;
+    int level;
+    std::string armor, weapon;
     // void setData(char key, int max);
     std::vector<std::string> debuffs[max_debuff];
     std::vector<std::string> buffs[max_buff];

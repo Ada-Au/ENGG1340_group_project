@@ -1,4 +1,5 @@
 #include "action.h"
+#include "backpack.h"
 #include <iostream>
 #include <thread>
 #if defined _WIN32 || defined _WIN64
@@ -9,7 +10,8 @@
 
 using namespace std;
 
-void action(Screen scr, Map map, Player player) {
+void action(Screen scr, Map map, Player player, Item item[]) {
+
     char key = ' ';
     while (key != 'q') {
         bool wall = false;
@@ -43,6 +45,10 @@ void action(Screen scr, Map map, Player player) {
             else
                 player.x++;
             break;
+        case 'b':
+        case 'B':
+            openBackpack(item, player);
+            break;
         default:
             scr.log = "Please input again";
         }
@@ -52,7 +58,7 @@ void action(Screen scr, Map map, Player player) {
             scr.log = "Monster!";
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            fightScreen(player);
+            fightScreen(player, item);
             map.removeMonster(player.x, player.y);
             key = getch();
         } else {
