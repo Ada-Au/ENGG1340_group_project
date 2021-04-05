@@ -14,6 +14,7 @@ void sortItems(Item item[])
     for (int i = 0; i < maxSpace - 1; i++){
         for (int j = 0; j < maxSpace - i - 1; j++){
             if (item[j].num <= 0){
+                item[j].num = 0;
                 tempName = item[j].name;
                 tempNum = item[j].num;
                 item[j].name = item[j+1].name;
@@ -74,13 +75,18 @@ void updateItems(string name, int number, char flag, Item item[])    // flag - A
 void openBackpack(Item item[], Player &player) {
     string flag;
     string old;
-    int n;
+    int n, index;
     displayBackpack(item);
     cin >> flag;
     while (flag != "q") {
-        for (int i = 0; i < maxSpace; i++) {
-            if (flag == to_string(i+1)) {
-                cout << item[i].name + " is selected\n";
+        for (index = 0; index < maxSpace; index++){
+            if (flag == to_string(index+1)) {
+                cout << item[index].name + " is selected\n";
+                break;
+            }
+        }
+        for (int i = 0; i < maxHealNum; i++){               //To-do: update player's state
+            if (item[index].name == heals[i].name){
                 cout << "Amount to use: ";
                 cin >> n;
                 cout << '\n';
@@ -89,41 +95,32 @@ void openBackpack(Item item[], Player &player) {
                     cin >> n;
                     cout << '\n';
                 }
-                // for (int i = 0; i < maxHealNum; i++){
-                //     if (heals[i].name == item[i].name){         // To-do: update state of player
-                //         cout << "Amount to use: ";
-                //         cin >> n;
-                //         cout << '\n';
-                //         while (n > item[i].num || n < 0) {
-                //             cout << "Exceeds amount, enter a valid number please: ";
-                //             cin >> n;
-                //             cout << '\n';
-                //         }
-                //         break;                      
-                //     }
-                // }
-                // for (int i = 0; i < maxArmorNum; i++){            // To do: also exchanges weapon and armor
-                //     if (armors[i].name == item[i].name){
-                //         n = 1;
-                //         old = player.armor;
-                //         player.armor = item[i].name;
-                //         updateItems(old, 1, 'A', item);
-                //         break;
-                //     }                        
-                // }             
-                // for (int i = 0; i <maxWeaponNum; i++){
-                //     if (weapons[i].name == item[i].name){
-                //         n = 1;
-                //         old = player.weapon;
-                //         player.weapon = item[i].name;
-                //         updateItems(old, 1, 'A', item);
-                //         break;
-                //     }                    
-                //}
-                updateItems(item[i].name, n, 'D', item);
                 break;
             }
         }
+        for (int i = 0; i < maxArmorNum; i++){             //Error: player's armor not update
+            if (item[index].name == armors[i].name){
+                n = 1;
+                if (player.armor != ""){
+                    old = player.armor;
+                    updateItems(old, 1, 'A', item);                    
+                }
+                player.armor = item[index].name;
+                break;
+            }
+        }
+        for (int i = 0; i < maxWeaponNum; i++){           //Error: player's weapon not update
+            if (item[index].name == weapons[i].name){
+                n = 1;
+                if (player.weapon != ""){
+                    old = player.weapon;
+                    updateItems(old, 1, 'A', item);
+                }
+                player.weapon = item[index].name;
+                break;
+            }
+        }
+        updateItems(item[index].name, n, 'D', item);
         displayBackpack(item);
         cout << "player's weapon: " << player.weapon << "  player's armor: " << player.weapon << endl;
         cin >> flag;

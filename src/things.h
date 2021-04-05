@@ -29,22 +29,22 @@ struct Weapon{
 };
 
 const Heal heals[maxHealNum] = {{"monster meat", 25, -10},
-                             {"bread", 30, 5},
-                             {"poor healing", 0, 10},
-                             {"medium healing", 0, 50},
-                             {"high healing", 0, 100}};
+                                {"bread", 30, 5},
+                                {"poor healing", 0, 10},
+                                {"medium healing", 0, 50},
+                                {"high healing", 0, 100}};
 
 const Armor armors[maxArmorNum] = {{"cloths", 1.05},
-                                {"wood chest", 1.1},
-                                {"leather chest", 1.25},
-                                {"silver chest", 1.5}};
+                                   {"wood chest", 1.1},
+                                   {"leather chest", 1.25},
+                                   {"silver chest", 1.5}};
 
 const Weapon weapons[maxWeaponNum] = {{"hammer", 2, 30, 0},
-                                   {"great sword", 1.5, 15, 0},
-                                   {"long sword", 1.25, 5, 0},
-                                   {"spear", 1.1, 10, 0},
-                                   {"sword", 1, 1, 0},
-                                   {"wand", 1.5, 0, 15}};
+                                      {"great sword", 1.5, 15, 0},
+                                      {"long sword", 1.25, 5, 0},
+                                      {"spear", 1.1, 10, 0},
+                                      {"sword", 1, 1, 0},
+                                      {"wand", 1.5, 0, 15}};
 
 void generateThings(Item[maxSpace]);
 
