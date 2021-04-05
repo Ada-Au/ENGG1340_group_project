@@ -98,7 +98,7 @@ void openBackpack(Item item[], Player &player) {
                 break;
             }
         }
-        for (int i = 0; i < maxArmorNum; i++){             //Error: player's armor not update
+        for (int i = 0; i < maxArmorNum; i++){             
             if (item[index].name == armors[i].name){
                 n = 1;
                 if (player.armor != ""){
@@ -109,7 +109,7 @@ void openBackpack(Item item[], Player &player) {
                 break;
             }
         }
-        for (int i = 0; i < maxWeaponNum; i++){           //Error: player's weapon not update
+        for (int i = 0; i < maxWeaponNum; i++){           
             if (item[index].name == weapons[i].name){
                 n = 1;
                 if (player.weapon != ""){
@@ -122,7 +122,7 @@ void openBackpack(Item item[], Player &player) {
         }
         updateItems(item[index].name, n, 'D', item);
         displayBackpack(item);
-        cout << "player's weapon: " << player.weapon << "  player's armor: " << player.weapon << endl;
+//         cout << "player's weapon: " << player.weapon << "  player's armor: " << player.armor << endl;
         cin >> flag;
     }
 }
