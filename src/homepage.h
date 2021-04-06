@@ -10,7 +10,7 @@ using namespace std;
 class Homepage
 {
     public:
-    string homepage[10] =
+    const string homepage[10] =
     {
         "WWW              WWW   HHH         HHH        AAAA     TTTTTTTTTTTTTTTTT             AAAA              HHH         HHH   EEEEEEEEEEEEE   LLL           LLL          ",
         "WWW              WWW   HHH         HHH     AAA    AAA        TTTTT                AAA    AAA           HHH         HHH   EEE             LLL           LLL          ",
