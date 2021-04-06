@@ -33,8 +33,8 @@ void displayBackpack(Item item[]){      //Also display player's state if possibl
         if (item[i].name != "" && item[i].num > 0)
             cout << (i + 1) << "  " << item[i].name << setw(48 - item[i].name.length()) << setfill(' ') << item[i].num << '\n';
     }
-    cout << "Press [number] to select items or [q] to exist\n" 
-         << "Press [w] to take off weapon or [a] to take off armor\n\n";
+    cout << "Press [number] to select items or [q] to exist.\n" 
+         << "Press [w] to take off weapon or [a] to take off armor.\n\n";
 }
 
 int findItem(string name, Item item[]) {
@@ -93,7 +93,7 @@ void updateState(Player &player, string object, int number)
 //To-do:
 // 1) input items after monster fighting / getting things on ground
 // 2) update number of items
-// 3) !!!sort by time(old to new)/ alphabetical order
+// 3) sort by time(old to new)
 void updateItems(string name, int number, char flag, Item item[])    // flag - A for adding, D for delete
 {
     if (number > maxNum)
@@ -149,7 +149,7 @@ void openBackpack(Item item[], Player &player) {
         }
         for (int i = 0; i < maxHealNum; i++){               
             if (item[index].name == heals[i].name){
-                cout << item[index].name + " is selected\n";
+                cout << item[index].name + " is selected.\n";
                 cout << "Amount to use: ";
                 cin >> n;
                 while (n > item[index].num || n < 0) {
@@ -163,7 +163,7 @@ void openBackpack(Item item[], Player &player) {
         }
         for (int i = 0; i < maxArmorNum; i++){             
             if (item[index].name == armors[i].name){
-                cout << item[index].name + " is equipped\n\n";
+                cout << item[index].name + " is equipped.\n\n";
                 n = 1;
                 if (player.armor != ""){
                     old = player.armor;
@@ -176,7 +176,7 @@ void openBackpack(Item item[], Player &player) {
         }
         for (int i = 0; i < maxWeaponNum; i++){           
             if (item[index].name == weapons[i].name){
-                cout << item[index].name + " is equipped\n\n";
+                cout << item[index].name + " is equipped.\n\n";
                 n = 1;
                 if (player.weapon != ""){
                     old = player.weapon;

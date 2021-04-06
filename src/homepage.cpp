@@ -1,8 +1,11 @@
 #include <windows.h>
 #include <iostream>
 #include <string>
-//#include "../lib/conio/conio.h" 
+#if defined _WIN32 || defined _WIN64
 #include <conio.h>
+#else
+#include "../lib/conio/conio.h"
+#endif
 
 #include "homepage.h"
 #include "env.h"
@@ -81,15 +84,15 @@ void home()
             default:
                 break;
             case '1':
-                log = "Selected START";  //start a new game
+                log = "\nSelected START";  //start a new game
                 updated = true;
                 break;
             case '2':
-                log = "Selected LOAD";  // input files
+                log = "\nSelected LOAD";  // input files
                 updated = true;
                 break;      
             case '3':
-                log = "Selected QUIT";
+                log = "\nSelected QUIT";
                 updated = true;
                 break; 
             case KEY_ENTER:
@@ -98,7 +101,7 @@ void home()
         }
         
         if (updated){
-            cout << log << "\t<Press Enter to Continue...>\n";
+            cout << log << "\t<Press Enter to Continue...>";
             c = getch();
             if (c == KEY_ENTER){
                 selecting = false;
