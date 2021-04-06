@@ -38,16 +38,16 @@ void Screen::renderScreen(Map map, Player player) {
             cout << "*  " << stat[h - 1] << setw(28 - stat[h - 1].length())
                  << setfill(' ') << "*" << endl;
         else if (h - 8 < debuffSize) {
-            cout << "*   - " << player.debuffs->at(h - 8)
-                 << setw(25 - player.debuffs->at(h - 8).length())
+            cout << "*   - " << player.debuffs->at(h - 8).name
+                 << setw(25 - player.debuffs->at(h - 8).name.length())
                  << setfill(' ') << "*" << endl;
         } else if (h - 8 < debuffSize + 2) {
             cout << "*  " << stat[h - 1 - debuffSize]
                  << setw(28 - stat[h - 1 - debuffSize].length()) << setfill(' ')
                  << "*" << endl;
         } else if (h - 10 - debuffSize < player.buffs->size()) {
-            cout << "*   - " << player.buffs->at(h - 10 - debuffSize)
-                 << setw(25 - player.buffs->at(h - 10 - debuffSize).length())
+            cout << "*   - " << player.buffs->at(h - 10 - debuffSize).name
+                 << setw(25 - player.buffs->at(h - 10 - debuffSize).name.length())
                  << setfill(' ') << "*" << endl;
         } else
             cout << "*" << setfill(' ') << setw(30) << "*" << endl;
