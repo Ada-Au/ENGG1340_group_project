@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#if defined _WIN32 || defined _WIN64
+#include <conio.h>
+#else
+#include "../lib/conio/conio.h"
+#endif
 
 using namespace std;
 
@@ -111,7 +116,7 @@ void setData(char key, int choice, Player &player) {
 }
 
 void setupScreen(Player &player) {
-    cout << "YOU DIED, Welcome to the Underworld!\n"
+    cout << "\nYOU DIED, Welcome to the Underworld!\n"
          << "Do you remember your name?\t";
     cin >> player.name;
     cout << endl;
@@ -122,7 +127,7 @@ void setupScreen(Player &player) {
     PrintInform(player);
 
     char key = ' ';
-    cin >> key;
+    key = getch();
 
     while (key == 'n') {
         PrintChoice();
@@ -152,6 +157,6 @@ void setupScreen(Player &player) {
             return;
         }
         PrintInform(player);
-        cin >> key;
+        key = getch();
     }
 }
