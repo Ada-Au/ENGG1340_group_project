@@ -23,7 +23,7 @@ struct Armor{
 
 struct Weapon{
     const string name;
-    const float damage;      // multiplication of attack damage
+    const float damage;         // multiplication of attack damage
     const float energyLose;     // consume of energy for each attack
     const float mpLose;         // consume of mp for each magic attack
 };

@@ -9,11 +9,10 @@ using namespace std;
 Player::Player() {
     mark = '@';
     x = 1, y = 1;
-    mp = 100, hp = 100, energy = 100, maxEnergy = 100; maxMp = 100, maxHp = 100, exp = 0; maxExp = 10, damage = 2, defense = 0;
+    mp = 100, hp = 100, energy = 100, maxEnergy = 100; maxMp = 100, maxHp = 100, exp = 0, maxExp = 10, damage = 2, defense = 0;
     level = 1;
     race = "human";
-    armor = "";
-    weapon = "";
+    armor = "", weapon = "", weaponEnergy = 1, weaponMp = 0;
     debuffs->push_back(allDebuffs[1]);
     debuffs->push_back(allDebuffs[0]);
     debuffs->push_back(allDebuffs[2]);
@@ -27,12 +26,11 @@ Player::Player() {
 
 void upgradePlayer(Player &player)
 {
-    //experience points of player
     if (player.exp >= player.maxExp && player.level < 100){
         player.level ++;
-        player.maxHp += 2;           // maxHp plus 2 for every level
-        player.damage ++;           // damage plus level for every level
-        player.exp -= player.maxExp;
+        player.maxHp += 2;              // maxHp plus 2 for every level
+        player.damage ++;               // damage plus level for every level-upgrade
+        player.exp -= player.maxExp;    // restart of exp.
         if (player.maxExp < 10000 )        // 1 - 13 level
             player.maxExp *= 2;
         else if (player.maxExp < 20000)    // 14 - 18 level
@@ -49,7 +47,7 @@ void upgradePlayer(Player &player)
         if (player.level % 5 == 0 && player.maxMp < 250)
             player.maxMp += 5;        
 
-        // restore of energy, hp and mp for every level upgrade
+        // restore of energy, hp and mp for every level upgrade (optional)
         player.energy = player.maxEnergy;
         player.hp = player.maxHp;
         player.mp = player.maxMp;
