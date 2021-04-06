@@ -4,11 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#if defined _WIN32 || defined _WIN64
-#include <conio.h>
-#else
-#include "../lib/conio/conio.h"
-#endif
 
 using namespace std;
 
@@ -29,7 +24,7 @@ void PrintInform(Player player) {
 }
 
 void PrintChoice() {
-    cout << "\n1 -Pick a ROLE\n"
+    cout << "\n1 - Pick a ROLE\n"
          << "2 - Pick a RACE\n"
          << "3 - Pick a GENDER\n"
          << "y - Yes: All are alright now\n"
@@ -87,20 +82,20 @@ void setData(char key, int choice, Player &player) {
             cout << "Please input again";
         break;
     case 2:    // race
-        if (key >= 'a' && key <= 'a' + max_race){
+        if (key >= 'a' && key <= 'a' + max_race) {
             player.race = raceList[i];
-        }else if (key == '*'){
-            player.race = raceList[rand() % max_race];            
-        } else{
-            cout << "Please input again";            
+        } else if (key == '*') {
+            player.race = raceList[rand() % max_race];
+        } else {
+            cout << "Please input again";
         }
 
-        if (player.race == "elf"){
-            log = "Charon: So you had been alone for thousands years so that you got the magic power?\n";            
-        }else if (player.race == "drawf"){
-            log = "Charon: No wonder why you are such...short?\n";            
-        }else if (player.race == "orc"){
-            log = "Charon: So you are a brute in human face. Got it.\n";            
+        if (player.race == "elf") {
+            log = "Charon: So you had been alone for thousands years so that you got the magic power?\n";
+        } else if (player.race == "drawf") {
+            log = "Charon: No wonder why you are such...short?\n";
+        } else if (player.race == "orc") {
+            log = "Charon: So you are a brute in human face. Got it.\n";
         }
         cout << log;
         break;
@@ -117,7 +112,7 @@ void setData(char key, int choice, Player &player) {
 
 void setupScreen(Player &player) {
     cout << "\nYOU DIED, Welcome to the Underworld!\n"
-         << "Do you remember your name?\t";
+         << "What's your name?\t";
     cin >> player.name;
     cout << endl;
     srand(time(NULL));
@@ -126,37 +121,35 @@ void setupScreen(Player &player) {
 
     PrintInform(player);
 
-    char key = ' ';
-    key = getch();
+    char key[2];
+    cin >> key;
 
-    while (key == 'n') {
+    while (key[0] != 'y') {
         PrintChoice();
         cin >> key;
-        switch (key) {
-        case '1': {
-            PrintRole();
-            cin >> key;
-            setData(key, 1, player);
-            break;
-        }
-        case '2': {
-            PrintRace();
-            cin >> key;
-            setData(key, 2, player);
-            break;
-        }
-        case '3': {
-            PrintGender();
-            cin >> key;
-            setData(key, 3, player);
-            break;
-        }
-        case 'y':
-            break;
-        case 'q':
-            return;
-        }
+        if (key[1] == '\0')
+            switch (key[0]) {
+            case '1': {
+                PrintRole();
+                cin >> key;
+                setData(key[0], 1, player);
+                break;
+            }
+            case '2': {
+                PrintRace();
+                cin >> key;
+                setData(key[0], 2, player);
+                break;
+            }
+            case '3': {
+                PrintGender();
+                cin >> key;
+                setData(key[0], 3, player);
+                break;
+            }
+            case 'q':
+                return;
+            }
         PrintInform(player);
-        key = getch();
     }
 }
