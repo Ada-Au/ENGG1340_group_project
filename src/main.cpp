@@ -12,6 +12,7 @@ int main() {
     Screen scr;
     Map map;
     Player player;
+    // addBuff(true, 0, player);
 
     setupScreen(player);
     map.fill();
@@ -19,13 +20,13 @@ int main() {
     scr.renderScreen(map, player);
     action(scr, map, player);
 
-    // std::cout << "COLOR" << std::endl
-    //           << BLACK << " BLACK" << RED << " RED" << GREEN << " GREEN"
-    //           << YELLOW << " YELLOW" << BLUE << " BLUE" << MAGENTA << " MAGENTA"
-    //           << CYAN << " CYAN" << WHITE << " WHITE" << std::endl
-    //           << BOLDBLACK << " BLACK" << BOLDRED << " RED" << BOLDGREEN
-    //           << " GREEN" << BOLDYELLOW << " YELLOW" << BOLDBLUE << " BLUE"
-    //           << BOLDMAGENTA << " MAGENTA" << BOLDCYAN << " CYAN" << BOLDWHITE
-    //           << " WHITE" << RESET << std::endl;
     return 0;
 }
+// std::cout << "COLOR" << std::endl
+//           << BLACK << " BLACK" << RED << " RED" << GREEN << " GREEN"
+//           << YELLOW << " YELLOW" << BLUE << " BLUE" << MAGENTA << " MAGENTA"
+//           << CYAN << " CYAN" << WHITE << " WHITE" << std::endl
+//           << BOLDBLACK << " BLACK" << BOLDRED << " RED" << BOLDGREEN
+//           << " GREEN" << BOLDYELLOW << " YELLOW" << BOLDBLUE << " BLUE"
+//           << BOLDMAGENTA << " MAGENTA" << BOLDCYAN << " CYAN" << BOLDWHITE
+//           << " WHITE" << RESET << std::endl;

@@ -67,6 +67,7 @@ void action(Screen scr, Map map, Player player) {
             scr.log = "There is a wall in my way";
         else {
             player.energy--;
+            updateOnBuff(player);
         }
     }
 }
