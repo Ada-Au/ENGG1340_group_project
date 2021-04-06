@@ -45,16 +45,25 @@ int findItem(string name, Item item[]) {
     return -1;
 }
 
-void exchange(Player &player, string old)
+void exchangeArmor(Player &player)
 {
-    for (int i = 0; i < maxArmorNum; i++){
-        if (player.armor == armors[i].name){
-           player.defense = armors[i].defenseValue;
-           break;
+    if (player.armor == ""){
+        player.defense = 0;
+    } else{
+        for (int i = 0; i < maxArmorNum; i++){
+            if (player.armor == armors[i].name){
+            player.defense = armors[i].defenseValue;
+            break;
+            }
         }
     }
-    if (player.weapon == "fist")
+
+}
+void exchangeWeapon(Player &player, string old){
+    if (player.weapon == ""){
         player.weaponEnergy = 1;
+        player.damage = 1 + player.level;
+    }
     float oldDamage = 1;
     if (old != player.weapon){
         for (int i = 0; i < maxWeaponNum; i++){
@@ -72,7 +81,7 @@ void exchange(Player &player, string old)
                 break;
             }
         }        
-    }
+    }    
 }
 
 void updateState(Player &player, string object, int number)
@@ -124,70 +133,75 @@ void openBackpack(Item item[], Player &player) {
     displayBackpack(item);
     cin >> flag;
     while (flag != "q") {
-        for (index = 0; index < maxSpace; index++){
-            if (flag == to_string(index+1)){
+        for (index = 0; index < maxSpace; index++){ //Find index
+            if (flag == to_string(index + 1))    
                break; 
-            }else if (flag == "a" || flag == "A"){
-                if (player.armor != ""){
-                    updateItems(player.armor, 1, 'A', item);
-                }else{
-                    cout << "You have no armor on body.\n" << "Press number to select or [q] to quit.  ";
-                    cin >> flag;
-                }
-                player.armor = "";
-                break;
-            }else if (flag == "w" || flag == "W"){
-                if (player.weapon != ""){
-                    updateItems(player.weapon, 1, 'A', item);
-                }else{
-                    cout << "You have no weapon on hand.\n" << "Press number to select or [q] to quit.  ";
-                    cin >> flag;
-                }
-                player.weapon = "";
-                break;
-            }
         }
-        for (int i = 0; i < maxHealNum; i++){               
-            if (item[index].name == heals[i].name){
-                cout << item[index].name + " is selected.\n";
-                cout << "Amount to use: ";
-                cin >> n;
-                while (n > item[index].num || n < 0) {
-                    cout << "Exceeds amount, enter a valid number please: ";
+        if (flag == to_string(index + 1)){          
+            for (int i = 0; i < maxHealNum; i++){               
+                if (item[index].name == heals[i].name){
+                    cout << item[index].name + " is selected.\n";
+                    cout << "Amount to use: ";
                     cin >> n;
+                    while (n > item[index].num || n < 0) {
+                        cout << "Exceeds amount, enter a valid number please: ";
+                        cin >> n;
+                    }
+                    cout << "\n\n";
+                    updateState(player, item[index].name, n);
+                    break;
                 }
-                cout << "\n\n";
-                updateState(player, item[index].name, n);
-                break;
             }
-        }
-        for (int i = 0; i < maxArmorNum; i++){             
-            if (item[index].name == armors[i].name){
-                cout << item[index].name + " is equipped.\n\n";
-                n = 1;
-                if (player.armor != ""){
-                    old = player.armor;
-                    updateItems(old, 1, 'A', item);                    
+            for (int i = 0; i < maxArmorNum; i++){             
+                if (item[index].name == armors[i].name){
+                    cout << item[index].name + " is equipped.\n\n";
+                    n = 1;
+                    if (player.armor != ""){
+                        old = player.armor;
+                        updateItems(old, 1, 'A', item);                    
+                    }
+                    player.armor = item[index].name;
+                    exchangeArmor(player);
+                    break;
                 }
-                player.armor = item[index].name;
-                exchange(player, old);
-                break;
             }
-        }
-        for (int i = 0; i < maxWeaponNum; i++){           
-            if (item[index].name == weapons[i].name){
-                cout << item[index].name + " is equipped.\n\n";
-                n = 1;
-                if (player.weapon != ""){
-                    old = player.weapon;
-                    updateItems(old, 1, 'A', item);
+            for (int i = 0; i < maxWeaponNum; i++){           
+                if (item[index].name == weapons[i].name){
+                    cout << item[index].name + " is equipped.\n\n";
+                    n = 1;
+                    if (player.weapon != ""){
+                        old = player.weapon;
+                        updateItems(old, 1, 'A', item);
+                    }
+                    player.weapon = item[index].name;
+                    exchangeWeapon(player, old);
+                    break;
                 }
-                player.weapon = item[index].name;
-                exchange(player, old);
-                break;
             }
+            updateItems(item[index].name, n, 'D', item);
+        } else if (flag == "a" || flag == "A"){
+            if (player.armor != ""){
+                updateItems(player.armor, 1, 'A', item);
+            } else{
+                cout << "You have no armor on body.\n" << "Press [number] to select or [q] to quit.  ";
+                cin >> flag;
+            }
+            player.armor = "";
+            exchangeArmor(player);
+        } else if (flag == "w" || flag == "W"){
+            if (player.weapon != ""){
+                updateItems(player.weapon, 1, 'A', item);
+            } else{
+                cout << "You have no weapon on hand.\n" << "Press [number] to select or [q] to quit.  ";
+                cin >> flag;
+            }
+            player.weapon = "";         // To-do: update of player damage
+            exchangeWeapon(player, player.weapon);
+        } else {
+            cout << "Press [number] to select items or [q] to exist.\n" 
+                 << "Press [w] to take off weapon or [a] to take off armor.\n\n";
+            cin >> flag;
         }
-        updateItems(item[index].name, n, 'D', item);
         displayBackpack(item);
         cin >> flag;
     }
