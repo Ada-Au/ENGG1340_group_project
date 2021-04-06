@@ -2,21 +2,28 @@
 #define Player_h
 
 #include "env.h"
+// #include "things.h"
 #include <string>
 #include <vector>
+
+using namespace std;
 
 class Player {
   public:
     Player();
     char mark;
     int x, y;
-    float mp, hp, energy, maxMp, maxHp, exp, maxExp;
+    float mp, hp, energy, maxEnergy, maxMp, maxHp, exp, maxExp, damage, defense;
     int level;
-    std::string armor, weapon;
+    string armor, weapon;
     // void setData(char key, int max);
-    std::vector<std::string> debuffs[max_debuff];
-    std::vector<std::string> buffs[max_buff];
-    std::string name, role, gender, race;
+    vector<string> debuffs[max_debuff];
+    vector<string> buffs[max_buff];
+    string name, role, gender, race;
 };
+
+void upgradePlayer(Player &);
+void exchange(Player &, string);
+void updateState(Player &, string, int);
 
 #endif

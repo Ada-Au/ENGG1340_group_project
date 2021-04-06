@@ -5,11 +5,11 @@
 using namespace std;
 
 void Screen::renderScreen(Map map, Player player) {
-    string stat[9] = {"[name]",
+    string stat[9] = {'[' + player.name + ']',
                       "",
-                      "HP: " + to_string(player.hp),
-                      "MP: " + to_string(player.mp),
-                      "Energy: " + to_string(player.energy),
+                      "HP: " + to_string(player.hp), // + '/' + to_string(player.maxHp),
+                      "MP: " + to_string(player.mp), // + '/' + to_string(player.maxMp),
+                      "Energy: " + to_string(player.energy), //+ '/' + to_string(player.maxEnergy),
                       "",
                       "Debuffs: ",
                       "",
