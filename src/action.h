@@ -3,7 +3,6 @@
 
 #include "fight.h"
 #include "map.h"
-#include "player.h"
 #include "screen.h"
 
 void action(Screen, Map, Player, Item[maxSpace]);
