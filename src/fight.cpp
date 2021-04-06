@@ -17,7 +17,7 @@ void fightScreen(Player &player, Item item[]) {
         std::cout << '|' << setfill(' ') << string(showMHp, '*')
              << setw(50 - showMHp) << '|' << endl;
         renderNpc("monster", "");
-        std::cout << "Player's HP" << endl;
+        std::cout << "Player's HP: " << player.hp << '/' << player.maxHp << endl;
         std::cout << '|' << string(player.hp / 2, '*') << setfill(' ')
              << setw(50 - player.hp / 2) << '|' << endl;
         std::cout << "Player's Energy: " << player.energy << '/' << player.maxEnergy
@@ -29,11 +29,29 @@ void fightScreen(Player &player, Item item[]) {
         switch(key){
             case '1':
                 // need to get player weapon first...
-                if (rand() % 10 >= 0) {    // rate of hitting
-                    mHp -= player.damage;              // should be weapon damage (<- update in exchange(player))
-                    std::cout << "Player: Successfully make " << player.damage << " damage." << endl;
-                } else {
-                    std::cout << "Player: Miss!" << endl;
+                if (player.mp >= 0 || player.energy >= 0){            //player can attack only either energy of mp is not 0
+                    float criticalHit = 1;
+                    string critical = "";
+                    if (rand() % 10 >= 0) {    // rate of hitting
+                        if (rand()%100 <= 6){
+                            criticalHit = 1.5;
+                            critical = " critical";
+                        }
+                        mHp -= player.damage * criticalHit;           // should be weapon damage (<- update in backpage.cpp: exchange(player))
+                        if (player.energy > 0)
+                            player.energy -= player.weaponEnergy;    // limite player min energy and min mp to 0
+                        if (player.mp > 0)
+                            player.mp -= player.weaponMp;
+                        if (player.energy < 0)
+                            player.energy = 0;
+                        if (player.mp < 0)
+                            player.mp = 0;
+                        std::cout << "Player: Successfully make " << (player.damage * criticalHit) << critical + " damage." << endl;
+                    } else {
+                        std::cout << "Player: Miss!" << endl;
+                    }                    
+                }else{
+                    cout << "You have no enery to attack now\n";
                 }
                 // monster strongness? (6)
                 if (mHp > 0) {
