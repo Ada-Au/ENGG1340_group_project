@@ -5,13 +5,12 @@
 #if defined _WIN32 || defined _WIN64
 #include <conio.h>
 #else
-#include "../lib/conio/conio.h"
+#include <curses.h>
 #endif
 
 using namespace std;
 
 void action(Screen scr, Map map, Player player, Item item[]) {
-
     char key = ' ';
     while (key != 'q') {
         bool wall = false;

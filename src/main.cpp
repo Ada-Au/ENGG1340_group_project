@@ -14,7 +14,7 @@ int main() {
     Screen scr;
     Map map;
     Player player;
-    Item item[maxSpace] = {"", 0};
+    Item item[maxSpace] = {};
     
     home();
     setupScreen(player);
