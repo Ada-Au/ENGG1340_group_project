@@ -1,7 +1,6 @@
 #ifndef NPC_h
 #define NPC_h
 
-#include "player.h"
 #include <string>
 using namespace std;
 
@@ -14,17 +13,17 @@ struct Monster {
 };
 
 const Monster monsters[monsterSize] = {{"a", 10, 20}, {"b", 30, 40}};
-const Monster boss1 = {"grief", 200, 200};
-const Monster boss2 = {"anxiety", 350, 300};
-const Monster boss3 = {"diseases", 400, 345};
-const Monster boss4 = {"oldAge", 450, 600};
-const Monster boss5 = {"fear", 500, 555};
-const Monster boss6 = {"hunger", 550, 650};
-const Monster boss7 = {"need", 600, 200};
-const Monster boss8 = {"death", 666, 444};
-const Monster boss9 = {"agony", 750, 450};
-const Monster boss10 = {"insomnia", 700, 999};
-const Monster boss11 = {"hades", 1000, 666};
+const Monster boss1 = {"grief", 300, 200};
+const Monster boss2 = {"anxiety", 480, 300};
+const Monster boss3 = {"diseases", 660, 345};
+const Monster boss4 = {"oldAge", 845, 600};
+const Monster boss5 = {"fear", 1020, 555};
+const Monster boss6 = {"hunger", 1440, 650};
+const Monster boss7 = {"need", 1630, 200};
+const Monster boss8 = {"death", 1925, 444};
+const Monster boss9 = {"agony", 2222, 450};
+const Monster boss10 = {"insomnia", 2666, 666};
+const Monster boss11 = {"hades", 3333, 999};
 
 
 const string monster[npcSize] = {
