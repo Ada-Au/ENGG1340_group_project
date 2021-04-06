@@ -33,11 +33,10 @@ void fightScreen(Player &player, Item item[]) {
                     float criticalHit = 1;
                     string critical = "";
                     if (rand() % 10 >= 0) {    // rate of hitting
-                        if (rand()%100 <= 6){
+                        if (rand()%100 <= 6){  // rate of critical hit
                             criticalHit = 1.5;
                             critical = " critical";
-                        }
-                        mHp -= player.damage * criticalHit;           // should be weapon damage (<- update in backpage.cpp: exchange(player))
+                        } mHp -= player.damage * criticalHit;           // should be weapon damage (<- update in backpage.cpp: exchange(player))
                         if (player.energy > 0)
                             player.energy -= player.weaponEnergy;    // limite player min energy and min mp to 0
                         if (player.mp > 0)
@@ -50,13 +49,13 @@ void fightScreen(Player &player, Item item[]) {
                     } else {
                         std::cout << "Player: Miss!" << endl;
                     }                    
-                }else{
+                } else{
                     cout << "You have no enery to attack now\n";
                 }
                 // monster strongness? (6)
                 if (mHp > 0) {
                     if (rand() % 10 >= 6) {
-                        player.hp -= 10;
+                        player.hp -= (10 - (player.defense / 2));
                         std::cout << "Monster: Got you!" << endl;
                     } else {
                         std::cout << "Monster: Miss!" << endl;
@@ -109,7 +108,8 @@ void fightScreen(Player &player, Item item[]) {
     }
 
     if (player.hp <= 0) {
-        std::cout << "You die!" << endl;
+        // std::cout << "You die!" << endl;
+        std::cout << endl;                  // "You die!" repeat in action.cpp
     } else {
         std::cout << "You kill the monster!" << endl;
         upgradePlayer(player);
