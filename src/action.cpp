@@ -76,8 +76,8 @@ void action(Screen scr, Map map, Player player, Item item[]) {
                 player.energy--;
             else
                 player.energy = 0;
-            if (player.mp < player.maxMp)
-                player.mp += 0.5;
+            // if (player.mp < player.maxMp)
+            //     player.mp += 0.5;
             
         }
     }

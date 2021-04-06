@@ -16,7 +16,7 @@ int main() {
     Player player;
     Item item[maxSpace] = {"", 0};
     
-    home();
+    homescreen();
     setupScreen(player);
     map.fill();
     cout << "Start your adventure!" << endl;

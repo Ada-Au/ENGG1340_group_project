@@ -33,12 +33,12 @@ void fightScreen(Player &player, Item item[]) {
                     float criticalHit = 1;
                     string critical = "";
                     if (rand() % 10 >= 0) {    // rate of hitting
-                        if (rand()%100 <= 6){  // rate of critical hit
+                        if (rand() % 100 <= 6){  // rate of critical hit
                             criticalHit = 1.5;
                             critical = " critical";
                         } mHp -= player.damage * criticalHit;           // should be weapon damage (<- update in backpage.cpp: exchange(player))
                         if (player.energy > 0)
-                            player.energy -= player.weaponEnergy;    // limite player min energy and min mp to 0
+                            player.energy -= player.weaponEnergy;    // limite player's min energy and min mp to 0
                         if (player.mp > 0)
                             player.mp -= player.weaponMp;
                         if (player.energy < 0)
@@ -86,27 +86,8 @@ void fightScreen(Player &player, Item item[]) {
                 break;
             
         }
-        // if (key == '1') {
-        //     // need to get player weapon first...
-        //     if (rand() % 10 >= 0) {    // rate of hitting
-        //         mHp -= 2;              // should be weapon damage
-        //         cout << "Player: Successfully make " << 2 << " damage." << endl;
-        //     } else {
-        //         cout << "Player: Miss!" << endl;
-        //     }
-        //     // monster strongness? (6)
-        //     if (mHp > 0) {
-        //         if (rand() % 10 >= 6) {
-        //             player.hp -= 10;
-        //             cout << "Monster: Got you!" << endl;
-        //         } else {
-        //             cout << "Monster: Miss!" << endl;
-        //         }
-        //     }
-        // }
         std::cout << endl;
     }
-
     if (player.hp <= 0) {
         // std::cout << "You die!" << endl;
         std::cout << endl;                  // "You die!" repeat in action.cpp
