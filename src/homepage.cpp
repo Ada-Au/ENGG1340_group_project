@@ -1,4 +1,3 @@
-#include <windows.h>
 #include <iostream>
 #include <string>
 #if defined _WIN32 || defined _WIN64
