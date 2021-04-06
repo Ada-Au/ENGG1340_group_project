@@ -72,7 +72,13 @@ void action(Screen scr, Map map, Player player, Item item[]) {
         if (wall)
             scr.log = "There is a wall in my way";
         else {
-            player.energy--;
+            if (player.energy > 0)
+                player.energy--;
+            else
+                player.energy = 0;
+            if (player.mp < player.maxMp)
+                player.mp += 0.5;
+            
         }
     }
 }
