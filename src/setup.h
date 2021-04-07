@@ -6,6 +6,6 @@
 
 using namespace std;
 
-void setupScreen(Player &);
+void setupScreen(Player &, int &);
 
 #endif

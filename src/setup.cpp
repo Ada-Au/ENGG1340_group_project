@@ -110,7 +110,7 @@ void setData(char key, int choice, Player &player) {
     }
 }
 
-void setupScreen(Player &player) {
+void setupScreen(Player &player, int &flag) {
     cout << "\nYOU DIED, Welcome to the Underworld!\n"
          << "What's your name?\t";
     cin >> player.name;
@@ -124,32 +124,37 @@ void setupScreen(Player &player) {
     char key[2];
     cin >> key;
 
-    while (key[0] != 'y') {
+    while ((key[0] != 'y' && key[0] != 'Y') && (key[0] != 'q' && key[0] != 'Q')) {
         PrintChoice();
         cin >> key;
-        if (key[1] == '\0')
+        if (key[1] == '\0'){
             switch (key[0]) {
-            case '1': {
-                PrintRole();
-                cin >> key;
-                setData(key[0], 1, player);
-                break;
+                case '1': {
+                    PrintRole();
+                    cin >> key;
+                    setData(key[0], 1, player);
+                    break;
+                }
+                case '2': {
+                    PrintRace();
+                    cin >> key;
+                    setData(key[0], 2, player);
+                    break;
+                }
+                case '3': {
+                    PrintGender();
+                    cin >> key;
+                    setData(key[0], 3, player);
+                    break;
+                }
+                case 'q':
+                case 'Q':
+                    flag = 0;
+                    break;
             }
-            case '2': {
-                PrintRace();
-                cin >> key;
-                setData(key[0], 2, player);
-                break;
-            }
-            case '3': {
-                PrintGender();
-                cin >> key;
-                setData(key[0], 3, player);
-                break;
-            }
-            case 'q':
-                return;
-            }
-        PrintInform(player);
-    }
+            PrintInform(player);            
+        }
+    } if (key[0] == 'q' || key[0] == 'Q')
+        flag = 0;
 }
+
