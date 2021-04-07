@@ -37,10 +37,10 @@ void Screen::renderScreen(Map map, Player player) {
         cout << "      ";
         if (h == 0 || h == map_height - 1) {
             cout << "*******************************" << endl;
-        } else if (h <= 10) //7
+        } else if (h <= 10) {
             cout << "*  " << stat[h - 1] << setw(28 - stat[h - 1].length())
-                 << setfill(' ') << "*" << endl;
-        else if (h - 11 < debuffSize) {
+                 << setfill(' ') << "*" << endl;            
+        } else if (h - 11 < debuffSize) {
             cout << "*   - " << player.debuffs->at(h - 11)
                  << setw(25 - player.debuffs->at(h - 11).length())
                  << setfill(' ') << "*" << endl;
@@ -66,6 +66,10 @@ void Screen::renderScreen(Map map, Player player) {
     log = "";
 }
 
+void printHelp(){
+    for (int i = 0; i < helpSize; i++)
+        cout <<  helpScreen[i] << endl;
+}
 // void Screen::fillHelp()
 // {
 //     help[0] = "\"Numpad\"... - Movement";

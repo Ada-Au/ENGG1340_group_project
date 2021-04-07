@@ -33,8 +33,8 @@ void displayBackpack(Item item[]){      //Also display player's state if possibl
         if (item[i].name != "" && item[i].num > 0)
             cout << (i + 1) << "  " << item[i].name << setw(48 - item[i].name.length()) << setfill(' ') << item[i].num << '\n';
     }
-    cout << "Press [number] to select items or [q] to exist.\n" 
-         << "Press [w] to take off weapon or [a] to take off armor.\n\n";
+    cout << "Press [number] to select items or [Q] to exist.\n" 
+         << "Press [W] to take off weapon or [A] to take off armor.\n\n";
 }
 
 int findItem(string name, Item item[]) {
@@ -183,7 +183,7 @@ void openBackpack(Item item[], Player &player) {
             if (player.armor != ""){
                 updateItems(player.armor, 1, 'A', item);
             } else{
-                cout << "You have no armor on body.\n" << "Press [number] to select or [q] to quit.  ";
+                cout << "You have no armor on body.\n" << "Press [number] to select or [Q] to quit.  ";
                 cin >> flag;
             }
             player.armor = "";
@@ -192,14 +192,14 @@ void openBackpack(Item item[], Player &player) {
             if (player.weapon != ""){
                 updateItems(player.weapon, 1, 'A', item);
             } else{
-                cout << "You have no weapon on hand.\n" << "Press [number] to select or [q] to quit.  ";
+                cout << "You have no weapon on hand.\n" << "Press [number] to select or [Q] to quit.  ";
                 cin >> flag;
             }
-            player.weapon = "";         // To-do: update of player damage
+            player.weapon = "";
             exchangeWeapon(player, player.weapon);
         } else {
-            cout << "Press [number] to select items or [q] to exist.\n" 
-                 << "Press [w] to take off weapon or [a] to take off armor.\n\n";
+            cout << "Press [number] to select items or [Q] to exist.\n" 
+                 << "Press [W] to take off weapon or [A] to take off armor.\n\n";
             cin >> flag;
         }
         displayBackpack(item);

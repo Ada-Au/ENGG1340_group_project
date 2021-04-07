@@ -2,12 +2,13 @@
 #include "env.h"
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 #define KEY_ENTER '\r'
 
 using namespace std;
 
-void homescreen() {
+void menu(int &flag) {
     int selected = 0;
     int choices = 3;
 
@@ -15,9 +16,11 @@ void homescreen() {
     //       add reminder: plz play this game with full screen
     for (int i = 0; i < 10; i++)
         cout << homepage[i] << "\n";
+    
+    cout << "(Please play this game with full screen)" << endl;
 
     //Press 1, 2, 3 to continue
-    cout << "[1]  START\t[2]  LOAD\t[3]  QUIT\n";
+    cout << setw(104) << "[1]  START    [2]  LOAD    [3]  QUIT\n";
 
     char c;
     switch (c = cin.get()) {
@@ -29,17 +32,9 @@ void homescreen() {
         break;
     case '3':
         cout << "Selected QUIT";
+        flag = 0;
         break;
     default:
         break;
     }
-
-    // if (updated) {
-    //     cout << log << "\t<Press Enter to Continue...>";
-    //     if (cin.get()) {
-    //         selecting = false;
-    //         break;
-    //     } else
-    //         updated = false;
-    // }
 }
