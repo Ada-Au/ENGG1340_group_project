@@ -65,11 +65,9 @@ void PrintGender() {
     cout << "* - Random\n";
 }
 
-void setData(char key, int choice, Player &player) {
+void setData(char key, int choice, Player &player) {                
     string log;
-    // To-do: only allow players input one char & game response immediately
-    //       if players input invalid key, print LOGs
-    //       close the screen and open next options
+    // To-do: avoid player's lengthen input
     int i = key - 'a';
     srand(time(NULL));
     switch (choice) {
@@ -78,16 +76,21 @@ void setData(char key, int choice, Player &player) {
             player.role = roleList[i];
         else if (key == '*')
             player.role = roleList[rand() % max_role];
-        else
-            cout << "Please input again";
+        else{
+            cout << "Please input again\t";
+            cin >> key;
+            setData(key, choice, player);
+        }      
         break;
     case 2:    // race
         if (key >= 'a' && key <= 'a' + max_race) {
             player.race = raceList[i];
         } else if (key == '*') {
             player.race = raceList[rand() % max_race];
-        } else {
-            cout << "Please input again";
+        } else{
+            cout << "Please input again\t";
+            cin >> key;
+            setData(key, choice, player);
         }
 
         if (player.race == "elf") {
@@ -104,8 +107,11 @@ void setData(char key, int choice, Player &player) {
             player.gender = genderList[i];
         else if (key == '*')
             player.gender = genderList[rand() % 2];
-        else
-            cout << "Please input again";
+        else{
+            cout << "Please input again\t";
+            cin >> key;
+            setData(key, choice, player);
+        }
         break;
     }
 }
@@ -152,7 +158,8 @@ void setupScreen(Player &player, int &flag) {
                     flag = 0;
                     break;
             }
-            PrintInform(player);            
+            if (key[0]!='Q' && key[0]!='q')
+                PrintInform(player);            
         }
     } if (key[0] == 'q' || key[0] == 'Q')
         flag = 0;

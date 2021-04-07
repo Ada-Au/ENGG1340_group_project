@@ -25,13 +25,13 @@ void menu(int &flag) {
     char c;
     switch (c = cin.get()) {
     case '1':
-        cout << "Selected START";    //start a new game
+        cout << "Selected START\n";    //start a new game
         break;
     case '2':
-        cout << "Selected LOAD";    // input files
+        cout << "Selected LOAD\n";    // input files
         break;
     case '3':
-        cout << "Selected QUIT";
+        cout << "Selected QUIT\n";
         flag = 0;
         break;
     default:
