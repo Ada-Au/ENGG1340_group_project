@@ -5,7 +5,7 @@
 using namespace std;
 
 void Screen::renderScreen(Map map, Player player) {
-    string stat[12] = {'[' + player.name + ']',
+    string stat[12] = {"[ " + player.name + " ]",
                       "",
                       "Level: " + to_string(player.level),
                       "HP: " + to_string(player.hp), // + '/' + to_string(player.maxHp),
@@ -19,7 +19,7 @@ void Screen::renderScreen(Map map, Player player) {
                       "Buffs: "};
 
     int debuffSize = player.debuffs->size();
-    for (int h = 0; h < map_height; h++) {
+    for (int h = 0; h < map_height; h++) {              //print map
         for (int w = 0; w < map_width; w++) {
             if (h == player.y && w == player.x) {
                 if (map.layout[h][w] == 'M') {
@@ -35,7 +35,7 @@ void Screen::renderScreen(Map map, Player player) {
         }
 
         cout << "      ";
-        if (h == 0 || h == map_height - 1) {
+        if (h == 0 || h == map_height - 1) {            // print player's status
             cout << "*******************************" << endl;
         } else if (h <= 10) {
             cout << "*  " << stat[h - 1] << setw(28 - stat[h - 1].length())
