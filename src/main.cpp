@@ -15,9 +15,14 @@ int main() {
     Map map;
     Player player;
     Item item[maxSpace] = {"", 0};
+    int flag = 1;   // determine close game or not
     
-    homescreen();
-    setupScreen(player);
+    menu(flag);
+    if (flag == 0)
+        return 0;
+    setupScreen(player, flag);
+    if (flag == 0)
+        return 0;
     map.fill();
     cout << "Start your adventure!" << endl;
     scr.renderScreen(map, player);
