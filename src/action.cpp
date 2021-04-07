@@ -49,8 +49,13 @@ void action(Screen scr, Map map, Player player, Item item[]) {
         case 'B':
             openBackpack(item, player);
             break;
+        case 'h':
+        case 'H':
+            printHelp();
+            break;
         default:
-            scr.log = "Please input again";
+            if (player.hp > 0)
+                scr.log = "Please input again or press [H] for help";
         }
         scr.renderScreen(map, player);
 
