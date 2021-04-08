@@ -7,12 +7,14 @@ using namespace std;
 void renderNpc(string, string);
 const int npcSize = 16;
 const int monsterSize = 2;
+
 struct Monster {
     string name;
     float hp, mp;
+    float damage, rate;
 };
 
-const Monster monsters[monsterSize] = {{"a", 10, 20}, {"b", 30, 40}};
+// const Monster monsters[monsterSize] = {{"a", 10, 20}, {"b", 30, 40}};
 const Monster boss1 = {"grief", 300, 200};
 const Monster boss2 = {"anxiety", 480, 300};
 const Monster boss3 = {"diseases", 660, 345};
@@ -25,6 +27,7 @@ const Monster boss9 = {"agony", 2222, 777};
 const Monster boss10 = {"nightmare", 2666, 800};
 const Monster boss11[monsterSize] = {{"hades1", 3333, 999}, {"hades2", 6666, 999}};
 
+const Monster monsters[monsterSize] = {{"a", 10, 20, 2, 80}, {"b", 30, 40, 3, 85}};
 
 const string monster[npcSize] = {
     "                                                   ",    // length ~50

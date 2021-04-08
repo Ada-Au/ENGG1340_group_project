@@ -56,6 +56,7 @@ void Map::fill() {
                 maxTunnels--;
             }
         }
+        layout[currentRow][currentCol] = 'S';
     }
 
     cout << "\ndone:D\n\n\n";

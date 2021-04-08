@@ -54,8 +54,8 @@ void fightScreen(Player &player, Item item[]) {
                 }
                 // monster strongness? (6)
                 if (mHp > 0) {
-                    if (rand() % 10 >= 6) {
-                        player.hp -= (10 - (player.defense / 2));
+                    if (rand() % 100 >=  monsters[monsterN].rate) {
+                        player.hp -= (monsters[monsterN].damage - (player.defense / 2));
                         std::cout << "Monster: Got you!" << endl;
                     } else {
                         std::cout << "Monster: Miss!" << endl;

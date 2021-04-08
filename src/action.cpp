@@ -58,8 +58,12 @@ void action(Screen scr, Map map, Player player, Item item[]) {
                 scr.log = "Please input again or press [H] for help";
         }
         scr.renderScreen(map, player);
-
-        if (map.layout[player.y][player.x] == 'M') {
+        cout << map.layout[player.y][player.x] << endl;
+        if (map.layout[player.y][player.x] == 'S') {
+            map.fill();
+            player.x = 1;
+            player.y = 1;
+        } else if (map.layout[player.y][player.x] == 'M') {
             scr.log = "Monster!";
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -83,7 +87,7 @@ void action(Screen scr, Map map, Player player, Item item[]) {
                 player.energy = 0;
             // if (player.mp < player.maxMp)
             //     player.mp += 0.5;
-            
+            updateOnBuff(player);
         }
     }
 }
