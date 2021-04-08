@@ -63,6 +63,7 @@ void action(Screen scr, Map map, Player player, Item item[]) {
             map.fill();
             player.x = 1;
             player.y = 1;
+            player.gameLevel++;
         } else if (map.layout[player.y][player.x] == 'M') {
             scr.log = "Monster!";
             scr.renderScreen(map, player);

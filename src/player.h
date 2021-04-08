@@ -26,13 +26,12 @@ class Player {
     char mark;
     int x, y;
     float mp, hp, energy, maxEnergy, maxMp, maxHp, exp, maxExp, damage, defense, weaponEnergy, weaponMp;
-    int level;
+    int level, gameLevel;
     string armor, weapon;
     // void setData(char key, int max);
     vector<Buff> debuffs;
     vector<Buff> buffs;
     string name, role, gender, race;
-
 };
 
 void upgradePlayer(Player &);
