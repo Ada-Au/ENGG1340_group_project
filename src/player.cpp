@@ -11,11 +11,12 @@ Player::Player() {
     mark = '@';
     x = 1, y = 1;
     mp = 100, hp = 100, energy = 100, maxEnergy = 100;
-    maxMp = 100, maxHp = 100, exp = 0, maxExp = 10, damage = 2, defense = 0, weaponEnergy = 1;
+    maxMp = 100, maxHp = 100, exp = 0, maxExp = 10, damage = 2, defense = 0, weaponEnergy = 1, weaponMp = 0;
     level = 1, gameLevel = 1;
     race = "human";
-    weapon = "";
-    armor = "";
+    weapon = "", armor = "";
+    debuffs.clear();
+    buffs.clear();
     debuffs.push_back(allDebuffs[0]);
 }
 
@@ -75,20 +76,19 @@ void upgradePlayer(Player &player) {
 }
 
 void updateOnBuff(Player &player) {
-    vector<Buff> newBuffs;
-    for (int i = player.debuffs.size(); i > 0; i--) {
+    for (int i = player.debuffs.size() - 1; i >= 0; i--) {
+        cout << player.debuffs[i].hp;
         player.hp += player.debuffs[i].hp;
-        player.hp += player.debuffs[i].mp;
-        player.debuffs[i].time++;
-        if (player.debuffs[i].time == 5) {
+        player.mp += player.debuffs[i].mp;
+        if (player.debuffs[i].time == 0) {
             player.debuffs.erase(player.debuffs.begin() + i - 1);
         }
     }
-    for (int i = player.buffs.size(); i > 0; i--) {
+    for (int i = player.buffs.size() - 1; i >= 0; i--) {
+        cout << player.buffs[i].hp;
         player.hp += player.buffs[i].hp;
-        player.hp += player.buffs[i].mp;
-        player.buffs[i].time++;
-        if (player.buffs[i].time == 5) {
+        player.mp += player.buffs[i].mp;
+        if (player.buffs[i].time == 0) {
             player.buffs.erase(player.buffs.begin() + i - 1);
         }
     }

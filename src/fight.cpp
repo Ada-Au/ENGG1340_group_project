@@ -26,71 +26,71 @@ void fightScreen(Player &player, Item item[]) {
                   << "1 - Attack               2 - Defence " << endl
                   << "3 - Use Something        4 - Escape" << endl;
         cin >> key;
-        switch(key){
-            case '1':
-                // need to get player weapon first...
-                if (player.mp >= 0 || player.energy >= 0){            //player can attack only either energy or mp is not 0
-                    float criticalHit = 1;
-                    string critical = "";
-                    if (rand() % 10 >= 0) {      // rate of hitting
-                        if (rand() % 100 <= 6){  // rate of critical hit
-                            criticalHit = 1.5;
-                            critical = " critical";
-                        } mHp -= player.damage * criticalHit;         // should be weapon damage (<- update in backpage.cpp: exchange(player))
-                        if (player.energy > 0)
-                            player.energy -= player.weaponEnergy;    // limite player's min energy and min mp to 0
-                        if (player.mp > 0)
-                            player.mp -= player.weaponMp;
-                        if (player.energy < 0)
-                            player.energy = 0;
-                        if (player.mp < 0)
-                            player.mp = 0;
-                        std::cout << "Player: Successfully make " << (player.damage * criticalHit) << critical + " damage." << endl;
-                    } else {
-                        std::cout << "Player: Miss!" << endl;
-                    }                    
-                } else{
-                    cout << "You have no enery to attack now" << endl;
+        switch (key) {
+        case '1':
+            // need to get player weapon first...
+            if (player.mp >= 0 || player.energy >= 0) {    //player can attack only either energy or mp is not 0
+                float criticalHit = 1;
+                string critical = "";
+                if (rand() % 10 >= 1) {         // rate of hitting
+                    if (rand() % 100 <= 6) {    // rate of critical hit
+                        criticalHit = 1.5;
+                        critical = " critical";
+                    }
+                    mHp -= player.damage * criticalHit;    // should be weapon damage (<- update in backpage.cpp: exchange(player))
+                    if (player.energy > 0)
+                        player.energy -= player.weaponEnergy;    // limit player's min energy and min mp to 0
+                    if (player.mp > 0)
+                        player.mp -= player.weaponMp;
+                    if (player.energy < 0)
+                        player.energy = 0;
+                    if (player.mp < 0)
+                        player.mp = 0;
+                    std::cout << "Player: Successfully make " << (player.damage * criticalHit) << critical + " damage." << endl;
+                } else {
+                    std::cout << "Player: Miss!" << endl;
                 }
-                // monster strongness? (6)
-                if (mHp > 0) {
-                    if (rand() % 100 >=  monsters[monsterN].rate) {
-                        player.hp -= (monsters[monsterN].damage - (player.defense / 2));
+            } else {
+                cout << "You have no energy to attack now" << endl;
+            }
+            // monster strongness? (6)
+            if (mHp > 0) {
+                if (rand() % 100 >= monsters[monsterN].rate) {
+                    player.hp -= (monsters[monsterN].damage - (player.defense / 2));
+                    std::cout << "Monster: Got you!" << endl;
+                } else {
+                    std::cout << "Monster: Miss!" << endl;
+                }
+            }
+            break;
+
+        case '2':
+            if (mHp > 0) {
+                if (rand() % 10 >= 2) {
+                    if ((10 - player.defense) <= 0) {
+                        std::cout << "Player: Successfully defense." << endl;
+                    } else {
+                        player.hp -= (10 - player.defense);
                         std::cout << "Monster: Got you!" << endl;
-                    } else {
-                        std::cout << "Monster: Miss!" << endl;
                     }
+                } else {
+                    std::cout << "Monster: Miss!" << endl;
                 }
-                break;
-            
-            case '2':
-                if (mHp > 0) {
-                    if (rand() % 10 >= 2) {
-                        if ((10 - player.defense) <= 0){
-                            std::cout << "Player: Successfully defense." << endl;                            
-                        } else{
-                            player.hp -= (10 - player.defense);
-                            std::cout << "Monster: Got you!" << endl;                            
-                        }
-                    } else {
-                        std::cout << "Monster: Miss!" << endl;
-                    }
-                }
-                break;
-            
-            case '3':
-                openBackpack(item, player);
-                break;
-            
-            case '4':
-                break;
-            
+            }
+            break;
+
+        case '3':
+            openBackpack(item, player);
+            break;
+
+        case '4':
+            break;
         }
         std::cout << endl;
     }
     if (player.hp <= 0) {
         // std::cout << "You die!" << endl;
-        std::cout << endl;                  // "You die!" repeat in action.cpp
+        std::cout << endl;    // "You die!" repeat in action.cpp
     } else {
         std::cout << "You kill the monster!" << endl;
         upgradePlayer(player);

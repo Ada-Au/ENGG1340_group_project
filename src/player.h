@@ -17,8 +17,8 @@ struct Buff {
     // rate of attack increase
     // can add other
 };
-const Buff allDebuffs[maxDebuff] = {{"Burning", -2, 0, 0}, {"Freezing", -2, 0, 0}, {"Poison", -3, -2, 0}, {"Hunger", -2, -1, 0}, {"Bleeding", -5, 0, 0}};
-const Buff allBuffs[maxBuff] = {{"Full", 2, 0, 0}, {"Focus", 0, 2, 0}};
+const Buff allDebuffs[maxDebuff] = {{"Burning", -2, 0, 5}, {"Freezing", -2, 0, 5}, {"Poison", -3, -2, 5}, {"Hunger", -2, -1, 5}, {"Bleeding", -5, 0, 5}};
+const Buff allBuffs[maxBuff] = {{"Full", 2, 0, 5}, {"Focus", 0, 2, 5}};
 
 class Player {
   public:
