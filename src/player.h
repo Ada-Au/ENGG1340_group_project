@@ -23,7 +23,7 @@ class Player {
   public:
     Player();
     char mark;
-    int x, y;
+    int x, y, level;
     float mp, hp, energy, maxMp, maxHp;
     vector<Buff> debuffs;
     vector<Buff> buffs;
