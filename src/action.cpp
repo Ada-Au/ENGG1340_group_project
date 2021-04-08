@@ -47,7 +47,7 @@ void action(Screen scr, Map map, Player player) {
             scr.log = "Please input again";
         }
         scr.renderScreen(map, player);
-
+        cout << map.layout[player.y][player.x] << endl;
         if (map.layout[player.y][player.x] == 'S') {
             map.fill();
             player.x = 1;
@@ -71,7 +71,7 @@ void action(Screen scr, Map map, Player player) {
             scr.log = "There is a wall in my way";
         else {
             player.energy--;
-            // updateOnBuff(player);
+            updateOnBuff(player);
         }
     }
 }
