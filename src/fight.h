@@ -5,6 +5,7 @@
 #include "npc.h"
 #include "player.h"
 #include "backpack.h"
+#include "things.h"
 #include <string>
 
 void fightScreen(Player &, Item[maxSpace]);

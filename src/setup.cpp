@@ -24,7 +24,7 @@ void PrintInform(Player player) {
 }
 
 void PrintChoice() {
-    cout << "\n1 -Pick a ROLE\n"
+    cout << "\n1 - Pick a ROLE\n"
          << "2 - Pick a RACE\n"
          << "3 - Pick a GENDER\n"
          << "y - Yes: All are alright now\n"
@@ -65,11 +65,9 @@ void PrintGender() {
     cout << "* - Random\n";
 }
 
-void setData(char key, int choice, Player &player) {
+void setData(char key, int choice, Player &player) {                
     string log;
-    // To-do: only allow players input one char & game response immediately
-    //       if players input invalid key, print LOGs
-    //       close the screen and open next options
+    // To-do: avoid player's lengthen input
     int i = key - 'a';
     srand(time(NULL));
     switch (choice) {
@@ -78,24 +76,29 @@ void setData(char key, int choice, Player &player) {
             player.role = roleList[i];
         else if (key == '*')
             player.role = roleList[rand() % max_role];
-        else
-            cout << "Please input again";
+        else{
+            cout << "Please input again\t";
+            cin >> key;
+            setData(key, choice, player);
+        }      
         break;
     case 2:    // race
-        if (key >= 'a' && key <= 'a' + max_race){
+        if (key >= 'a' && key <= 'a' + max_race) {
             player.race = raceList[i];
-        }else if (key == '*'){
-            player.race = raceList[rand() % max_race];            
+        } else if (key == '*') {
+            player.race = raceList[rand() % max_race];
         } else{
-            cout << "Please input again";            
+            cout << "Please input again\t";
+            cin >> key;
+            setData(key, choice, player);
         }
 
-        if (player.race == "elf"){
-            log = "Charon: So you had been alone for thousands years so that you got the magic power?\n";            
-        }else if (player.race == "drawf"){
-            log = "Charon: No wonder why you are such...short?\n";            
-        }else if (player.race == "orc"){
-            log = "Charon: So you are a brute in human face. Got it.\n";            
+        if (player.race == "elf") {
+            log = "Charon: So you had been alone for thousands years so that you got the magic power?\n";
+        } else if (player.race == "drawf") {
+            log = "Charon: No wonder why you are such...short?\n";
+        } else if (player.race == "orc") {
+            log = "Charon: So you are a brute in human face. Got it.\n";
         }
         cout << log;
         break;
@@ -104,15 +107,18 @@ void setData(char key, int choice, Player &player) {
             player.gender = genderList[i];
         else if (key == '*')
             player.gender = genderList[rand() % 2];
-        else
-            cout << "Please input again";
+        else{
+            cout << "Please input again\t";
+            cin >> key;
+            setData(key, choice, player);
+        }
         break;
     }
 }
 
-void setupScreen(Player &player) {
-    cout << "YOU DIED, Welcome to the Underworld!\n"
-         << "Do you remember your name?\t";
+void setupScreen(Player &player, int &flag) {
+    cout << "\nYOU DIED, Welcome to the Underworld!\n"
+         << "What's your name?\t";
     cin >> player.name;
     cout << endl;
     srand(time(NULL));
@@ -121,37 +127,41 @@ void setupScreen(Player &player) {
 
     PrintInform(player);
 
-    char key = ' ';
+    char key[2];
     cin >> key;
 
-    while (key == 'n') {
+    while ((key[0] != 'y' && key[0] != 'Y') && (key[0] != 'q' && key[0] != 'Q')) {
         PrintChoice();
         cin >> key;
-        switch (key) {
-        case '1': {
-            PrintRole();
-            cin >> key;
-            setData(key, 1, player);
-            break;
+        if (key[1] == '\0'){
+            switch (key[0]) {
+                case '1': {
+                    PrintRole();
+                    cin >> key;
+                    setData(key[0], 1, player);
+                    break;
+                }
+                case '2': {
+                    PrintRace();
+                    cin >> key;
+                    setData(key[0], 2, player);
+                    break;
+                }
+                case '3': {
+                    PrintGender();
+                    cin >> key;
+                    setData(key[0], 3, player);
+                    break;
+                }
+                case 'q':
+                case 'Q':
+                    flag = 0;
+                    break;
+            }
+            if (key[0]!='Q' && key[0]!='q')
+                PrintInform(player);            
         }
-        case '2': {
-            PrintRace();
-            cin >> key;
-            setData(key, 2, player);
-            break;
-        }
-        case '3': {
-            PrintGender();
-            cin >> key;
-            setData(key, 3, player);
-            break;
-        }
-        case 'y':
-            break;
-        case 'q':
-            return;
-        }
-        PrintInform(player);
-        cin >> key;
-    }
+    } if (key[0] == 'q' || key[0] == 'Q')
+        flag = 0;
 }
+

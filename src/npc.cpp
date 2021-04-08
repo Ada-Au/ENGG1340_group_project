@@ -49,7 +49,7 @@ void renderNpc(string npc, string talk) {
         printNpc(talk, death);
     } else if (npc == "agony") {
         printNpc(talk, agony);
-    } else if (npc == "insomnia") {
-        printNpc(talk, insomnia);
+    } else if (npc == "nightmare") {
+        printNpc(talk, nightmare);
     }
 }
