@@ -48,7 +48,11 @@ void action(Screen scr, Map map, Player player) {
         }
         scr.renderScreen(map, player);
 
-        if (map.layout[player.y][player.x] == 'M') {
+        if (map.layout[player.y][player.x] == 'S') {
+            map.fill();
+            player.x = 1;
+            player.y = 1;
+        } else if (map.layout[player.y][player.x] == 'M') {
             scr.log = "Monster!";
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -67,7 +71,7 @@ void action(Screen scr, Map map, Player player) {
             scr.log = "There is a wall in my way";
         else {
             player.energy--;
-            updateOnBuff(player);
+            // updateOnBuff(player);
         }
     }
 }

@@ -22,10 +22,12 @@ void Screen::renderScreen(Map map, Player player) {
                 if (map.layout[h][w] == 'M') {
                     cout << RED << player.mark << RESET;
                 } else
-                    cout << GREEN << player.mark << RESET;
+                    cout << BOLDGREEN << player.mark << RESET;
             } else {
                 if (map.layout[h][w] == 'M') {
                     cout << RED << 'M' << RESET;
+                } else if (map.layout[h][w] == 'S') {
+                    cout << BOLDMAGENTA << 'S' << RESET;
                 } else
                     cout << map.layout[h][w];
             }

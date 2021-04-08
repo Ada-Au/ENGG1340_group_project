@@ -1,5 +1,6 @@
 #include "player.h"
 #include <algorithm>
+#include <iostream>
 
 Player::Player() {
     mark = '@';
@@ -34,12 +35,21 @@ void addBuff(bool isAdd, int buff, Player &player) {
 }
 
 void updateOnBuff(Player &player) {
-    for (int i = 0; i < player.debuffs.size(); i++) {
-        player.hp += player.debuffs[i].hp;
-        player.hp += player.debuffs[i].mp;
-    }
-    for (int i = 0; i < player.buffs.size(); i++) {
-        player.hp += player.buffs[i].hp;
-        player.hp += player.buffs[i].mp;
-    }
+    vector<Buff> newBuffs;
+    // for (int i = player.debuffs.size(); i > 0; i--) {
+    //     player.hp += player.debuffs[i].hp;
+    //     player.hp += player.debuffs[i].mp;
+    //     player.debuffs[i].time++;
+    // if (player.debuffs[i].time == 5) {
+    //     player.debuffs.erase(player.debuffs.begin() + i - 1);
+    // }
+    // }
+    // for (int i = player.buffs.size(); i > 0; i--) {
+    //     player.hp += player.buffs[i].hp;
+    //     player.hp += player.buffs[i].mp;
+    //     player.buffs[i].time++;
+    // if (player.buffs[i].time == 5) {
+    //     player.buffs.erase(player.buffs.begin() + i - 1);
+    // }
+    // }
 };
