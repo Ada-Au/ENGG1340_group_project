@@ -6,7 +6,7 @@ Au Wing Yan, Ada (3035783728)<br>
 Chau Hiu Man, Humen (3035783716)
 
 ## About this game
-YOU DIED. Welcome to the Greek underworld!
+YOU DIED. Welcome to the HEll!
 
 In this game, you control a dead man who falls into hell with plenty of monsters. Now you must find a way out… or stay trapped and tortured forever.
 
