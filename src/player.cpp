@@ -45,14 +45,13 @@ void addBuff(bool isAdd, int buff, Player &player) {
     }
 }
 void nextLevel(Player &player){
-    player.maxExp = 0.85 * pow(player.level, 3) + 0.04 * pow (player.level, 2) + 2 * player.level ;
+    player.maxExp = (0.85 * pow(player.level, 3) + 0.04 * pow (player.level, 2) + 2 * player.level) ;
 }
 void upgradePlayer(Player &player) {
-    if (player.exp >= player.maxExp && player.level < 100) {
+    if (player.exp >= player.maxExp && player.level <= 100) {
         player.level++;
         player.maxHp += 2;              // maxHp plus 2 for every level
         player.damage++;                // damage plus level for every level-upgrade
-                     
         // every 10 level, maxEnergy plus 5 until it becomes 150
         if (player.level % 10 == 0 && player.maxEnergy < 150)
             player.maxEnergy += 5;
@@ -65,7 +64,7 @@ void upgradePlayer(Player &player) {
         player.hp = player.maxHp;
         player.mp = player.maxMp;
         nextLevel(player);               // update of maxExp
-        std::cout << "You are now " << player.level << "!\n";
+        std::cout << "You are now level " << player.level << "!!\n";
     }
 }
 

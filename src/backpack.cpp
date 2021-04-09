@@ -30,7 +30,7 @@ void displayBackpack(Item item[]) {    //Also display player's state if possible
         if (i == 0)
             cout << "Items\t\t\t\t\t\tNumber\n";
         if (item[i].name != "" && item[i].num > 0)
-            cout << (i + 1) << "  " << item[i].name << setw(48 - item[i].name.length()) << setfill(' ') << item[i].num << '\n';
+            cout << (i + 1) << "  " << item[i].name << setw(48 - item[i].name.length() - to_string(i+1).length()) << setfill(' ') << item[i].num << '\n';
     }
     cout << "Press [number] to select items or [Q] to exist.\n"
          << "Press [W] to take off weapon or [A] to take off armor.\n\n";
