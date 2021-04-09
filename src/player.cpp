@@ -70,18 +70,18 @@ void upgradePlayer(Player &player) {
 
 void updateOnBuff(Player &player) {
     for (int i = player.debuffs.size() - 1; i >= 0; i--) {
-        // cout << player.debuffs[i].hp;
         player.hp += player.debuffs[i].hp;
         player.mp += player.debuffs[i].mp;
-        if (player.debuffs[i].time == 0) {
+        player.debuffs[i].time--;
+        if (player.debuffs[i].time <= 0) {
             player.debuffs.erase(player.debuffs.begin() + i - 1);
         }
     }
     for (int i = player.buffs.size() - 1; i >= 0; i--) {
-        cout << player.buffs[i].hp;
         player.hp += player.buffs[i].hp;
         player.mp += player.buffs[i].mp;
-        if (player.buffs[i].time == 0) {
+        player.buffs[i].time--;
+        if (player.buffs[i].time <= 0) {
             player.buffs.erase(player.buffs.begin() + i - 1);
         }
     }

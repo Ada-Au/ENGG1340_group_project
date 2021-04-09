@@ -5,7 +5,7 @@
 using namespace std;
 
 void Screen::renderScreen(Map map, Player player) {
-    string stat[12] = {"[ " + player.name + " ]",
+    string stat[13] = {"[ " + player.name + " ]",
                        "",
                        "Level: " + to_string(player.level),
                        "HP: " + to_string(player.hp).substr(0, to_string(player.hp).find(".") + 3)  + " / " + to_string(player.maxHp).substr(0, to_string(player.hp).find(".") + 3),
@@ -39,20 +39,20 @@ void Screen::renderScreen(Map map, Player player) {
         cout << "      ";
         if (h == 0 || h == map_height - 1) {    // print player's status
             cout << "*******************************" << endl;
-        } else if (h <= 10) {    //print player's inform
+        } else if (h <= 11) {    //print player's inform
             cout << "*  " << stat[h - 1] << setw(28 - stat[h - 1].length())
                  << setfill(' ') << "*" << endl;
-        } else if (h - 11 < debuffSize) {    //print player's debuffs
-            cout << "*   - " << player.debuffs.at(h - 11).name
-                 << setw(25 - player.debuffs.at(h - 11).name.length())
+        } else if (h - 12 < debuffSize) {    //print player's debuffs
+            cout << "*   - " << player.debuffs.at(h - 12).name
+                 << setw(25 - player.debuffs.at(h - 12).name.length())
                  << setfill(' ') << "*" << endl;
-        } else if (h - 11 < debuffSize + 2) {
+        } else if (h - 12 < debuffSize + 2) {
             cout << "*  " << stat[h - 1 - debuffSize]
                  << setw(28 - stat[h - 1 - debuffSize].length()) << setfill(' ')
                  << "*" << endl;
-        } else if (h - 13 - debuffSize < player.buffs.size()) {    //print player's buffs
-            cout << "*   - " << player.buffs.at(h - 13 - debuffSize).name
-                 << setw(25 - player.buffs.at(h - 13 - debuffSize).name.length())
+        } else if (h - 14 - debuffSize < player.buffs.size()) {    //print player's buffs
+            cout << "*   - " << player.buffs.at(h - 14 - debuffSize).name
+                 << setw(25 - player.buffs.at(h - 14 - debuffSize).name.length())
                  << setfill(' ') << "*" << endl;
         } else
             cout << "*" << setfill(' ') << setw(30) << "*" << endl;
@@ -64,7 +64,6 @@ void Screen::renderScreen(Map map, Player player) {
          << setw(map_width + 2) << endl
          << "\n\n";
 
-    //  cout << '\t' << help[i] << '\n';
     log = "";
 }
 
@@ -72,10 +71,3 @@ void printHelp() {
     for (int i = 0; i < helpSize; i++)
         cout << helpScreen[i] << endl;
 }
-// void Screen::fillHelp()
-// {
-//     help[0] = "\"Numpad\"... - Movement";
-//     help[1] = "";
-//     for (int i = 2; i < 21; i++)
-//         help[i] = "";
-// }

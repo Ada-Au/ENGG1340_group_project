@@ -2,8 +2,8 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
-#include <vector>
 #include <time.h>
+#include <vector>
 
 using namespace std;
 
@@ -59,7 +59,7 @@ void Map::fill() {
         layout[currentRow][currentCol] = 'S';
     }
 
-    cout << "\ndone:D\n\n\n";
+    cout << "\ndone:D\tpress enter to continue\n\n\n";
 }
 
 void Map::update() {
