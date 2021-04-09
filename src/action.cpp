@@ -11,9 +11,7 @@
 using namespace std;
 
 void action(Screen scr, Map map, Player player, Item item[]) {
-
     char key = ' ';
-    cin.ignore();
     while (key != 'q') {
         scr.renderScreen(map, player);
         bool wall = false;
@@ -72,6 +70,7 @@ void action(Screen scr, Map map, Player player, Item item[]) {
             fightScreen(player, item);
             map.removeMonster(player.x, player.y);
             key = getch();
+            cin.ignore();
         } else {
             map.update();
         }

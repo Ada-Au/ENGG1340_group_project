@@ -16,7 +16,7 @@ int main() {
     Player player;
     Item item[maxSpace] = {"", 0};
     int flag = 1;    // determine close game or not
-
+    cout << "test";
     // menu(flag);
     // if (flag == 0)
     //     return 0;

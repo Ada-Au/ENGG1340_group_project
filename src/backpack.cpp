@@ -138,6 +138,7 @@ void openBackpack(Item item[], Player &player) {
             for (int i = 0; i < maxHealNum; i++) {
                 if (item[index].name == heals[i].name) {
                     cout << item[index].name + " is selected.\n";
+                    cout << "Description: " + heals[i].desc << endl;
                     cout << "Amount to use: ";
                     cin >> n;
                     while (n > item[index].num || n < 0) {
@@ -151,6 +152,7 @@ void openBackpack(Item item[], Player &player) {
             }
             for (int i = 0; i < maxArmorNum; i++) {
                 if (item[index].name == armors[i].name) {
+                    cout << "Description: " + armors[i].desc << endl;
                     cout << item[index].name + " is equipped.\n\n";
                     n = 1;
                     if (player.armor != "") {
@@ -164,6 +166,7 @@ void openBackpack(Item item[], Player &player) {
             }
             for (int i = 0; i < maxWeaponNum; i++) {
                 if (item[index].name == weapons[i].name) {
+                    cout << "Description: " + weapons[i].desc << endl;
                     cout << item[index].name + " is equipped.\n\n";
                     n = 1;
                     if (player.weapon != "") {

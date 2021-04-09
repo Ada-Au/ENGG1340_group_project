@@ -74,7 +74,7 @@ void updateOnBuff(Player &player) {
         player.mp += player.debuffs[i].mp;
         player.debuffs[i].time--;
         if (player.debuffs[i].time <= 0) {
-            player.debuffs.erase(player.debuffs.begin() + i - 1);
+            player.debuffs.erase(player.debuffs.begin() + i );
         }
     }
     for (int i = player.buffs.size() - 1; i >= 0; i--) {
@@ -82,7 +82,7 @@ void updateOnBuff(Player &player) {
         player.mp += player.buffs[i].mp;
         player.buffs[i].time--;
         if (player.buffs[i].time <= 0) {
-            player.buffs.erase(player.buffs.begin() + i - 1);
+            player.buffs.erase(player.buffs.begin() + i );
         }
     }
 };
