@@ -22,10 +22,15 @@ void menu(int &flag) {
     //Press 1, 2, 3 to continue
     cout << setw(104) << "[1]  START    [2]  LOAD    [3]  QUIT\n";
 
-    char c;
-    switch (c = cin.get()) {
+    char c[2] = {'4'};
+    while ( (c[0] != '1' && c[0] != '2' && c[0] != '3' )|| c[1] != '\0'){
+        cout <<"Enter your choice: ";
+        cin >> c;
+        cout << endl;
+    }
+    switch (c[0]) {
     case '1':
-        cout << "Selected START\n";    //start a new game
+        cout << "START! :D\n\n";      //start a new game
         break;
     case '2':
         cout << "Selected LOAD\n";    // input files
@@ -33,8 +38,6 @@ void menu(int &flag) {
     case '3':
         cout << "Selected QUIT\n";
         flag = 0;
-        break;
-    default:
         break;
     }
 }
