@@ -8,10 +8,9 @@ void Screen::renderScreen(Map map, Player player) {
     string stat[13] = {"[ " + player.name + " ]",
                        "",
                        "Level: " + to_string(player.level),
-                       "Game Level: " + to_string(player.gameLevel),
-                       "HP: " + to_string(player.hp).substr(0, to_string(player.hp).find(".") + 3),    // + '/' + to_string(player.maxHp),
-                       "MP: " + to_string(player.mp).substr(0, to_string(player.mp).find(".") + 3),    // + '/' + to_string(player.maxMp),
-                       "Energy: " + to_string(player.energy),                                          //+ '/' + to_string(player.maxEnergy),
+                       "HP: " + to_string(player.hp).substr(0, to_string(player.hp).find(".") + 3)  + " / " + to_string(player.maxHp).substr(0, to_string(player.hp).find(".") + 3),
+                       "MP: " + to_string(player.mp).substr(0, to_string(player.mp).find(".") + 3)  + " / " + to_string(player.maxMp).substr(0, to_string(player.hp).find(".") + 3),
+                       "Energy: " + to_string(player.energy).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxEnergy).substr(0, to_string(player.hp).find(".") + 3),
                        "ATK: " + to_string(player.damage),
                        "DFS: " + to_string(player.defense),
                        "",
@@ -65,7 +64,6 @@ void Screen::renderScreen(Map map, Player player) {
          << setw(map_width + 2) << endl
          << "\n\n";
 
-    //  cout << '\t' << help[i] << '\n';
     log = "";
 }
 
@@ -73,10 +71,3 @@ void printHelp() {
     for (int i = 0; i < helpSize; i++)
         cout << helpScreen[i] << endl;
 }
-// void Screen::fillHelp()
-// {
-//     help[0] = "\"Numpad\"... - Movement";
-//     help[1] = "";
-//     for (int i = 2; i < 21; i++)
-//         help[i] = "";
-// }
