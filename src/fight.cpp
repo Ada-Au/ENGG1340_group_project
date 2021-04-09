@@ -22,10 +22,10 @@ void setUpMonster(Player player, int &monsterN, float &mHp, float &mMaxHp, float
         mExp *= 0.2;
     }
 }
-void bossScreen(Player &player, Item item[], int i) {
+void bossScreen(Player &player, Item item[], int B) {
     srand(time(NULL));
     Monster boss;
-    switch (i) {
+    switch (B) {
     case 1:
         boss = boss1;
         renderNpc(boss.name, "Hello! Don't kill me please QwQ");
@@ -74,13 +74,13 @@ void bossScreen(Player &player, Item item[], int i) {
         // mDamage = rand() % player.gameLevel + (2 * player.gameLevel + boss.damage);    // monster's damage range ~ gameLevel
         int showMHp = mHp / mMaxHp * 50;
         std::cout << fixed << setprecision(2);
-        std::cout << "Monster's HP: " << mHp << '/' << mMaxHp << endl;
+        std::cout << boss.name << "'s HP: " << mHp << '/' << mMaxHp << endl;
         std::cout << '|' << setfill(' ') << string(showMHp, '*')
                   << setw(50 - showMHp) << '|' << endl;
         renderNpc(boss.name, "");
         std::cout << "Player's HP: " << player.hp << '/' << player.maxHp << endl;
-        std::cout << '|' << string(player.hp / 2, '*') << setfill(' ')
-                  << setw(50 - player.hp / 2) << '|' << endl;
+        std::cout << '|' << string(player.hp / player.maxHp * 50, '*') << setfill(' ')
+                  << setw(50 - player.hp / player.maxHp * 50) << '|' << endl;
         std::cout << "Player's Energy: " << player.energy << '/' << player.maxEnergy
                   << setw(map_width - 40) << "Player's MP: " << player.mp << '/' << player.maxMp << endl;
         std::cout << "ACTION (please input number 1-4)" << endl
@@ -116,14 +116,14 @@ void bossScreen(Player &player, Item item[], int i) {
             // monster strongness? (6)
             if (mHp > 0) {
                 if (rand() % 100 >= boss.rate) {
-                    std::cout << "Monster: Got you!" << endl;
+                    std::cout << boss.name << ": Got you!" << endl;
                     if ((player.defense / 2) > mDamage)
                         std::cout << "Player: Successfully defense." << endl;
                     else
                         player.hp -= (mDamage - (player.defense / 4));
 
                 } else {
-                    std::cout << "Monster: Miss!" << endl;
+                    std::cout << boss.name << ": Miss!" << endl;
                 }
             }
             break;
@@ -135,10 +135,10 @@ void bossScreen(Player &player, Item item[], int i) {
                         std::cout << "Player: Successfully defense." << endl;
                     } else {
                         player.hp -= (10 - player.defense);
-                        std::cout << "Monster: Got you!" << endl;
+                        std::cout << boss.name << ": Got you!" << endl;
                     }
                 } else {
-                    std::cout << "Monster: Miss!" << endl;
+                    std::cout << boss.name << ": Miss!" << endl;
                 }
             }
             break;
@@ -149,7 +149,11 @@ void bossScreen(Player &player, Item item[], int i) {
             std::cout << endl;
         }
         if (player.hp <= 0) {
-            std::cout << endl;    // "You die!" repeat in action.cpp
+            std::cout << endl;
+        } else if (mHp < 0 && B == 11) {
+            bossScreen(player, item, 12);
+        } else if (mHp < 0 && B == 12) {
+            std::cout << "You win!" << endl;    // need to add more?
         } else {
             std::cout << "You kill " << boss.name << '!' << endl;
             std::cout << fixed << setprecision(2) << "You gain " << boss.exp << " XP!" << endl;
@@ -176,8 +180,8 @@ void fightScreen(Player &player, Item item[], bool &isEscape) {
                   << setw(50 - showMHp) << '|' << endl;
         renderNpc("monster", "");
         std::cout << "Player's HP: " << player.hp << '/' << player.maxHp << endl;
-        std::cout << '|' << string(player.hp / 2, '*') << setfill(' ')
-                  << setw(50 - player.hp / 2) << '|' << endl;
+        std::cout << '|' << string(player.hp / player.maxHp * 50, '*') << setfill(' ')
+                  << setw(50 - player.hp / player.maxHp * 50) << '|' << endl;
         std::cout << "Player's Energy: " << player.energy << '/' << player.maxEnergy
                   << setw(map_width - 40) << "Player's MP: " << player.mp << '/' << player.maxMp << endl;
         std::cout << "ACTION (please input number 1-4)" << endl

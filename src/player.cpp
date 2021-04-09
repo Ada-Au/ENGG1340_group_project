@@ -1,10 +1,9 @@
 #include "player.h"
 #include "things.h"
-// #include <stdlib.h>
 #include <algorithm>
 #include <iostream>
-#include <string>
 #include <math.h>
+#include <string>
 
 using namespace std;
 
@@ -16,8 +15,6 @@ Player::Player() {
     level = 1, gameLevel = 1;
     race = "human";
     weapon = "", armor = "";
-    debuffs.clear();
-    buffs.clear();
     debuffs.push_back(allDebuffs[0]);
 }
 
@@ -44,14 +41,14 @@ void addBuff(bool isAdd, int buff, Player &player) {
             player.debuffs.push_back(allDebuffs[buff]);
     }
 }
-void nextLevel(Player &player){
-    player.maxExp = (0.85 * pow(player.level, 3) + 0.04 * pow (player.level, 2) + 2 * player.level) ;
+void nextLevel(Player &player) {
+    player.maxExp = (0.85 * pow(player.level, 3) + 0.04 * pow(player.level, 2) + 2 * player.level);
 }
 void upgradePlayer(Player &player) {
     if (player.exp >= player.maxExp && player.level <= 100) {
         player.level++;
-        player.maxHp += 2;              // maxHp plus 2 for every level
-        player.damage++;                // damage plus level for every level-upgrade
+        player.maxHp += 2;    // maxHp plus 2 for every level
+        player.damage++;      // damage plus level for every level-upgrade
         // every 10 level, maxEnergy plus 5 until it becomes 150
         if (player.level % 10 == 0 && player.maxEnergy < 150)
             player.maxEnergy += 5;
@@ -63,7 +60,7 @@ void upgradePlayer(Player &player) {
         player.energy = player.maxEnergy;
         player.hp = player.maxHp;
         player.mp = player.maxMp;
-        nextLevel(player);               // update of maxExp
+        nextLevel(player);    // update of maxExp
         std::cout << "You are now level " << player.level << "!!\n";
     }
 }
