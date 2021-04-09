@@ -61,10 +61,16 @@ void action(Screen scr, Map map, Player player, Item item[]) {
 
         if (map.layout[player.y][player.x] == 'S') {
             player.gameLevel++;
+            bool isEnd = false;
             if (player.gameLevel % 5 == 0) {
                 cout << player.gameLevel / 5;
-                bossScreen(player, item, player.gameLevel / 5);
+                bossScreen(player, item, player.gameLevel / 5, isEnd);
                 player.gameLevel++;
+                if (isEnd) {
+                    // TODO
+                    cout << "You Win the game! Wanna play again??" << endl;
+                    break;
+                }
             }
             map.fill();
             player.x = 1;
@@ -83,8 +89,9 @@ void action(Screen scr, Map map, Player player, Item item[]) {
             map.update();
         }
 
+        // TODO
         if (player.hp <= 0) {
-            cout << "You die!\t Wanna restart?\ny - Yes     q - Quit game\n";
+            cout << "You die!\tWanna restart?\ny - Yes\t\tq - Quit game\n";
             break;
         }
 

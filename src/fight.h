@@ -9,6 +9,6 @@
 #include <string>
 
 void fightScreen(Player &, Item[maxSpace], bool &);
-void bossScreen(Player &, Item[maxSpace], int);
+void bossScreen(Player &, Item[maxSpace], int, bool &);
 
 #endif

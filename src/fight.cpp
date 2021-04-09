@@ -22,7 +22,7 @@ void setUpMonster(Player player, int &monsterN, float &mHp, float &mMaxHp, float
         mExp *= 0.2;
     }
 }
-void bossScreen(Player &player, Item item[], int B) {
+void bossScreen(Player &player, Item item[], int B, bool &isEnd) {
     srand(time(NULL));
     Monster boss;
     switch (B) {
@@ -150,17 +150,18 @@ void bossScreen(Player &player, Item item[], int B) {
         }
         if (player.hp <= 0) {
             std::cout << endl;
-        } else if (mHp < 0 && B == 11) {
-            bossScreen(player, item, 12);
-        } else if (mHp < 0 && B == 12) {
-            std::cout << "You win!" << endl;    // need to add more?
-        } else {
+        } else if (mHp <= 0 && B == 12) {
+            isEnd = true;
+        } else if (mHp <= 0) {
             std::cout << "You kill " << boss.name << '!' << endl;
             std::cout << fixed << setprecision(2) << "You gain " << boss.exp << " XP!" << endl;
             player.exp += boss.exp;
             upgradePlayer(player);
             //annouce what player got after battle save in generateThings(item)
             generateThings(item);
+            if (B == 11) {
+                bossScreen(player, item, 12, isEnd);
+            }
         }
     }
 }
