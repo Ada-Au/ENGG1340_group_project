@@ -13,7 +13,9 @@ using namespace std;
 void action(Screen scr, Map map, Player player, Item item[]) {
 
     char key = ' ';
+    cin.ignore();
     while (key != 'q') {
+        scr.renderScreen(map, player);
         bool wall = false;
         key = getch();
         switch (key) {
@@ -57,8 +59,7 @@ void action(Screen scr, Map map, Player player, Item item[]) {
             if (player.hp > 0)
                 scr.log = "Please input again or press [H] for help";
         }
-        scr.renderScreen(map, player);
-        cout << map.layout[player.y][player.x] << endl;
+
         if (map.layout[player.y][player.x] == 'S') {
             map.fill();
             player.x = 1;
