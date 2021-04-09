@@ -15,17 +15,17 @@ struct Monster {
 };
 
 // const Monster monsters[monsterSize] = {{"a", 10, 20}, {"b", 30, 40}};
-const Monster boss1 = {"grief", 300, 200};
-const Monster boss2 = {"anxiety", 480, 300};
-const Monster boss3 = {"diseases", 660, 345};
-const Monster boss4 = {"oldAge", 845, 600};
-const Monster boss5 = {"fear", 1020, 555};
-const Monster boss6 = {"hunger", 1440, 650};
-const Monster boss7 = {"need", 1630, 700};
-const Monster boss8 = {"death", 1925, 740};
-const Monster boss9 = {"agony", 2222, 777};
-const Monster boss10 = {"nightmare", 2666, 800};
-const Monster boss11[monsterSize] = {{"hades1", 3333, 999}, {"hades2", 6666, 999}};
+const Monster boss1 = {"grief", 525, 200};
+const Monster boss2 = {"anxiety", 795, 300};
+const Monster boss3 = {"diseases", 1065, 345};
+const Monster boss4 = {"oldAge", 1369, 600};
+const Monster boss5 = {"fear", 1695, 555};
+const Monster boss6 = {"hunger", 2097, 650};
+const Monster boss7 = {"need", 2472, 700};
+const Monster boss8 = {"death", 2925, 740};
+const Monster boss9 = {"agony", 3417, 777};
+const Monster boss10 = {"nightmare", 3954, 800};
+const Monster boss11[monsterSize] = {{"hades1", 4476, 999}, {"hades2", 11190, 999}};
 
 const Monster monsters[monsterSize] = {{"a", 10, 20, 2, 80}, {"b", 30, 40, 3, 85}};
 
