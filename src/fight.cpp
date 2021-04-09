@@ -7,11 +7,10 @@
 
 using namespace std;
 
-void setUpMonster(Player player, int &monsterN, float &mHp, float &mMaxHp, float &mDamage, float &mRate, float &mExp) {
+void setUpMonster(Player player, int &monsterN, float &mHp, float &mMaxHp, float &mRate, float &mExp) {
     monsterN = rand() % monsterSize;
     mHp = rand () % player.gameLevel + ( pow(0.4 * player.gameLevel, 2) / 2 ) + ( monsters[monsterN].hp * pow(player.gameLevel, 0.5) ); //monster's Hp range ~ gameLevel
     mMaxHp = mHp;
-    mDamage = rand() % player.gameLevel + (2 * player.gameLevel + monsters[monsterN].damage);                                         // monster's damage range ~ gameLevel
     mRate = monsters[monsterN].rate - (player.gameLevel / 2);
     mExp = ( ( log(player.gameLevel) / log(2) ) * ( 0.4 * player.gameLevel ) + 5);
     // mExp reward and penalty based on the difference of level between player and game
@@ -29,8 +28,9 @@ void fightScreen(Player &player, Item item[]) {
     int monsterN ;
     float mHp, mMaxHp, mDamage, mRate, mExp;    
     char key;
-    setUpMonster(player, monsterN, mHp, mMaxHp, mDamage, mRate, mExp);
+    setUpMonster(player, monsterN, mHp, mMaxHp, mRate, mExp);
     while (mHp >= 0 && player.hp >= 0) {
+        mDamage = rand() % player.gameLevel + (2 * player.gameLevel + monsters[monsterN].damage);    // monster's damage range ~ gameLevel
         int showMHp = mHp / mMaxHp * 50;
         std::cout << fixed << setprecision(2);
         std::cout << "Monster's HP: " << mHp << '/' << mMaxHp << endl;
@@ -79,7 +79,7 @@ void fightScreen(Player &player, Item item[]) {
                     if ( (player.defense / 2) > mDamage)
                         std::cout << "Player: Successfully defense." << endl;
                     else
-                        player.hp -= (mDamage - (player.defense / 2));
+                        player.hp -= (mDamage - (player.defense / 4));
                     
                 } else {
                     std::cout << "Monster: Miss!" << endl;
