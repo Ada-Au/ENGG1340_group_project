@@ -22,7 +22,7 @@ const char helpScreen[helpSize][map_width] = {
   "- [D]\t move Right",
   "- [B]\t open backpack",
   "- [Q]\t quit game",
-  "- [H]\t qpen Help",
+  "- [H]\t open Help",
   "",
 };
 

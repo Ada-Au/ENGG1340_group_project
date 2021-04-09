@@ -26,7 +26,6 @@ void menu(int &flag) {
     while ( (c[0] != '1' && c[0] != '2' && c[0] != '3' )|| c[1] != '\0'){
         cout <<"Enter your choice: ";
         cin >> c;
-        cout << endl;
     }
     switch (c[0]) {
     case '1':

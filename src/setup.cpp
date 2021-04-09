@@ -210,3 +210,63 @@ void setupScreen(Player &player, int &flag) {
     } if (key[0] == 'q' || key[0] == 'Q')
         flag = 0;
 }
+
+void printBoats()
+{
+    string boats[11] = {"1 - trash","0 G",
+                        "2 - wooden boat", "2 G",
+                        "3 - iron boat", "3 G",
+                        "4 - gold boat", "5 G",
+                        "5 - EPIC DIAMOND BOAT", "999,999,999 G",
+                        ""};
+    for (int i = 0; i < 10; i++) {
+        if ( i == 0)
+            cout << "Boats" << setfill(' ') << setw(36) << "Price" << endl;
+        if (i % 2 == 0 )
+            cout << boats[i]  << setfill(' ') << setw( 40 - boats[i].length()); 
+        else
+            cout << boats[i] << endl;
+    }
+}
+
+void boatScreen() {
+    renderNpc("charon", "Before you go on, you have to buy a boat.");
+    printBoats();
+    cout << "\nYou find your pocket...\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    cout << '.' << endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    cout << '.' << endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    cout << "...\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    cout << "1 G GET.\n";
+    char c[2] = {'6'};
+    while ((c[0] != '1' && c[0] != '2' && c[0] != '3' && c[0] != '4' && c[0] != '5') || c[1] != '\0'){
+        // printBoats();
+        cout << "Enter your choice: ";
+        cin >> c;
+    }
+    while (c[0] != '1'){
+        while ((c[0] != '1' && c[0] != '2' && c[0] != '3' && c[0] != '4' && c[0] != '5') || c[1] != '\0'){
+            renderNpc("charon", "No such choice.");
+            printBoats();
+            cout << "Enter your choice: ";
+            cin >> c;
+        }
+        renderNpc("charon", "You got no money to buy that.");
+        printBoats();
+        cout << "Enter your choice: ";
+        cin >> c;
+    }
+    renderNpc("charon", "To my surprise, you buy trash.");
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    renderNpc("charon", "What a poor boy.");
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    renderNpc("charon", "Hope you enjoy your trip to hell :)");
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    cout << "You ride on the trash, start rolling hard.\n"
+         << "After a few minutes, you find there is water ...\n"
+         << "The boat is sinking!!\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+}

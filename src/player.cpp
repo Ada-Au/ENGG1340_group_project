@@ -77,7 +77,6 @@ void upgradePlayer(Player &player) {
 
 void updateOnBuff(Player &player) {
     for (int i = player.debuffs.size() - 1; i >= 0; i--) {
-        cout << player.debuffs[i].hp;
         player.hp += player.debuffs[i].hp;
         player.mp += player.debuffs[i].mp;
         if (player.debuffs[i].time == 0) {

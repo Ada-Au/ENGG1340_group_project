@@ -23,6 +23,7 @@ int main() {
     setupScreen(player, flag);
     if (flag == 0)
         return 0;
+    boatScreen();
     map.fill();
     cout << "Start your adventure!" << endl;
     scr.renderScreen(map, player);
