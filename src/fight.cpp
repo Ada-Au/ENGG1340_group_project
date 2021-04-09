@@ -32,7 +32,7 @@ void fightScreen(Player &player, Item item[]) {
             if (player.mp >= 0 || player.energy >= 0) {    //player can attack only either energy or mp is not 0
                 float criticalHit = 1;
                 string critical = "";
-                if (rand() % 10 >= 1) {         // rate of hitting
+                if (rand() % 10 >= 1) {         // rate of player's hitting
                     if (rand() % 100 <= 6) {    // rate of critical hit
                         criticalHit = 1.5;
                         critical = " critical";
@@ -56,8 +56,12 @@ void fightScreen(Player &player, Item item[]) {
             // monster strongness? (6)
             if (mHp > 0) {
                 if (rand() % 100 >= monsters[monsterN].rate) {
-                    player.hp -= (monsters[monsterN].damage - (player.defense / 2));
                     std::cout << "Monster: Got you!" << endl;
+                    if ( (player.defense / 2) > monsters[monsterN].damage)
+                        std::cout << "Player: Successfully defense." << endl;
+                    else
+                        player.hp -= (monsters[monsterN].damage - (player.defense / 2));
+                    
                 } else {
                     std::cout << "Monster: Miss!" << endl;
                 }
