@@ -10,22 +10,21 @@ const int monsterSize = 2;
 
 struct Monster {
     string name;
-    float hp, mp;
-    float damage, rate;
+    float hp;
+    float damage, rate, exp;
 };
 
-// const Monster monsters[monsterSize] = {{"a", 10, 20}, {"b", 30, 40}};
-const Monster boss1 = {"grief", 525, 200};
-const Monster boss2 = {"anxiety", 795, 300};
-const Monster boss3 = {"diseases", 1065, 345};
-const Monster boss4 = {"oldAge", 1369, 600};
-const Monster boss5 = {"fear", 1695, 555};
-const Monster boss6 = {"hunger", 2097, 650};
-const Monster boss7 = {"need", 2472, 700};
-const Monster boss8 = {"death", 2925, 740};
-const Monster boss9 = {"agony", 3417, 777};
-const Monster boss10 = {"nightmare", 3954, 800};
-const Monster boss11[monsterSize] = {{"hades1", 4476, 999}, {"hades2", 11190, 999}};
+const Monster boss1 = {"grief", 525, 1};
+const Monster boss2 = {"anxiety", 795, 1};
+const Monster boss3 = {"diseases", 1065, 1};
+const Monster boss4 = {"oldAge", 1369, 1};
+const Monster boss5 = {"fear", 1695, 1};
+const Monster boss6 = {"hunger", 2097, 1};
+const Monster boss7 = {"need", 2472, 1};
+const Monster boss8 = {"death", 2925, 1};
+const Monster boss9 = {"agony", 3417, 1};
+const Monster boss10 = {"nightmare", 3954, 1};
+const Monster boss11[2] = {{"hades(calm)", 4476, 1}, {"hades(angry)", 11190, 1}};
 
 const Monster monsters[monsterSize] = {{"a", 10, 20, 2, 80}, {"b", 30, 40, 3, 85}};
 
@@ -47,25 +46,6 @@ const string monster[npcSize] = {
     "                                                   ",
     "                                                   ",
 };
-
-// const string monster[npcSize] = {
-//     "                                                   ",    // length ~50
-//     "                                                   ",    // monster
-//     "                                                   ",
-//     "               +------.        .------+           ",
-//     "               |       \\      /       |           ",
-//     "               |        \\    /        |           ",
-//     "               |    .    \\  /    .    |           ",
-//     "               |    |\\    \\/    /|    |          ",
-//     "               |    | \\        / |    |          ",
-//     "               |    |  +------+  |    |          ",
-//     "               |    |            |    |          ",
-//     "               |    |            |    |          ",
-//     "               +----+            +----+          ",
-//     "                                                   ",
-//     "                                                   ",
-//     "                                                   ",
-// };
 
 const string charon[npcSize] = {
     "                      .---.                        ",    //length ~50
@@ -107,8 +87,8 @@ const string grief[npcSize] = {
 };
 
 const string anxiety[npcSize] = {
-    "                           ( ___  )                ",      //level 2 boss
-    "           (`               /  @ {_/7_             ",      //burning
+    "                           ( ___  )                ",    //level 2 boss
+    "           (`               /  @ {_/7_             ",    //burning
     "         .)   (             |__n( __  \\           ",
     "        (       )            nnn/   ) /            ",
     "          ~^ ~ .        ._          ||  )          ",
@@ -123,12 +103,11 @@ const string anxiety[npcSize] = {
     "                           /      /||\\\\          ",
     "                          //V\\    \\|//           ",
     "                                                   ",
-
 };
 
 const string diseases[npcSize] = {
-    "                           _____________           ",      //level 3 boss
-    "                          /  _______ (             ",      //posioning
+    "                           _____________           ",    //level 3 boss
+    "                          /  _______ (             ",    //posioning
     "                         | |\\      (              ",
     "                __      /  | \\    (               ",
     "              (    )__ /   |  \\_{_________        ",
@@ -147,8 +126,8 @@ const string diseases[npcSize] = {
 };
 
 const string oldAge[npcSize] = {
-    "                        ____                        ",     //level 4 boss
-    "                      .  __  `                      ",     //healing effect is half
+    "                        ____                        ",    //level 4 boss
+    "                      .  __  `                      ",    //healing effect is half
     "                     /   __   \\                    ",
     "                    / (#)   () \\                   ",
     "        .-----.     |     7    |                    ",
@@ -166,8 +145,8 @@ const string oldAge[npcSize] = {
 
 };
 const string fear[npcSize] = {
-    "                       .-.                         ",      //level 5 boss
-    "                      /   \\                       ",      //hit rate drops / max.mp drops
+    "                       .-.                         ",    //level 5 boss
+    "                      /   \\                       ",    //hit rate drops / max.mp drops
     "                     | .-. |         ^             ",
     "                     | `-' |        |o|            ",
     "       / \\            \\   /          v           ",
@@ -184,8 +163,8 @@ const string fear[npcSize] = {
 
 };
 const string hunger[npcSize] = {
-    "             .---..__/\\    /\\  .---.              ",     //level 6 boss
-    "            (,` \\       `./  -' .'` .)             ",     //hunger
+    "             .---..__/\\    /\\  .---.              ",    //level 6 boss
+    "            (,` \\       `./  -' .'` .)             ",    //hunger
     "                {                \\                 ",
     "               /    `~V-v~vvvV`   \\                ",
     "             .{       ^^.__.^      }                ",
@@ -202,8 +181,8 @@ const string hunger[npcSize] = {
     "          ;                                         ",
 };
 const string need[npcSize] = {
-    "                     /|                            ",      //level 7 boss
-    "                  _./ |/|----------._              ",      //hp/mp is drained
+    "                     /|                            ",    //level 7 boss
+    "                  _./ |/|----------._              ",    //hp/mp is drained
     "                ./     _/             `.           ",
     "               /   @  /     .---.       \\         ",
     "  o   __..__  {  _/-----'--(  O  ) -`.   )         ",
@@ -221,8 +200,8 @@ const string need[npcSize] = {
 
 };
 const string death[npcSize] = {
-    "                  .----.           .               ",      //level 8 boss
-    "                 /   .--`.        //               ",      //
+    "                  .----.           .               ",    //level 8 boss
+    "                 /   .--`.        //               ",    //
     "                /   (:::(       lllll              ",
     "               {     ):::)      //  llll.          ",
     "               /    (:::/\\     //     ^lll.       ",
@@ -239,8 +218,8 @@ const string death[npcSize] = {
     "           /       \\    |    |                    ",
 };
 const string agony[npcSize] = {
-    "                            |                       ",     //level 9 boss
-    "                           .-''--.   `.             ",     //bleeding
+    "                            |                       ",    //level 9 boss
+    "                           .-''--.   `.             ",    //bleeding
     "                          /       `   \\            ",
     "      /                   |.   .-. |   |            ",
     "     |\\                   }:) (::| {.-``           ",
@@ -255,10 +234,10 @@ const string agony[npcSize] = {
     "                       '--==+ +==--'   | |     ||   ",
     "                            / \\        | |     ||  ",
     "                           |   |       | |     ||   ",
-    
+
 };
 const string nightmare[npcSize] = {
-    "           ---.  .  -  -  .   .---                 ",      //boss 10
+    "           ---.  .  -  -  .   .---                 ",    //boss 10
     "          __.) )             ( (.__                ",
     "        (   .--                --.  )              ",
     "        \\  '-----.       .-----'  /               ",

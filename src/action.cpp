@@ -11,7 +11,6 @@
 using namespace std;
 
 void action(Screen scr, Map map, Player player, Item item[]) {
-
     char key = ' ';
     cin.ignore();
     while (key != 'q') {
@@ -61,23 +60,30 @@ void action(Screen scr, Map map, Player player, Item item[]) {
         }
 
         if (map.layout[player.y][player.x] == 'S') {
+            player.gameLevel++;
+            if (player.gameLevel % 5 == 0) {
+                bossScreen(player, item, player.gameLevel / 5);
+            }
             map.fill();
             player.x = 1;
             player.y = 1;
-            player.gameLevel++;
-        } else if (map.layout[player.y][player.x] == 'M') {
-            scr.log = "Monster!";
-            scr.renderScreen(map, player);
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            fightScreen(player, item);
-            map.removeMonster(player.x, player.y);
-            key = getch();
+            } else if (map.layout[player.y][player.x] == 'M') {
+                scr.log = "Monster!";
+                scr.renderScreen(map, player);
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                bool isEscape = false;
+                fightScreen(player, item, isEscape);
+                if (!isEscape) {
+                    map.removeMonster(player.x, player.y);
+                }
+                key = getch();
         } else {
             map.update();
         }
 
         if (player.hp <= 0) {
-            cout << "You die!\n Wanna restart?\ny - Yes     q - Quit game\n";
+            cout << "You die!\t Wanna restart?\ny - Yes     q - Quit game\n";
+            break;
         }
 
         if (wall)
@@ -87,8 +93,6 @@ void action(Screen scr, Map map, Player player, Item item[]) {
                 player.energy--;
             else
                 player.energy = 0;
-            // if (player.mp < player.maxMp)
-            //     player.mp += 0.5;
             updateOnBuff(player);
         }
     }
