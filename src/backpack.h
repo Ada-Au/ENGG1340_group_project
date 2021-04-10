@@ -13,6 +13,7 @@ const int maxSpace = 50;
 
 struct Item {
     string name;
+    // string desc;
     int num;
 };
 
