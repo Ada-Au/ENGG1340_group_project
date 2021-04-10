@@ -27,6 +27,7 @@ class Player {
     int x, y;
     float mp, hp, energy, maxEnergy, maxMp, maxHp, exp, maxExp, damage, defense, weaponEnergy, weaponMp;
     int level, gameLevel;
+    int coin;
     string armor, weapon;
     // void setData(char key, int max);
     vector<Buff> debuffs;

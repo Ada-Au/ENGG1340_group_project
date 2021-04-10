@@ -1,5 +1,3 @@
-# main:main.o map.o screen.o player.o action.o setup.o npc.o fight.o backpack.o homepage.o things.o
-# 	g++ -o main main.o map.o screen.o player.o action.o setup.o npc.o fight.o backpack.o homepage.o things.o
 main.o:src/main.cpp
 	g++ -c -pedantic-errors -std=c++11  src/main.cpp -o main.o
 things.o:src/things.cpp src/things.h
