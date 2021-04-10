@@ -8,6 +8,7 @@ void Screen::renderScreen(Map map, Player player) {
     string stat[13] = {"[ " + player.name + " ]",
                        "",
                        "Level: " + to_string(player.level),
+                       "Game level: " + to_string(player.gameLevel),
                        "HP: " + to_string(player.hp).substr(0, to_string(player.hp).find(".") + 3)  + " / " + to_string(player.maxHp).substr(0, to_string(player.hp).find(".") + 3),
                        "MP: " + to_string(player.mp).substr(0, to_string(player.mp).find(".") + 3)  + " / " + to_string(player.maxMp).substr(0, to_string(player.hp).find(".") + 3),
                        "Energy: " + to_string(player.energy).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxEnergy).substr(0, to_string(player.hp).find(".") + 3),

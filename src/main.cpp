@@ -16,7 +16,6 @@ int main() {
     Item item[maxSpace] = {"", 0};
     bool isReplay = true;
     int flag = 1;    // determine close game or not
-
     while (isReplay) {
         isReplay = false;
         player = Player();

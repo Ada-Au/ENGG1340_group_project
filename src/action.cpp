@@ -12,9 +12,9 @@
 
 using namespace std;
 
+
 void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
     char key = ' ';
-    cin.ignore();
     while (key != 'q') {
         scr.renderScreen(map, player);
         bool wall = false;
@@ -87,6 +87,7 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 map.removeMonster(player.x, player.y);
             }
             key = getch();
+            cin.ignore();
         } else {
             map.update();
         }
