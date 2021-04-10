@@ -120,7 +120,8 @@ void bossScreen(Player &player, Item item[], int B, bool &isEnd) {
                     if ((player.defense / 2) > mDamage)
                         std::cout << "Player: Successfully defense." << endl;
                     else
-                        player.hp -= (mDamage - (player.defense / 4));
+                        player.hp -= (mDamage - (player.defense / 2));
+                    std::cout << boss.name << ": Got you! Make " << boss.damage - player.defense / 2 << " damage!" << endl;
 
                 } else {
                     std::cout << boss.name << ": Miss!" << endl;
@@ -134,8 +135,8 @@ void bossScreen(Player &player, Item item[], int B, bool &isEnd) {
                     if ((10 - player.defense) <= 0) {
                         std::cout << "Player: Successfully defense." << endl;
                     } else {
-                        player.hp -= (10 - player.defense);
-                        std::cout << boss.name << ": Got you!" << endl;
+                        player.hp -= boss.damage - player.defense / 2;
+                        std::cout << boss.name << ": Got you! Make " << boss.damage - player.defense / 2 << " damage!" << endl;
                     }
                 } else {
                     std::cout << boss.name << ": Miss!" << endl;
@@ -172,7 +173,7 @@ void fightScreen(Player &player, Item item[], bool &isEscape) {
     float mHp, mMaxHp, mDamage, mRate, mExp;
     char key;
     setUpMonster(player, monsterN, mHp, mMaxHp, mRate, mExp);
-    while (mHp >= 0 && player.hp >= 0) {
+    while (mHp > 0 && player.hp > 0) {
         mDamage = rand() % player.gameLevel + (2 * player.gameLevel + monsters[monsterN].damage);    // monster's damage range ~ gameLevel
         int showMHp = mHp / mMaxHp * 50;
         std::cout << fixed << setprecision(2);
@@ -219,10 +220,12 @@ void fightScreen(Player &player, Item item[], bool &isEscape) {
             if (mHp > 0) {
                 if (rand() % 100 >= monsters[monsterN].rate) {
                     std::cout << "Monster: Got you!" << endl;
-                    if ((player.defense / 2) > mDamage)
+                    if (player.defense / 2 > mDamage)
                         std::cout << "Player: Successfully defense." << endl;
-                    else
-                        player.hp -= (mDamage - (player.defense / 4));
+                    else {
+                        std::cout << "Monster: Make " << mDamage - player.defense / 2 << " damage!" << endl;
+                        player.hp -= mDamage - player.defense / 2;
+                    }
 
                 } else {
                     std::cout << "Monster: Miss!" << endl;
@@ -237,7 +240,7 @@ void fightScreen(Player &player, Item item[], bool &isEscape) {
                         std::cout << "Player: Successfully defense." << endl;
                     } else {
                         player.hp -= mDamage - player.defense;
-                        std::cout << "Monster: Got you!" << endl;
+                        std::cout << "Monster: Got you! Make " << mDamage - player.defense << " damage!" << endl;
                     }
                 } else {
                     std::cout << "Monster: Miss!" << endl;

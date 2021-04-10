@@ -4,8 +4,10 @@
 #include <thread>
 #if defined _WIN32 || defined _WIN64
 #include <conio.h>
+#define ISWINDOW true
 #else
 #include "../lib/conio/conio.h"
+#define ISWINDOW false
 #endif
 
 using namespace std;
@@ -108,8 +110,10 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
 }
 
 void tryAgain(string str, bool &isReplay) {
-    string choice = " ";
-    while (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y') {
+    string choice;
+    if (ISWINDOW)
+        cin.ignore();
+    do {
         getline(cin, choice);
         if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {
             break;
@@ -120,5 +124,5 @@ void tryAgain(string str, bool &isReplay) {
             cout << str << endl;
             choice = " ";
         }
-    }
+    } while (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y');
 }
