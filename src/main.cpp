@@ -13,21 +13,20 @@ int main() {
     Screen scr;
     Map map;
     Player player;
-    bool isReplay = true;
     Item item[maxSpace] = {"", 0};
+    bool isReplay = true;
     int flag = 1;    // determine close game or not
-
-    // menu(flag);
-    // if (flag == 0)
-    //     return 0;
-    // setupScreen(player, flag);
-    // if (flag == 0)
-    //     return 0;
-    // boatScreen();
+    menu(flag);
+    if (flag == 0)
+        return 0;
+    setupScreen(player, flag);
+    if (flag == 0)
+        return 0;
+    boatScreen();
     map.fill();
     cout << "Start your adventure!" << endl;
     scr.renderScreen(map, player);
-    action(scr, map, player, item);
+    action(scr, map, player, item, isReplay);
 
 
     while (isReplay) {

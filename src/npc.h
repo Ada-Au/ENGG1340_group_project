@@ -10,8 +10,7 @@ const int monsterSize = 2;
 
 struct Monster {
     string name;
-    float hp;
-    float damage, rate, exp;
+    float hp, damage, rate, exp;
 };
 
 const Monster boss1 = {"grief", 525, 1};
@@ -26,7 +25,7 @@ const Monster boss9 = {"agony", 3417, 1};
 const Monster boss10 = {"nightmare", 3954, 1};
 const Monster boss11[2] = {{"hades(calm)", 4476, 1}, {"hades(angry)", 11190, 1}};
 
-const Monster monsters[monsterSize] = {{"a", 10, 20, 2, 80}, {"b", 30, 40, 3, 85}};
+const Monster monsters[monsterSize] = {{"a", 10, 2, 80, 5}, {"b", 30, 3, 85, 5}};
 
 const string monster[npcSize] = {
     "                                                   ",    // length ~50
