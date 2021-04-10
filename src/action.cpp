@@ -67,7 +67,6 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 bossScreen(player, item, player.gameLevel / 5, isEnd);
                 player.gameLevel++;
                 if (isEnd) {
-                    string choice = " ";
                     cout << "You win the game! Wanna play again??\ny - Yes, what a fun game!\tn - No, I have better things to do with my life." << endl;
                     tryAgain("Please input again:\ny - Yes, what a fun game!\tn - No, I have better things to do with my life.", isReplay);
                     break;
@@ -90,7 +89,6 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
             map.update();
         }
 
-        // TODO
         if (player.hp <= 0) {
             cout << "You die:( Wanna try again?\ny - Yes, I want to try again!\tn - No, I suck at this game." << endl;
             tryAgain("Please input again:\ny - Yes, I want to try again!\tn - No, I suck at this game.", isReplay);
@@ -111,15 +109,16 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
 
 void tryAgain(string str, bool &isReplay) {
     string choice = " ";
-    while (choice[1] == '\0' && choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y') {
+    while (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y') {
         getline(cin, choice);
         if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {
             break;
         } else if (choice[1] == '\0' && (choice[0] == 'y' || choice[0] == 'Y')) {
             isReplay = true;
+            break;
         } else {
             cout << str << endl;
-            getline(cin, choice);
+            choice = " ";
         }
     }
 }
