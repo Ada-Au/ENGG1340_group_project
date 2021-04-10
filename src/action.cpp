@@ -4,14 +4,15 @@
 #include <thread>
 #if defined _WIN32 || defined _WIN64
 #include <conio.h>
+#define ISWINDOW true
 #else
 #include "../lib/conio/conio.h"
+#define ISWINDOW false
 #endif
 
 using namespace std;
 
-void action(Screen scr, Map map, Player player, Item item[]) {
-
+void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
     char key = ' ';
     cin.ignore();
     while (key != 'q') {
@@ -61,23 +62,39 @@ void action(Screen scr, Map map, Player player, Item item[]) {
         }
 
         if (map.layout[player.y][player.x] == 'S') {
+            player.gameLevel++;
+            bool isEnd = false;
+            if (player.gameLevel % 5 == 0) {
+                cout << player.gameLevel / 5;
+                bossScreen(player, item, player.gameLevel / 5, isEnd);
+                player.gameLevel++;
+                if (isEnd) {
+                    cout << "You win the game! Wanna play again??\ny - Yes, what a fun game!\tn - No, I have better things to do with my life." << endl;
+                    tryAgain("Please input again:\ny - Yes, what a fun game!\tn - No, I have better things to do with my life.", isReplay);
+                    break;
+                }
+            }
             map.fill();
             player.x = 1;
             player.y = 1;
-            player.gameLevel++;
         } else if (map.layout[player.y][player.x] == 'M') {
             scr.log = "Monster!";
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            fightScreen(player, item);
-            map.removeMonster(player.x, player.y);
+            bool isEscape = false;
+            fightScreen(player, item, isEscape);
+            if (!isEscape) {
+                map.removeMonster(player.x, player.y);
+            }
             key = getch();
         } else {
             map.update();
         }
 
         if (player.hp <= 0) {
-            cout << "You die!\n Wanna restart?\ny - Yes     q - Quit game\n";
+            cout << "You die:( Wanna try again?\ny - Yes, I want to try again!\tn - No, I suck at this game." << endl;
+            tryAgain("Please input again:\ny - Yes, I want to try again!\tn - No, I suck at this game.", isReplay);
+            break;
         }
 
         if (wall)
@@ -87,9 +104,25 @@ void action(Screen scr, Map map, Player player, Item item[]) {
                 player.energy--;
             else
                 player.energy = 0;
-            // if (player.mp < player.maxMp)
-            //     player.mp += 0.5;
             updateOnBuff(player);
         }
     }
+}
+
+void tryAgain(string str, bool &isReplay) {
+    string choice;
+    if (ISWINDOW)
+        cin.ignore();
+    do {
+        getline(cin, choice);
+        if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {
+            break;
+        } else if (choice[1] == '\0' && (choice[0] == 'y' || choice[0] == 'Y')) {
+            isReplay = true;
+            break;
+        } else {
+            cout << str << endl;
+            choice = " ";
+        }
+    } while (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y');
 }

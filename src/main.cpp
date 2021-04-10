@@ -10,10 +10,10 @@
 using namespace std;
 
 int main() {
-    char temp = ' ';
     Screen scr;
     Map map;
     Player player;
+    bool isReplay = true;
     Item item[maxSpace] = {"", 0};
     int flag = 1;    // determine close game or not
 
@@ -29,6 +29,23 @@ int main() {
     scr.renderScreen(map, player);
     action(scr, map, player, item);
 
+
+    while (isReplay) {
+        isReplay = false;
+        player = Player();
+        Item item[maxSpace] = {"", 0};
+        int flag = 1;    // determine close game or not
+        menu(flag);
+        if (flag == 0)
+            return 0;
+        // setupScreen(player, flag);
+        if (flag == 0)
+            return 0;
+        map.fill();
+        cout << "Start your adventure!" << endl;
+        scr.renderScreen(map, player);
+        action(scr, map, player, item, isReplay);
+    }
     return 0;
 }
 // std::cout << "COLOR" << std::endl
