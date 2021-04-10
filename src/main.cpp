@@ -17,19 +17,6 @@ int main() {
     Item item[maxSpace] = {"", 0};
     int flag = 1;    // determine close game or not
 
-    // menu(flag);
-    // if (flag == 0)
-    //     return 0;
-    // setupScreen(player, flag);
-    // if (flag == 0)
-    //     return 0;
-    // boatScreen();
-    map.fill();
-    cout << "Start your adventure!" << endl;
-    scr.renderScreen(map, player);
-    action(scr, map, player, item);
-
-
     while (isReplay) {
         isReplay = false;
         player = Player();
