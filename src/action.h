@@ -5,6 +5,7 @@
 #include "map.h"
 #include "screen.h"
 
-void action(Screen, Map, Player, Item[maxSpace]);
+void action(Screen, Map, Player, Item[maxSpace], bool &);
+void tryAgain(string, bool &);
 
 #endif
