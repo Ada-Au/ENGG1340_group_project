@@ -82,4 +82,4 @@ void updateOnBuff(Player &player) {
             player.buffs.erase(player.buffs.begin() + i - 1);
         }
     }
-};
+}
