@@ -1,33 +1,36 @@
 #include "action.h"
+#include "backpack.h"
+#include "homepage.h"
 #include "map.h"
 #include "player.h"
 #include "screen.h"
 #include "setup.h"
-#include "homepage.h"
-#include "backpack.h"
 #include <iostream>
 
 using namespace std;
 
 int main() {
-    char temp = ' ';
     Screen scr;
     Map map;
     Player player;
-    Item item[maxSpace] = {"", 0};
-    int flag = 1;   // determine close game or not
-    
-    menu(flag);
-    if (flag == 0)
-        return 0;
-    setupScreen(player, flag);
-    if (flag == 0)
-        return 0;
-    map.fill();
-    cout << "Start your adventure!" << endl;
-    scr.renderScreen(map, player);
-    action(scr, map, player, item);
+    bool isReplay = true;
 
+    while (isReplay) {
+        isReplay = false;
+        player = Player();
+        Item item[maxSpace] = {"", 0};
+        int flag = 1;    // determine close game or not
+        menu(flag);
+        if (flag == 0)
+            return 0;
+        // setupScreen(player, flag);
+        if (flag == 0)
+            return 0;
+        map.fill();
+        cout << "Start your adventure!" << endl;
+        scr.renderScreen(map, player);
+        action(scr, map, player, item, isReplay);
+    }
     return 0;
 }
 // std::cout << "COLOR" << std::endl
