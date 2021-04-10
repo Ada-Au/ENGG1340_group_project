@@ -67,9 +67,11 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 bossScreen(player, item, player.gameLevel / 5, isEnd);
                 player.gameLevel++;
                 if (isEnd) {
-                    string choice = " ";
+                    string choice= " ";
                     cout << "You win the game! Wanna play again??\ny - Yes, what a fun game!\tn - No, I have better things to do with my life." << endl;
-                    tryAgain("Please input again:\ny - Yes, what a fun game!\tn - No, I have better things to do with my life.", isReplay);
+                    cin.ignore();
+                    getline(cin, choice);
+                    tryAgain("Please input again:\ny - Yes, what a fun game!\tn - No, I have better things to do with my life.", choice, isReplay);
                     break;
                 }
             }
@@ -92,8 +94,11 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
 
         // TODO
         if (player.hp <= 0) {
-            cout << "You die:( Wanna try again?\ny - Yes, I want to try again!\tn - No, I suck at this game." << endl;
-            tryAgain("Please input again:\ny - Yes, I want to try again!\tn - No, I suck at this game.", isReplay);
+            string choice = " ";
+            cout << "You die:( " << " Wanna try again?\ny - Yes, I want to try again!\tn - No, I suck at this game." << endl;
+            cin.ignore();
+            getline(cin, choice);
+            tryAgain("Please input again:\ny - Yes, I want to try again!\tn - No, I suck at this game.", choice, isReplay);
             break;
         }
 
@@ -109,17 +114,35 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
     }
 }
 
-void tryAgain(string str, bool &isReplay) {
-    string choice = " ";
-    while (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y') {
-        getline(cin, choice);
+void tryAgain(string str, string choice, bool &isReplay) {
+    if(choice[1] == '\0'){
+        switch(choice[0]){
+        case 'y':
+        case 'Y':
+            isReplay = true;
+            break;
+        case 'n':
+        case 'N':
+            break;
+        default:
+            cout << str << endl;
+            getline(cin, choice);
+            tryAgain(str, choice, isReplay);
+            break;
+        }
+    }
+    while ( (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y')) {
         if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {
             break;
         } else if (choice[1] == '\0' && (choice[0] == 'y' || choice[0] == 'Y')) {
             isReplay = true;
+            break;
         } else {
             cout << str << endl;
             getline(cin, choice);
+            tryAgain(str, choice, isReplay);
+            break;
         }
     }
+
 }

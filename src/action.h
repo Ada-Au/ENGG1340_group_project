@@ -6,6 +6,6 @@
 #include "screen.h"
 
 void action(Screen, Map, Player, Item[maxSpace], bool &);
-void tryAgain(string, bool &);
+void tryAgain(string, string, bool &);
 
 #endif
