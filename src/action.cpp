@@ -111,7 +111,7 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
 
 void tryAgain(string str, bool &isReplay) {
     string choice = " ";
-    while (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y') {
+    while (choice[1] == '\0' && choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y') {
         getline(cin, choice);
         if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {
             break;
