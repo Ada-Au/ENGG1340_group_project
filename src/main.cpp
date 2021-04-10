@@ -13,8 +13,8 @@ int main() {
     Screen scr;
     Map map;
     Player player;
-    bool isReplay = true;
     Item item[maxSpace] = {"", 0};
+    bool isReplay = true;
     int flag = 1;    // determine close game or not
 
     while (isReplay) {
