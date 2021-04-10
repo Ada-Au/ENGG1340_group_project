@@ -67,20 +67,9 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 bossScreen(player, item, player.gameLevel / 5, isEnd);
                 player.gameLevel++;
                 if (isEnd) {
-                    // TODO
+                    string choice = " ";
                     cout << "You win the game! Wanna play again??\ny - Yes, what a fun game!\tn - No, I have better things to do with my life." << endl;
-                    key = ' ';
-                    while (key != 'n' && key != 'N' && key != 'y' && key != 'Y') {
-                        cin >> key;
-                        if (key == 'n' || key == 'N') {
-                            break;
-                        } else if (key == 'y' || key == 'Y') {
-                            isReplay = true;
-                        } else {
-                            cout << "Please input again:\ny - Yes, what a fun game!\tn - No, I have better things to do with my life." << endl;
-                            cin >> key;
-                        }
-                    }
+                    tryAgain("Please input again:\ny - Yes, what a fun game!\tn - No, I have better things to do with my life.", isReplay);
                     break;
                 }
             }
@@ -103,19 +92,8 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
 
         // TODO
         if (player.hp <= 0) {
-            key = ' ';
             cout << "You die:( Wanna try again?\ny - Yes, I want to try again!\tn - No, I suck at this game." << endl;
-            while (key != 'n' && key != 'N' && key != 'y' && key != 'Y') {
-                cin >> key;
-                if (key == 'n' || key == 'N') {
-                    break;
-                } else if (key == 'y' || key == 'Y') {
-                    isReplay = true;
-                } else {
-                    cout << "Please input again:\ny - Yes, I want to try again!\tn - No, I suck at this game." << endl;
-                    cin >> key;
-                }
-            }
+            tryAgain("Please input again:\ny - Yes, I want to try again!\tn - No, I suck at this game.", isReplay);
             break;
         }
 
@@ -127,6 +105,21 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
             else
                 player.energy = 0;
             updateOnBuff(player);
+        }
+    }
+}
+
+void tryAgain(string str, bool &isReplay) {
+    string choice = " ";
+    while (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y') {
+        getline(cin, choice);
+        if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {
+            break;
+        } else if (choice[1] == '\0' && (choice[0] == 'y' || choice[0] == 'Y')) {
+            isReplay = true;
+        } else {
+            cout << str << endl;
+            getline(cin, choice);
         }
     }
 }
