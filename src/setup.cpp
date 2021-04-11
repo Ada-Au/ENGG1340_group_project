@@ -63,21 +63,27 @@ void PrintGender() {
     cout << "* - Random\n";
 }
 
-void introduction(char key[]) {
-    cout << "1 - Who are you?\n"
-         << "2 - Where am I?\n"
-         << "3 - (Nothing want to ask)\n"
-         << "Enter your choice: ";
-    cin >> key;
-    cout << endl;
-    while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[0] != '3')) {
+void DealQuestion(int repeat, char key[]) {
+    if (repeat == 0){
+        cout << "1 - Who are you?\n"
+             << "2 - Where am I?\n"
+             << "3 - (Nothing want to ask)\n"
+             << "Enter your choice: ";
+    } else {
         renderNpc("charon", " What do you say?");
         cout << "1 - Who are you?\n"
              << "2 - Where am I?\n"
              << "3 - (Nothing want to ask)\n"
-             << "Enter again: ";
-        cin >> key;
-        cout << endl;
+             << "Enter again: ";       
+    }
+    cin >> key;
+    cout << endl;
+}
+
+void introduction(char key[]) {
+    DealQuestion(0, key);
+    while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[0] != '3')) {
+        DealQuestion(1, key);
     }
     while (key[0] != '3') {
         switch (key[0]) {
@@ -88,20 +94,9 @@ void introduction(char key[]) {
             renderNpc("charon", "I've just said-- Welcome to HELL.");
             break;
         }
-        cout << "1 - Who are you?\n"
-             << "2 - Where am I?\n"
-             << "3 - (Nothing want to ask)\n"
-             << "Enter your choice: ";
-        cin >> key;
-        cout << endl;
+        DealQuestion(0, key);
         while (key[1] != '\0') {
-            renderNpc("charon", " What do you say?");
-            cout << "1 - Who are you?\n"
-                 << "2 - Where am I?\n"
-                 << "3 - (Nothing want to ask)\n"
-                 << "Enter again: ";
-            cin >> key;
-            cout << endl;
+            DealQuestion(1, key);
         }
     }
 }
@@ -113,11 +108,15 @@ void setData(char key[], int choice, Player &player) {
         cout << "Please input again: ";
         cin >> key;
     }
-    int i = key[0] - 'a';
+    int i = key[0];
+    if (key[0] >= 'a')
+        i -= 'a';
+    else
+        i -= 'A';
     srand(time(NULL));
     switch (choice) {
     case 1:    // role
-        if (key[0] >= 'a' && key[0] <= 'a' + max_role)
+        if ((key[0] >= 'a' && key[0] <= 'a' + max_role )|| (key[0] >= 'A' && key[0] <= 'A'+ max_role))
             player.role = roleList[i];
         else if (key[0] == '*')
             player.role = roleList[rand() % max_role];
@@ -128,7 +127,7 @@ void setData(char key[], int choice, Player &player) {
         }
         break;
     case 2:    // race
-        if (key[0] >= 'a' && key[0] <= 'a' + max_race) {
+        if ((key[0] >= 'a' && key[0] <= 'a' + max_race)||(key[0] >= 'A' && key[0] <= 'A' + max_race)){
             player.race = raceList[i];
         } else if (key[0] == '*') {
             player.race = raceList[rand() % max_race];
@@ -139,7 +138,7 @@ void setData(char key[], int choice, Player &player) {
         }
 
         if (player.race == "elf") {
-            log = "You had been alone for thousands years so that you got the magic power?";
+            log = "Hundred years of virginity make you an elf?"; 
         } else if (player.race == "drawf") {
             log = "No wonder why you are such...short?";
         } else if (player.race == "orc") {
@@ -148,10 +147,10 @@ void setData(char key[], int choice, Player &player) {
         renderNpc("charon", log);
         break;
     case 3:    // gender
-        if (key[0] >= 'a' && key[0] <= 'a' + max_gender)
+        if ((key[0] >= 'a' && key[0] <= 'a' + max_gender) || (key[0] >= 'A' && key[0] <= 'A' + max_gender))
             player.gender = genderList[i];
         else if (key[0] == '*')
-            player.gender = genderList[rand() % 2];
+            player.gender = genderList[rand() % max_gender];
         else {
             cout << "Please input again: ";
             cin >> key;
@@ -255,7 +254,6 @@ void boatScreen() {
     cout << "1 G GET.\n";
     char c[2] = {'6'};
     while ((c[0] != '1' && c[0] != '2' && c[0] != '3' && c[0] != '4' && c[0] != '5') || c[1] != '\0') {
-        // printBoats();
         cout << "Enter your choice: ";
         cin >> c;
     }
@@ -276,7 +274,7 @@ void boatScreen() {
         cout << "Enter your choice: ";
         cin >> c;
     }
-    renderNpc("charon", "To my surprise, you buy trash.");
+    renderNpc("charon", "To my surprise, you buy a trash.");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     renderNpc("charon", "What a poor boy.");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
