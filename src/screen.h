@@ -10,6 +10,7 @@ const int helpSize = 9;
 class Screen {
   public:
     void renderScreen(Map, Player);
+
     // void fillHelp();
     std::string log;
 };
@@ -27,5 +28,6 @@ const char helpScreen[helpSize][map_width] = {
 };
 
 void printHelp();
+void clearScreen();
 
 #endif

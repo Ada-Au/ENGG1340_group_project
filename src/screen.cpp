@@ -1,7 +1,12 @@
 #include "screen.h"
 #include <iomanip>
 #include <iostream>
-
+#include <cstdlib>
+#if defined _WIN32 || defined _WIN64
+#define ISWINDOW true
+#else
+#define ISWINDOW false
+#endif
 using namespace std;
 
 void Screen::renderScreen(Map map, Player player) {
@@ -71,4 +76,12 @@ void Screen::renderScreen(Map map, Player player) {
 void printHelp() {
     for (int i = 0; i < helpSize; i++)
         cout << helpScreen[i] << endl;
+}
+
+void clearScreen()
+{
+    if (ISWINDOW)
+        std::system("cls");
+    else
+        std::system ("clear");
 }
