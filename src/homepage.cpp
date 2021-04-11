@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void menu(int &flag) {
+void menu(int &isPlay) {
     int selected = 0;
     int choices = 3;
 
@@ -36,7 +36,7 @@ void menu(int &flag) {
         break;
     case '3':
         cout << "Selected QUIT\n";
-        flag = 0;
+        isPlay = 0;
         break;
     }
 }

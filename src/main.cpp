@@ -15,17 +15,17 @@ int main() {
     Player player;
     Item item[maxSpace] = {"", 0};
     bool isReplay = true;
-    int flag = 1;    // determine close game or not
+    int isPlay = 1;    // determine close game or not
     while (isReplay) {
         isReplay = false;
         player = Player();
         Item item[maxSpace] = {"", 0};
-        int flag = 1;    // determine close game or not
-        menu(flag);
-        if (flag == 0)
+        int isPlay = 1;    // determine close game or not
+        menu(isPlay);
+        if (isPlay == 0)
             return 0;
-        // setupScreen(player, flag);
-        if (flag == 0)
+        // setupScreen(player, isPlay);
+        if (isPlay == 0)
             return 0;
         map.fill();
         cout << "Start your adventure!" << endl;

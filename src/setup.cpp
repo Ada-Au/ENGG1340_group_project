@@ -161,7 +161,7 @@ void setData(char key[], int choice, Player &player) {
     }
 }
 
-void setupScreen(Player &player, int &flag) {
+void setupScreen(Player &player, int &isPlay) {
     char key[2];
     srand(time(NULL));
     player.role = roleList[rand() % max_role];
@@ -206,7 +206,7 @@ void setupScreen(Player &player, int &flag) {
             }
             case 'q':
             case 'Q':
-                flag = 0;
+                isPlay = 0;
                 break;
             }
             if (key[0] != 'Q' && key[0] != 'q') {
@@ -221,7 +221,7 @@ void setupScreen(Player &player, int &flag) {
         }
     }
     if (key[0] == 'q' || key[0] == 'Q')
-        flag = 0;
+        isPlay = 0;
 }
 
 void printBoats() {
