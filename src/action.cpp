@@ -55,6 +55,7 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
         case 'h':
         case 'H':
             printHelp();
+            cin.get();
             break;
         default:
             if (player.hp > 0)
@@ -106,6 +107,7 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
             else
                 player.energy = 0;
             updateOnBuff(player);
+        clearScreen();
         }
     }
 }

@@ -33,6 +33,7 @@ void menu(int &isPlay) {
         break;
     case '2':
         cout << "Selected LOAD\n";    // input files
+        isPlay = 2;
         break;
     case '3':
         cout << "Selected QUIT\n";
