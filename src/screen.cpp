@@ -1,7 +1,7 @@
 #include "screen.h"
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
-#include <cstdlib>
 #if defined _WIN32 || defined _WIN64
 #define ISWINDOW true
 #else
@@ -14,8 +14,8 @@ void Screen::renderScreen(Map map, Player player) {
                        "",
                        "Level: " + to_string(player.level),
                        "Game level: " + to_string(player.gameLevel),
-                       "HP: " + to_string(player.hp).substr(0, to_string(player.hp).find(".") + 3)  + " / " + to_string(player.maxHp).substr(0, to_string(player.hp).find(".") + 3),
-                       "MP: " + to_string(player.mp).substr(0, to_string(player.mp).find(".") + 3)  + " / " + to_string(player.maxMp).substr(0, to_string(player.hp).find(".") + 3),
+                       "HP: " + to_string(player.hp).substr(0, to_string(player.hp).find(".") + 3) + " / " + to_string(player.maxHp).substr(0, to_string(player.hp).find(".") + 3),
+                       "MP: " + to_string(player.mp).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxMp).substr(0, to_string(player.hp).find(".") + 3),
                        "Energy: " + to_string(player.energy).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxEnergy).substr(0, to_string(player.hp).find(".") + 3),
                        "ATK: " + to_string(player.damage),
                        "DFS: " + to_string(player.defense),
@@ -76,12 +76,4 @@ void Screen::renderScreen(Map map, Player player) {
 void printHelp() {
     for (int i = 0; i < helpSize; i++)
         cout << helpScreen[i] << endl;
-}
-
-void clearScreen()
-{
-    if (ISWINDOW)
-        std::system("cls");
-    else
-        std::system ("clear");
 }
