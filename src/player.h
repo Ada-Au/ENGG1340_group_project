@@ -24,7 +24,8 @@ class Player {
     Player();
     char mark;
     int x, y;
-    float mp, hp, energy, maxEnergy, maxMp, maxHp, exp, maxExp, damage, defense;
+    float mp, hp, energy, maxEnergy, exp, maxExp;    // fixed or variables
+    float maxMp, maxHp, damage, defense;             // allow player to upgrade
     int level, gameLevel, coin;
     struct playerWeapon {
         string name;

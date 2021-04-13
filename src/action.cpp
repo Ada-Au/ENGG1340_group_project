@@ -115,8 +115,7 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
 
 void tryAgain(string str, bool &isReplay) {
     string choice;
-    if (ISWINDOW)
-        cin.ignore();
+    cin.ignore();
     do {
         getline(cin, choice);
         if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {

@@ -205,7 +205,7 @@ void openBackpack(Item items[], Player &player) {
         } else if (choice == "w" || choice == "W") {
             if (player.weapon.name != "") {
                 updateItems(player.weapon.name, 1, 'A', items);
-                player.weapon = {"", 3, 0, 1};
+                player.weapon = {"", 2, 0, 1};
             } else {
                 cout << "You have no weapon on hand.\n";
             }
