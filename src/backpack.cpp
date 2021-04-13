@@ -11,12 +11,12 @@ void generateThings(Item items[]) {
     int healsNum, weaponsNum, armorsNum;
     srand(time(NULL));
     if (rand() % 100 >= 95) {
-        heal = "high healing";
-        armor = "silver chest";
+        heal = "decent healing";
+        armor = "silver shield";
         weapon = "hammer";
     } else if (rand() % 100 >= 75) {
-        heal = "medium healing";
-        armor = "leather chest";
+        heal = "average healing";
+        armor = "leather shield";
         if ((rand() % 100) % 2 == 0) {
             weapon = "great sword";
         } else {
@@ -24,11 +24,11 @@ void generateThings(Item items[]) {
         }
     } else if (rand() % 100 >= 50) {
         heal = "poor healing";
-        armor = "wood chest";
+        armor = "wood shield";
         weapon = "long sword";
     } else if (rand() % 100 >= 40) {
         heal = "bread";
-        armor = "cloths";
+        armor = "boat remains";
         weapon = "spear";
     } else {
         heal = "monster meat";
@@ -50,7 +50,7 @@ void generateThings(Item items[]) {
         cout << weapon << " x " << weaponsNum << " GET!\n";
 }
 
-void sortItems(Item items[]) {    // TODO what this is for???
+void sortItems(Item items[]) {    
     string tempName;
     int tempNum;
     for (int i = 0; i < maxSpace - 1; i++) {
@@ -69,7 +69,7 @@ void sortItems(Item items[]) {    // TODO what this is for???
 }
 
 void displayBackpack(Item items[]) {    // Also display player's state if possible
-    sortItems(items);                   // TODO
+    sortItems(items);                   
     for (int i = 0; i < maxSpace; i++) {
         if (i == 0)
             cout << "Items\t\t\t\t\t\tNumber\n";
@@ -142,16 +142,17 @@ void openBackpack(Item items[], Player &player) {
         if (choice == to_string(pos + 1)) {
             for (int i = 0; i < maxHealNum; i++) {
                 if (items[pos].name == heals[i].name) {
-                    cout << items[i].name + " is selected.\t" + heals[i].desc << endl;
+                    cout << items[pos].name + " is selected.\t" + heals[i].desc << endl;
                     cout << "Amount to use: ";
                     int amount;
                     cin >> amount;
-                    while (amount > items[i].num || amount < 0) {
+                    while (amount > items[pos].num || amount < 0) {
                         cout << "Exceeds amount, please enter a valid number: ";
                         cin >> amount;
                     }
                     cout << "\n\n";
-                    updateState(player, items[i].name, amount);
+                    updateItems(items[pos].name, amount, 'D', items);
+                    updateState(player, items[pos].name, amount);
                     break;
                 }
             }
