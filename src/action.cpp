@@ -90,7 +90,6 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
             if (!isEscape) {
                 map.removeMonster(player.x, player.y);
             }
-            key = getch();
             cin.ignore();
         } else {
             map.update();

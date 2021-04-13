@@ -1,11 +1,31 @@
 #include "fight.h"
+#include "map.h"
 #include "npc.h"
+// #include "things.h"
 #include <iomanip>
 #include <iostream>
 #include <math.h>
 #include <time.h>
 
 using namespace std;
+
+void displayStats(float mHp, float mMaxHp, Player player) {
+    int showMHp = mHp / mMaxHp * 50;
+    int showHp = player.hp / player.maxHp * 50;
+    std::cout << fixed << setprecision(2);
+    std::cout << "Monster's HP: " << mHp << '/' << mMaxHp << endl;
+    std::cout << '|' << setfill(' ') << string(showMHp, '*')
+              << setw(50 - showMHp) << '|' << endl;
+    renderNpc("monster", "");
+    std::cout << "Player's HP: " << player.hp << '/' << player.maxHp << endl;
+    std::cout << '|' << string(showHp, '*') << setfill(' ')
+              << setw(50 - showHp) << '|' << endl;
+    std::cout << "Player's Energy: " << player.energy << '/' << player.maxEnergy
+              << setw(map_width - 40) << "Player's MP: " << player.mp << '/' << player.maxMp << endl;
+    std::cout << "ACTION (please input number 1-4)" << endl
+              << "1 - Attack               2 - Defence " << endl
+              << "3 - Use Something        4 - Escape" << endl;
+}
 
 void setUpMonster(Player player, int &monsterN, float &mHp, float &mMaxHp, float &mRate, float &mExp) {
     monsterN = rand() % monsterSize;
@@ -65,27 +85,10 @@ void bossScreen(Player &player, Item item[], int B, bool &isEnd) {
         boss = boss11[1];
         break;
     }
-    float mHp, mMaxHp, mDamage, mRate;
+    float mHp = boss.hp, mDamage = boss.damage;
     char key;
-    mMaxHp = boss.hp;
-    mHp = boss.hp;
     while (mHp >= 0 && player.hp >= 0) {
-        mDamage = 0;
-        // mDamage = rand() % player.gameLevel + (2 * player.gameLevel + boss.damage);    // monster's damage range ~ gameLevel
-        int showMHp = mHp / mMaxHp * 50;
-        std::cout << fixed << setprecision(2);
-        std::cout << boss.name << "'s HP: " << mHp << '/' << mMaxHp << endl;
-        std::cout << '|' << setfill(' ') << string(showMHp, '*')
-                  << setw(50 - showMHp) << '|' << endl;
-        renderNpc(boss.name, "");
-        std::cout << "Player's HP: " << player.hp << '/' << player.maxHp << endl;
-        std::cout << '|' << string(player.hp / player.maxHp * 50, '*') << setfill(' ')
-                  << setw(50 - player.hp / player.maxHp * 50) << '|' << endl;
-        std::cout << "Player's Energy: " << player.energy << '/' << player.maxEnergy
-                  << setw(map_width - 40) << "Player's MP: " << player.mp << '/' << player.maxMp << endl;
-        std::cout << "ACTION (please input number 1-4)" << endl
-                  << "1 - Attack               2 - Defence " << endl
-                  << "3 - Use Something" << endl;
+        displayStats(mHp, boss.hp, player);
         cin >> key;
         switch (key) {
         case '1':
@@ -98,10 +101,15 @@ void bossScreen(Player &player, Item item[], int B, bool &isEnd) {
                         critical = " critical";
                     }
                     mHp -= player.damage * criticalHit;    // should be weapon damage (<- update in backpage.cpp: exchangeWeapon(player))
-                    if (player.energy > 0)
-                        player.energy -= player.weaponEnergy;
-                    if (player.mp > 0)    // limit player's min.energy and min.mp to 0
-                        player.mp -= player.weaponMp;
+                    if (player.energy > 0) {
+                        // TODO update energy lose, and dont do damage if 0
+                        // player.energy -= player.weaponEnergy;
+                    }
+                    if (player.mp > 0) {
+                        // TODO update mp lose, and dont do damage if 0
+                        // player.mp -= player.weaponMp;
+                    }    // limit player's min.energy and min.mp to 0
+                    // TODO should not do this: should check mp and en after deduct, if <0 then no damage
                     if (player.energy < 0)
                         player.energy = 0;
                     if (player.mp < 0)
@@ -111,9 +119,9 @@ void bossScreen(Player &player, Item item[], int B, bool &isEnd) {
                     std::cout << "Player: Miss!" << endl;
                 }
             } else {
+                // TODO ???? what is this?
                 cout << "You have no energy to attack now." << endl;
             }
-            // monster strongness? (6)
             if (mHp > 0) {
                 if (rand() % 100 >= boss.rate) {
                     std::cout << boss.name << ": Got you!" << endl;
@@ -175,20 +183,7 @@ void fightScreen(Player &player, Item item[], bool &isEscape) {
     setUpMonster(player, monsterN, mHp, mMaxHp, mRate, mExp);
     while (mHp > 0 && player.hp > 0) {
         mDamage = rand() % player.gameLevel + (2 * player.gameLevel + monsters[monsterN].damage);    // monster's damage range ~ gameLevel
-        int showMHp = mHp / mMaxHp * 50;
-        std::cout << fixed << setprecision(2);
-        std::cout << "Monster's HP: " << mHp << '/' << mMaxHp << endl;
-        std::cout << '|' << setfill(' ') << string(showMHp, '*')
-                  << setw(50 - showMHp) << '|' << endl;
-        renderNpc("monster", "");
-        std::cout << "Player's HP: " << player.hp << '/' << player.maxHp << endl;
-        std::cout << '|' << string(player.hp / player.maxHp * 50, '*') << setfill(' ')
-                  << setw(50 - player.hp / player.maxHp * 50) << '|' << endl;
-        std::cout << "Player's Energy: " << player.energy << '/' << player.maxEnergy
-                  << setw(map_width - 40) << "Player's MP: " << player.mp << '/' << player.maxMp << endl;
-        std::cout << "ACTION (please input number 1-4)" << endl
-                  << "1 - Attack               2 - Defence " << endl
-                  << "3 - Use Something        4 - Escape" << endl;
+        displayStats(mHp, mMaxHp, player);
         cin >> key;
         switch (key) {
         case '1':
@@ -201,10 +196,15 @@ void fightScreen(Player &player, Item item[], bool &isEscape) {
                         critical = " critical";
                     }
                     mHp -= player.damage * criticalHit;    // should be weapon damage (<- update in backpage.cpp: exchangeWeapon(player))
-                    if (player.energy > 0)
-                        player.energy -= player.weaponEnergy;
-                    if (player.mp > 0)    // limit player's min.energy and min.mp to 0
-                        player.mp -= player.weaponMp;
+                    if (player.energy > 0) {
+                        // TODO update energy lose, and dont do damage if 0
+                        // player.energy -= player.weaponEnergy;
+                    }
+                    if (player.mp > 0) {
+                        // TODO update mp lose, and dont do damage if 0
+                        // player.mp -= player.weaponMp;
+                    }    // limit player's min.energy and min.mp to 0
+                    // TODO should not do this: should check mp and en after deduct, if <0 then no damage
                     if (player.energy < 0)
                         player.energy = 0;
                     if (player.mp < 0)
@@ -214,6 +214,7 @@ void fightScreen(Player &player, Item item[], bool &isEscape) {
                     std::cout << "Player: Miss!" << endl;
                 }
             } else {
+                // TODO ???? what is this?
                 cout << "You have no energy to attack now." << endl;
             }
             // monster strongness? (6)
