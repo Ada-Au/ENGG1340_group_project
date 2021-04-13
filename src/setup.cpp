@@ -64,7 +64,7 @@ void PrintGender() {
 }
 
 void DealQuestion(int repeat, char key[]) {
-    if (repeat == 0){
+    if (repeat == 0) {
         cout << "1 - Who are you?\n"
              << "2 - Where am I?\n"
              << "3 - (Nothing want to ask)\n"
@@ -74,7 +74,7 @@ void DealQuestion(int repeat, char key[]) {
         cout << "1 - Who are you?\n"
              << "2 - Where am I?\n"
              << "3 - (Nothing want to ask)\n"
-             << "Enter again: ";       
+             << "Enter again: ";
     }
     cin >> key;
     cout << endl;
@@ -116,7 +116,7 @@ void setData(char key[], int choice, Player &player) {
     srand(time(NULL));
     switch (choice) {
     case 1:    // role
-        if ((key[0] >= 'a' && key[0] <= 'a' + max_role )|| (key[0] >= 'A' && key[0] <= 'A'+ max_role))
+        if ((key[0] >= 'a' && key[0] <= 'a' + max_role) || (key[0] >= 'A' && key[0] <= 'A' + max_role))
             player.role = roleList[i];
         else if (key[0] == '*')
             player.role = roleList[rand() % max_role];
@@ -127,7 +127,7 @@ void setData(char key[], int choice, Player &player) {
         }
         break;
     case 2:    // race
-        if ((key[0] >= 'a' && key[0] <= 'a' + max_race)||(key[0] >= 'A' && key[0] <= 'A' + max_race)){
+        if ((key[0] >= 'a' && key[0] <= 'a' + max_race) || (key[0] >= 'A' && key[0] <= 'A' + max_race)) {
             player.race = raceList[i];
         } else if (key[0] == '*') {
             player.race = raceList[rand() % max_race];
@@ -138,7 +138,7 @@ void setData(char key[], int choice, Player &player) {
         }
 
         if (player.race == "elf") {
-            log = "Hundred years of virginity make you an elf?"; 
+            log = "Hundred years of virginity make you an elf?";
         } else if (player.race == "drawf") {
             log = "No wonder why you are such...short?";
         } else if (player.race == "orc") {
@@ -281,7 +281,7 @@ void boatScreen() {
     renderNpc("charon", "Hope you enjoy your trip to hell :)");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     cout << "You ride on the trash, start rolling hard.\n"
-         << "After a few minutes, you find there is water ...\n"
+         << "After a few minutes, you found there is water leaking...\n"
          << "The boat is sinking!!\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 }
