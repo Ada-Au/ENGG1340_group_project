@@ -12,9 +12,9 @@ Player::Player() {
     x = 1, y = 1;
     mp = 100, hp = 100, energy = 100, maxEnergy = 100;
     maxMp = 100, maxHp = 100, exp = 0, maxExp = 10, damage = 2, defense = 0;
-    level = 1, gameLevel = 1;
+    level = 1, gameLevel = 4;
     race = "human";
-    weapon = {"", 0, 0, 1}, armor = "";
+    weapon = {"", 3, 0, 1}, armor = "";
     aDefense = 0;
     // debuffs.push_back(allDebuffs[0]);
 }

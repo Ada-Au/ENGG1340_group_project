@@ -200,23 +200,18 @@ void openBackpack(Item items[], Player &player) {
                 player.armor = "";
                 player.aDefense = 0;
             } else {
-                cout << "You have no armor on body.\n"
-                     << "Press [number] to select or [Q] to quit.  ";
-                cin >> choice;
+                cout << "You have no armor on body.\n";
             }
         } else if (choice == "w" || choice == "W") {
             if (player.weapon.name != "") {
                 updateItems(player.weapon.name, 1, 'A', items);
-                player.weapon = {"", 0, 0, 1};
+                player.weapon = {"", 3, 0, 1};
             } else {
-                cout << "You have no weapon on hand.\n"
-                     << "Press [number] to select or [Q] to quit.  ";
-                cin >> choice;
+                cout << "You have no weapon on hand.\n";
             }
         } else {
             cout << "Press [number] to select items or [Q] to exit.\n"
                  << "Press [W] to take off weapon or [A] to take off armor.\n\n";
-            cin >> choice;
         }
         displayBackpack(items);
         cin >> choice;
