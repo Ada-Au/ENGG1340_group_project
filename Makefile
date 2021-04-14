@@ -1,7 +1,5 @@
 main.o:src/main.cpp
 	g++ -c -pedantic-errors -std=c++11  src/main.cpp -o main.o
-things.o:src/things.cpp src/things.h
-	g++ -c -pedantic-errors -std=c++11  src/things.cpp -o things.o
 backpack.o:src/backpack.cpp src/backpack.h 
 	g++ -c -pedantic-errors -std=c++11  src/backpack.cpp -o backpack.o 
 player.o:src/player.cpp src/player.h
@@ -21,9 +19,8 @@ setup.o:src/setup.cpp src/setup.h
 npc.o:src/npc.cpp src/npc.h 
 	g++ -c -pedantic-errors -std=c++11  src/npc.cpp -o npc.o 
 
-
-main:main.o things.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 
-	g++ -o main main.o things.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 
+main:main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 
+	g++ -o main main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 
 	
 clean:
-	rm -f  main.o things.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 
+	rm -f  main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 

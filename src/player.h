@@ -2,7 +2,6 @@
 #define Player_h
 
 #include "env.h"
-// #include "things.h"
 #include <string>
 #include <vector>
 
@@ -25,17 +24,24 @@ class Player {
     Player();
     char mark;
     int x, y;
-    float mp, hp, energy, maxEnergy, maxMp, maxHp, exp, maxExp, damage, defense, weaponEnergy, weaponMp;
-    int level, gameLevel;
-    int coin;
-    string armor, weapon;
-    // void setData(char key, int max);
+    float mp, hp, energy, maxEnergy, exp, maxExp;    // fixed or variables
+    float maxMp, maxHp, damage, defense;             // allow player to upgrade
+    int level, gameLevel, coin;
+    struct playerWeapon {
+        string name;
+        float damage, mp, energy;
+    } weapon;
+    string armor;
+    float aDefense;
     vector<Buff> debuffs;
     vector<Buff> buffs;
     string name, role, gender, race;
 };
 
 void upgradePlayer(Player &);
+void addBuff(bool, int, Player &);
+void updateOnBuff(Player &);
+
 // void exchange(Player &, string);
 // void updateState(Player &, string, int);
 //     float mp, hp, energy, maxMp, maxHp;
@@ -43,8 +49,5 @@ void upgradePlayer(Player &);
 //     vector<Buff> buffs;
 //     string name, role, gender, race;
 // };
-
-void addBuff(bool, int, Player &);
-void updateOnBuff(Player &);
 
 #endif

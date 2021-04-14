@@ -12,11 +12,10 @@
 
 using namespace std;
 
-
 void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
     char key = ' ';
+    scr.renderScreen(map, player);
     while (key != 'q') {
-        scr.renderScreen(map, player);
         bool wall = false;
         key = getch();
         switch (key) {
@@ -62,6 +61,9 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 scr.log = "Please input again or press [H] for help";
         }
 
+        clearScreen();
+        scr.renderScreen(map, player);
+
         if (map.layout[player.y][player.x] == 'S') {
             player.gameLevel++;
             bool isEnd = false;
@@ -80,14 +82,16 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
             player.y = 1;
         } else if (map.layout[player.y][player.x] == 'M') {
             scr.log = "Monster!";
+            clearScreen();
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             bool isEscape = false;
+            clearScreen();
             fightScreen(player, item, isEscape);
             if (!isEscape) {
                 map.removeMonster(player.x, player.y);
             }
-            key = getch();
+            scr.renderScreen(map, player);
             cin.ignore();
         } else {
             map.update();
@@ -107,15 +111,13 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
             else
                 player.energy = 0;
             updateOnBuff(player);
-        clearScreen();
         }
     }
 }
 
 void tryAgain(string str, bool &isReplay) {
     string choice;
-    if (ISWINDOW)
-        cin.ignore();
+    cin.ignore();
     do {
         getline(cin, choice);
         if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {
@@ -128,4 +130,11 @@ void tryAgain(string str, bool &isReplay) {
             choice = " ";
         }
     } while (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y');
+}
+
+void clearScreen() {
+    if (ISWINDOW)
+        std::system("cls");
+    else
+        std::system("clear");
 }
