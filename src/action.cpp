@@ -216,7 +216,7 @@ void ending() {
     cout << "At the end, you defeated Hades, the Lord of Hell, in your endless, extraordinary journey of hell.\n";
     cout << "You feel drained out after such long battles, playing around the cold and dark, gods and monsters\n";
     cout << "Closing your eyes, you were just desperate for a moment of rest...\n";
-    cout << "A whistle passes into your ears, a familiar voice...(press enter to continue)";
+    cout << "A whistle passes into your ears, a familiar voice... <press enter to continue>";
     cin.get();
     cout << "\n\"Oh, you come back to buy boats?\"\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
