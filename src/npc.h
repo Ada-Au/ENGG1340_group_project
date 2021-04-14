@@ -13,19 +13,19 @@ struct Monster {
     float hp, damage, rate, exp;
 };
 
-const Monster boss1 = {"grief", 525, 1};
-const Monster boss2 = {"anxiety", 795, 1};
-const Monster boss3 = {"diseases", 1065, 1};
-const Monster boss4 = {"oldAge", 1369, 1};
-const Monster boss5 = {"fear", 1695, 1};
-const Monster boss6 = {"hunger", 2097, 1};
-const Monster boss7 = {"need", 2472, 1};
-const Monster boss8 = {"death", 2925, 1};
-const Monster boss9 = {"agony", 3417, 1};
-const Monster boss10 = {"nightmare", 3954, 1};
-const Monster boss11[2] = {{"hades(calm)", 4476, 1}, {"hades(angry)", 11190, 1}};
+const Monster boss1 = {"Grief", 525, 1};
+const Monster boss2 = {"Anxiety", 795, 1};
+const Monster boss3 = {"Diseases", 1065, 1};
+const Monster boss4 = {"Old Age", 1369, 1};
+const Monster boss5 = {"Fear", 1695, 1};
+const Monster boss6 = {"Hunger", 2097, 1};
+const Monster boss7 = {"Need", 2472, 1};
+const Monster boss8 = {"Death", 2925, 1};
+const Monster boss9 = {"Agony", 3417, 1};
+const Monster boss10 = {"Nightmare", 3954, 1};
+const Monster boss11[2] = {{"Hades(calm)", 4476, 1}, {"Hades(angry)", 11190, 1}};
 
-const Monster monsters[monsterSize] = {{"a", 10, 2, 80, 5}, {"b", 30, 3, 85, 5}};
+const Monster monsters[monsterSize] = {{"Monster", 10, 2, 80, 5}, {"Monster (enchanted)", 30, 3, 85, 5}};
 
 const string monster[npcSize] = {
     "                                                   ",    // length ~50

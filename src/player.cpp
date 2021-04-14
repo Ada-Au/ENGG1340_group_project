@@ -1,5 +1,5 @@
 #include "player.h"
-#include "things.h"
+// #include "things.h"
 #include <algorithm>
 #include <iostream>
 #include <math.h>
@@ -14,8 +14,9 @@ Player::Player() {
     maxMp = 100, maxHp = 100, exp = 0, maxExp = 10, damage = 2, defense = 0, weaponEnergy = 1, weaponMp = 0;
     level = 1, gameLevel = 4;
     race = "human";
-    weapon = "", armor = "";
-    debuffs.push_back(allDebuffs[0]);
+    weapon = {"", 2, 0, 1}, armor = "";
+    aDefense = 0;
+    // debuffs.push_back(allDebuffs[0]);
 }
 
 void addBuff(bool isAdd, int buff, Player &player) {
@@ -41,9 +42,11 @@ void addBuff(bool isAdd, int buff, Player &player) {
             player.debuffs.push_back(allDebuffs[buff]);
     }
 }
+
 void nextLevel(Player &player) {
     player.maxExp = (0.85 * pow(player.level, 3) + 0.04 * pow(player.level, 2) + 2 * player.level);
 }
+
 void upgradePlayer(Player &player) {
     if (player.exp >= player.maxExp && player.level <= 100) {
         player.level++;
@@ -71,7 +74,7 @@ void updateOnBuff(Player &player) {
         player.mp += player.debuffs[i].mp;
         player.debuffs[i].time--;
         if (player.debuffs[i].time <= 0) {
-            player.debuffs.erase(player.debuffs.begin() + i );
+            player.debuffs.erase(player.debuffs.begin() + i);
         }
     }
     for (int i = player.buffs.size() - 1; i >= 0; i--) {
@@ -79,7 +82,7 @@ void updateOnBuff(Player &player) {
         player.mp += player.buffs[i].mp;
         player.buffs[i].time--;
         if (player.buffs[i].time <= 0) {
-            player.buffs.erase(player.buffs.begin() + i );
+            player.buffs.erase(player.buffs.begin() + i);
         }
     }
 }

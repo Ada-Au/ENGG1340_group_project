@@ -27,29 +27,31 @@ void printNpc(string talk, const string npc[npcSize]) {
 }
 
 void renderNpc(string npc, string talk) {
-    if (npc == "monster")
+    if (npc == "Monster" || npc == "Monster (enchanted)")
         printNpc(talk, monster);
-    else if (npc == "charon")
+    else if (npc == "Charon")
         printNpc(talk, charon);
-    else if (npc == "grief") {
+    else if (npc == "Grief") {
         printNpc(talk, grief);
-    } else if (npc == "anxiety") {
+    } else if (npc == "Anxiety") {
         printNpc(talk, anxiety);
-    } else if (npc == "diseases") {
+    } else if (npc == "Diseases") {
         printNpc(talk, diseases);
-    } else if (npc == "oldAge") {
+    } else if (npc == "Old Age") {
         printNpc(talk, oldAge);
-    } else if (npc == "fear") {
+    } else if (npc == "Fear") {
         printNpc(talk, fear);
-    } else if (npc == "hunger") {
+    } else if (npc == "Hunger") {
         printNpc(talk, hunger);
-    } else if (npc == "need") {
+    } else if (npc == "Need") {
         printNpc(talk, need);
-    } else if (npc == "death") {
+    } else if (npc == "Death") {
         printNpc(talk, death);
-    } else if (npc == "agony") {
+    } else if (npc == "Agony") {
         printNpc(talk, agony);
-    } else if (npc == "nightmare") {
+    } else if (npc == "Nightmare") {
         printNpc(talk, nightmare);
+    } else if (npc == "Hades(calm)" || npc == "Hades(angry)") {
+        cout << "yup, i've got no face:D" << endl;
     }
 }
