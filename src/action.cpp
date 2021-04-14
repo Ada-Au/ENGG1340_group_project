@@ -85,14 +85,16 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 player.y = 1;
             } else if (map.layout[player.y][player.x] == 'M') {
                 scr.log = "Monster!";
+                clearScreen();
                 scr.renderScreen(map, player);
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                clearScreen();
                 bool isEscape = false;
                 fightScreen(player, item, isEscape);
                 if (!isEscape) {
                     map.removeMonster(player.x, player.y);
                 }
-                key = getch();
+                scr.renderScreen(map, player);
                 cin.ignore();
             } else {
                 map.update();
@@ -159,52 +161,52 @@ void tryAgainInEnding(string &choice, bool &choosing) {    //To-do: adding condi
     getline(cin, choice);
     while (choosing) {
         if (choice[1] == '\0' && choice[0] == '1') {
-            renderNpc("charon", "You're broke before you came?");
+            renderNpc("Charon", "You're broke before you came?");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            renderNpc("charon", "What did you do in hell???");
+            renderNpc("Charon", "What did you do in hell???");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            renderNpc("charon", "Are you a brainless slime,");
+            renderNpc("Charon", "Are you a brainless slime,");
             std::this_thread::sleep_for(std::chrono::milliseconds(250));
-            renderNpc("charon", "that can only jump around??");
+            renderNpc("Charon", "that can only jump around??");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            renderNpc("charon", "Go get a job and make money!!");
+            renderNpc("Charon", "Go get a job and make money!!");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             cout << "Bad Ending: Working in Hell.\n";
             choosing = false;
             break;
         } else if (choice[1] == '\0' && (choice[0] == '2' || choice[0] == '3')) {
-            renderNpc("charon", "Can't you see it is SOLD OUT??");
+            renderNpc("Charon", "Can't you see it is SOLD OUT??");
             cout << "Enter again: ";
             tryAgainInEnding(choice, choosing);
             break;
         } else if (choice[1] == '\0' && choice[0] == '4') {
-            renderNpc("charon", "Nice, you got enough money this time.");
+            renderNpc("Charon", "Nice, you got enough money this time.");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             cout << "golden boat x 1 GET!\n";
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            renderNpc("charon", "Here is your boat.");
+            renderNpc("Charon", "Here is your boat.");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            renderNpc("charon", "Sail it to the end of the river.");
+            renderNpc("Charon", "Sail it to the end of the river.");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            renderNpc("charon", "Enjoy your afterlife :)");
+            renderNpc("Charon", "Enjoy your afterlife :)");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             cout << "Normal Ending: Having an Afterlife.\n";
             choosing = false;
             break;
         } else if (choice[1] == '\0' && choice[0] == '5') {
-            renderNpc("charon", "You work real hard.");
+            renderNpc("Charon", "You work real hard.");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            renderNpc("charon", "Proud of you for buying it. :D");
+            renderNpc("Charon", "Proud of you for buying it. :D");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            renderNpc("charon", "Here is your boat.");
+            renderNpc("Charon", "Here is your boat.");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            renderNpc("charon", "Sail it to the Heaven, boy.");
+            renderNpc("Charon", "Sail it to the Heaven, boy.");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             cout << "Good Ending: Going to the Heaven.\n";
             choosing = false;
             break;
         } else {
-            renderNpc("charon", "No such choice.");
+            renderNpc("Charon", "No such choice.");
             tryAgainInEnding(choice, choosing);
             break;
         }
@@ -221,10 +223,17 @@ void ending() {
     cin.get();
     cout << "\n\"Oh, you come back to buy boats?\"\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
-    renderNpc("charon", "Many people came and buy boats.");
+    renderNpc("Charon", "Many people came and buy boats.");
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
-    renderNpc("charon", "Not many was left.");
+    renderNpc("Charon", "Not many was left.");
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
-    renderNpc("charon", "Which one do you want?");
+    renderNpc("Charon", "Which one do you want?");
     tryAgainInEnding(choice, choosing);
+}
+
+void clearScreen() {
+    if (ISWINDOW)
+        std::system("cls");
+    else
+        std::system("clear");
 }
