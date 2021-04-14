@@ -1,5 +1,6 @@
 #include "action.h"
 #include "backpack.h"
+#include "npc.h"
 #include <iomanip>
 #include <iostream>
 #include <stdlib.h>
