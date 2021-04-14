@@ -46,7 +46,7 @@ void setUpMonster(Player player, int &monsterN, float &mHp, float &mMaxHp, float
     }
 }
 
-bool fight(Player &player, Item items[], Monster monster, float &mHp, bool escape = false) {
+bool fight(Player &player, Item items[], Monster monster, float &mHp, bool &escape) {
     char key;
     while (mHp > 0 && player.hp > 0) {
         float mDamage = monster.damage;    // TODO add fluctuation
@@ -167,7 +167,8 @@ void bossScreen(Player &player, Item items[], int bossIndex, bool &isEnd) {
         break;
     }
     float mHp = boss.hp;
-    fight(player, items, boss, mHp);
+    bool isEscape = false;
+    fight(player, items, boss, mHp, isEscape);
     if (player.hp <= 0) {
         cout << endl;
     } else if (mHp <= 0 && bossIndex == 12) {
@@ -190,7 +191,8 @@ void fightScreen(Player &player, Item items[], bool &isEscape) {
     int monsterN = rand() % 2;
     float mHp = monsters[monsterN].hp;
     // setUpMonster(player, monsterN, mHp, mMaxHp, mRate, mExp);
-    fight(player, items, monsters[monsterN], mHp, true);
+    isEscape = true;
+    fight(player, items, monsters[monsterN], mHp, isEscape);
     if (player.hp > 0 && !isEscape) {
         cout << "You kill a monster!" << endl;
         cout << fixed << setprecision(2) << "You gain " << monsters[monsterN].exp << " XP!" << endl;

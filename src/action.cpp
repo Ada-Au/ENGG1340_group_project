@@ -86,10 +86,12 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
             scr.renderScreen(map, player);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             bool isEscape = false;
+            clearScreen();
             fightScreen(player, item, isEscape);
             if (!isEscape) {
                 map.removeMonster(player.x, player.y);
             }
+            scr.renderScreen(map, player);
             cin.ignore();
         } else {
             map.update();

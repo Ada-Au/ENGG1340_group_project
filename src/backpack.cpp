@@ -50,7 +50,7 @@ void generateThings(Item items[]) {
         cout << weapon << " x " << weaponsNum << " GET!\n";
 }
 
-void sortItems(Item items[]) {    
+void sortItems(Item items[]) {
     string tempName;
     int tempNum;
     for (int i = 0; i < maxSpace - 1; i++) {
@@ -69,7 +69,7 @@ void sortItems(Item items[]) {
 }
 
 void displayBackpack(Item items[]) {    // Also display player's state if possible
-    sortItems(items);                   
+    sortItems(items);
     for (int i = 0; i < maxSpace; i++) {
         if (i == 0)
             cout << "Items\t\t\t\t\t\tNumber\n";
