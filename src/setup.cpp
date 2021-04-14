@@ -227,7 +227,7 @@ void printBoats() {
     string boats[11] = {"1 - trash", "0 G",
                         "2 - wooden boat", "2 G",
                         "3 - iron boat", "3 G",
-                        "4 - gold boat", "5 G",
+                        "4 - golden boat", "5 G",
                         "5 - EPIC DIAMOND BOAT", "999,999,999 G",
                         ""};
     for (int i = 0; i < 10; i++) {

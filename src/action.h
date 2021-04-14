@@ -7,6 +7,6 @@
 
 void action(Screen, Map, Player, Item[maxSpace], bool &);
 void tryAgain(string, bool &);
-void clearScreen();
+void ending();
 
 #endif
