@@ -18,9 +18,10 @@ setup.o:src/setup.cpp src/setup.h
 	g++ -c -pedantic-errors -std=c++11  src/setup.cpp -o setup.o
 npc.o:src/npc.cpp src/npc.h 
 	g++ -c -pedantic-errors -std=c++11  src/npc.cpp -o npc.o 
-
-main:main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 
-	g++ -o main main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 
+shop.o:src/shop.cpp src/shop.h
+	g++ -c -pedantic-errors -std=c++11  src/shop.cpp -o shop.o
+main:main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o shop.o
+	g++ -o main main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o shop.o
 	
 clean:
 	rm -f  main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 

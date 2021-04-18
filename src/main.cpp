@@ -5,6 +5,7 @@
 #include "player.h"
 #include "screen.h"
 #include "setup.h"
+#include "shop.h"
 #include <iostream>
 
 using namespace std;
@@ -19,7 +20,8 @@ int main() {
         int isPlay = 1;    // determine close game or not
         isReplay = false;
         player = Player();
-        Item item[maxSpace] = {"", 0};
+        Item item[maxSpace] = {};
+        // shopScreen(item);
         menu(isPlay);
         // if (isPlay == 0)
         //     return 0;
