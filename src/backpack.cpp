@@ -103,8 +103,6 @@ void displayBackpack(Item items[], bool isShop) {    // Also display player's st
                 cout << endl;
             }            
         }
-        else
-            break;
     }
     if (!isShop) {
         cout << "Press [number] to select items or [Q] to exit.\n"
