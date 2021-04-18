@@ -10,7 +10,7 @@ using namespace std;
 
 const int maxHealNum = 7;
 const int maxArmorNum = 6;
-const int maxWeaponNum = 12;
+const int maxWeaponNum = 13;
 const int maxSpace = 50;
 const int maxStack = 99;
 
@@ -61,13 +61,14 @@ const Weapon weapons[maxWeaponNum] = {{"hammer", "(+10 ATK, -30 Energy/atk)", 10
                                       {"long sword", "(+4.5 ATK, -5 Energy/atk)", 4.5, 5, 0, 15, 204},
                                       {"spear", "(+6 ATK, -10 Energy/atk)", 6, 10, 0, 12, 200},
                                       {"sword", "(+2 ATK, -0.5 Energy/atk)", 2, 0.5, 0, 5, 169},
-                                      {"wand", "(+4 ATK, -15 MP/atk)", 4, 0, 15, 30, 474},
+                                      {"wand", "(+8 ATK, -15 MP/atk)", 8, 0, 15, 30, 474},
                                       {"vorpan", "(+10 ATK, -10 Energy/atk)",10, 10, 0, 45, 3819},
                                       {"soul sword", "(+20 ATK, -8 Energy/atk, -8 MP/atk)", 20, 8, 8, 66, 6666},
                                       {"twin daggers", "(+14 Atk, -12 Energy/atk)", 14, 12, 0, 44, 4242},
                                       {"war spear", "(+12 Atk, -7 Energy/atk)", 12, 7, 0, 39, 3647},
                                       {"blood katana", "(+18 Atk, -20 Energy/atk)", 18, 20, 0, 42, 4536},
-                                      {"toothpick", "(+15 Atk, -25 Energy/atk)", 15, 25, 0, 40, 3840}};
+                                      {"toothpick", "(+15 Atk, -25 Energy/atk)", 15, 25, 0, 40, 3840},
+                                      {"diamond sword", "(+30 ATK, -5 Energy/atk)", 30, 5, 0, 1999, 9999999}};
 
 struct Item {
     string name;

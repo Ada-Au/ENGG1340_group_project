@@ -179,7 +179,7 @@ void openBackpack(Item items[], Player &player) {
                     cout << "Amount to use: ";
                     int amount;
                     cin >> amount;
-                    while (amount > items[pos].num || amount < 0 || !isdigit(char(amount))) {
+                    while (amount > items[pos].num || amount < 0) {
                         cout << "Exceeds amount, please enter a valid number: ";
                         cin >> amount ;
                     }

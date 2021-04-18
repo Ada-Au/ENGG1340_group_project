@@ -20,8 +20,9 @@ int main() {
         int isPlay = 1;    // determine close game or not
         isReplay = false;
         player = Player();
-        Item item[maxSpace] = {};
-        // shopScreen(item);
+        player.coin = 0;
+        Item item[maxSpace] = {{"boat remains", 20, 1}, {"bread", 3, 5}, {"sword", 1, 2}};
+        shopScreen(player, item);
         menu(isPlay);
         // if (isPlay == 0)
         //     return 0;
