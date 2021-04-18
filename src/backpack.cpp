@@ -146,9 +146,9 @@ void openBackpack(Item items[], Player &player) {
                     cout << "Amount to use: ";
                     int amount;
                     cin >> amount;
-                    while (amount > items[pos].num || amount < 0) {
+                    while (amount > items[pos].num || amount < 0 || !isdigit(char(amount))) {
                         cout << "Exceeds amount, please enter a valid number: ";
-                        cin >> amount;
+                        cin >> amount ;
                     }
                     cout << "\n\n";
                     updateItems(items[pos].name, amount, 'D', items);
@@ -176,7 +176,6 @@ void openBackpack(Item items[], Player &player) {
             }
             for (int i = 0; i < maxWeaponNum; i++) {
                 if (items[pos].name == weapons[i].name) {
-                    cout << "Description: " + weapons[i].desc << endl;
                     cout << items[pos].name + " is equipped.\t" + weapons[i].desc + "\n\n";
                     if (player.weapon.name != "") {
                         updateItems(player.weapon.name, 1, 'A', items);
