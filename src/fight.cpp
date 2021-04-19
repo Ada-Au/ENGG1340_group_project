@@ -30,22 +30,6 @@ void displayStats(float mHp, float mMaxHp, Player player, string mName, bool esc
     cout << endl;
 }
 
-void setUpMonster(Player player, int &monsterN, float &mHp, float &mMaxHp, float &mRate, float &mExp) {
-    monsterN = rand() % monsterSize;
-    mHp = rand() % player.gameLevel + (pow(0.4 * player.gameLevel, 2) / 2) + (monsters[monsterN].hp * pow(player.gameLevel, 0.5));    //monster's Hp range ~ gameLevel
-    mMaxHp = mHp;
-    mRate = monsters[monsterN].rate - (player.gameLevel / 2);
-    mExp = ((log(player.gameLevel) / log(2)) * (0.4 * player.gameLevel) + 5);
-    // mExp reward and penalty based on the difference of level between player and game
-    if (monsterN == 1)
-        mExp *= 1.5;
-    if (player.gameLevel > (player.level + 3)) {
-        mExp *= 1.5;
-    } else if (player.gameLevel < (player.level - 3)) {
-        mExp *= 0.2;
-    }
-}
-
 bool fight(Player &player, Item items[], Monster monster, float &mHp, bool escape = false) {
     char key;
     while (mHp > 0 && player.hp > 0) {
@@ -54,14 +38,14 @@ bool fight(Player &player, Item items[], Monster monster, float &mHp, bool escap
         cin >> key;
         switch (key) {
         case '1':
-            if (rand() % 10 >= 1) {    // rate of player's hitting >= 90%
-                float criticalHit = 1;
-                bool critical = false;
-                if (rand() % 100 <= 6) {    // rate of critical hit = 6%
-                    criticalHit = 1.5;
-                    critical = true;
-                }
-                if (player.energy - player.weapon.energy > 0 && player.mp - player.weapon.mp > 0) {
+            if (player.energy - player.weapon.energy > 0 && player.mp - player.weapon.mp > 0) {
+                if (rand() % 10 >= 1) {    // rate of player's hitting >= 90%
+                    float criticalHit = 1;
+                    bool critical = false;
+                    if (rand() % 100 <= 6) {    // rate of critical hit = 6%
+                        criticalHit = 1.5;
+                        critical = true;
+                    }
                     player.energy -= player.weapon.energy;
                     player.mp -= player.weapon.mp;
                     cout << "Player: Successfully make " << (player.weapon.damage * criticalHit * (1 + player.damage / 50));
@@ -69,26 +53,28 @@ bool fight(Player &player, Item items[], Monster monster, float &mHp, bool escap
                         cout << " critical";
                     cout << " damage." << endl;
                     mHp -= player.weapon.damage * criticalHit * (1 + player.damage / 50);
+
                 } else {
-                    cout << "You have no energy to attack now." << endl;
+                    cout << "Player: Miss!" << endl;
+                }
+
+                if ((!escape && rand() % 10 >= 1) || rand() % 10 >= 3) {
+                    float criticalHit = 1;
+                    bool critical = false;
+                    if (rand() % 100 <= 6) {    // rate of critical hit = 6%
+                        criticalHit = 1.2;
+                        critical = true;
+                    }
+                    cout << monster.name << ": Successfully make " << monster.damage * criticalHit;
+                    if (critical)
+                        cout << " critical";
+                    cout << " damage." << endl;
+                    player.hp -= monster.damage * criticalHit;
+                } else {
+                    cout << monster.name << ": Miss!" << endl;
                 }
             } else {
-                cout << "Player: Miss!" << endl;
-            }
-            if ((!escape && rand() % 10 >= 1) || rand() % 10 >= 3) {    // rate of player's hitting = 90%
-                float criticalHit = 1;
-                bool critical = false;
-                if (rand() % 100 <= 6) {    // rate of critical hit = 6%
-                    criticalHit = 1.2;
-                    critical = true;
-                }
-                cout << monster.name << ": Successfully make " << monster.damage * criticalHit;
-                if (critical)
-                    cout << " critical";
-                cout << " damage." << endl;
-                player.hp -= monster.damage * criticalHit;
-            } else {
-                cout << monster.name << ": Miss!" << endl;
+                cout << "You have no energy to attack now." << endl;
             }
             break;
 
@@ -118,7 +104,10 @@ bool fight(Player &player, Item items[], Monster monster, float &mHp, bool escap
                 }
                 break;
             }
+        default:
+            cout << "Please input a valid number" << endl;
         }
+        cout << endl;
     }
     return false;
 }
@@ -176,8 +165,8 @@ void bossScreen(Player &player, Item items[], int bossIndex, bool &isEnd) {
         cout << "You kill " << boss.name << '!' << endl;
         cout << fixed << setprecision(2) << "You gain " << boss.exp << " XP!" << endl;
         player.exp += boss.exp;
-        upgradePlayer(player);
         generateThings(items);    //annouce what player got after battle save in generateThings(item)
+        upgradePlayer(player);
         if (bossIndex == 11)
             bossScreen(player, items, 12, isEnd);
         else
@@ -185,18 +174,38 @@ void bossScreen(Player &player, Item items[], int bossIndex, bool &isEnd) {
     }
 }
 
+Monster setUpMonster(Player player) {
+    int monsterN = rand() % monsterSize;
+    float hp = rand() % player.gameLevel + (rand() % 100) / 100.0 + (pow(0.4 * player.gameLevel, 2) / 2) + (monsters[monsterN].hp * pow(player.gameLevel, 0.5));    //monster's Hp range ~ gameLevel
+    float damage = rand() % player.gameLevel + (pow(0.4 * player.gameLevel, 2) / 2) + (monsters[monsterN].damage * pow(player.gameLevel, 0.5));
+    float rate = monsters[monsterN].rate - (player.gameLevel / 2);
+    float exp = ((log(player.gameLevel) / log(2)) * (0.4 * player.gameLevel) + 5);
+    // mExp reward and penalty based on the difference of level between player and game
+    if (monsterN == 1)
+        exp *= 1.5;
+    if (player.gameLevel > (player.level + 3)) {
+        exp *= 1.5;
+    } else if (player.gameLevel < (player.level - 3)) {
+        exp *= 0.2;
+    }
+    return {monsters[monsterN].name, hp, damage, rate, exp};
+}
+
 void fightScreen(Player &player, Item items[], bool &isEscape) {
     srand(time(NULL));
-    int monsterN = rand() % 2;
-    float mHp = monsters[monsterN].hp;
-    // setUpMonster(player, monsterN, mHp, mMaxHp, mRate, mExp);
-    isEscape = fight(player, items, monsters[monsterN], mHp, true);
+    int monsterN;
+    if (rand() % 10 < 8)
+        monsterN = 0;
+    else
+        monsterN = 1;
+    Monster monster = setUpMonster(player);
+    isEscape = fight(player, items, monster, monster.hp, true);
     if (player.hp > 0 && !isEscape) {
         cout << "You kill a monster!" << endl;
-        cout << fixed << setprecision(2) << "You gain " << monsters[monsterN].exp << " XP!" << endl;
-        player.exp += monsters[monsterN].exp;
-        upgradePlayer(player);
+        cout << fixed << setprecision(2) << "You gain " << monster.exp << " XP!" << endl;
+        player.exp += monster.exp;
         generateThings(items);    //annouce what player got after battle save in generateThings(item)
+        upgradePlayer(player);
     }
     cout << endl;
 }

@@ -17,7 +17,6 @@ const std::string roleList[max_role] = {"Archeologist", "Barbarian",
 const std::string raceList[max_race] = {"human", "drawf", "elf", "orc"};
 const std::string genderList[max_gender] = {"male", "female"};
 
-
 #define RESET "\033[0m"
 #define BLACK "\033[30m"              /* Black */
 #define RED "\033[31m"                /* Red (Monster) */
@@ -35,5 +34,11 @@ const std::string genderList[max_gender] = {"male", "female"};
 #define BOLDMAGENTA "\033[1m\033[35m" /* Bold Magenta */
 #define BOLDCYAN "\033[1m\033[36m"    /* Bold Cyan */
 #define BOLDWHITE "\033[1m\033[37m"   /* Bold White */
+
+#if defined _WIN32 || defined _WIN64
+#define ISWINDOW true
+#else
+#define ISWINDOW false
+#endif
 
 #endif

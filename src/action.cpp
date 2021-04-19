@@ -1,5 +1,6 @@
 #include "action.h"
 #include "backpack.h"
+#include "fight.h"
 #include "npc.h"
 #include <iomanip>
 #include <iostream>
@@ -7,20 +8,21 @@
 #include <thread>
 #if defined _WIN32 || defined _WIN64
 #include <conio.h>
-#define ISWINDOW true
 #else
 #include "../lib/conio/conio.h"
-#define ISWINDOW false
 #endif
 
 using namespace std;
 
 void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
     char key = ' ';
+    cin.ignore();
+    clearScreen();
+    scr.renderScreen(map, player);
     while (key != 'q') {
-        scr.renderScreen(map, player);
         bool wall = false, isValid = true;
         key = getch();
+        clearScreen();
         switch (key) {
         case 'w':
         case 'W':
@@ -64,6 +66,7 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 scr.log = "Please input again or press [H] for help";
             isValid = false;
         }
+        scr.renderScreen(map, player);
 
         if (isValid) {
             if (map.layout[player.y][player.x] == 'S') {
@@ -97,7 +100,7 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 scr.renderScreen(map, player);
                 cin.ignore();
             } else {
-                map.update();
+                map.update(player.x, player.y);
             }
 
             if (player.hp <= 0) {
@@ -115,15 +118,12 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                     player.energy = 0;
                 updateOnBuff(player);
             }
-            clearScreen();
         }
     }
 }
 
 void tryAgain(string str, bool &isReplay) {
     string choice;
-    // if (ISWINDOW)                    //fix after adding ending() :D
-    //     cin.ignore();
     do {
         getline(cin, choice);
         if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {

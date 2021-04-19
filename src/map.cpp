@@ -59,10 +59,10 @@ void Map::fill() {
         layout[currentRow][currentCol] = 'S';
     }
 
-    cout << "\ndone:D\tpress enter to continue\n\n\n";
+    cout << "\ndone:D\n\n\n";
 }
 
-void Map::update() {
+void Map::update(int x, int y) {
     srand(time(NULL));
     char newMap[map_height][map_width];
     for (int h = 0; h < map_height; h++) {
@@ -74,14 +74,15 @@ void Map::update() {
         for (int w = 0; w < map_width; w++) {
             if (newMap[h][w] != 'M') {
                 newMap[h][w] = layout[h][w];
-                if (layout[h][w] == 'M' && rand() % 100 < 70) {
+                if (layout[h][w] == 'M' && rand() % 10 < 6) {
                     int randomN = rand() % 4;
                     int randomDirection[2] = {directions[randomN][0],
                                               directions[randomN][1]};
                     if (layout[h + randomDirection[0]]
                               [w + randomDirection[1]] == ' ' &&
                         newMap[h + randomDirection[0]]
-                              [w + randomDirection[1]] != 'M') {
+                              [w + randomDirection[1]] != 'M' &&
+                        (h + randomDirection[0]) != y && (w + randomDirection[1]) != x) {
                         newMap[h][w] = ' ';
                         newMap[h + randomDirection[0]][w + randomDirection[1]] = 'M';
                     }

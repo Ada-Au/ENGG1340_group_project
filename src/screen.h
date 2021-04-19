@@ -16,18 +16,17 @@ class Screen {
 };
 
 const char helpScreen[helpSize][map_width] = {
-  "Keyboard shortcuts",
-  "- [W]\t move Up",
-  "- [A]\t move Left",
-  "- [S]\t move Down",
-  "- [D]\t move Right",
-  "- [B]\t open backpack",
-  "- [Q]\t quit game",
-  "- [H]\t open Help",
-  "",
+    "Keyboard shortcuts",
+    "- [W]\t move Up",
+    "- [A]\t move Left",
+    "- [S]\t move Down",
+    "- [D]\t move Right",
+    "- [B]\t open backpack",
+    "- [Q]\t quit game",
+    "- [H]\t open Help",
+    "",
 };
 
 void printHelp();
-void clearScreen();
 
 #endif
