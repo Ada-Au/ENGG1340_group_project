@@ -30,7 +30,7 @@ void renderNpc(string npc, string talk) {
     if (npc == "Monster" || npc == "Monster (enchanted)")
         printNpc(talk, monster);
     else if (npc == "Charon")
-        printNpc(talk, charon);
+        printNpc(talk, Charon);
     else if (npc == "Grief") {
         printNpc(talk, grief);
     } else if (npc == "Anxiety") {
