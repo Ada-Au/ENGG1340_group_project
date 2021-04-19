@@ -43,7 +43,7 @@ void addBuff(bool isAdd, int buff, Player &player) {
 }
 
 void nextLevel(Player &player) {
-    player.maxExp += 10;
+    player.maxExp = (0.85 * pow(player.level, 3) + 0.04 * pow(player.level, 2) + 2 * player.level);
     int point = (player.level / 20) + 2;    // every 20 level add one more skill point for each upgrade
     while (point != 0) {
         char key;
@@ -87,7 +87,6 @@ void upgradePlayer(Player &player) {
         player.energy = player.maxEnergy;
         player.hp = player.maxHp;
         player.mp = player.maxMp;
-        player.exp = player.exp - player.maxExp;
     }
 }
 
