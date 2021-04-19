@@ -139,7 +139,7 @@ void talkAgain(string str, bool &isTalking, int &c, bool isFirst) {
         std::cout << "1 - Say Hello";
         if (!isFirst) {cout << " (again)";}
         std::cout << "\n" << "2 - What to do here?\n" << "3 - Why are you here?\n" 
-                << "4 - Life advice(?)\n" << "5 - (Nothing wanna ask)\n";
+                << "4 - Life advice(?)\n" << "5 - (Nothing to ask)\n";
         std::cout << "Enter choice: "; 
         std::cin >> choice;
     }
@@ -190,12 +190,13 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
             std::cout << "You have " << player.coin << " G." << endl;
             std::cout << "Press [number] to sell or [Q] to quit.\n"  << "Enter your choice: ";
             std::cin >> choice;
-            while (!isNumber(choice) || !isWithinBackpack(items, choice) && (choice != "q" || choice != "Q") ) {    
+            if (choice == "q" || choice == "Q")
+                break;
+            while (!isNumber(choice) || !isWithinBackpack(items, choice)) {    
                 std::cout << "No such item, please select again: ";
                 std::cin >> choice;
+                if (choice == "q" || choice == "Q") {break;}
             }
-            if (choice == "q" || choice == "Q") 
-                break;
             for (pos = 0; pos < maxSpace; pos++) {
                 if (choice == to_string(pos + 1)) {
                     std::cout << "Amount to sell: ";
@@ -216,13 +217,14 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
                 generateShopItems(player, shopItems);
             displayShopItems(shopItems);
             std::cout << "You have " << player.coin << " G." << endl;
-            std::cout << "Press [number] to sell or [Q] to quit.\n"  << "Enter your choice: ";
             renderNpc("Charon", "What do you wanna buy?");
-            std::cout << "Enter your choice: ";
+            std::cout << "Press [number] to buy or [Q] to quit.\n"  << "Enter your choice: ";
             std::cin >> choice;
+            if (choice == "q" || choice == "Q") {break;}
             while (!isNumber(choice) || !isWithinShop(shopItems, choice)) {    
                 std::cout << "No such item, please select again: ";
                 std::cin >> choice;
+                if (choice == "q" || choice == "Q") {break;}
             }
             for (pos = 0; pos < shopItems.size(); pos++) {
                 if (choice == to_string(pos + 1)) {
