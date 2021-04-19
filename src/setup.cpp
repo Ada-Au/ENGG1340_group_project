@@ -15,7 +15,7 @@ void PrintInform(Player player) {
                     "> Race: " + player.race,
                     "> Gender: " + player.gender,
                     "------------------------------------------"};
-    renderNpc("charon", "Here is your indentity information");
+    renderNpc("Charon", "Here is your indentity information");
     for (int i = 0; i < 6; i++)
         cout << ID[i] << endl;
 }
@@ -70,7 +70,7 @@ void DealQuestion(int repeat, char key[]) {
              << "3 - (Nothing want to ask)\n"
              << "Enter your choice: ";
     } else {
-        renderNpc("charon", " What do you say?");
+        renderNpc("Charon", " What do you say?");
         cout << "1 - Who are you?\n"
              << "2 - Where am I?\n"
              << "3 - (Nothing want to ask)\n"
@@ -88,10 +88,10 @@ void introduction(char key[]) {
     while (key[0] != '3') {
         switch (key[0]) {
         case '1':
-            renderNpc("charon", "I am Charon, a ferryman in hell.");
+            renderNpc("Charon", "I am Charon, a ferryman in hell.");
             break;
         case '2':
-            renderNpc("charon", "I've just said-- Welcome to HELL.");
+            renderNpc("Charon", "I've just said-- Welcome to HELL.");
             break;
         }
         DealQuestion(0, key);
@@ -144,7 +144,7 @@ void setData(char key[], int choice, Player &player) {
         } else if (player.race == "orc") {
             log = "So you are a brute in human face. Got it.";
         }
-        renderNpc("charon", log);
+        renderNpc("Charon", log);
         break;
     case 3:    // gender
         if ((key[0] >= 'a' && key[0] <= 'a' + max_gender) || (key[0] >= 'A' && key[0] <= 'A' + max_gender))
@@ -165,14 +165,14 @@ void setupScreen(Player &player, int &isPlay) {
     srand(time(NULL));
     player.role = roleList[rand() % max_role];
     player.gender = genderList[rand() % max_gender];
-    renderNpc("charon", "YOU DIED, Welcome to the Hell!");
+    renderNpc("Charon", "YOU DIED, Welcome to the Hell!");
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    renderNpc("charon", "What's your name?");
+    renderNpc("Charon", "What's your name?");
     cout << "My name is: ";
     cin.ignore();
     getline(cin, player.name);
     cout << endl;
-    renderNpc("charon", "Welcome " + player.name + ".");
+    renderNpc("Charon", "Welcome " + player.name + ".");
     introduction(key);
     PrintInform(player);
     PrintChoice();
@@ -241,7 +241,7 @@ void printBoats() {
 }
 
 void boatScreen() {
-    renderNpc("charon", "Before you go on, you have to buy a boat.");
+    renderNpc("Charon", "Before you go on, you have to buy a boat.");
     printBoats();
     cout << "\nYou search through your pocket...\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
@@ -259,26 +259,26 @@ void boatScreen() {
     }
     while (c[0] != '1') {
         while ((c[0] != '1' && c[0] != '2' && c[0] != '3' && c[0] != '4' && c[0] != '5') || c[1] != '\0') {
-            renderNpc("charon", "No such choice.");
+            renderNpc("Charon", "No such choice.");
             printBoats();
             cout << "Enter your choice: ";
             cin >> c;
         }
         if (c[0] == '5') {
-            renderNpc("charon", "Look at how much money you have!");
+            renderNpc("Charon", "Look at how much money you have!");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            renderNpc("charon", "Why do you think you can afford that!?");
+            renderNpc("Charon", "Why do you think you can afford that!?");
         } else
-            renderNpc("charon", "You got no money to buy that.");
+            renderNpc("Charon", "You got no money to buy that.");
         printBoats();
         cout << "Enter your choice: ";
         cin >> c;
     }
-    renderNpc("charon", "To my surprise, you buy a trash.");
+    renderNpc("Charon", "To my surprise, you buy a trash.");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    renderNpc("charon", "What a poor boy.");
+    renderNpc("Charon", "What a poor boy.");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    renderNpc("charon", "Hope you enjoy your trip to hell :)");
+    renderNpc("Charon", "Hope you enjoy your trip to hell :)");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     cout << "You ride on the trash, start rolling hard.\n"
          << "After a few minutes, you found there is water leaking...\n"
