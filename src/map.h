@@ -7,7 +7,7 @@ class Map {
   public:
     void fill();
     char layout[map_height][map_width];
-    void update();
+    void update(int, int);
     void removeMonster(int, int);
 };
 

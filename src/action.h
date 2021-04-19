@@ -1,7 +1,7 @@
 #ifndef Action_h
 #define Action_h
 
-#include "fight.h"
+#include "backpack.h"
 #include "map.h"
 #include "screen.h"
 

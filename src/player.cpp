@@ -1,5 +1,4 @@
 #include "player.h"
-// #include "things.h"
 #include <algorithm>
 #include <iostream>
 #include <math.h>
@@ -11,8 +10,8 @@ Player::Player() {
     mark = '@';
     x = 1, y = 1;
     mp = 100, hp = 100, energy = 100, maxEnergy = 100;
-    maxMp = 100, maxHp = 100, exp = 0, maxExp = 10, damage = 2, defense = 0;
-    level = 1, gameLevel = 4;
+    maxMp = 100, maxHp = 100, exp = 19, maxExp = 20, damage = 0, defense = 0;
+    level = 1, gameLevel = 1;
     race = "human";
     weapon = {"", 2, 0, 1}, armor = "";
     aDefense = 0;
@@ -44,27 +43,51 @@ void addBuff(bool isAdd, int buff, Player &player) {
 }
 
 void nextLevel(Player &player) {
-    player.maxExp = (0.85 * pow(player.level, 3) + 0.04 * pow(player.level, 2) + 2 * player.level);
+    player.maxExp += 10;
+    int point = (player.level / 20) + 2;    // every 20 level add one more skill point for each upgrade
+    while (point != 0) {
+        char key;
+        cout << "\nYou have " << point << " points to upgrade!" << endl
+             << "1 - Maximum MP (+2): " << player.maxMp << endl
+             << "2 - Maximum energy (+2): " << player.maxEnergy << endl
+             << "3 - Damage level (+2% damage per level): " << player.damage << endl
+             << "4 - Defense level (+2% defense per level): " << player.defense << endl
+             << "Input number to upgrade: ";
+        cin >> key;
+        while (key != '1' && key != '2' && key != '3' && key != '4') {
+            cout << "Please input a valid number to upgrade: ";
+            cin >> key;
+        }
+        switch (key) {
+        case '1':
+            player.maxMp += 2;
+            break;
+        case '2':
+            player.maxEnergy += 2;
+            break;
+        case '3':
+            player.damage++;
+            break;
+        case '4':
+            player.defense++;
+            break;
+        }
+        point--;
+    }
+    cout << endl;
 }
 
 void upgradePlayer(Player &player) {
     if (player.exp >= player.maxExp && player.level <= 100) {
         player.level++;
         player.maxHp += 2;    // maxHp plus 2 for every level
-        player.damage++;      // damage plus level for every level-upgrade
-        // every 10 level, maxEnergy plus 5 until it becomes 150
-        if (player.level % 10 == 0 && player.maxEnergy < 150)
-            player.maxEnergy += 5;
-        // every 5 level, maxMp plus 5 until it becomes 250
-        if (player.level % 5 == 0 && player.maxMp < 250)
-            player.maxMp += 5;
-
+        cout << "\n\nYou are now level " << player.level << "!!\n";
+        nextLevel(player);    // upgrade of skills
         // restore of energy, hp and mp for every level upgrade (optional)
         player.energy = player.maxEnergy;
         player.hp = player.maxHp;
         player.mp = player.maxMp;
-        nextLevel(player);    // update of maxExp
-        std::cout << "You are now level " << player.level << "!!\n";
+        player.exp = player.exp - player.maxExp;
     }
 }
 

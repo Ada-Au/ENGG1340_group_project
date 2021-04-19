@@ -10,7 +10,7 @@
 using namespace std;
 
 void Screen::renderScreen(Map map, Player player) {
-    const int statSize = 13;
+    const int statSize = 15;
     string stat[statSize] = {"[ " + player.name + " ]",
                              "",
                              "Level: " + to_string(player.level),
@@ -18,8 +18,10 @@ void Screen::renderScreen(Map map, Player player) {
                              "HP: " + to_string(player.hp).substr(0, to_string(player.hp).find(".") + 3) + " / " + to_string(player.maxHp).substr(0, to_string(player.hp).find(".") + 3),
                              "MP: " + to_string(player.mp).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxMp).substr(0, to_string(player.hp).find(".") + 3),
                              "Energy: " + to_string(player.energy).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxEnergy).substr(0, to_string(player.hp).find(".") + 3),
-                             "ATK: " + to_string(player.damage),
-                             "DFS: " + to_string(player.defense),
+                             "ATK: " + to_string(player.weapon.damage * (1 + player.damage / 50)).substr(0, to_string(player.weapon.damage * (1 + player.damage / 50)).find(".") + 3),
+                             " - Damage level: " + to_string(player.damage),
+                             "DFS: " + to_string(player.aDefense * (1 + player.defense / 50)).substr(0, to_string(player.aDefense * (1 + player.defense / 50)).find(".") + 3),
+                             " - Defense level: " + to_string(player.defense),
                              "",
                              "Debuffs: ",
                              "",

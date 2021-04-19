@@ -18,10 +18,11 @@ void PrintInform(Player player) {
     renderNpc("Charon", "Here is your indentity information");
     for (int i = 0; i < 6; i++)
         cout << ID[i] << endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 void PrintChoice() {
-    cout << "Charon: Do you have anything to change for your ID?\n\n"
+    cout << "Do you have anything to change for your ID?\n"
          << "1 - Pick a ROLE\n"
          << "2 - Pick a RACE\n"
          << "3 - Pick a GENDER\n"
@@ -36,7 +37,7 @@ void PrintRole() {
 
     for (char i = 'a'; i < 'a' + max_role; i++) {
         int j = i - 'a';
-        cout << i << " -" << roleList[j] << "\n";
+        cout << i << " - " << roleList[j] << "\n";
     }
     cout << "* - Random\n";
 }
@@ -47,7 +48,7 @@ void PrintRace() {
 
     for (char i = 'a'; i < 'a' + max_race; i++) {
         int j = i - 'a';
-        cout << i << " -" << raceList[j] << "\n";
+        cout << i << " - " << raceList[j] << "\n";
     }
     cout << "* - Random\n";
 }
@@ -55,10 +56,9 @@ void PrintRace() {
 void PrintGender() {
     cout << setfill('-') << setw(50) << "\n";
     cout << "\nWhat's your gender?\n\n";
-
     for (char i = 'a'; i < 'a' + max_gender; i++) {
         int j = i - 'a';
-        cout << i << " -" << genderList[j] << "\n";
+        cout << i << " - " << genderList[j] << "\n";
     }
     cout << "* - Random\n";
 }
@@ -140,11 +140,14 @@ void setData(char key[], int choice, Player &player) {
         if (player.race == "elf") {
             log = "Hundred years of virginity make you an elf?";
         } else if (player.race == "drawf") {
-            log = "No wonder why you are such...short?";
+            log = "No wonder why you are so...short?";
         } else if (player.race == "orc") {
             log = "So you are a brute in human face. Got it.";
         }
-        renderNpc("Charon", log);
+        if (log != "") {
+            renderNpc("Charon", log);
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        }
         break;
     case 3:    // gender
         if ((key[0] >= 'a' && key[0] <= 'a' + max_gender) || (key[0] >= 'A' && key[0] <= 'A' + max_gender))
@@ -242,16 +245,18 @@ void printBoats() {
 
 void boatScreen() {
     renderNpc("Charon", "Before you go on, you have to buy a boat.");
-    printBoats();
     cout << "\nYou search through your pocket...\n";
-    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    cout << '.' << endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     cout << '.' << endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    cout << ".." << endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     cout << "...\n";
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     cout << "1 G GET.\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    renderNpc("Charon", "Choose one here.");
+    printBoats();
     char c[2] = {'6'};
     while ((c[0] != '1' && c[0] != '2' && c[0] != '3' && c[0] != '4' && c[0] != '5') || c[1] != '\0') {
         cout << "Enter your choice: ";
@@ -274,14 +279,16 @@ void boatScreen() {
         cout << "Enter your choice: ";
         cin >> c;
     }
-    renderNpc("Charon", "To my surprise, you buy a trash.");
+    renderNpc("Charon", "To my surprise, you bought trash.");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     renderNpc("Charon", "What a poor boy.");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    renderNpc("Charon", "Hope you enjoy your trip to hell :)");
+    renderNpc("Charon", "Enjoy your trip to hell:)");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    cout << "You ride on the trash, start rolling hard.\n"
+    cout << "You get on the trash, start rolling hard.\n"
          << "After a few minutes, you found there is water leaking...\n"
          << "The boat is sinking!!\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    cout << "You fell down for very long.long..long... time. Guess now you are in the bottom layer of hell.¯\\_(ツ)_/¯\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 }
