@@ -175,6 +175,7 @@ void tryAgainInShop (char key[]) {
 }
 
 void shopScreen(Player player, Item items[], bool &isFirst) {
+    shopItems.clear();
     char key[2];
     bool bought = false;
     tryAgainInShop(key);
