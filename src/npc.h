@@ -46,7 +46,7 @@ const string monster[npcSize] = {
     "                                                   ",
 };
 
-const string charon[npcSize] = {
+const string Charon[npcSize] = {
     "                      .---.                        ",    //length ~50
     "                     ,      `                      ",    //the boat guy & saleclerk
     "                    / _.-._  |                     ",

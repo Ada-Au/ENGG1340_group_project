@@ -6,7 +6,7 @@
 struct ShopItem {
     string name, desc;
     int amount;
-    int price;
+    int price, cost;
 };
 
 void shopScreen(Player player,Item[maxSpace]);
