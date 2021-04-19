@@ -14,29 +14,33 @@ void generateThings(Item items[]) {
         heal = "decent healing";
         armor = "silver shield";
         weapon = "hammer";
-    } else if (rand() % 100 >= 75) {
+        healsNum = rand() % 2;
+    } else if (rand() % 10 < 1) {
         heal = "average healing";
         armor = "leather shield";
-        if ((rand() % 100) % 2 == 0) {
+        if ((rand() % 1000) % 15 == 0) {
             weapon = "great sword";
         } else {
             weapon = "wand";
         }
+        healsNum = rand() % 3;
     } else if (rand() % 100 >= 50) {
         heal = "poor healing";
         armor = "wood shield";
         weapon = "long sword";
+        healsNum = rand() % 6;
     } else if (rand() % 100 >= 40) {
         heal = "bread";
         armor = "boat remains";
         weapon = "spear";
+        healsNum = rand() % 3;
     } else {
         heal = "monster meat";
         weapon = "sword";
+        healsNum = rand() % 7;
     }
     armorsNum = (rand() % 2);
     weaponsNum = (rand() % 2);
-    healsNum = (rand() % 6);
 
     updateItems(heal, healsNum, 'A', items);
     updateItems(armor, armorsNum, 'A', items);
