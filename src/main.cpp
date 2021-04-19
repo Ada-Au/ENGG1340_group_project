@@ -16,13 +16,14 @@ int main() {
     Player player;
     // Item item[maxSpace] = {"", 0};
     bool isReplay = true;
+    bool isFirst = true;
     while (isReplay) {
         int isPlay = 1;    // determine close game or not
         isReplay = false;
         player = Player();
         player.coin = 0;
         Item item[maxSpace] = {{"boat remains", 20, 1}, {"bread", 3, 5}, {"sword", 1, 2}};
-        shopScreen(player, item);
+        shopScreen(player, item, isFirst);
         menu(isPlay);
         // if (isPlay == 0)
         //     return 0;
