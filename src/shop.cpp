@@ -214,6 +214,8 @@ void shopScreen(Player &player, Item items[]) {
             }
             break;
         case '2':
+            if (shopItems.empty())
+                cout << "searching for shop items... " << endl;
             while (shopItems.size() < 12)
                 generateShopItems(player, shopItems);
             displayShopItems(shopItems);
