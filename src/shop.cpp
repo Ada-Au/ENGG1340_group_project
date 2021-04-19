@@ -170,11 +170,12 @@ void tryAgainInShop (char key[]) {
         std::cout << "ACTION (please input number 1-4)" << endl
                 << "1 - Sell                    2 - Buy " << endl
                 << "3 - Talk                    4 - Exit" << endl;
-        std::cin >> key;      
+        std::cin >> key; 
+        std::cout << endl;     
     }    
 }
 
-void shopScreen(Player player, Item items[], bool &isFirst) {
+void shopScreen(Player &player, Item items[]) {
     shopItems.clear();
     char key[2];
     bool bought = false;
@@ -230,7 +231,6 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
                 if (choice == to_string(pos + 1)) {
                     if (player.coin < shopItems[pos].price) {
                         renderNpc("Charon", "That's not enough money.");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
                         renderNpc("Charon", "YOU CAN'T EVEN BUY ONE!!");
                         break;
                     }                    
@@ -272,9 +272,8 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
             }
             break;
         case '3':
-            if (isFirst && !bought) {       //talk before buying
+            if (player.isFirst && !bought) {       //talk before buying
                 renderNpc("Charon", "Why do I need to talk to someone");
-                std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 renderNpc("Charon", "that even haven't bought anything.");
                 break;            
             } else {
@@ -282,52 +281,76 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
                 bool isTalking = true;
                 while (isTalking) {
                     srand(time(NULL));
-                    talkAgain("Don't waste much time.", isTalking, c, isFirst);
+                    talkAgain("Don't waste much time.", isTalking, c, player.isFirst);
                     switch (c) {
                     case 1:
-                        if (isFirst) {
+                        if (player.isFirst) {
                             string logs[3] = {"Hmmm", "What?", "..."};
                             renderNpc("Charon", logs[rand()%3]);
-                            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                            cin.ignore(1024, '\n');
+                            cout << endl;
                             break;
                         } else {
-                            string logs[3] = {"Hello :)", "Hi :D", "What's up? Brother."};
+                            string logs[3] = {"Hello", "Hi", "What's up? Bro."};
                             renderNpc("Charon",logs[rand()%3]);
-                            std::this_thread::sleep_for(std::chrono::milliseconds(500));
                             break;
                         }
                         break;
                     case 2:
                         renderNpc("Charon", "You want to know what to do here?");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "Normally, you should be suffering");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "from the afterlife torturement.");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "But seems like you are lucky enough");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "to stand here still.");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "Earn money and GIVE them to ME :D");
                         break;
                     case 3:
                         renderNpc("Charon", "Huh?");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "You are asking me?");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "Can't you see what am I doing??");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "EARN MONEY (from you)");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "Money is never enough.");
                         break;
                     case 4:
                         renderNpc("Charon", "Earn Money");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "Save as much as you can.");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "It might save your life as well.");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        cout << "<Press Enter to Continue>";
+                        cin.ignore(1024, '\n');
+                        cout << endl;
                         renderNpc("Charon", "although you had been dead ;)");
                         break;
                     case 5:
@@ -340,5 +363,5 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
         tryAgainInShop(key);
     }
     renderNpc("Charon", "Bye now, little buddy.");
-    isFirst = false;
+    player.isFirst = false;
 }

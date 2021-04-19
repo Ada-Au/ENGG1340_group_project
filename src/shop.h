@@ -9,6 +9,6 @@ struct ShopItem {
     int price, cost;
 };
 
-void shopScreen(Player player,Item[maxSpace], bool &);
+void shopScreen(Player &player,Item[maxSpace]);
 
 #endif

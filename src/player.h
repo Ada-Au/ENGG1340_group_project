@@ -36,6 +36,7 @@ class Player {
     vector<Buff> debuffs;
     vector<Buff> buffs;
     string name, role, gender, race;
+    bool isFirst;
 };
 
 void upgradePlayer(Player &);
