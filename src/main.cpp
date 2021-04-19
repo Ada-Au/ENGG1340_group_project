@@ -22,7 +22,7 @@ int main() {
         isReplay = false;
         player = Player();
         player.coin = 0;
-        Item item[maxSpace] = {{"boat remains", 20, 1}, {"bread", 3, 5}, {"sword", 1, 2}};
+        Item item[maxSpace] = {{"boat remains", 98, 1}, {"bread", 19, 5}, {"sword", 1, 2}};
         shopScreen(player, item, isFirst);
         menu(isPlay);
         // if (isPlay == 0)

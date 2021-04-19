@@ -132,7 +132,7 @@ void displayShopItems(vector<ShopItem> shopItems) {
     }
 }
 
-void tryAgainInShop(string str, bool &isTalking, int &c, bool isFirst) {
+void talkAgain(string str, bool &isTalking, int &c, bool isFirst) {
     string choice = " ";
     while ( (choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5') || choice[1]!='\0') {
         renderNpc("Charon", str);
@@ -141,7 +141,7 @@ void tryAgainInShop(string str, bool &isTalking, int &c, bool isFirst) {
         std::cout << "\n" << "2 - What to do here?\n" << "3 - Why are you here?\n" 
                 << "4 - Life advice(?)\n" << "5 - (Nothing wanna ask)\n";
         std::cout << "Enter choice: "; 
-        getline(cin, choice);
+        std::cin >> choice;
     }
     switch (choice[0]) {
     case '1':
@@ -163,19 +163,26 @@ void tryAgainInShop(string str, bool &isTalking, int &c, bool isFirst) {
     }
 }
 
+void tryAgainInShop (char key[]) {
+    key[0] = '6';
+    while (key[0] != '1' && key[0] != '2' && key[0] != '3' && key[0] != '4' || key[1] != '\0') {
+        renderNpc("Charon", "Welcome, have a look.");
+        std::cout << "ACTION (please input number 1-4)" << endl
+                << "1 - Sell                    2 - Buy " << endl
+                << "3 - Talk                    4 - Exit" << endl;
+        std::cin >> key;      
+    }    
+}
+
 void shopScreen(Player player, Item items[], bool &isFirst) {
-    char key;
-    bool ifBuy = false;
-    renderNpc("Charon", "Welcome, have a look.");
-    std::cout << "ACTION (please input number 1-4)" << endl
-              << "1 - Sell                    2 - Buy " << endl
-              << "3 - Talk                    4 - Exit" << endl;
-    std::cin >> key;
-    while (key != '4') {
+    char key[2];
+    bool bought = false;
+    tryAgainInShop(key);
+    while (key[0] != '4') {
         string choice;    // string for two digit nums
         int pos;
         int amount;
-        switch (key) {
+        switch (key[0]) {
         case '1':
             renderNpc("Charon", "Sell somehing?");
             displayBackpack(items, true);
@@ -226,24 +233,28 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
                     std::cin >> amount;
                     while (amount > shopItems[pos].amount || amount < 0) {    //To-do: repeat if amount is char/ string
                         renderNpc("Charon", "I have not that much.");
-                        std::cout << "Exceeds amount, please enter a valid number: ";
+                        std::cout << "Amount to buy: ";
                         std::cin >> amount;
                     }
-                    if (amount == 0) {
-                        renderNpc("Charon", "Just looking?");
-                        break;
-                    }
                     for (int i = 0; i < maxSpace; i++) {
-                        if ((items[i].num + amount) > maxStack)
-                            renderNpc("Charon", "You're carrying too much.");
-                        while (items[i].num + amount > maxStack) {
-                            std::cout << "Amount to buy: ";
-                            std::cin >> amount;
+                        if (items[i].name == shopItems[pos].name) {
+                            if ((items[i].num + amount) > maxStack)
+                                renderNpc("Charon", "You're carrying too much.");
+                            while (items[i].num + amount > maxStack) {
+                                std::cout << "(Remaining space for " << items[i].name << " = " << (99 - items[i].num) << ')' << endl;
+                                std::cout << "Amount to buy: ";
+                                std::cin >> amount;
+                            }
+                            break;                           
                         }
+                    }
+                    if (amount == 0) {
+                        renderNpc("Charon", "Just looking? :(");
+                        break;
                     }
                     if (player.coin >= (shopItems[pos].price * amount)) {
                         updateItems(shopItems[pos].name, amount, shopItems[pos].cost, 'A', items);
-                        ifBuy = true;
+                        bought = true;
                         shopItems[pos].amount -= amount;
                         player.coin -= shopItems[pos].price * amount;
                         std::cout << "You spend " << shopItems[pos].price * amount << " G.\n\n";
@@ -256,7 +267,7 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
             }
             break;
         case '3':
-            if (isFirst && !ifBuy) {       //talk before buying
+            if (isFirst && !bought) {       //talk before buying
                 renderNpc("Charon", "Why do I need to talk to someone");
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 renderNpc("Charon", "that even haven't bought anything.");
@@ -266,7 +277,7 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
                 bool isTalking = true;
                 while (isTalking) {
                     srand(time(NULL));
-                    tryAgainInShop("Don't waste much time.", isTalking, c, isFirst);
+                    talkAgain("Don't waste much time.", isTalking, c, isFirst);
                     switch (c) {
                     case 1:
                         if (isFirst) {
@@ -324,11 +335,7 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
             }
             break;
         }
-        renderNpc("Charon", "Anything else you need?");
-        std::cout << "ACTION (please input number 1-4)" << endl
-                  << "1 - Sell                    2 - Buy " << endl
-                  << "3 - Talk                    4 - Exit" << endl;
-        std::cin >> key;
+        tryAgainInShop(key);
     }
     renderNpc("Charon", "Bye now, little buddy.");
     isFirst = false;
