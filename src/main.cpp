@@ -21,14 +21,14 @@ int main() {
         player = Player();
         Item item[maxSpace] = {"", 0};
         menu(isPlay);
-        // if (isPlay == 0)
-        //     return 0;
-        // else if (isPlay == 2)   // To-do: load files
-        //     return 0;         
-        // setupScreen(player, isPlay);
-        // if (isPlay == 0)
-        //     return 0;
-        // boatScreen(); 
+        if (isPlay == 0)
+            return 0;
+        else if (isPlay == 2)    // To-do: load files
+            return 0;
+        setupScreen(player, isPlay);
+        if (isPlay == 0)
+            return 0;
+        boatScreen();
         map.fill();
         cout << "Start your adventure!" << endl;
         scr.renderScreen(map, player);
