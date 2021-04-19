@@ -59,7 +59,7 @@ void Map::fill() {
         layout[currentRow][currentCol] = 'S';
     }
 
-    cout << "\ndone:D\n\n\n";
+    cout << "\ndone:D\tPress enter to continue...\n\n\n ";
 }
 
 void Map::update(int x, int y) {

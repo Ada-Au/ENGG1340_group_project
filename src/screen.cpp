@@ -22,8 +22,6 @@ void Screen::renderScreen(Map map, Player player) {
                              " - Damage level: " + to_string(player.damage),
                              "DFS: " + to_string(player.aDefense * (1 + player.defense / 50)).substr(0, to_string(player.aDefense * (1 + player.defense / 50)).find(".") + 3),
                              " - Defense level: " + to_string(player.defense),
-                             "ATK: " + to_string(player.weapon.damage * (1 + player.damage / 50)).substr(0, to_string(player.mp).find(".") + 3),
-                             "DFS: " + to_string(player.aDefense * (1 + player.defense / 50)).substr(0, to_string(player.mp).find(".") + 3),
                              "",
                              "Debuffs: ",
                              "",
