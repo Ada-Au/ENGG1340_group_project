@@ -185,16 +185,17 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
         int amount;
         switch (key[0]) {
         case '1':
-            renderNpc("Charon", "Sell somehing?");
+            renderNpc("Charon", "Sell something?");
             displayBackpack(items, true);
             std::cout << "You have " << player.coin << " G." << endl;
-            std::cout << "Enter your choice: ";
+            std::cout << "Press [number] to sell or [Q] to quit.\n"  << "Enter your choice: ";
             std::cin >> choice;
-            // std::cout << endl;
-            while (!isNumber(choice) || !isWithinBackpack(items, choice)) {    
+            while (!isNumber(choice) || !isWithinBackpack(items, choice) && (choice != "q" || choice != "Q") ) {    
                 std::cout << "No such item, please select again: ";
                 std::cin >> choice;
-            } 
+            }
+            if (choice == "q" || choice == "Q") 
+                break;
             for (pos = 0; pos < maxSpace; pos++) {
                 if (choice == to_string(pos + 1)) {
                     std::cout << "Amount to sell: ";
@@ -215,6 +216,7 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
                 generateShopItems(player, shopItems);
             displayShopItems(shopItems);
             std::cout << "You have " << player.coin << " G." << endl;
+            std::cout << "Press [number] to sell or [Q] to quit.\n"  << "Enter your choice: ";
             renderNpc("Charon", "What do you wanna buy?");
             std::cout << "Enter your choice: ";
             std::cin >> choice;
@@ -302,12 +304,9 @@ void shopScreen(Player player, Item items[], bool &isFirst) {
                         std::this_thread::sleep_for(std::chrono::milliseconds(500));
                         renderNpc("Charon", "But seems like you are lucky enough");
                         std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                        renderNpc("Charon", "to still stand here.");
+                        renderNpc("Charon", "to stand here still.");
                         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                        renderNpc("Charon", "Earn money.");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                        renderNpc("Charon", "And GIVE them to me :D");
-                        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                        renderNpc("Charon", "Earn money and GIVE them to ME :D");
                         break;
                     case 3:
                         renderNpc("Charon", "Huh?");
