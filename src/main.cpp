@@ -14,7 +14,6 @@ int main() {
     Screen scr;
     Map map;
     Player player;
-    // Item item[maxSpace] = {"", 0};
     bool isReplay = true;
     while (isReplay) {
         int isPlay = 1;    // determine close game or not
@@ -22,17 +21,18 @@ int main() {
         player = Player();
         player.coin = 0;
         player.isFirst = true;
-        Item item[maxSpace] = {{"boat remains", 98, 1}, {"bread", 19, 5}, {"sword", 1, 2}};
-        shopScreen(player, item);
+        Item item[maxSpace] = {"", 0};
+        // Item item[maxSpace] = {{"boat remains", 98, 1}, {"bread", 19, 5}, {"sword", 1, 2}};
+        // shopScreen(player, item);
         menu(isPlay);
-        // if (isPlay == 0)
-        //     return 0;
-        // else if (isPlay == 2)    // To-do: load files
-        //     return 0;
-        // setupScreen(player, isPlay);
-        // if (isPlay == 0)
-        //     return 0;
-        // boatScreen();
+        if (isPlay == 0)
+            return 0;
+        else if (isPlay == 2)    // To-do: load files
+            return 0;
+        setupScreen(player, isPlay);
+        if (isPlay == 0)
+            return 0;
+        boatScreen();
         map.fill();
         cout << "Start your adventure!" << endl;
         scr.renderScreen(map, player);

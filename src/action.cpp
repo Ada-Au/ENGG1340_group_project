@@ -2,10 +2,12 @@
 #include "backpack.h"
 #include "fight.h"
 #include "npc.h"
+#include "shop.h"
 #include <iomanip>
 #include <iostream>
 #include <stdlib.h>
 #include <thread>
+
 #if defined _WIN32 || defined _WIN64
 #include <conio.h>
 #else
@@ -14,7 +16,7 @@
 
 using namespace std;
 
-void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
+void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
     char key = ' ';
     cin.ignore();
     clearScreen();
@@ -54,7 +56,7 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
             break;
         case 'b':
         case 'B':
-            openBackpack(item, player);
+            openBackpack(items, player);
             break;
         case 'h':
         case 'H':
@@ -74,7 +76,7 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 bool isEnd = true;
                 if (player.gameLevel % 5 == 0) {
                     cout << player.gameLevel / 5;
-                    // bossScreen(player, item, player.gameLevel / 5, isEnd);
+                    // bossScreen(player, items, player.gameLevel / 5, isEnd);
                     player.gameLevel++;
                     if (isEnd) {
                         ending();
@@ -93,12 +95,24 @@ void action(Screen scr, Map map, Player player, Item item[], bool &isReplay) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                 clearScreen();
                 bool isEscape = false;
-                fightScreen(player, item, isEscape);
+                fightScreen(player, items, isEscape);
                 if (!isEscape) {
-                    map.removeMonster(player.x, player.y);
+                    map.removeMapIcon(player.x, player.y);
                 }
                 scr.renderScreen(map, player);
                 cin.ignore();
+            } else if (map.layout[player.y][player.x] == 'C') {
+                scr.log = "Find a golden chest!";
+                clearScreen();
+                scr.renderScreen(map, player);
+                generateChestItems(items);
+                map.removeMapIcon(player.x, player.y);
+            } else if (map.layout[player.y][player.x] == 'N') {
+                scr.log = "Hey Charon!";
+                clearScreen();
+                scr.renderScreen(map, player);
+                shopScreen(player, items);
+                map.removeMapIcon(player.x, player.y);
             } else {
                 map.update(player.x, player.y);
             }

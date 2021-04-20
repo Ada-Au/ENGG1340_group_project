@@ -8,7 +8,7 @@ class Map {
     void fill();
     char layout[map_height][map_width];
     void update(int, int);
-    void removeMonster(int, int);
+    void removeMapIcon(int, int);
 };
 
 #endif

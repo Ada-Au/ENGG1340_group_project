@@ -32,7 +32,7 @@ void Screen::renderScreen(Map map, Player player) {
         for (int w = 0; w < map_width; w++) {
             if (h == player.y && w == player.x) {
                 if (map.layout[h][w] == 'M') {
-                    cout << RED << player.mark << RESET;
+                    cout << BOLDRED << player.mark << RESET;
                 } else
                     cout << BOLDGREEN << player.mark << RESET;
             } else {
@@ -40,6 +40,10 @@ void Screen::renderScreen(Map map, Player player) {
                     cout << RED << 'M' << RESET;
                 } else if (map.layout[h][w] == 'S') {
                     cout << BOLDMAGENTA << 'S' << RESET;
+                } else if (map.layout[h][w] == 'C') {
+                    cout << BOLDYELLOW << 'C' << RESET;
+                } else if (map.layout[h][w] == 'N') {
+                    cout << BOLDCYAN << 'N' << RESET;
                 } else
                     cout << map.layout[h][w];
             }

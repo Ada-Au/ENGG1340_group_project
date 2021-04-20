@@ -38,7 +38,7 @@ struct Weapon {
     const float energyLose;    // consume of energy for each attack
     const float mpLose;        // consume of mp for each magic attack
     const int cost;
-    const int  price;
+    const int price;
 };
 
 const Heal heals[maxHealNum] = {{"monster meat", "(+25 Energy, -10 HP)", 25, -10, 2, 12},
@@ -62,7 +62,7 @@ const Weapon weapons[maxWeaponNum] = {{"hammer", "(+10 ATK, -30 Energy/atk)", 10
                                       {"spear", "(+6 ATK, -10 Energy/atk)", 6, 10, 0, 12, 200},
                                       {"sword", "(+2 ATK, -0.5 Energy/atk)", 2, 0.5, 0, 5, 169},
                                       {"wand", "(+8 ATK, -15 MP/atk)", 8, 0, 15, 30, 474},
-                                      {"vorpan", "(+10 ATK, -10 Energy/atk)",10, 10, 0, 45, 3819},
+                                      {"vorpan", "(+10 ATK, -10 Energy/atk)", 10, 10, 0, 45, 3819},
                                       {"soul sword", "(+20 ATK, -8 Energy/atk, -8 MP/atk)", 20, 8, 8, 66, 6666},
                                       {"twin daggers", "(+14 Atk, -12 Energy/atk)", 14, 12, 0, 44, 4242},
                                       {"war spear", "(+12 Atk, -7 Energy/atk)", 12, 7, 0, 39, 3647},
@@ -80,5 +80,6 @@ void generateThings(Item[maxSpace]);
 void updateItems(string, int, int, char, Item[maxSpace]);
 void displayBackpack(Item[maxSpace], bool);
 void openBackpack(Item[maxSpace], Player &);
+void generateChestItems(Item[maxSpace]);
 
 #endif
