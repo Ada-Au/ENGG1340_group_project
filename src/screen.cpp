@@ -81,6 +81,12 @@ void Screen::renderScreen(Map map, Player player) {
 }
 
 void printHelp() {
-    for (int i = 0; i < helpSize; i++)
-        cout << helpScreen[i] << endl;
+    cout << "Keyboard shortcuts" << setfill(' ') << setw(map_width - 15) << "NPC Icons" << endl
+         << "- [W]\t move Up" << setw(map_width - 19) << RED << "- M\t monster" << RESET << endl
+         << "- [A]\t move Left" << setw(map_width - 17) << BOLDYELLOW << "- C\t chest" << RESET << endl
+         << "- [S]\t move Down" << setw(map_width - 17) << BOLDCYAN << "- N\t NPC" << RESET << endl
+         << "- [D]\t move Right" << setw(map_width - 18) << BOLDMAGENTA << "- S\t stair" << RESET << endl
+         << "- [B]\t open backpack" << endl
+         << "- [Q]\t quit game" << endl
+         << "- [H]\t open Help" << endl;
 }
