@@ -10,17 +10,20 @@
 using namespace std;
 
 void Screen::renderScreen(Map map, Player player) {
-    const int statSize = 15;
+    const int statSize = 18;
     string stat[statSize] = {"[ " + player.name + " ]",
                              "",
                              "Level: " + to_string(player.level),
                              "Game level: " + to_string(player.gameLevel),
+                             "Coins: " + to_string(player.coin),
                              "HP: " + to_string(player.hp).substr(0, to_string(player.hp).find(".") + 3) + " / " + to_string(player.maxHp).substr(0, to_string(player.hp).find(".") + 3),
                              "MP: " + to_string(player.mp).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxMp).substr(0, to_string(player.hp).find(".") + 3),
                              "Energy: " + to_string(player.energy).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxEnergy).substr(0, to_string(player.hp).find(".") + 3),
-                             "ATK: " + to_string(player.weapon.damage * (1 + player.damage / 50)).substr(0, to_string(player.weapon.damage * (1 + player.damage / 50)).find(".") + 3),
+                             "ATK: " + to_string(player.weapon.damage * (1 + player.damage / 50.0)).substr(0, to_string(player.weapon.damage * (1 + player.damage / 50.0)).find(".") + 3),
+                             " - Weapon: " + player.weapon.name,
                              " - Damage level: " + to_string(player.damage),
-                             "DFS: " + to_string(player.aDefense * (1 + player.defense / 50)).substr(0, to_string(player.aDefense * (1 + player.defense / 50)).find(".") + 3),
+                             "DFS: " + to_string(player.aDefense * (1 + player.defense / 50.0)).substr(0, to_string(player.aDefense * (1 + player.defense / 50.0)).find(".") + 3),
+                             " - Armor: " + player.armor,
                              " - Defense level: " + to_string(player.defense),
                              "",
                              "Debuffs: ",

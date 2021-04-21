@@ -129,7 +129,7 @@ void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
                 if (player.energy > 0)
                     player.energy--;
                 else
-                    player.energy = 0;
+                    player.hp--;
                 updateOnBuff(player);
             }
         }

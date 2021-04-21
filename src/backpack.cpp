@@ -6,9 +6,9 @@
 
 using namespace std;
 
-void generateThings(Item items[]) {
+void generateDrops(Item items[]) {
     string heal = "", weapon = "";
-    int healsNum, weaponsNum;
+    int healsNum, weaponsNum = 0;
     srand(time(NULL));
     int randNum = rand() % 100;
     if (randNum <= 3) {
@@ -31,7 +31,7 @@ void generateThings(Item items[]) {
         heal = "bread";
         weapon = "spear";
         healsNum = rand() % 3;
-    } else if (randNum <= 70) {
+    } else if (randNum <= 90) {
         heal = "monster meat";
         weapon = "sword";
         healsNum = rand() % 7;
@@ -272,7 +272,7 @@ void openBackpack(Item items[], Player &player) {
 
 void generateChestItems(Item items[]) {
     string armor = "";
-    int randNum = rand() % 100;
+    int randNum = rand() % 100, armorNum = 1;
     if (randNum <= 3) {
         armor = "silver shield";
     } else if (randNum <= 10) {
@@ -281,11 +281,12 @@ void generateChestItems(Item items[]) {
         armor = "wood shield";
     } else if (randNum <= 75) {
         armor = "boat remains";
+        armorNum = rand() % 5;
     }
 
     for (int i = 0; i < maxArmorNum; i++) {
         if (armor == armors[i].name) {
-            updateItems(armor, 1, armors[i].cost, 'A', items);
+            updateItems(armor, armorNum, armors[i].cost, 'A', items);
             break;
         }
     }

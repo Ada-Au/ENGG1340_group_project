@@ -48,11 +48,11 @@ bool fight(Player &player, Item items[], Monster monster, float &mHp, bool escap
                     }
                     player.energy -= player.weapon.energy;
                     player.mp -= player.weapon.mp;
-                    cout << "Player: Successfully make " << (player.weapon.damage * criticalHit * (1 + player.damage / 50));
+                    cout << "Player: Successfully make " << (player.weapon.damage * criticalHit * (1 + player.damage / 50.0));
                     if (critical)
                         cout << " critical";
                     cout << " damage." << endl;
-                    mHp -= player.weapon.damage * criticalHit * (1 + player.damage / 50);
+                    mHp -= player.weapon.damage * criticalHit * (1 + player.damage / 50.0);
 
                 } else {
                     cout << "Player: Miss!" << endl;
@@ -74,15 +74,15 @@ bool fight(Player &player, Item items[], Monster monster, float &mHp, bool escap
                     cout << monster.name << ": Miss!" << endl;
                 }
             } else {
-                cout << "You have no energy to attack now." << endl;
+                cout << RED << "You have no energy to attack now." << RESET << endl;
             }
             break;
 
         case '2':
             if (mHp > 0) {
-                if (monster.damage - player.aDefense * (1 + player.defense / 50) <= 0 || rand() % 10 >= 8) {    // 100% if player defense is higher than monster attack
-                    player.hp -= monster.damage - player.aDefense * (1 + player.defense / 50);                  // When lower, 80% defense part of attack, 20% defense all
-                    cout << monster.name << ": Got you! Make " << monster.damage - player.aDefense * (1 + player.defense / 50) << " damage!" << endl;
+                if (monster.damage - player.aDefense * (1 + player.defense / 50.0) <= 0 || rand() % 10 >= 8) {    // 100% if player defense is higher than monster attack
+                    player.hp -= monster.damage - player.aDefense * (1 + player.defense / 50.0);                  // When lower, 80% defense part of attack, 20% defense all
+                    cout << monster.name << ": Got you! Make " << monster.damage - player.aDefense * (1 + player.defense / 50.0) << " damage!" << endl;
                 } else {
                     cout << "Player: Successfully defensed." << endl;
                 }
@@ -165,7 +165,7 @@ void bossScreen(Player &player, Item items[], int bossIndex, bool &isEnd) {
         cout << "You kill " << boss.name << '!' << endl;
         cout << fixed << setprecision(2) << "You gain " << boss.exp << " XP!" << endl;
         player.exp += boss.exp;
-        generateThings(items);    //annouce what player got after battle save in generateThings(item)
+        generateDrops(items);    //annouce what player got after battle save in generateDrops(item)
         upgradePlayer(player);
         if (bossIndex == 11)
             bossScreen(player, items, 12, isEnd);
@@ -204,7 +204,7 @@ void fightScreen(Player &player, Item items[], bool &isEscape) {
         cout << "You kill a monster!" << endl;
         cout << fixed << setprecision(2) << "You gain " << monster.exp << " XP!" << endl;
         player.exp += monster.exp;
-        generateThings(items);    //annouce what player got after battle save in generateThings(item)
+        generateDrops(items);    //annouce what player got after battle save in generateDrops(item)
         upgradePlayer(player);
     }
     cout << endl;
