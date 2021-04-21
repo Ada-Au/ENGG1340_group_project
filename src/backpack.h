@@ -76,7 +76,7 @@ struct Item {
     int cost;
 };
 
-void generateThings(Item[maxSpace]);
+void generateDrops(Item[maxSpace]);
 void updateItems(string, int, int, char, Item[maxSpace]);
 void displayBackpack(Item[maxSpace], bool);
 void openBackpack(Item[maxSpace], Player &);

@@ -48,27 +48,31 @@ void nextLevel(Player &player) {
     while (point != 0) {
         char key;
         cout << "\nYou have " << point << " points to upgrade!" << endl
-             << "1 - Maximum MP (+2): " << player.maxMp << endl
-             << "2 - Maximum energy (+2): " << player.maxEnergy << endl
-             << "3 - Damage level (+2% damage per level): " << player.damage << endl
-             << "4 - Defense level (+2% defense per level): " << player.defense << endl
+             << "z - Maximum MP (+2): " << player.maxMp << endl
+             << "x - Maximum energy (+2): " << player.maxEnergy << endl
+             << "c - Damage level (+2% damage per level): " << player.damage << endl
+             << "v - Defense level (+2% defense per level): " << player.defense << endl
              << "Input number to upgrade: ";
         cin >> key;
-        while (key != '1' && key != '2' && key != '3' && key != '4') {
+        while (key != 'z' && key != 'Z' && key != 'x' && key != 'X' && key != 'c' && key != 'C' && key != 'v' && key != 'V') {
             cout << "Please input a valid number to upgrade: ";
             cin >> key;
         }
         switch (key) {
-        case '1':
+        case 'z':
+        case 'Z':
             player.maxMp += 2;
             break;
-        case '2':
+        case 'x':
+        case 'X':
             player.maxEnergy += 2;
             break;
-        case '3':
+        case 'c':
+        case 'C':
             player.damage++;
             break;
-        case '4':
+        case 'v':
+        case 'V':
             player.defense++;
             break;
         }
