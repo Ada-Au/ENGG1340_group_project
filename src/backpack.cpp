@@ -243,7 +243,7 @@ void openBackpack(Item items[], Player &player) {
                         break;
                     }
                 }
-                player.armor = "";
+                player.armor = "Empty";
                 player.aDefense = 0;
             } else {
                 cout << "You have no armor on body.\n";
@@ -257,7 +257,7 @@ void openBackpack(Item items[], Player &player) {
                         break;
                     }
                 }
-                player.weapon = {"", 2, 0, 1};
+                player.weapon = {"Empty", 2, 0, 1};
             } else {
                 cout << "You have no weapon on hand.\n";
             }

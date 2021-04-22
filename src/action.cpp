@@ -19,6 +19,7 @@ using namespace std;
 void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
     char key = ' ';
     cin.ignore();
+    scr.log = "Press WASD to move or press [H] for help";
     clearScreen();
     scr.renderScreen(map, player);
     while (key != 'q') {

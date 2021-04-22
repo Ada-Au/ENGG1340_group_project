@@ -15,7 +15,7 @@ Player::Player() {
     coin = 0;
     isFirst = true;
     race = "human";
-    weapon = {"", 2, 0, 1}, armor = "";
+    weapon = {"Empty", 2, 0, 1}, armor = "Empty";
     aDefense = 0;
     // debuffs.push_back(allDebuffs[0]);
 }
