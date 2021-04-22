@@ -76,10 +76,10 @@ struct Item {
     int cost;
 };
 
-void generateDrops(Item[maxSpace]);
-void updateItems(string, int, int, char, Item[maxSpace]);
-void displayBackpack(Item[maxSpace], bool);
-void openBackpack(Item[maxSpace], Player &);
-void generateChestItems(Item[maxSpace], Player &);
+void generateDrops(vector<Item> &);
+void updateItems(string, int, int, char, vector<Item> &);
+void displayBackpack(vector<Item> &, bool);
+void openBackpack(vector<Item> &, Player &);
+void generateChestItems(vector<Item> &, Player &);
 
 #endif

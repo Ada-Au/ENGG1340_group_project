@@ -17,7 +17,7 @@
 
 using namespace std;
 
-void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
+void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isReplay) {
     char key = ' ';
     cin.ignore();
     scr.log = "Press WASD to move or press [H] for help";

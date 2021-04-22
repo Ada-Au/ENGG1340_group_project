@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void generateDrops(Item items[]) {
+void generateDrops(vector<Item> &items) {
     string heal = "", weapon = "";
     int healsNum, weaponsNum = 0;
     srand(time(NULL));
@@ -59,29 +59,16 @@ void generateDrops(Item items[]) {
         cout << weapon << " x " << weaponsNum << " GET!\n";
 }
 
-void sortItems(Item items[]) {
-    string tempName;
-    int tempNum;
-    int tempCost;
-    for (int i = 0; i < maxSpace - 1; i++) {
-        for (int j = 0; j < maxSpace - i - 1; j++) {
-            if (items[j].num <= 0) {
-                items[j].num = 0;
-                tempName = items[j].name;
-                tempNum = items[j].num;
-                tempCost = items[j].cost;
-                items[j].name = items[j + 1].name;
-                items[j].num = items[j + 1].num;
-                items[j].cost = items[j + 1].cost;
-                items[j + 1].name = tempName;
-                items[j + 1].num = tempNum;
-                items[j + 1].cost = tempCost;
-            }
+void sortItems(vector<Item> &items) {
+    Item temp;
+    for (int i = 0; i < items.size(); i++) {
+        if (items[i].num <= 0) {
+            items.erase(items.begin() + i);
         }
     }
 }
 
-void displayBackpack(Item items[], bool isShop) {    // Also display player's state if possible
+void displayBackpack(vector<Item> &items, bool isShop) {    // Also display player's state if possible
     sortItems(items);
     cout << "Items\t\t\t\t\t\tNumber";
     if (isShop) {
@@ -89,15 +76,12 @@ void displayBackpack(Item items[], bool isShop) {    // Also display player's st
     } else {
         cout << endl;
     }
-    for (int i = 0; i < maxSpace; i++) {
-        // TODO can u make it not to run 50 time everytime?
-        if (items[i].name != "" && items[i].num > 0) {
-            cout << (i + 1) << "  " << items[i].name << setw(48 - items[i].name.length() - to_string(i + 1).length()) << setfill(' ') << items[i].num;
-            if (isShop) {
-                cout << "\t\t" << items[i].cost << " G" << endl;
-            } else {
-                cout << endl;
-            }
+    for (int i = 0; i < items.size(); i++) {
+        cout << (i + 1) << "  " << items[i].name << setw(48 - items[i].name.length() - to_string(i + 1).length()) << setfill(' ') << items[i].num;
+        if (isShop) {
+            cout << "\t\t" << items[i].cost << " G" << endl;
+        } else {
+            cout << endl;
         }
     }
     if (!isShop) {
@@ -106,8 +90,8 @@ void displayBackpack(Item items[], bool isShop) {    // Also display player's st
     }
 }
 
-int findItem(string name, Item items[]) {
-    for (int i = 0; i < maxSpace; i++) {
+int findItem(string name, vector<Item> &items) {
+    for (int i = 0; i < items.size(); i++) {
         if (name == items[i].name)
             return i;
     }
@@ -132,30 +116,26 @@ void updateState(Player &player, string object, int number) {
 // 1) input items after monster fighting / getting things on ground
 // 2) update number of items
 // 3) sort by time(old to new)
-void updateItems(string name, int number, int cost, char flag, Item items[]) {    // flag - A for adding, D for delete
+void updateItems(string name, int number, int cost, char flag, vector<Item> &items) {    // flag - A for adding, D for delete
     if (number > maxStack)
         number = maxStack;
 
     if (flag == 'D')
         number = -number;
 
-    if (findItem(name, items) == -1 && number != 0) {
-        for (int i = 0; i < maxSpace; i++) {
-            if (items[i].name == "") {
-                items[i].name = name;
-                items[i].num += number;
-                items[i].cost = cost;
-                break;
-            }
-        }
+    int pos = findItem(name, items);
+    if (pos == -1 && number != 0) {
+        items.push_back({name, number, cost});
     } else {
-        items[findItem(name, items)].num += number;
-        if (items[findItem(name, items)].num > maxStack)
-            items[findItem(name, items)].num = maxStack;
+        items[pos].num += number;
+        if (items[pos].num > maxStack) {
+            items[pos].num = maxStack;
+            cout << "You cannot have more than 99 " << items[pos].name << '.';
+        }
     }
 }
 
-void openBackpack(Item items[], Player &player) {
+void openBackpack(vector<Item> &items, Player &player) {
     string choice;    // string for two digit nums
     displayBackpack(items, false);
     cin >> choice;
@@ -271,7 +251,7 @@ void openBackpack(Item items[], Player &player) {
     }
 }
 
-void generateChestItems(Item items[], Player &player) {
+void generateChestItems(vector<Item> &items, Player &player) {
     string armor = "";
     int randNum = rand() % 100, armorNum = 1;
     if (randNum <= 3) {

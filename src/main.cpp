@@ -19,7 +19,8 @@ int main() {
         int isPlay = 1;    // determine close game or not
         isReplay = false;
         player = Player();
-        Item item[maxSpace] = {"", 0};
+        vector<Item> items;
+        updateItems("bread", 3, 2, 'A', items);
         // menu(isPlay);
         // if (isPlay == 0)
         //     return 0;
@@ -32,7 +33,7 @@ int main() {
         map.fill();
         cout << "Start your adventure!" << endl;
         scr.renderScreen(map, player);
-        action(scr, map, player, item, isReplay);
+        action(scr, map, player, items, isReplay);
     }
     return 0;
 }

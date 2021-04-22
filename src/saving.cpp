@@ -9,7 +9,7 @@ using namespace std;
 // TODO encrytion?
 // TODO fileName cannot be Q or q
 
-void saveGame(Player player, Item items[]) {
+void saveGame(Player player, vector<Item> &items) {
     ofstream saveFile;
     saveFile.open(player.name + ".txt");
 
@@ -44,7 +44,7 @@ void saveGame(Player player, Item items[]) {
     saveFile.close();
 }
 
-void getSavedGame(Player &player, string fileName, Item items[]) {
+void getSavedGame(Player &player, string fileName, vector<Item> &items) {
     ifstream file;
     file.open(fileName + ".txt");
     while (file.fail()) {
@@ -79,6 +79,5 @@ void getSavedGame(Player &player, string fileName, Item items[]) {
     getline(file, player.name);
     file >> player.role >> player.gender >> player.race >> player.isFirst;
 
-   
-    file.close();
+       file.close();
 }

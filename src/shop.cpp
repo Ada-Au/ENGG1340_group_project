@@ -25,7 +25,7 @@ void sortShopItems(vector<ShopItem> &shopItems) {
                 shopItems.erase(shopItems.begin() + j);
 }
 
-bool isWithinBackpack(Item items[], string choice) {
+bool isWithinBackpack(vector<Item> &items, string choice) {
     int sizeOfBackpack;
     for (sizeOfBackpack = 0; sizeOfBackpack < maxSpace; sizeOfBackpack++)
         if (items[sizeOfBackpack].name == "" || items[sizeOfBackpack].num <= 0)
@@ -180,7 +180,7 @@ void tryAgainInShop(char key[]) {
     }
 }
 
-void shopScreen(Player &player, Item items[]) {
+void shopScreen(Player &player, vector<Item> &items) {
     shopItems.clear();
     char key[2];
     bool bought = false;

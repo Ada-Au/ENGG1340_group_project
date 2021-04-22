@@ -4,7 +4,7 @@
 #include "backpack.h"
 #include "player.h"
 
-void saveGame(Player player, Item items[maxSpace]);
-void getSavedGame(Player &player, string fileName, Item items[maxSpace]);
+void saveGame(Player, vector<Item> &);
+void getSavedGame(Player &, string, vector<Item> &);
 
 #endif
