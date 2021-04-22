@@ -118,37 +118,51 @@ void bossScreen(Player &player, Item items[], int bossIndex, bool &isEnd) {
     switch (bossIndex) {
     case 1:
         boss = boss1;
-        renderNpc(boss.name, "Hello! Don't kill me please QwQ");
+        renderNpc(boss.name, "AH! Don't kill me please QwQ");
         break;
     case 2:
         boss = boss2;
+        renderNpc(boss.name, "Burn! Flame! Blaze! Hahaha");
         break;
     case 3:
         boss = boss3;
+        renderNpc(boss.name, "Oh hi. Don't 'die' so quick :D");
         break;
     case 4:
         boss = boss4;
+        renderNpc(boss.name, "Sha du lulu ~ oh --BI--");
+        renderNpc(boss.name, "Why are you here??");
         break;
     case 5:
         boss = boss5;
+        renderNpc(boss.name, "fACe tHe FeAR");
         break;
     case 6:
         boss = boss6;
+        renderNpc(boss.name, "Hello! CAN I SWALLOW YOU?");
         break;
     case 7:
         boss = boss7;
+        renderNpc(boss.name, "...Huh...");
         break;
     case 8:
         boss = boss8;
+        renderNpc(boss.name, "People call me the Death.");
+        renderNpc(boss.name, "But I'd like to call myself...");
+        renderNpc(boss.name, "a slave of death (;_;)");
         break;
     case 9:
         boss = boss9;
+        renderNpc(boss.name, "GLORY TO THE AFTERLIFE!!");
         break;
     case 10:
         boss = boss10;
+        renderNpc(boss.name, "Welcome to the Hell of Nightmare.");
+        renderNpc(boss.name, "How much is your soul worth?");
         break;
     case 11:
         boss = boss11[0];
+        renderNpc(boss.name, "");
         break;
     case 12:
     default:
