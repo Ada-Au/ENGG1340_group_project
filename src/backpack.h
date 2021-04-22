@@ -80,6 +80,6 @@ void generateDrops(Item[maxSpace]);
 void updateItems(string, int, int, char, Item[maxSpace]);
 void displayBackpack(Item[maxSpace], bool);
 void openBackpack(Item[maxSpace], Player &);
-void generateChestItems(Item[maxSpace]);
+void generateChestItems(Item[maxSpace], Player &);
 
 #endif

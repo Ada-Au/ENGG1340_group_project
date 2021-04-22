@@ -105,7 +105,7 @@ void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
                 scr.log = "Find a golden chest!";
                 clearScreen();
                 scr.renderScreen(map, player);
-                generateChestItems(items);
+                generateChestItems(items, player);
                 map.removeMapIcon(player.x, player.y);
             } else if (map.layout[player.y][player.x] == 'N') {
                 scr.log = "Hey Charon!";

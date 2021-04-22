@@ -90,6 +90,6 @@ void printHelp() {
          << "- [S]\t move Down" << setw(map_width - 17) << BOLDCYAN << "- N\t NPC" << RESET << endl
          << "- [D]\t move Right" << setw(map_width - 18) << BOLDMAGENTA << "- S\t stair" << RESET << endl
          << "- [B]\t open backpack" << endl
-         << "- [Q]\t quit game" << endl
+         << "- [Q]\t quit game /return to last page" << endl
          << "- [H]\t open Help" << endl;
 }
