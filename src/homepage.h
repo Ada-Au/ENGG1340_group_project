@@ -1,7 +1,9 @@
 #ifndef Homepage_h
 #define Homepage_h
 
+#include "backpack.h"
 #include "env.h"
+#include "player.h"
 #include <iostream>
 #include <string>
 
@@ -19,6 +21,6 @@ const string homepage[10] =
         "  WWWW        WWWW     HHH         HHH   AAA        AAA      TTTTT              AAA        AAA              HHH         HHH   EEEEEEEEEEEEE   LLLLLLLLLLLL  LLLLLLLLLLLL ",
 };
 
-void menu(int &);
+void menu(int &, Player &, vector<Item> &);
 
 #endif

@@ -1,4 +1,5 @@
 #include "saving.h"
+#include "env.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -34,21 +35,23 @@ void saveGame(Player player, vector<Item> &items) {
     saveFile << player.name << endl;
     saveFile << player.role << ' ' << player.gender << ' ' << player.race << ' ' << player.isFirst << endl;
 
-    for (int i = 0; i < maxSpace; i++) {
-        // TODO again 50 times....
-        if (items[i].name != "" && items[i].num > 0) {
-            saveFile << items[i].name << ' ' << items[i].num << ' ' << items[i].cost << ' ';
-        }
+    saveFile << items.size() << endl;
+    for (int i = 0; i < items.size(); i++) {
+        saveFile << items[i].name << endl;
+        saveFile << items[i].num << ' ' << items[i].cost << endl;
     }
 
     saveFile.close();
 }
 
-void getSavedGame(Player &player, string fileName, vector<Item> &items) {
+void getSavedGame(Player &player, vector<Item> &items) {
+    string fileName;
+    cout << "Please input the file name you want to continue: ";
+    cin >> fileName;
     ifstream file;
     file.open(fileName + ".txt");
     while (file.fail()) {
-        cout << "File not exist. Please input again or press Q to starting screen: ";
+        cout << "File not exist. Please input again or press [Q] to starting screen: ";
         cin >> fileName;
         if (fileName == "Q" || fileName == "q") {
             return;
@@ -57,27 +60,44 @@ void getSavedGame(Player &player, string fileName, vector<Item> &items) {
         }
     }
 
+    string tempName;
     file >> player.mp >> player.hp >> player.energy >> player.exp >> player.maxExp >> player.maxMp >> player.maxEnergy >> player.damage >> player.defense >> player.maxHp;
     file >> player.level >> player.gameLevel >> player.coin;
-    getline(file, player.weapon.name);
-    getline(file, player.armor);
+
+    file.ignore();
+    getline(file, tempName);
+    player.weapon.name = tempName;
+    getline(file, tempName);
+    player.armor = tempName;
+
     file >> player.weapon.damage >> player.weapon.mp >> player.weapon.energy >> player.aDefense;
 
-    int buffNum;
-    string tempBuff;
-    file >> buffNum;
-    for (int i = 0; i < buffNum; i++) {
-        file >> tempBuff;
-        addBuff(false, tempBuff, player);
+    int lineNum;
+    file >> lineNum;
+    for (int i = 0; i < lineNum; i++) {
+        file >> tempName;
+        addBuff(false, tempName, player);
     }
-    file >> buffNum;
-    for (int i = 0; i < buffNum; i++) {
-        file >> tempBuff;
-        addBuff(true, tempBuff, player);
+    file >> lineNum;
+    for (int i = 0; i < lineNum; i++) {
+        file >> tempName;
+        addBuff(true, tempName, player);
     }
 
+    file.ignore();
+    file.ignore();
     getline(file, player.name);
     file >> player.role >> player.gender >> player.race >> player.isFirst;
 
-       file.close();
+    file >> lineNum;
+    int tempNum, tempCost;
+    for (int i = 0; i < lineNum; i++) {
+        file.ignore();
+        getline(file, tempName);
+        file >> tempNum >> tempCost;
+        cout << "i name: " << tempName << ' ' << tempNum << ' ' << tempCost << endl;
+        updateItems(tempName, tempNum, tempCost, 'A', items);
+    }
+
+    file.close();
 }

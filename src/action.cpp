@@ -21,7 +21,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
     char key = ' ';
     cin.ignore();
     scr.log = "Press WASD to move or press [H] for help";
-    clearScreen();
+    // clearScreen();
     scr.renderScreen(map, player);
     while (key != 'q') {
         bool wall = false, isValid = true;
@@ -67,9 +67,6 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
             break;
         case 'p':
             saveGame(player, items);
-            break;
-        case 'o':
-            getSavedGame(player, "idk", items);
             break;
         default:
             if (player.hp > 0)

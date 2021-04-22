@@ -90,14 +90,6 @@ void displayBackpack(vector<Item> &items, bool isShop) {    // Also display play
     }
 }
 
-int findItem(string name, vector<Item> &items) {
-    for (int i = 0; i < items.size(); i++) {
-        if (name == items[i].name)
-            return i;
-    }
-    return -1;
-}
-
 void updateState(Player &player, string object, int number) {
     for (int i = 0; i < maxHealNum; i++) {
         if (object == heals[i].name) {
@@ -110,6 +102,14 @@ void updateState(Player &player, string object, int number) {
         player.hp = player.maxHp;
     if (player.energy > player.maxEnergy)
         player.energy = player.maxEnergy;
+}
+
+int findItem(string name, vector<Item> &items) {
+    for (int i = 0; i < items.size(); i++) {
+        if (name == items[i].name)
+            return i;
+    }
+    return -1;
 }
 
 //To-do:
