@@ -28,4 +28,4 @@ main:main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup
 	g++ -o main main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o shop.o saving.o
 	
 clean:
-	rm -f main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o saving.o
+	rm -f main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o saving.o shop.o things.o

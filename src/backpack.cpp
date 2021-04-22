@@ -124,13 +124,15 @@ void updateItems(string name, int number, int cost, char flag, vector<Item> &ite
         number = -number;
 
     int pos = findItem(name, items);
-    if (pos == -1 && number != 0) {
-        items.push_back({name, number, cost});
-    } else {
-        items[pos].num += number;
-        if (items[pos].num > maxStack) {
-            items[pos].num = maxStack;
-            cout << "You cannot have more than 99 " << items[pos].name << '.';
+    if (number != 0) {
+        if (pos == -1) {
+            items.push_back({name, number, cost});
+        } else {
+            items[pos].num += number;
+            if (items[pos].num > maxStack) {
+                items[pos].num = maxStack;
+                cout << "You cannot have more than 99 " << items[pos].name << '.';
+            }
         }
     }
 }
