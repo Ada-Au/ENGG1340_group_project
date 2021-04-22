@@ -141,12 +141,12 @@ void openBackpack(vector<Item> &items, Player &player) {
     cin >> choice;
     while (choice != "q") {
         int pos;
-        for (pos = 0; pos < maxSpace; pos++) {    //Find items pos in backpack
+        for (pos = 0; pos < maxSpace; pos++) {    // Find item pos in backpack
             if (choice == to_string(pos + 1))
                 break;
         }
-        if (choice == to_string(pos + 1)) {    //Select item in backpack
-            //Find item if it's healing
+        if (choice == to_string(pos + 1)) {    // Select item in backpack
+            // Find item if it's healing
             for (int i = 0; i < maxHealNum; i++) {
                 if (items[pos].name == heals[i].name) {
                     cout << items[pos].name + " is selected.\t" + heals[i].desc << endl;
@@ -163,7 +163,7 @@ void openBackpack(vector<Item> &items, Player &player) {
                     break;
                 }
             }
-            //Find item if it's armor
+            // Find item if it's armor
             for (int i = 0; i < maxArmorNum; i++) {
                 if (items[pos].name == armors[i].name) {
                     cout << items[pos].name + " is equipped.\t" + armors[i].desc + "\n\n";
@@ -187,7 +187,7 @@ void openBackpack(vector<Item> &items, Player &player) {
                     break;
                 }
             }
-            //Find item if it's weapon
+            // Find item if it's weapon
             for (int i = 0; i < maxWeaponNum; i++) {
                 if (items[pos].name == weapons[i].name) {
                     cout << items[pos].name + " is equipped.\t" + weapons[i].desc + "\n\n";
@@ -216,7 +216,7 @@ void openBackpack(vector<Item> &items, Player &player) {
                 }
             }
         } else if (choice == "a" || choice == "A") {
-            if (player.armor != "") {
+            if (player.armor != "Empty") {
                 //Add player's old armor in backpack & Update armor's cost into item's
                 for (int i = 0; i < maxArmorNum; i++) {
                     if (player.armor == armors[i].name) {
@@ -230,7 +230,7 @@ void openBackpack(vector<Item> &items, Player &player) {
                 cout << "You have no armor on body.\n";
             }
         } else if (choice == "w" || choice == "W") {
-            if (player.weapon.name != "") {
+            if (player.weapon.name != "Empty") {
                 //Add player's old weapon in backpack & Update weapon's cost into item's
                 for (int i = 0; i < maxWeaponNum; i++) {
                     if (player.weapon.name == weapons[i].name) {
