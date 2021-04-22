@@ -19,8 +19,6 @@ int main() {
         int isPlay = 1;    // determine close game or not
         isReplay = false;
         player = Player();
-        player.coin = 0;
-        player.isFirst = true;
         Item item[maxSpace] = {"", 0};
         // menu(isPlay);
         // if (isPlay == 0)

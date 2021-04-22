@@ -12,6 +12,8 @@ Player::Player() {
     mp = 100, hp = 100, energy = 100, maxEnergy = 100;
     maxMp = 100, maxHp = 100, exp = 19, maxExp = 20, damage = 0, defense = 0;
     level = 1, gameLevel = 1;
+    coin = 0;
+    isFirst = true;
     race = "human";
     weapon = {"", 2, 0, 1}, armor = "";
     aDefense = 0;
