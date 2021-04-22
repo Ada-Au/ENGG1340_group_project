@@ -11,6 +11,7 @@ int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
 void Map::fill() {
     int maxTunnels = map_maxTunnels;
+    int shopPos = rand() % (map_maxTunnels - 100);
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
             layout[h][w] = '#';
@@ -18,7 +19,7 @@ void Map::fill() {
     }
 
     srand(time(NULL));
-    int currentRow = 1, currentCol = 1;
+    int yPos = 1, xPos = 1;
     int temp[2] = {0, 0};
     int *lastDirection = temp, *randomDirection;
 
@@ -35,20 +36,23 @@ void Map::fill() {
 
         int randomLength = rand() % maxLength, tunnelLength = 0;
         while (tunnelLength < randomLength) {
-            if (((currentRow == 1) && (randomDirection[0] == -1)) ||
-                ((currentCol == 1) && (randomDirection[1] == -1)) ||
-                ((currentRow == map_height - 2) && (randomDirection[0] == 1)) ||
-                ((currentCol == map_width - 2) && (randomDirection[1] == 1))) {
+            if (((yPos == 1) && (randomDirection[0] == -1)) ||
+                ((xPos == 1) && (randomDirection[1] == -1)) ||
+                ((yPos == map_height - 2) && (randomDirection[0] == 1)) ||
+                ((xPos == map_width - 2) && (randomDirection[1] == 1))) {
                 break;
             } else {
-                if (!(currentRow == 1 && currentCol == 1) &&
-                    rand() % 100 >= 90 &&
-                    layout[currentRow][currentCol] != ' ') {
-                    layout[currentRow][currentCol] = 'M';
-                } else
-                    layout[currentRow][currentCol] = ' ';
-                currentRow += randomDirection[0];
-                currentCol += randomDirection[1];
+                if (!(yPos == 1 && xPos == 1) && rand() % 100 >= 90 && layout[yPos][xPos] != ' ')
+                    layout[yPos][xPos] = 'M';
+                else if ((!(yPos == 1 && xPos == 1) && maxTunnels == shopPos) || layout[yPos][xPos] == 'N')
+                    layout[yPos][xPos] = 'N';
+                else if ((!(yPos == 1 && xPos == 1) && rand() % 100 == 1) && layout[yPos][xPos] == ' ')
+                    layout[yPos][xPos] = 'C';
+                else
+                    layout[yPos][xPos] = ' ';
+
+                yPos += randomDirection[0];
+                xPos += randomDirection[1];
                 tunnelLength++;
             }
             if (tunnelLength > 0) {
@@ -56,7 +60,7 @@ void Map::fill() {
                 maxTunnels--;
             }
         }
-        layout[currentRow][currentCol] = 'S';
+        layout[yPos][xPos] = 'S';
     }
 
     cout << "\ndone:D\tPress enter to continue...\n\n\n ";
@@ -97,4 +101,4 @@ void Map::update(int x, int y) {
     }
 }
 
-void Map::removeMonster(int x, int y) { layout[y][x] = ' '; }
+void Map::removeMapIcon(int x, int y) { layout[y][x] = ' '; }

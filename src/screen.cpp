@@ -10,17 +10,20 @@
 using namespace std;
 
 void Screen::renderScreen(Map map, Player player) {
-    const int statSize = 15;
+    const int statSize = 18;
     string stat[statSize] = {"[ " + player.name + " ]",
                              "",
                              "Level: " + to_string(player.level),
                              "Game level: " + to_string(player.gameLevel),
+                             "Coins: " + to_string(player.coin),
                              "HP: " + to_string(player.hp).substr(0, to_string(player.hp).find(".") + 3) + " / " + to_string(player.maxHp).substr(0, to_string(player.hp).find(".") + 3),
                              "MP: " + to_string(player.mp).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxMp).substr(0, to_string(player.hp).find(".") + 3),
                              "Energy: " + to_string(player.energy).substr(0, to_string(player.mp).find(".") + 3) + " / " + to_string(player.maxEnergy).substr(0, to_string(player.hp).find(".") + 3),
-                             "ATK: " + to_string(player.weapon.damage * (1 + player.damage / 50)).substr(0, to_string(player.weapon.damage * (1 + player.damage / 50)).find(".") + 3),
+                             "ATK: " + to_string(player.weapon.damage * (1 + player.damage / 50.0)).substr(0, to_string(player.weapon.damage * (1 + player.damage / 50.0)).find(".") + 3),
+                             " - Weapon: " + player.weapon.name,
                              " - Damage level: " + to_string(player.damage),
-                             "DFS: " + to_string(player.aDefense * (1 + player.defense / 50)).substr(0, to_string(player.aDefense * (1 + player.defense / 50)).find(".") + 3),
+                             "DFS: " + to_string(player.aDefense * (1 + player.defense / 50.0)).substr(0, to_string(player.aDefense * (1 + player.defense / 50.0)).find(".") + 3),
+                             " - Armor: " + player.armor,
                              " - Defense level: " + to_string(player.defense),
                              "",
                              "Debuffs: ",
@@ -32,7 +35,7 @@ void Screen::renderScreen(Map map, Player player) {
         for (int w = 0; w < map_width; w++) {
             if (h == player.y && w == player.x) {
                 if (map.layout[h][w] == 'M') {
-                    cout << RED << player.mark << RESET;
+                    cout << BOLDRED << player.mark << RESET;
                 } else
                     cout << BOLDGREEN << player.mark << RESET;
             } else {
@@ -40,6 +43,10 @@ void Screen::renderScreen(Map map, Player player) {
                     cout << RED << 'M' << RESET;
                 } else if (map.layout[h][w] == 'S') {
                     cout << BOLDMAGENTA << 'S' << RESET;
+                } else if (map.layout[h][w] == 'C') {
+                    cout << BOLDYELLOW << 'C' << RESET;
+                } else if (map.layout[h][w] == 'N') {
+                    cout << BOLDCYAN << 'N' << RESET;
                 } else
                     cout << map.layout[h][w];
             }
@@ -77,6 +84,12 @@ void Screen::renderScreen(Map map, Player player) {
 }
 
 void printHelp() {
-    for (int i = 0; i < helpSize; i++)
-        cout << helpScreen[i] << endl;
+    cout << "Keyboard shortcuts" << setfill(' ') << setw(map_width - 15) << "NPC Icons" << endl
+         << "- [W]\t move Up" << setw(map_width - 19) << RED << "- M\t monster" << RESET << endl
+         << "- [A]\t move Left" << setw(map_width - 17) << BOLDYELLOW << "- C\t chest" << RESET << endl
+         << "- [S]\t move Down" << setw(map_width - 17) << BOLDCYAN << "- N\t NPC" << RESET << endl
+         << "- [D]\t move Right" << setw(map_width - 18) << BOLDMAGENTA << "- S\t stair" << RESET << endl
+         << "- [B]\t open backpack" << endl
+         << "- [Q]\t quit game /return to last page" << endl
+         << "- [H]\t open Help" << endl;
 }

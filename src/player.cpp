@@ -12,6 +12,8 @@ Player::Player() {
     mp = 100, hp = 100, energy = 100, maxEnergy = 100;
     maxMp = 100, maxHp = 100, exp = 19, maxExp = 20, damage = 0, defense = 0;
     level = 1, gameLevel = 1;
+    coin = 0;
+    isFirst = true;
     race = "human";
     weapon = {"", 2, 0, 1}, armor = "";
     aDefense = 0;
@@ -48,27 +50,31 @@ void nextLevel(Player &player) {
     while (point != 0) {
         char key;
         cout << "\nYou have " << point << " points to upgrade!" << endl
-             << "1 - Maximum MP (+2): " << player.maxMp << endl
-             << "2 - Maximum energy (+2): " << player.maxEnergy << endl
-             << "3 - Damage level (+2% damage per level): " << player.damage << endl
-             << "4 - Defense level (+2% defense per level): " << player.defense << endl
-             << "Input number to upgrade: ";
+             << "z - Maximum MP (+2): " << player.maxMp << endl
+             << "x - Maximum energy (+2): " << player.maxEnergy << endl
+             << "c - Damage level (+2% damage per level): " << player.damage << endl
+             << "v - Defense level (+2% defense per level): " << player.defense << endl
+             << "Input character to upgrade: ";
         cin >> key;
-        while (key != '1' && key != '2' && key != '3' && key != '4') {
-            cout << "Please input a valid number to upgrade: ";
+        while (key != 'z' && key != 'Z' && key != 'x' && key != 'X' && key != 'c' && key != 'C' && key != 'v' && key != 'V') {
+            cout << "Please input a valid character to upgrade: ";
             cin >> key;
         }
         switch (key) {
-        case '1':
+        case 'z':
+        case 'Z':
             player.maxMp += 2;
             break;
-        case '2':
+        case 'x':
+        case 'X':
             player.maxEnergy += 2;
             break;
-        case '3':
+        case 'c':
+        case 'C':
             player.damage++;
             break;
-        case '4':
+        case 'v':
+        case 'V':
             player.defense++;
             break;
         }

@@ -253,7 +253,7 @@ void boatScreen() {
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     cout << "...\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    cout << "1 G GET.\n";
+    cout << "1G GET.\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     renderNpc("Charon", "Choose one here.");
     printBoats();
@@ -289,6 +289,6 @@ void boatScreen() {
          << "After a few minutes, you found there is water leaking...\n"
          << "The boat is sinking!!\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    cout << "You fell down for very long.long..long... time. Guess now you are in the bottom layer of hell.¯\\_(ツ)_/¯\n";
+    cout << "You fell down for very long.long..long... time. Guess now you are in the bottom layer of hell.\\_('U')_/\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 }

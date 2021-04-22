@@ -14,17 +14,13 @@ int main() {
     Screen scr;
     Map map;
     Player player;
-    // Item item[maxSpace] = {"", 0};
     bool isReplay = true;
     while (isReplay) {
         int isPlay = 1;    // determine close game or not
         isReplay = false;
         player = Player();
-        player.coin = 0;
-        player.isFirst = true;
-        Item item[maxSpace] = {{"boat remains", 98, 1}, {"bread", 19, 5}, {"sword", 1, 2}};
-        shopScreen(player, item);
-        menu(isPlay);
+        Item item[maxSpace] = {"", 0};
+        // menu(isPlay);
         // if (isPlay == 0)
         //     return 0;
         // else if (isPlay == 2)    // To-do: load files
