@@ -22,8 +22,10 @@ npc.o:src/npc.cpp src/npc.h
 	g++ -c $(flag) src/npc.cpp -o npc.o 
 shop.o:src/shop.cpp src/shop.h
 	g++ -c $(flag) src/shop.cpp -o shop.o
-main:main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o shop.o
-	g++ -o main main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o shop.o
+saving.o:src/saving.cpp src/saving.h
+	g++ -c $(flag) src/saving.cpp -o saving.o
+main:main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o shop.o saving.o
+	g++ -o main main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o shop.o saving.o
 	
 clean:
-	rm -f main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o 
+	rm -f main.o backpack.o player.o fight.o map.o homepage.o screen.o action.o setup.o npc.o saving.o

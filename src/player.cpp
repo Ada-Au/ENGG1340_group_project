@@ -20,27 +20,38 @@ Player::Player() {
     // debuffs.push_back(allDebuffs[0]);
 }
 
-void addBuff(bool isAdd, int buff, Player &player) {
-    if (isAdd) {
+void addBuff(bool isBuff, string name, Player &player) {
+    if (isBuff) {
         bool flag = true;
         for (int i = 0; i < player.buffs.size(); i++) {
-            if (player.buffs[i].name == allBuffs[buff].name) {
+            if (player.buffs[i].name == name) {
                 flag = false;
                 break;
             }
         }
+
         if (flag)
-            player.buffs.push_back(allBuffs[buff]);
+            for (int i = 0; i < maxBuff; i++) {
+                if (allBuffs[i].name == name) {
+                    player.buffs.push_back(allBuffs[i]);
+                    break;
+                }
+            }
     } else {
         bool flag = true;
         for (int i = 0; i < player.debuffs.size(); i++) {
-            if (player.debuffs[i].name == allDebuffs[buff].name) {
+            if (player.debuffs[i].name == name) {
                 flag = false;
                 break;
             }
         }
         if (flag)
-            player.debuffs.push_back(allDebuffs[buff]);
+            for (int i = 0; i < maxDebuff; i++) {
+                if (allDebuffs[i].name == name) {
+                    player.debuffs.push_back(allDebuffs[i]);
+                    break;
+                }
+            }
     }
 }
 

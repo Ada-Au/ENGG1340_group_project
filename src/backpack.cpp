@@ -90,6 +90,7 @@ void displayBackpack(Item items[], bool isShop) {    // Also display player's st
         cout << endl;
     }
     for (int i = 0; i < maxSpace; i++) {
+        // TODO can u make it not to run 50 time everytime?
         if (items[i].name != "" && items[i].num > 0) {
             cout << (i + 1) << "  " << items[i].name << setw(48 - items[i].name.length() - to_string(i + 1).length()) << setfill(' ') << items[i].num;
             if (isShop) {

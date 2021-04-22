@@ -2,6 +2,7 @@
 #include "backpack.h"
 #include "fight.h"
 #include "npc.h"
+#include "saving.h"
 #include "shop.h"
 #include <iomanip>
 #include <iostream>
@@ -63,6 +64,12 @@ void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
         case 'H':
             printHelp();
             cin.get();
+            break;
+        case 'p':
+            saveGame(player, items);
+            break;
+        case 'o':
+            getSavedGame(player, "idk", items);
             break;
         default:
             if (player.hp > 0)
