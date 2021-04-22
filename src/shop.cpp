@@ -197,12 +197,15 @@ void shopScreen(Player &player, Item items[]) {
             std::cout << "Press [number] to sell or [Q] to quit.\n"
                       << "Enter your choice: ";
             std::cin >> choice;
-            if (choice == "q" || choice == "Q")
+            if (choice == "q" || choice == "Q") {
+                renderNpc("Charon", "Just looking? :(");
                 break;
+            }
             while (!isNumber(choice) || !isWithinBackpack(items, choice)) {
                 std::cout << "No such item, please select again: ";
                 std::cin >> choice;
                 if (choice == "q" || choice == "Q") {
+                    renderNpc("Charon", "Just looking? :(");
                     break;
                 }
             }
@@ -233,12 +236,14 @@ void shopScreen(Player &player, Item items[]) {
                       << "Enter your choice: ";
             std::cin >> choice;
             if (choice == "q" || choice == "Q") {
+                renderNpc("Charon", "Just looking? :(");
                 break;
             }
             while (!isNumber(choice) || !isWithinShop(shopItems, choice)) {
                 std::cout << "No such item, please select again: ";
                 std::cin >> choice;
                 if (choice == "q" || choice == "Q") {
+                    renderNpc("Charon", "Just looking? :(");
                     break;
                 }
             }

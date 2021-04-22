@@ -270,7 +270,7 @@ void openBackpack(Item items[], Player &player) {
     }
 }
 
-void generateChestItems(Item items[]) {
+void generateChestItems(Item items[], Player &player) {
     string armor = "";
     int randNum = rand() % 100, armorNum = 1;
     if (randNum <= 3) {
@@ -298,7 +298,9 @@ void generateChestItems(Item items[]) {
     } else {
         coinNum = rand() % 16;
     }
+    player.coin += coinNum;
     if (coinNum > 0) {
+
         cout << coinNum << "G GET!\n";
     }
 }
