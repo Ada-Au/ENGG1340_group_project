@@ -33,7 +33,7 @@ void displayStats(float mHp, float mMaxHp, Player player, string mName, bool esc
 bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, bool escape = false) {
     char key;
     while (mHp > 0 && player.hp > 0) {
-        float mDamage = monster.damage;    // TODO add fluctuation
+        float mDamage = monster.damage + (rand() % 100 - 50) / 50.0;
         displayStats(mHp, monster.hp, player, monster.name, escape);
         cin >> key;
         switch (key) {

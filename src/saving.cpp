@@ -6,13 +6,40 @@
 
 using namespace std;
 
-// TODO warn player if file already exist: give choice: cover or new name for file
 // TODO encrytion?
-// TODO fileName cannot be Q or q
 
 void saveGame(Player player, vector<Item> &items) {
+    ifstream file;
+    file.open(player.name + ".txt");
+    if (!file.fail()) {
+        cout << "File name exist, do you want to cover the existing file? [y/n]" << endl;
+    }
+    file.close();
+
+    string fileName = player.name;
+    char key = ' ';
+    cin >> key;
+    while (key != 'y' && key != 'Y' && key != 'n' && key != 'N') {
+        cout << "Please input [y] or [n]" << endl;
+        cin >> key;
+    }
+    if (key == 'n' || key == 'N') {
+        cout << "Do you want to create a new file? [y/n]" << endl;
+        cin >> key;
+        while (key != 'y' && key != 'Y' && key != 'n' && key != 'N') {
+            cout << "Please input [y] or [n]" << endl;
+            cin >> key;
+        }
+        if (key == 'n' || key == 'N') {
+            return;
+        } else {
+            cout << "Please input the new file name (without spaces): " << endl;
+            cin >> fileName;
+        }
+    }
+
     ofstream saveFile;
-    saveFile.open(player.name + ".txt");
+    saveFile.open(fileName + ".txt");
 
     saveFile << player.mp << ' ' << player.hp << ' ' << player.energy << ' ' << player.exp << ' ' << player.maxExp << ' ' << player.maxMp << ' ' << player.maxEnergy << ' ' << player.damage << ' ' << player.defense << ' ' << player.maxHp << endl;
     saveFile << player.level << ' ' << player.gameLevel << ' ' << player.coin << endl;

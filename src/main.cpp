@@ -21,7 +21,7 @@ int main() {
         isReplay = false;
         player = Player();
         vector<Item> items;
-        menu(isPlay, player, items);
+        menu(isPlay, player, items);    // todo return to menu screen if no file
         // if (isPlay == 0)
         //     return 0;
         // else if (isPlay == 2)    // To-do: load files
