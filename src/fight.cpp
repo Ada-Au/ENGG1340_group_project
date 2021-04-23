@@ -143,7 +143,7 @@ void bossScreen(Player &player, Item items[], int bossIndex, bool &isEnd) {
         break;
     case 7:
         boss = boss7;
-        renderNpc(boss.name, "...Huh...");
+        renderNpc(boss.name, "...I want your body(O r O)");
         break;
     case 8:
         boss = boss8;
