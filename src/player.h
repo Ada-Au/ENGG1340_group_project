@@ -42,15 +42,7 @@ class Player {
 };
 
 void upgradePlayer(Player &);
-void addBuff(bool, int, Player &);
+void addBuff(bool, string, Player &);
 void updateOnBuff(Player &);
-
-// void exchange(Player &, string);
-// void updateState(Player &, string, int);
-//     float mp, hp, energy, maxMp, maxHp;
-//     vector<Buff> debuffs;
-//     vector<Buff> buffs;
-//     string name, role, gender, race;
-// };
 
 #endif

@@ -2,6 +2,7 @@
 #include "backpack.h"
 #include "fight.h"
 #include "npc.h"
+#include "saving.h"
 #include "shop.h"
 #include <iomanip>
 #include <iostream>
@@ -16,11 +17,9 @@
 
 using namespace std;
 
-void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
+void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isReplay) {
     char key = ' ';
-    cin.ignore();
-    clearScreen();
-    scr.renderScreen(map, player);
+    scr.log = "Press WASD to move or press [H] for help";
     while (key != 'q') {
         bool wall = false, isValid = true;
         key = getch();
@@ -63,6 +62,9 @@ void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
             printHelp();
             cin.get();
             break;
+        case 'p':
+            saveGame(player, items);
+            break;
         default:
             if (player.hp > 0)
                 scr.log = "Please input again or press [H] for help";
@@ -76,7 +78,7 @@ void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
                 bool isEnd = true;
                 if (player.gameLevel % 5 == 0) {
                     cout << player.gameLevel / 5;
-                    // bossScreen(player, items, player.gameLevel / 5, isEnd);
+                    bossScreen(player, items, player.gameLevel / 5, isEnd);
                     player.gameLevel++;
                     if (isEnd) {
                         ending();
@@ -100,7 +102,6 @@ void action(Screen scr, Map map, Player player, Item items[], bool &isReplay) {
                     map.removeMapIcon(player.x, player.y);
                 }
                 scr.renderScreen(map, player);
-                cin.ignore();
             } else if (map.layout[player.y][player.x] == 'C') {
                 scr.log = "Find a golden chest!";
                 clearScreen();

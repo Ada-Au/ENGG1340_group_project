@@ -15,27 +15,29 @@ int main() {
     Map map;
     Player player;
     bool isReplay = true;
+    // TODO what the hell is isPlay=_=
     while (isReplay) {
         int isPlay = 1;    // determine close game or not
         isReplay = false;
         player = Player();
-        Item item[maxSpace] = {"", 0};
-        // menu(isPlay);
-        // if (isPlay == 0)
-        //     return 0;
-        // else if (isPlay == 2)    // To-do: load files
-        //     return 0;
-        // setupScreen(player, isPlay);
-        // if (isPlay == 0)
-        //     return 0;
-        // boatScreen();
+        vector<Item> items;
+        menu(isPlay, player, items);    // todo return to menu screen if no file
+        if (isPlay == 0)
+            return 0;
+        else if (isPlay != 2)    // To-do: load files
+        {
+            setupScreen(player, isPlay);
+            if (isPlay == 0)
+                return 0;
+            boatScreen();
+        }
         map.fill();
         cout << "Start your adventure!" << endl;
-        scr.renderScreen(map, player);
-        action(scr, map, player, item, isReplay);
+        action(scr, map, player, items, isReplay);
     }
     return 0;
 }
+
 // std::cout << "COLOR" << std::endl
 //           << BLACK << " BLACK" << RED << " RED" << GREEN << " GREEN"
 //           << YELLOW << " YELLOW" << BLUE << " BLUE" << MAGENTA << " MAGENTA"

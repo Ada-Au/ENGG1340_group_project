@@ -24,16 +24,16 @@ void displayStats(float mHp, float mMaxHp, Player player, string mName, bool esc
          << setw(map_width - 40) << "Player's MP: " << player.mp << '/' << player.maxMp << endl;
     cout << "ACTION (please input number 1-4)" << endl
          << "1 - Attack               2 - Defence " << endl
-         << "3 - Use Something";
+         << "3 - Open backpack";
     if (escape)
         cout << "        4 - Escape";
     cout << endl;
 }
 
-bool fight(Player &player, Item items[], Monster monster, float &mHp, bool escape = false) {
+bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, bool escape = false) {
     char key;
     while (mHp > 0 && player.hp > 0) {
-        float mDamage = monster.damage;    // TODO add fluctuation
+        float mDamage = monster.damage + (rand() % 100 - 50) / 50.0;
         displayStats(mHp, monster.hp, player, monster.name, escape);
         cin >> key;
         switch (key) {
@@ -112,7 +112,7 @@ bool fight(Player &player, Item items[], Monster monster, float &mHp, bool escap
     return false;
 }
 
-void bossScreen(Player &player, Item items[], int bossIndex, bool &isEnd) {
+void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd) {
     srand(time(NULL));
     Monster boss;
     switch (bossIndex) {
@@ -191,7 +191,7 @@ Monster setUpMonster(Player player) {
     return {monsters[monsterN].name, hp, damage, rate, exp};
 }
 
-void fightScreen(Player &player, Item items[], bool &isEscape) {
+void fightScreen(Player &player, vector<Item> &items, bool &isEscape) {
     srand(time(NULL));
     int monsterN;
     if (rand() % 10 < 8)

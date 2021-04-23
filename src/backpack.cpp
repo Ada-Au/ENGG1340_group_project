@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void generateDrops(Item items[]) {
+void generateDrops(vector<Item> &items) {
     string heal = "", weapon = "";
     int healsNum, weaponsNum = 0;
     srand(time(NULL));
@@ -59,29 +59,16 @@ void generateDrops(Item items[]) {
         cout << weapon << " x " << weaponsNum << " GET!\n";
 }
 
-void sortItems(Item items[]) {
-    string tempName;
-    int tempNum;
-    int tempCost;
-    for (int i = 0; i < maxSpace - 1; i++) {
-        for (int j = 0; j < maxSpace - i - 1; j++) {
-            if (items[j].num <= 0) {
-                items[j].num = 0;
-                tempName = items[j].name;
-                tempNum = items[j].num;
-                tempCost = items[j].cost;
-                items[j].name = items[j + 1].name;
-                items[j].num = items[j + 1].num;
-                items[j].cost = items[j + 1].cost;
-                items[j + 1].name = tempName;
-                items[j + 1].num = tempNum;
-                items[j + 1].cost = tempCost;
-            }
+void sortItems(vector<Item> &items) {
+    Item temp;
+    for (int i = 0; i < items.size(); i++) {
+        if (items[i].num <= 0) {
+            items.erase(items.begin() + i);
         }
     }
 }
 
-void displayBackpack(Item items[], bool isShop) {    // Also display player's state if possible
+void displayBackpack(vector<Item> &items, bool isShop) {    // Also display player's state if possible
     sortItems(items);
     cout << "Items\t\t\t\t\t\tNumber";
     if (isShop) {
@@ -89,28 +76,18 @@ void displayBackpack(Item items[], bool isShop) {    // Also display player's st
     } else {
         cout << endl;
     }
-    for (int i = 0; i < maxSpace; i++) {
-        if (items[i].name != "" && items[i].num > 0) {
-            cout << (i + 1) << "  " << items[i].name << setw(48 - items[i].name.length() - to_string(i + 1).length()) << setfill(' ') << items[i].num;
-            if (isShop) {
-                cout << "\t\t" << items[i].cost << " G" << endl;
-            } else {
-                cout << endl;
-            }
+    for (int i = 0; i < items.size(); i++) {
+        cout << (i + 1) << "  " << items[i].name << setw(48 - items[i].name.length() - to_string(i + 1).length()) << setfill(' ') << items[i].num;
+        if (isShop) {
+            cout << "\t\t" << items[i].cost << " G" << endl;
+        } else {
+            cout << endl;
         }
     }
     if (!isShop) {
         cout << "Press [number] to select items or [Q] to exit.\n"
              << "Press [W] to take off weapon or [A] to take off armor.\n\n";
     }
-}
-
-int findItem(string name, Item items[]) {
-    for (int i = 0; i < maxSpace; i++) {
-        if (name == items[i].name)
-            return i;
-    }
-    return -1;
 }
 
 void updateState(Player &player, string object, int number) {
@@ -127,45 +104,51 @@ void updateState(Player &player, string object, int number) {
         player.energy = player.maxEnergy;
 }
 
+int findItem(string name, vector<Item> &items) {
+    for (int i = 0; i < items.size(); i++) {
+        if (name == items[i].name)
+            return i;
+    }
+    return -1;
+}
+
 //To-do:
 // 1) input items after monster fighting / getting things on ground
 // 2) update number of items
 // 3) sort by time(old to new)
-void updateItems(string name, int number, int cost, char flag, Item items[]) {    // flag - A for adding, D for delete
+void updateItems(string name, int number, int cost, char flag, vector<Item> &items) {    // flag - A for adding, D for delete
     if (number > maxStack)
         number = maxStack;
 
     if (flag == 'D')
         number = -number;
 
-    if (findItem(name, items) == -1 && number != 0) {
-        for (int i = 0; i < maxSpace; i++) {
-            if (items[i].name == "") {
-                items[i].name = name;
-                items[i].num += number;
-                items[i].cost = cost;
-                break;
+    int pos = findItem(name, items);
+    if (number != 0) {
+        if (pos == -1) {
+            items.push_back({name, number, cost});
+        } else {
+            items[pos].num += number;
+            if (items[pos].num > maxStack) {
+                items[pos].num = maxStack;
+                cout << "You cannot have more than 99 " << items[pos].name << '.';
             }
         }
-    } else {
-        items[findItem(name, items)].num += number;
-        if (items[findItem(name, items)].num > maxStack)
-            items[findItem(name, items)].num = maxStack;
     }
 }
 
-void openBackpack(Item items[], Player &player) {
+void openBackpack(vector<Item> &items, Player &player) {
     string choice;    // string for two digit nums
     displayBackpack(items, false);
     cin >> choice;
     while (choice != "q") {
         int pos;
-        for (pos = 0; pos < maxSpace; pos++) {    //Find items pos in backpack
+        for (pos = 0; pos < maxSpace; pos++) {    // Find item pos in backpack
             if (choice == to_string(pos + 1))
                 break;
         }
-        if (choice == to_string(pos + 1)) {    //Select item in backpack
-            //Find item if it's healing
+        if (choice == to_string(pos + 1)) {    // Select item in backpack
+            // Find item if it's healing
             for (int i = 0; i < maxHealNum; i++) {
                 if (items[pos].name == heals[i].name) {
                     cout << items[pos].name + " is selected.\t" + heals[i].desc << endl;
@@ -182,7 +165,7 @@ void openBackpack(Item items[], Player &player) {
                     break;
                 }
             }
-            //Find item if it's armor
+            // Find item if it's armor
             for (int i = 0; i < maxArmorNum; i++) {
                 if (items[pos].name == armors[i].name) {
                     cout << items[pos].name + " is equipped.\t" + armors[i].desc + "\n\n";
@@ -206,11 +189,11 @@ void openBackpack(Item items[], Player &player) {
                     break;
                 }
             }
-            //Find item if it's weapon
+            // Find item if it's weapon
             for (int i = 0; i < maxWeaponNum; i++) {
                 if (items[pos].name == weapons[i].name) {
                     cout << items[pos].name + " is equipped.\t" + weapons[i].desc + "\n\n";
-                    //Exchange weapon
+                    // Exchange weapon
                     if (player.weapon.name != "") {
                         //Add player's old weapon in backpack & Update weapon's cost into item's
                         for (int j = 0; j < maxWeaponNum; j++) {
@@ -235,7 +218,7 @@ void openBackpack(Item items[], Player &player) {
                 }
             }
         } else if (choice == "a" || choice == "A") {
-            if (player.armor != "") {
+            if (player.armor != "Empty") {
                 //Add player's old armor in backpack & Update armor's cost into item's
                 for (int i = 0; i < maxArmorNum; i++) {
                     if (player.armor == armors[i].name) {
@@ -243,13 +226,13 @@ void openBackpack(Item items[], Player &player) {
                         break;
                     }
                 }
-                player.armor = "";
+                player.armor = "Empty";
                 player.aDefense = 0;
             } else {
                 cout << "You have no armor on body.\n";
             }
         } else if (choice == "w" || choice == "W") {
-            if (player.weapon.name != "") {
+            if (player.weapon.name != "Empty") {
                 //Add player's old weapon in backpack & Update weapon's cost into item's
                 for (int i = 0; i < maxWeaponNum; i++) {
                     if (player.weapon.name == weapons[i].name) {
@@ -257,7 +240,7 @@ void openBackpack(Item items[], Player &player) {
                         break;
                     }
                 }
-                player.weapon = {"", 2, 0, 1};
+                player.weapon = {"Empty", 2, 0, 1};
             } else {
                 cout << "You have no weapon on hand.\n";
             }
@@ -270,7 +253,7 @@ void openBackpack(Item items[], Player &player) {
     }
 }
 
-void generateChestItems(Item items[], Player &player) {
+void generateChestItems(vector<Item> &items, Player &player) {
     string armor = "";
     int randNum = rand() % 100, armorNum = 1;
     if (randNum <= 3) {
