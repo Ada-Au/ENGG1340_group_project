@@ -19,10 +19,7 @@ using namespace std;
 
 void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isReplay) {
     char key = ' ';
-    cin.ignore();
     scr.log = "Press WASD to move or press [H] for help";
-    // clearScreen();
-    scr.renderScreen(map, player);
     while (key != 'q') {
         bool wall = false, isValid = true;
         key = getch();
@@ -74,6 +71,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
             isValid = false;
         }
         scr.renderScreen(map, player);
+        cout << "test2" << endl;
 
         if (isValid) {
             if (map.layout[player.y][player.x] == 'S') {
@@ -81,7 +79,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                 bool isEnd = true;
                 if (player.gameLevel % 5 == 0) {
                     cout << player.gameLevel / 5;
-                    // bossScreen(player, items, player.gameLevel / 5, isEnd);
+                    bossScreen(player, items, player.gameLevel / 5, isEnd);
                     player.gameLevel++;
                     if (isEnd) {
                         ending();
@@ -97,6 +95,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                 scr.log = "Monster!";
                 clearScreen();
                 scr.renderScreen(map, player);
+                cout << "test3" << endl;
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                 clearScreen();
                 bool isEscape = false;
@@ -105,17 +104,19 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                     map.removeMapIcon(player.x, player.y);
                 }
                 scr.renderScreen(map, player);
-                cin.ignore();
+                cout << "test4" << endl;
             } else if (map.layout[player.y][player.x] == 'C') {
                 scr.log = "Find a golden chest!";
                 clearScreen();
                 scr.renderScreen(map, player);
+                cout << "test5" << endl;
                 generateChestItems(items, player);
                 map.removeMapIcon(player.x, player.y);
             } else if (map.layout[player.y][player.x] == 'N') {
                 scr.log = "Hey Charon!";
                 clearScreen();
                 scr.renderScreen(map, player);
+                cout << "test6" << endl;
                 shopScreen(player, items);
                 map.removeMapIcon(player.x, player.y);
             } else {

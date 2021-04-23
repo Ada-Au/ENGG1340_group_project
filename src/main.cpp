@@ -22,22 +22,22 @@ int main() {
         player = Player();
         vector<Item> items;
         menu(isPlay, player, items);    // todo return to menu screen if no file
-        // if (isPlay == 0)
-        //     return 0;
-        // else if (isPlay == 2)    // To-do: load files
-        //     return 0;
-        if (isPlay != 2)
+        if (isPlay == 0)
+            return 0;
+        else if (isPlay != 2)    // To-do: load files
+        {
             setupScreen(player, isPlay);
-        // if (isPlay == 0)
-        //     return 0;
-        // boatScreen();
+            if (isPlay == 0)
+                return 0;
+            boatScreen();
+        }
         map.fill();
         cout << "Start your adventure!" << endl;
-        scr.renderScreen(map, player);
         action(scr, map, player, items, isReplay);
     }
     return 0;
 }
+
 // std::cout << "COLOR" << std::endl
 //           << BLACK << " BLACK" << RED << " RED" << GREEN << " GREEN"
 //           << YELLOW << " YELLOW" << BLUE << " BLUE" << MAGENTA << " MAGENTA"

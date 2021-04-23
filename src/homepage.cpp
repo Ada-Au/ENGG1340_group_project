@@ -12,7 +12,6 @@ void menu(int &isPlay, Player &player, vector<Item> &items) {
     int choices = 3;
 
     //To-do: Press any key to continue
-    //       add reminder: plz play this game with full screen
     for (int i = 0; i < 10; i++)
         cout << homepage[i] << "\n";
 

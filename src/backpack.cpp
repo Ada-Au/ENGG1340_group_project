@@ -193,7 +193,7 @@ void openBackpack(vector<Item> &items, Player &player) {
             for (int i = 0; i < maxWeaponNum; i++) {
                 if (items[pos].name == weapons[i].name) {
                     cout << items[pos].name + " is equipped.\t" + weapons[i].desc + "\n\n";
-                    //Exchange weapon
+                    // Exchange weapon
                     if (player.weapon.name != "") {
                         //Add player's old weapon in backpack & Update weapon's cost into item's
                         for (int j = 0; j < maxWeaponNum; j++) {
