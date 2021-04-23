@@ -283,6 +283,8 @@ void boatScreen() {
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     renderNpc("Charon", "What a poor boy.");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    renderNpc("Charon", "Here are some breads in case you 'die'");
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     renderNpc("Charon", "Enjoy your trip to hell:)");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     cout << "You get on the trash, start rolling hard.\n"
