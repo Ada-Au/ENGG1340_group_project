@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void generateDrops(vector<Item> &items) {
+void generateDrops(vector<Item> &items, Player &player) {
     string heal = "", weapon = "";
     int healsNum, weaponsNum = 0;
     srand(time(NULL));
@@ -23,11 +23,11 @@ void generateDrops(vector<Item> &items) {
             weapon = "wand";
         }
         healsNum = rand() % 3;
-    } else if (randNum <= 25) {
+    } else if (randNum <= 30) {
         heal = "poor healing";
         weapon = "long sword";
         healsNum = rand() % 6;
-    } else if (randNum <= 40) {
+    } else if (randNum <= 50) {
         heal = "bread";
         weapon = "spear";
         healsNum = rand() % 3;
@@ -36,7 +36,7 @@ void generateDrops(vector<Item> &items) {
         weapon = "sword";
         healsNum = rand() % 7;
     }
-    if (rand() % 10 >= 7) {
+    if (rand() % 5 == 1) {
         weaponsNum = 1;
     }
 
@@ -52,11 +52,20 @@ void generateDrops(vector<Item> &items) {
             break;
         }
     }
+    int coinNum;
+    coinNum = rand() % 7;
 
     if (healsNum != 0 && heal != "")
         cout << heal << " x " << healsNum << " GET!\n";
-    if (weaponsNum != 0 && weapon != "")
+    if (weaponsNum != 0 && weapon != "") {
         cout << weapon << " x " << weaponsNum << " GET!\n";
+        coinNum = rand() % 4;
+    }
+
+    player.coin += coinNum;
+    if (coinNum > 0) {
+        cout << coinNum << "G GET!\n";
+    }
 }
 
 void sortItems(vector<Item> &items) {
