@@ -11,18 +11,18 @@ using namespace std;
 void saveGame(Player player, vector<Item> &items) {
     ifstream file;
     file.open(player.name + ".txt");
+    char key = ' ';
     if (!file.fail()) {
         cout << "File name exist, do you want to cover the existing file? [y/n]" << endl;
+        cin >> key;
+        while (key != 'y' && key != 'Y' && key != 'n' && key != 'N') {
+            cout << "Please input [y] or [n]" << endl;
+            cin >> key;
+        }
     }
     file.close();
 
     string fileName = player.name;
-    char key = ' ';
-    cin >> key;
-    while (key != 'y' && key != 'Y' && key != 'n' && key != 'N') {
-        cout << "Please input [y] or [n]" << endl;
-        cin >> key;
-    }
     if (key == 'n' || key == 'N') {
         cout << "Do you want to create a new file? [y/n]" << endl;
         cin >> key;
@@ -69,6 +69,7 @@ void saveGame(Player player, vector<Item> &items) {
     }
 
     saveFile.close();
+    cout << "File Saved <Press Enter to continue>";
 }
 
 void getSavedGame(Player &player, vector<Item> &items) {

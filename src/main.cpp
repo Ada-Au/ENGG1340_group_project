@@ -24,8 +24,7 @@ int main() {
         menu(isPlay, player, items);    // todo return to menu screen if no file
         if (isPlay == 0)
             return 0;
-        else if (isPlay != 2)    // To-do: load files
-        {
+        else if (isPlay != 2) {
             setupScreen(player, isPlay);
             if (isPlay == 0)
                 return 0;

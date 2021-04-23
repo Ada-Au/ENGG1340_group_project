@@ -19,7 +19,7 @@ void Map::fill() {
     }
 
     srand(time(NULL));
-    int yPos = 1, xPos = 1;
+    int yPos = 1, xPos = 1, tempY = 2, tempX = 2;
     int temp[2] = {0, 0};
     int *lastDirection = temp, *randomDirection;
 
@@ -48,7 +48,10 @@ void Map::fill() {
                     layout[yPos][xPos] = 'N';
                 else if ((!(yPos == 1 && xPos == 1) && rand() % 100 == 1) && layout[yPos][xPos] == ' ')
                     layout[yPos][xPos] = 'C';
-                else
+                else if (rand() % 100 == 1 && layout[yPos][xPos] == ' ') {
+                    tempY = yPos;
+                    tempX = xPos;
+                } else
                     layout[yPos][xPos] = ' ';
 
                 yPos += randomDirection[0];
@@ -60,8 +63,11 @@ void Map::fill() {
                 maxTunnels--;
             }
         }
-        layout[yPos][xPos] = 'S';
     }
+    if (yPos == 1 && xPos == 1)
+        layout[tempY][tempX] = 'S';
+    else
+        layout[yPos][xPos] = 'S';
 
     cout << "\ndone:D\tPress enter to continue...\n\n\n ";
 }

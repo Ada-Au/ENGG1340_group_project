@@ -23,11 +23,11 @@ void generateDrops(vector<Item> &items, Player &player) {
             weapon = "wand";
         }
         healsNum = rand() % 3;
-    } else if (randNum <= 25) {
+    } else if (randNum <= 30) {
         heal = "poor healing";
         weapon = "long sword";
         healsNum = rand() % 6;
-    } else if (randNum <= 40) {
+    } else if (randNum <= 50) {
         heal = "bread";
         weapon = "spear";
         healsNum = rand() % 3;
@@ -36,7 +36,7 @@ void generateDrops(vector<Item> &items, Player &player) {
         weapon = "sword";
         healsNum = rand() % 7;
     }
-    if (rand() % 10 >= 7) {
+    if (rand() % 5 == 1) {
         weaponsNum = 1;
     }
 

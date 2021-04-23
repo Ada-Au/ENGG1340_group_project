@@ -115,6 +115,7 @@ bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, boo
 void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd) {
     srand(time(NULL));
     Monster boss;
+    isEnd = false;
     switch (bossIndex) {
     case 1:
         boss = boss1;

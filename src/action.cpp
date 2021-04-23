@@ -62,9 +62,6 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
             printHelp();
             cin.get();
             break;
-        case 'p':
-            saveGame(player, items);
-            break;
         default:
             if (player.hp > 0)
                 scr.log = "Please input again or press [H] for help";
@@ -79,7 +76,8 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                 if (player.gameLevel % 5 == 0) {
                     cout << player.gameLevel / 5;
                     bossScreen(player, items, player.gameLevel / 5, isEnd);
-                    player.gameLevel++;
+                    // player.gameLevel++;
+                    saveGame(player, items);
                     if (isEnd) {
                         ending();
                         cout << "\nYou win the game! Wanna play again??\ny - Yes, what a fun game!\tn - No, I have better things to do with my life." << endl;
