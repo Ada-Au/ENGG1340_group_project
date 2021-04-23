@@ -179,7 +179,7 @@ void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd)
         cout << "You kill " << boss.name << '!' << endl;
         cout << fixed << setprecision(2) << "You gain " << boss.exp << " XP!" << endl;
         player.exp += boss.exp;
-        generateDrops(items);    //annouce what player got after battle save in generateDrops(item)
+        generateDrops(items, player);    //annouce what player got after battle save in generateDrops(item)
         upgradePlayer(player);
         if (bossIndex == 11)
             bossScreen(player, items, 12, isEnd);
@@ -218,7 +218,7 @@ void fightScreen(Player &player, vector<Item> &items, bool &isEscape) {
         cout << "You kill a monster!" << endl;
         cout << fixed << setprecision(2) << "You gain " << monster.exp << " XP!" << endl;
         player.exp += monster.exp;
-        generateDrops(items);    //annouce what player got after battle save in generateDrops(item)
+        generateDrops(items, player);    //annouce what player got after battle save in generateDrops(item)
         upgradePlayer(player);
     }
     cout << endl;

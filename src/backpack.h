@@ -76,7 +76,7 @@ struct Item {
     int cost;
 };
 
-void generateDrops(vector<Item> &);
+void generateDrops(vector<Item> &, Player &);
 void updateItems(string, int, int, char, vector<Item> &);
 void displayBackpack(vector<Item> &, bool);
 void openBackpack(vector<Item> &, Player &);
