@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void menu(bool &isPlay, Player &player, vector<Item> &items) {
+void menu(int &isPlay, Player &player, vector<Item> &items) {
 
     for (int i = 0; i < 10; i++)
         cout << homepage[i] << "\n";
@@ -32,7 +32,7 @@ void menu(bool &isPlay, Player &player, vector<Item> &items) {
         break;
     case '3':    // quit game
         cout << "Selected QUIT\n";
-        isPlay = false;
+        isPlay = 0;
         break;
     }
 }
