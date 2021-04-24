@@ -69,7 +69,7 @@ void generateDrops(vector<Item> &items, Player &player) {
 
     player.coin += coinNum;
     if (coinNum > 0) {
-        cout << coinNum << "G GET!\n";
+        cout << coinNum << " G GET!\n";
     }
 }
 
@@ -314,5 +314,5 @@ void generateChestItems(vector<Item> &items, Player &player) {
         coinNum = (1 + rand() % 16);
     }
     player.coin += coinNum;
-    cout << coinNum << "G GET!\n";
+    cout << coinNum << " G GET!\n";
 }

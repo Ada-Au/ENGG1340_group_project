@@ -24,6 +24,7 @@ void menu(int &isPlay, Player &player, vector<Item> &items) {
     case '1':    // start a new game
         cout << "START! :D\n\n";
         updateItems("bread", 3, 2, 'A', items);    // give breads to player in the beginning
+        player.coin = 1;
         break;
     case '2':
         cout << "Selected LOAD\n";    // input files

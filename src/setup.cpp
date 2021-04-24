@@ -282,7 +282,7 @@ void boatScreen() {
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     cout << "...\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    cout << "1G GET.\n";
+    cout << "1 G GET.\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     renderNpc("Charon", "Choose one here.");
     printBoats();
