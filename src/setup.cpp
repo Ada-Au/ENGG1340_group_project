@@ -71,7 +71,7 @@ void PrintGender() {
 // print player's question in Charon's introduction
 // and read player's choices
 // Input: bool repeat: determine whether player entered invalid input
-//                     if yes, Charon appears to ask "What do you say?"
+//                     if invalid, Charon appears to ask "What do you say?"
 void DealQuestion(bool repeat, string &key) {
     if (repeat) {
         cout << "1 - Who are you?\n"
@@ -154,6 +154,7 @@ void setData(string key, int choice, Player &player) {
             cout << "Please input again: ";
             cin >> key;
             setData(key, choice, player);
+            break;
         }
         // set up Charon's log after player's selecting race
         if (player.race == "elf") {
@@ -288,20 +289,20 @@ void boatScreen() {
     printBoats();
     string choice = "";
     // restrict player's choice within '1', '2', '3', '4' and '5'
-    while ((choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5') || choice[1] != '\0') {
+    while (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5") {
         cout << "Enter your choice: ";
         cin >> choice;
     }
     // limit player to buy trash as player.coin < prices of other boats
-    while (choice[0] != '1') {
-        while ((choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5') || choice[1] != '\0') {
+    while (choice != "1") {
+        while (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5") {
             renderNpc("Charon", "No such choice.");
             printBoats();
             cout << "Enter your choice: ";
             cin >> choice;
         }
         // Charon being more sarcastic if player select diamond boat
-        if (choice[0] == '5') {
+        if (choice == "5") {
             renderNpc("Charon", "Look at how much money you have!");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             renderNpc("Charon", "Why do you think you can afford that!?");
@@ -313,17 +314,17 @@ void boatScreen() {
         cin >> choice;
     }
     renderNpc("Charon", "To my surprise, you bought trash.");
-    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     renderNpc("Charon", "What a poor boy.");
-    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     renderNpc("Charon", "Here are some breads in case you 'die'");
-    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     renderNpc("Charon", "Enjoy your trip to hell:)");
-    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     cout << "You get on the trash, start rolling hard.\n"
          << "After a few minutes, you found there is water leaking...\n"
          << "The boat is sinking!!\n";
-    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     cout << "You fell down for very long.long..long... time. Guess now you are in the bottom layer of hell.\\_('U')_/\n";
-    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 }

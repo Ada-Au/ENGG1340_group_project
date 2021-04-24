@@ -45,6 +45,7 @@ void generateDrops(vector<Item> &items, Player &player) {
         weaponsNum = 1;
     }
 
+    // Update player's backpack
     for (int i = 0; i < maxHealNum; i++) {
         if (heal == heals[i].name) {
             updateItems(heal, healsNum, heals[i].cost, 'A', items);

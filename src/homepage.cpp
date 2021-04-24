@@ -12,7 +12,7 @@ void menu(int &isPlay, Player &player, vector<Item> &items) {
         cout << homepage[i] << "\n";
     cout << "(Please play this game with full screen)" << endl;
 
-    // Press 1, 2, 3 to continue
+    // Press 1/ 2/ 3 to continue
     cout << setw(104) << setfill(' ') << "[1]  START    [2]  LOAD    [3]  QUIT\n";
 
     string choice = "";
@@ -23,11 +23,11 @@ void menu(int &isPlay, Player &player, vector<Item> &items) {
     switch (choice[0]) {
     case '1':    // start a new game
         cout << "START! :D\n\n";
-        updateItems("bread", 3, 2, 'A', items);    // give breads to player in the beginning
+        updateItems("bread", 3, 2, 'A', items);    // give breads and coin to player in the beginning
         player.coin = 1;
         break;
-    case '2':
-        cout << "Selected LOAD\n";    // input files
+    case '2':    // load a game
+        cout << "Selected LOAD\n";
         isPlay = 2;
         getSavedGame(player, items, isPlay);
         break;
