@@ -6,7 +6,7 @@
 struct ShopItem {
     string name, desc;
     int amount;
-    int price, cost;
+    int cost, price;
 };
 
 void shopScreen(Player &player, vector<Item> &);

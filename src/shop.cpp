@@ -52,74 +52,74 @@ void generateShopItems(Player player, vector<ShopItem> &shopItems) {
         //items that only sold in shop
         if (rand() % 100 > 90 - player.level) {
             if (rand() % 7 == 0) {
-                shopItems.push_back({"vorpan", "(+10 ATK, -10 Energy/atk)", 1, 3819, 45});
+                shopItems.push_back({"vorpan", "(+10 ATK, -10 Energy/atk)", 1, 202, 3819});
             } else if (rand() % 7 == 1) {
-                shopItems.push_back({"soul sword", "(+20 ATK, -8 Energy/atk, -8 MP/atk)", 1, 6666, 66});
+                shopItems.push_back({"soul sword", "(+20 ATK, -8 Energy/atk, -8 MP/atk)", 1, 166, 6666});
             } else if (rand() % 7 == 2) {
-                shopItems.push_back({"twin daggers", "(+14 Atk, -12 Energy/atk)", 1, 4242, 44});
+                shopItems.push_back({"twin daggers", "(+14 Atk, -12 Energy/atk)", 1, 110, 4242});
             } else if (rand() % 7 == 3) {
-                shopItems.push_back({"war spear", "(+12 Atk, -7 Energy/atk)", 1, 3647, 39});
+                shopItems.push_back({"war spear", "(+12 Atk, -7 Energy/atk)", 1, 97, 3647});
             } else if (rand() % 7 == 4) {
-                shopItems.push_back({"blood katana", "(+18 Atk, -20 Energy/atk)", 1, 4536, 42});
+                shopItems.push_back({"blood katana", "(+18 Atk, -20 Energy/atk)", 1, 105, 4536});
             } else if (rand() % 7 == 5) {
-                shopItems.push_back({"toothpick", "(+15 Atk, -25 Energy/atk)", 1, 3840, 40});
+                shopItems.push_back({"toothpick", "(+15 Atk, -25 Energy/atk)", 1, 100, 3840});
             } else if (rand() % 7 == 6) {
-                shopItems.push_back({"diamond sword", "(Best weapon you can have!)", 1, 9999999, 1999});
+                shopItems.push_back({"diamond sword", "(Best weapon you can have!)", 1, 4999, 99999});
             }
         } else if (rand() % 100 > 75 - player.level) {
             if (rand() % 2 == 0) {
-                shopItems.push_back({"diamond shield", "(Best armor you can have!)", 1, 999999, 999});
+                shopItems.push_back({"diamond shield", "(Best armor you can have!)", 1, 2999, 9999});
             } else {
-                shopItems.push_back({"golden shield", "(+20 DFS)", 1, 1980, 72});
+                shopItems.push_back({"golden shield", "(+20 DFS)", 1, 180, 1980});
             }
         } else if (rand() % 100 > 50 - player.level) {
             if (rand() % 2 == 0) {
-                shopItems.push_back({"high healing", "(+100 HP)", (1 + rand() % 3), 420, 50});
+                shopItems.push_back({"high healing", "(+100 HP)", (1 + rand() % 3), 125, 420});
             } else {
-                shopItems.push_back({"medium healing", "(+75 HP)", (1 + rand() % 4), 288, 36});
+                shopItems.push_back({"medium healing", "(+75 HP)", (1 + rand() % 4), 90, 288});
             }
         }
         //generate healings
         if (rand() % 100 <= 90) {
-            shopItems.push_back({"monster meat", "(Are you sure to eat that?)", (1 + rand() % 20), 12, 2});
+            shopItems.push_back({"monster meat", "(Are you sure to eat that?)", (1 + rand() % 20), 5, 12});
         }
         if (rand() % 100 <= 50) {
-            shopItems.push_back({"bread", "(You're \"toast\".)", (1 + rand() % 10), 30, 5});
+            shopItems.push_back({"bread", "(You're \"toast\".)", (1 + rand() % 10), 12, 30});
         }
         if (rand() % 100 >= 25) {
-            shopItems.push_back({"poor healing", "(+10 HP)", (1 + rand() % 20), 65, 10});
+            shopItems.push_back({"poor healing", "(+10 HP)", (1 + rand() % 20), 25, 65});
         }
         if (rand() % 100 >= 50) {
-            shopItems.push_back({"average healing", "(+20 HP)", (1 + rand() % 15), 90, 15});
+            shopItems.push_back({"average healing", "(+20 HP)", (1 + rand() % 15), 37, 90});
         }
         if (rand() % 100 >= 75) {
-            shopItems.push_back({"decent healing", "(+50 HP)", (1 + rand() % 10), 145, 24});
+            shopItems.push_back({"decent healing", "(+50 HP)", (1 + rand() % 10), 60, 145});
         }
         //generate armors
         if (rand() % 50 <= 45) {
-            shopItems.push_back({"boat remains", "(...)", (1 + rand() % 50), 15, 1});
+            shopItems.push_back({"boat remains", "(...)", (1 + rand() % 50), 2, 15});
         }
         if (rand() % 50 <= 30) {
-            shopItems.push_back({"wood shield", "(+5 DFS)", 1, 150, 10});
+            shopItems.push_back({"wood shield", "(+5 DFS)", 1, 25, 150});
         } else if (rand() % 50 <= 25) {
-            shopItems.push_back({"leather shield", "(+10 DFS)", 1, 550, 40});
+            shopItems.push_back({"leather shield", "(+10 DFS)", 1, 100, 550});
         } else if (rand() % 50 <= 10) {
-            shopItems.push_back({"silver shield", "(+15 DFS)", 1, 900, 60});
+            shopItems.push_back({"silver shield", "(+15 DFS)", 1, 150, 900});
         }
         //generate weapons
         if (rand() % 25 >= 22) {
-            shopItems.push_back({"hammer", "(+10 ATK, -30 Energy/atk)", 1, 592, 37});
+            shopItems.push_back({"hammer", "(+10 ATK, -30 Energy/atk)", 1, 92, 592});
         } else if (rand() % 25 >= 20) {
-            shopItems.push_back({"great sword", "(+8 ATK, -15 Energy/atk)", 1, 290, 18});
+            shopItems.push_back({"great sword", "(+8 ATK, -15 Energy/atk)", 1, 45, 290});
         } else if (rand() % 25 >= 12) {
-            shopItems.push_back({"long sword", "(+4.5 ATK, -5 Energy/atk)", 1, 204, 15});
+            shopItems.push_back({"long sword", "(+4.5 ATK, -5 Energy/atk)", 1, 37, 204});
         }
         if (rand() % 25 <= 20) {
-            shopItems.push_back({"sword", "(+2 ATK, -0.5 Energy/atk)", 1, 169, 5});
+            shopItems.push_back({"sword", "(+2 ATK, -0.5 Energy/atk)", 1, 12, 169});
         } else if (rand() % 25 <= 12) {
-            shopItems.push_back({"wand", "(+8 ATK, -15 MP/atk)", 1, 474, 30});
+            shopItems.push_back({"wand", "(+8 ATK, -15 MP/atk)", 1, 100, 474});
         } else {
-            shopItems.push_back({"spear", "(+6 ATK, -10 Energy/atk)", 1, 200, 12});
+            shopItems.push_back({"spear", "(+6 ATK, -10 Energy/atk)", 1, 30, 200});
         }
     }
     sortShopItems(shopItems);
