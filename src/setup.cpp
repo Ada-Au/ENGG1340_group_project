@@ -63,7 +63,7 @@ void PrintGender() {
     cout << "* - Random\n";
 }
 
-void DealQuestion(bool repeat, string key) {
+void DealQuestion(bool repeat, string &key) {
     if (repeat) {
         cout << "1 - Who are you?\n"
              << "2 - Where am I?\n"
