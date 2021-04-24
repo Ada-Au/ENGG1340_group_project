@@ -27,7 +27,7 @@ int main() {
         }    // todo return to menu screen if no file
         if (isPlay == 0)
             return 0;
-        else {
+        else if (isPlay == 2) {
             setupScreen(player, isPlay);
             if (!isPlay)
                 return 0;
