@@ -30,17 +30,20 @@ bool isWithinBackpack(vector<Item> &items, string choice) {
 
 // check whether player's choice is inside shop
 bool isWithinShop(vector<ShopItem> shopItems, string choice) {
+    // As choice is printed out as the index of shop items + 1
     for (int i = 0; i < shopItems.size(); i++)
+        // if choice matches index of shop items + 1
         if (choice == to_string(i + 1))
             return true;
     return false;
 }
 
+// avoid redundancy of generation of shop items
 void sortShopItems(vector<ShopItem> &shopItems) {
-    for (int i = 0; i < shopItems.size() - 1; i++)
+    for (int i = 0; i < shopItems.size() - 1; i++)    // selection sorting
         for (int j = i + 1; j < shopItems.size(); j++)
-            if (shopItems[i].name == shopItems[j].name)
-                shopItems.erase(shopItems.begin() + j);
+            if (shopItems[i].name == shopItems[j].name)    // if shop items are same
+                shopItems.erase(shopItems.begin() + j);    // erase redundant shop item
 }
 
 void generateShopItems(Player player, vector<ShopItem> &shopItems) {
