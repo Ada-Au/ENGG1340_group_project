@@ -26,8 +26,8 @@ const std::string genderList[max_gender] = {"male", "female"};
 #define MAGENTA "\033[35m"            /* Magenta */
 #define CYAN "\033[36m"               /* Cyan (NPC)*/
 #define WHITE "\033[37m"              /* White */
-#define BOLDBLACK "\033[1m\033[30m"   /* Bold Black (Wall)*/
-#define BOLDRED "\033[1m\033[31m"     /* Bold Red (fire)*/
+#define BOLDBLACK "\033[1m\033[30m"   /* Bold Black*/
+#define BOLDRED "\033[1m\033[31m"     /* Bold Red (When player is on monster)*/
 #define BOLDGREEN "\033[1m\033[32m"   /* Bold Green */
 #define BOLDYELLOW "\033[1m\033[33m"  /* Bold Yellow (chest)*/
 #define BOLDBLUE "\033[1m\033[34m"    /* Bold Blue */
