@@ -204,14 +204,14 @@ void setupScreen(Player &player, int &isPlay) {
     PrintChoice();
     cin >> key;
     // restrict player's input within 'N'/'n', 'Q'/'q', '1', '2', '3'
-    while (((key[0] != 'n' && key[0] != 'N') && (key[0] != 'q' && key[0] != 'Q') && key[0] != '1' && key[0] != '2' && key[0] != '3') || key[1] != '\0') {
+    while (key != "n" && key != "N" && key != "q" && key != "Q" && key != "1" && key != "2" && key != "3") {
         cout << "Enter again: ";
         cin >> key;
         cout << endl;
     }
     // if player enters 'N'/'n', player starts game
     // if player enters 'Q'/'q', player quits game
-    while (key[0] != 'n' && key[0] != 'N' && key[0] != 'Q' && key[0] != 'q') {
+    while (key != "n" && key != "N" && key != "q" && key != "Q") {
         // restrict player only input one character
         if (key[1] == '\0') {
             switch (key[0]) {
@@ -239,7 +239,7 @@ void setupScreen(Player &player, int &isPlay) {
                 break;
             }
             // print player's information again if player doesn't quit game
-            if (key[0] != 'Q' && key[0] != 'q') {
+            if (key != "q" && key != "Q") {
                 PrintInform(player);
                 PrintChoice();
                 cin >> key;
