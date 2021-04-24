@@ -7,17 +7,18 @@
 using namespace std;
 
 Player::Player() {
-    mark = '@';
-    x = 1, y = 1;
+    mark = '@';      // player's icon on map
+    x = 1, y = 1;    // player's initial position
+    // player's initial status
     mp = 100, hp = 100, energy = 100, maxEnergy = 100;
     maxMp = 100, maxHp = 100, exp = 0, maxExp = 20, damage = 0, defense = 0;
-    level = 1, gameLevel = 1;
-    coin = 0;
-    isFirst = true;
-    race = "human";
-    weapon = {"Empty", 2, 0, 1}, armor = "Empty";
-    aDefense = 0;
-    // debuffs.push_back(allDebuffs[0]);
+    level = 1, gameLevel = 1;       // player's level and round level
+    coin = 0;                       // player's money
+    isFirst = true;                 // bool for player first meeting Charon
+    race = "human";                 // player's initial race
+    weapon = {"Empty", 2, 0, 1};    // player's weapon {name, damage, mp loss, energy loss}
+    armor = "Empty";                // player's armor
+    aDefense = 0;                   // player's initial armor defense value
 }
 
 void addBuff(bool isBuff, string name, Player &player) {
