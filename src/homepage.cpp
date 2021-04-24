@@ -20,7 +20,7 @@ void menu(int &isPlay, Player &player, vector<Item> &items) {
     //Press 1, 2, 3 to continue
     cout << setw(104) << setfill(' ') << "[1]  START    [2]  LOAD    [3]  QUIT\n";
 
-    char c[2] = {'4'};
+    string c = "";
     while ((c[0] != '1' && c[0] != '2' && c[0] != '3') || c[1] != '\0') {
         cout << "Enter your choice: ";
         cin >> c;

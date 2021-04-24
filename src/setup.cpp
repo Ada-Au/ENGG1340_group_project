@@ -63,7 +63,7 @@ void PrintGender() {
     cout << "* - Random\n";
 }
 
-void DealQuestion(bool repeat, char key[]) {
+void DealQuestion(bool repeat, string key) {
     if (repeat) {
         cout << "1 - Who are you?\n"
              << "2 - Where am I?\n"
@@ -80,7 +80,7 @@ void DealQuestion(bool repeat, char key[]) {
     cout << endl;
 }
 
-void introduction(char key[]) {
+void introduction(string key) {
     DealQuestion(true, key);
     while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[0] != '3')) {
         DealQuestion(false, key);
@@ -101,7 +101,7 @@ void introduction(char key[]) {
     }
 }
 
-void setData(char key[], int choice, Player &player) {
+void setData(string key, int choice, Player &player) {
     // To-do: avoid player's lengthen input
     while (key[1] != '\0') {
         cout << "Please input again: ";
@@ -148,7 +148,6 @@ void setData(char key[], int choice, Player &player) {
             renderNpc("Charon", log);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
-
         break;
     case 3:    // gender
         if ((key[0] >= 'a' && key[0] <= 'a' + max_gender) || (key[0] >= 'A' && key[0] <= 'A' + max_gender))
@@ -165,7 +164,7 @@ void setData(char key[], int choice, Player &player) {
 }
 
 void setupScreen(Player &player, int &isPlay) {
-    char key[2];
+    string key;
     srand(time(NULL));
     player.role = roleList[rand() % max_role];
     player.gender = genderList[rand() % max_gender];
