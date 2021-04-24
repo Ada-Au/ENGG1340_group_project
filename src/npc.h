@@ -23,7 +23,7 @@ const Monster boss7 = {"Need", 495, 66, 85, 45};
 const Monster boss8 = {"Death", 585, 76, 85, 50};
 const Monster boss9 = {"Agony", 683, 86, 85, 55};
 const Monster boss10 = {"Nightmare", 790, 109, 85, 60};
-const Monster boss11[2] = {{"Hades(calm)", 895, 121, 85, 65}, {"Hades(angry)", 2238, 181, 100, 70}};
+const Monster boss11[2] = {{"Hades(calm)", 895, 121, 85, 65}, {"Hades(angry)", 1238, 181, 100, 70}};
 
 const Monster monsters[monsterSize] = {{"Monster", 10, 2, 70, 2}, {"Monster (enchanted)", 15, 3, 75, 4}};
 
