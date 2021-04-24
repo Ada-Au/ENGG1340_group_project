@@ -16,12 +16,16 @@ int main() {
     Player player;
     bool isReplay = true;
     while (isReplay) {
-        bool isPlay = true;    // determine close game or not
+        int isPlay = 1;    // determine close game or not
         isReplay = false;
         player = Player();
         vector<Item> items;
-        menu(isPlay, player, items);    // todo return to menu screen if no file
-        if (!isPlay)
+        menu(isPlay, player, items);
+        if (isPlay == 3) {
+            isReplay = true;
+            continue;
+        }    // todo return to menu screen if no file
+        if (isPlay == 0)
             return 0;
         else {
             setupScreen(player, isPlay);

@@ -5,6 +5,6 @@
 #include "player.h"
 
 void saveGame(Player, vector<Item> &);
-void getSavedGame(Player &, vector<Item> &);
+void getSavedGame(Player &, vector<Item> &, int &);
 
 #endif

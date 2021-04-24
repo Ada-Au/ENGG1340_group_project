@@ -7,6 +7,6 @@
 
 using namespace std;
 
-void setupScreen(Player &, bool &);
+void setupScreen(Player &, int &);
 void boatScreen();
 #endif
