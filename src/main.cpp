@@ -15,18 +15,17 @@ int main() {
     Map map;
     Player player;
     bool isReplay = true;
-    // TODO what the hell is isPlay=_=
     while (isReplay) {
-        int isPlay = 1;    // determine close game or not
+        bool isPlay = true;    // determine close game or not
         isReplay = false;
         player = Player();
         vector<Item> items;
         menu(isPlay, player, items);    // todo return to menu screen if no file
-        if (isPlay == 0)
+        if (!isPlay)
             return 0;
-        else if (isPlay != 2) {
+        else {
             setupScreen(player, isPlay);
-            if (isPlay == 0)
+            if (!isPlay)
                 return 0;
             boatScreen();
         }

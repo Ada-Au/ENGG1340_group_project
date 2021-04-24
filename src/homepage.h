@@ -21,6 +21,6 @@ const string homepage[10] =
         "  WWWW        WWWW     HHH         HHH   AAA        AAA      TTTTT              AAA        AAA              HHH         HHH   EEEEEEEEEEEEE   LLLLLLLLLLLL  LLLLLLLLLLLL ",
 };
 
-void menu(int &, Player &, vector<Item> &);
+void menu(bool &, Player &, vector<Item> &);
 
 #endif

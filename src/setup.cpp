@@ -163,7 +163,7 @@ void setData(string key, int choice, Player &player) {
     }
 }
 
-void setupScreen(Player &player, int &isPlay) {
+void setupScreen(Player &player, bool &isPlay) {
     string key;
     srand(time(NULL));
     player.role = roleList[rand() % max_role];
@@ -223,7 +223,7 @@ void setupScreen(Player &player, int &isPlay) {
         }
     }
     if (key[0] == 'q' || key[0] == 'Q')
-        isPlay = 0;
+        isPlay = false;
 }
 
 void printBoats() {

@@ -7,37 +7,32 @@
 
 using namespace std;
 
-void menu(int &isPlay, Player &player, vector<Item> &items) {
-    int selected = 0;
-    int choices = 3;
+void menu(bool &isPlay, Player &player, vector<Item> &items) {
 
-    //To-do: Press any key to continue
     for (int i = 0; i < 10; i++)
         cout << homepage[i] << "\n";
-
     cout << "(Please play this game with full screen)" << endl;
 
-    //Press 1, 2, 3 to continue
+    // Press 1, 2, 3 to continue
     cout << setw(104) << setfill(' ') << "[1]  START    [2]  LOAD    [3]  QUIT\n";
 
-    string c = "";
-    while ((c[0] != '1' && c[0] != '2' && c[0] != '3') || c[1] != '\0') {
+    string choice = "";
+    while (choice != "1" && choice != "2" && choice != "3") {
         cout << "Enter your choice: ";
-        cin >> c;
+        cin >> choice;
     }
-    switch (c[0]) {
-    case '1':
-        cout << "START! :D\n\n";    //start a new game
-        updateItems("bread", 3, 2, 'A', items);
+    switch (choice[0]) {
+    case '1':    // start a new game
+        cout << "START! :D\n\n";
+        updateItems("bread", 3, 2, 'A', items);    // give breads to player in the beginning
         break;
-    case '2':
-        cout << "Selected LOAD\n";    // input files
+    case '2':    // load file
+        cout << "Selected LOAD\n";
         getSavedGame(player, items);
-        isPlay = 2;
         break;
-    case '3':
+    case '3':    // quit game
         cout << "Selected QUIT\n";
-        isPlay = 0;
+        isPlay = false;
         break;
     }
 }
