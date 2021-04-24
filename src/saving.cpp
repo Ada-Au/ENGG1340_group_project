@@ -6,8 +6,6 @@
 
 using namespace std;
 
-// TODO encrytion?
-
 void saveGame(Player player, vector<Item> &items) {
     ifstream file;
     file.open(player.name + ".txt");
@@ -74,7 +72,7 @@ void saveGame(Player player, vector<Item> &items) {
     cout << "File Saved <Press Enter to continue>";
 }
 
-void getSavedGame(Player &player, vector<Item> &items) {
+void getSavedGame(Player &player, vector<Item> &items, int &isPlay) {
     string fileName;
     cout << "Please input the file name you want to continue: ";
     cin >> fileName;
@@ -84,6 +82,7 @@ void getSavedGame(Player &player, vector<Item> &items) {
         cout << "File not exist. Please input again or press [Q] to starting screen: ";
         cin >> fileName;
         if (fileName == "Q" || fileName == "q") {
+            isPlay = 3;
             return;
         } else {
             file.open(fileName + ".txt");

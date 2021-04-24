@@ -8,7 +8,6 @@
 using namespace std;
 
 void menu(int &isPlay, Player &player, vector<Item> &items) {
-
     for (int i = 0; i < 10; i++)
         cout << homepage[i] << "\n";
     cout << "(Please play this game with full screen)" << endl;
@@ -26,9 +25,10 @@ void menu(int &isPlay, Player &player, vector<Item> &items) {
         cout << "START! :D\n\n";
         updateItems("bread", 3, 2, 'A', items);    // give breads to player in the beginning
         break;
-    case '2':    // load file
-        cout << "Selected LOAD\n";
-        getSavedGame(player, items);
+    case '2':
+        cout << "Selected LOAD\n";    // input files
+        isPlay = 2;
+        getSavedGame(player, items, isPlay);
         break;
     case '3':    // quit game
         cout << "Selected QUIT\n";
