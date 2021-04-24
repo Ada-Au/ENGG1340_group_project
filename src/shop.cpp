@@ -168,8 +168,7 @@ void talkAgain(string str, bool &isTalking, int &c, bool isFirst) {
     }
 }
 
-void tryAgainInShop(string key) {
-    key[0] = '6';
+void tryAgainInShop(string &key) {
     while (key[0] != '1' && key[0] != '2' && key[0] != '3' && key[0] != '4' || key[1] != '\0') {
         renderNpc("Charon", "Welcome, have a look.");
         std::cout << "ACTION (please input number 1-4)" << endl
@@ -182,7 +181,7 @@ void tryAgainInShop(string key) {
 
 void shopScreen(Player &player, vector<Item> &items) {
     shopItems.clear();
-    string key;
+    string key = "";
     bool bought = false;
     tryAgainInShop(key);
     while (key[0] != '4') {
