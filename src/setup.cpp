@@ -95,7 +95,7 @@ void introduction(string key) {
             break;
         }
         DealQuestion(true, key);
-        while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[1] == '\0')) {
+        while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[0] != '3' && key[1] == '\0')) {
             DealQuestion(false, key);
         }
     }
