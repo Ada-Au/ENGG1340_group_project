@@ -8,8 +8,9 @@
 
 using namespace std;
 
-vector<ShopItem> shopItems;
+vector<ShopItem> shopItems;    // vector to store shop items, which is only needed in shop.cpp
 
+// check whether player's input is number
 bool isNumber(string str) {
     for (int i = 0; i < str.length(); i++) {
         if (isdigit(str[i]) == 0)
@@ -18,30 +19,28 @@ bool isNumber(string str) {
     return true;
 }
 
-void sortShopItems(vector<ShopItem> &shopItems) {
-    for (int i = 0; i < shopItems.size() - 1; i++)
-        for (int j = i + 1; j < shopItems.size(); j++)
-            if (shopItems[i].name == shopItems[j].name)
-                shopItems.erase(shopItems.begin() + j);
-}
-
+// check whether player's choice is inside backpack
 bool isWithinBackpack(vector<Item> &items, string choice) {
-    int sizeOfBackpack;
-    for (sizeOfBackpack = 0; sizeOfBackpack < maxSpace; sizeOfBackpack++)
-        if (items[sizeOfBackpack].name == "" || items[sizeOfBackpack].num <= 0)
-            break;
-    for (int i = 0; i < sizeOfBackpack; i++) {
+    for (int i = 0; i < items.size(); i++) {
         if (choice == to_string(i + 1))
             return true;
     }
     return false;
 }
 
+// check whether player's choice is inside shop
 bool isWithinShop(vector<ShopItem> shopItems, string choice) {
     for (int i = 0; i < shopItems.size(); i++)
         if (choice == to_string(i + 1))
             return true;
     return false;
+}
+
+void sortShopItems(vector<ShopItem> &shopItems) {
+    for (int i = 0; i < shopItems.size() - 1; i++)
+        for (int j = i + 1; j < shopItems.size(); j++)
+            if (shopItems[i].name == shopItems[j].name)
+                shopItems.erase(shopItems.begin() + j);
 }
 
 void generateShopItems(Player player, vector<ShopItem> &shopItems) {
