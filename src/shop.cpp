@@ -207,10 +207,11 @@ void shopScreen(Player &player, vector<Item> &items) {
     string key = "";        // string for player's choice in action
     bool bought = false;    // determine whether player buys items
     tryAgainInShop(key);
-    while (key != "4") {    // while player doesn't choose quit
-        string choice;      // string for two digit nums that players has to select items
-        int pos;            // int for postion of items in backpack/shop
-        int amount;         // int for amount that player buys or sells
+    // while player doesn't choose quit
+    while (key != "4") {
+        string choice;    // string for two digit nums that players has to select items
+        int pos;          // int for postion of items in backpack/shop
+        int amount;       // int for amount that player buys or sells
         switch (key[0]) {
         case '1':    // sell
             renderNpc("Charon", "Sell something?");
@@ -330,7 +331,7 @@ void shopScreen(Player &player, vector<Item> &items) {
             }
             break;
         case '3':    //talk
-            // player talk before buying and first meet Charon
+            // player talk before buying and first meeting Charon
             if (player.isFirst && !bought) {
                 renderNpc("Charon", "Why do I need to talk to someone");
                 cout << "<Press Enter to Continue>";
