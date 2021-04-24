@@ -24,12 +24,12 @@ int main() {
         if (isPlay == 3) {
             isReplay = true;
             continue;
-        }    // todo return to menu screen if no file
+        }
         if (isPlay == 0)
             return 0;
-        else if (isPlay == 2) {
+        else if (isPlay != 2) {
             setupScreen(player, isPlay);
-            if (!isPlay)
+            if (isPlay == 0)
                 return 0;
             boatScreen();
         }

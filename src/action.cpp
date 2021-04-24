@@ -169,7 +169,7 @@ void printBoatsInEnding() {
     }
 }
 
-void tryAgainInEnding(string &choice, bool &choosing) {    //To-do: adding condition -> player's property
+void tryAgainInEnding(string &choice, bool &choosing) {
     printBoatsInEnding();
     getline(cin, choice);
     while (choosing) {

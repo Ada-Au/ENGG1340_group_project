@@ -6,8 +6,6 @@
 
 using namespace std;
 
-// TODO encrytion?
-
 void saveGame(Player player, vector<Item> &items) {
     ifstream file;
     file.open(player.name + ".txt");

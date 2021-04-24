@@ -46,7 +46,7 @@ bool isWithinShop(vector<ShopItem> shopItems, string choice) {
 
 void generateShopItems(Player player, vector<ShopItem> &shopItems) {
     srand(player.gameLevel + time(NULL));
-    while (shopItems.size() < 12) {    // To-do: make sure shopItems.size = 12
+    while (shopItems.size() < 12) {
         //items that only sold in shop
         if (rand() % 100 > 90 - player.level) {
             if (rand() % 7 == 0) {
@@ -214,7 +214,7 @@ void shopScreen(Player &player, vector<Item> &items) {
                 if (choice == to_string(pos + 1)) {
                     std::cout << "Amount to sell: ";
                     std::cin >> amount;
-                    while (amount > items[pos].num || amount < 0) {    //To-do: repeat if amount is char/ string
+                    while (amount > items[pos].num || amount < 0) {
                         std::cout << "Exceeds amount, please enter a valid number: ";
                         std::cin >> amount;
                     }
@@ -257,7 +257,7 @@ void shopScreen(Player &player, vector<Item> &items) {
                     }
                     std::cout << "Amount to buy: ";
                     std::cin >> amount;
-                    while (amount > shopItems[pos].amount || amount < 0) {    //To-do: repeat if amount is char/ string
+                    while (amount > shopItems[pos].amount || amount < 0) {
                         renderNpc("Charon", "I have not that much.");
                         std::cout << "Amount to buy: ";
                         std::cin >> amount;

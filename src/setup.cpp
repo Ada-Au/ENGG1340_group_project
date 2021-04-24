@@ -102,7 +102,6 @@ void introduction(string key) {
 }
 
 void setData(string key, int choice, Player &player) {
-    // To-do: avoid player's lengthen input
     while (key[1] != '\0') {
         cout << "Please input again: ";
         cin >> key;
