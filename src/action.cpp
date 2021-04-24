@@ -1,5 +1,4 @@
 #include "action.h"
-#include "backpack.h"
 #include "fight.h"
 #include "npc.h"
 #include "saving.h"
@@ -90,7 +89,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                     saveGame(player, items);
                     // If player defeat the last boss (on level 55) will show end screen
                     if (isEnd) {
-                        ending();
+                        ending(player);
                         cout << "\nYou win the game! Wanna play again??\ny - Yes, what a fun game!\tn - No, I have better things to do with my life." << endl;
                         tryAgain("Please input again:\ny - Yes, what a fun game!\tn - No, I have better things to do with my life.", isReplay);
                         break;
@@ -170,25 +169,26 @@ void tryAgain(string str, bool &isReplay) {
     string choice;
     do {
         getline(cin, choice);
-        if (choice[1] == '\0' && (choice[0] == 'n' || choice[0] == 'N')) {
+        if (choice == "n" || choice == "N") {
             isReplay = false;
             break;
-        } else if (choice[1] == '\0' && (choice[0] == 'y' || choice[0] == 'Y')) {
+        } else if (choice == "y" || choice == "Y") {
             isReplay = true;
             break;
         } else {
             cout << str << endl;
             choice = " ";
         }
-    } while (choice[0] != 'n' && choice[0] != 'N' && choice[0] != 'y' && choice[0] != 'Y');
+    } while (choice != "n" && choice != "N" && choice != "y" && choice != "Y");
 }
 
+// Print the boat selling screen in ending
 void printBoatsInEnding() {
     string boats[11] = {"1 - trash", "0 G",
                         "2 - wooden boat", "(Sold out)",
                         "3 - iron boat", "(Sold out)",
                         "4 - golden boat", "10,000 G",
-                        "5 - EPIC DIAMOND BOAT", "999,999,999 G",
+                        "5 - EPIC DIAMOND BOAT", "99,999 G(discount cause I cannot sell this for years)",
                         ""};
     for (int i = 0; i < 10; i++) {
         if (i == 0)
@@ -200,11 +200,12 @@ void printBoatsInEnding() {
     }
 }
 
-void tryAgainInEnding(string &choice, bool &choosing) {
+// Show different ending based on the coins that player
+void tryAgainInEnding(string &choice, bool &choosing, Player &player) {
     printBoatsInEnding();
     getline(cin, choice);
     while (choosing) {
-        if (choice[1] == '\0' && choice[0] == '1') {
+        if (choice == "1") {
             renderNpc("Charon", "You're broke before you came?");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             renderNpc("Charon", "What did you do in hell???");
@@ -218,12 +219,12 @@ void tryAgainInEnding(string &choice, bool &choosing) {
             cout << "Bad Ending: Working in Hell.\n";
             choosing = false;
             break;
-        } else if (choice[1] == '\0' && (choice[0] == '2' || choice[0] == '3')) {
+        } else if (choice == "2" || choice == "3") {
             renderNpc("Charon", "Can't you see it is SOLD OUT??");
             cout << "Enter again: ";
-            tryAgainInEnding(choice, choosing);
+            tryAgainInEnding(choice, choosing, player);
             break;
-        } else if (choice[1] == '\0' && choice[0] == '4') {
+        } else if (choice == "4" && player.coin >= 10000) {
             renderNpc("Charon", "Nice, you got enough money this time.");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             cout << "golden boat x 1 GET!\n";
@@ -237,7 +238,7 @@ void tryAgainInEnding(string &choice, bool &choosing) {
             cout << "Normal Ending: Having an Afterlife.\n";
             choosing = false;
             break;
-        } else if (choice[1] == '\0' && choice[0] == '5') {
+        } else if (choice == "5" && player.coin >= 99999) {
             renderNpc("Charon", "You work real hard.");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             renderNpc("Charon", "Proud of you for buying it. :D");
@@ -251,13 +252,14 @@ void tryAgainInEnding(string &choice, bool &choosing) {
             break;
         } else {
             renderNpc("Charon", "No such choice.");
-            tryAgainInEnding(choice, choosing);
+            tryAgainInEnding(choice, choosing, player);
             break;
         }
     }
 }
 
-void ending() {
+// Print ending for player
+void ending(Player &player) {
     string choice = " ";
     bool choosing = true;
     cout << "At the end, you defeated Hades, the Lord of Hell, in your endless, extraordinary journey of hell.\n";
@@ -272,9 +274,10 @@ void ending() {
     renderNpc("Charon", "Not many was left.");
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
     renderNpc("Charon", "Which one do you want?");
-    tryAgainInEnding(choice, choosing);
+    tryAgainInEnding(choice, choosing, player);
 }
 
+// clear Screen (Windows have different command for it)
 void clearScreen() {
     if (ISWINDOW)
         std::system("cls");
