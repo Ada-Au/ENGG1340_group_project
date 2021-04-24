@@ -33,8 +33,10 @@ void saveGame(Player player, vector<Item> &items) {
         if (key == 'n' || key == 'N') {
             return;
         } else {
-            cout << "Please input the new file name (without spaces): " << endl;
-            cin >> fileName;
+            while (fileName == player.name) {
+                cout << "Please input a new file name (without spaces): " << endl;
+                cin >> fileName;
+            }
         }
     }
 
