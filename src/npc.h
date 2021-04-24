@@ -25,7 +25,7 @@ const Monster boss9 = {"Agony", 683, 86, 85, 55};
 const Monster boss10 = {"Nightmare", 790, 109, 85, 60};
 const Monster boss11[2] = {{"Hades(calm)", 895, 121, 85, 65}, {"Hades(angry)", 2238, 181, 100, 70}};
 
-const Monster monsters[monsterSize] = {{"Monster", 10, 2, 70, 2}, {"Monster (enchanted)", 15, 3, 87, 4}};
+const Monster monsters[monsterSize] = {{"Monster", 10, 2, 70, 2}, {"Monster (enchanted)", 15, 3, 75, 4}};
 
 const string monster[npcSize] = {
     "                                                   ",    // length ~50
