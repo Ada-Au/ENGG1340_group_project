@@ -123,9 +123,9 @@ void getSavedGame(Player &player, vector<Item> &items) {
         file.ignore();
         getline(file, tempName);
         file >> tempNum >> tempCost;
-        cout << "i name: " << tempName << ' ' << tempNum << ' ' << tempCost << endl;
         updateItems(tempName, tempNum, tempCost, 'A', items);
     }
 
     file.close();
+    cout << "File loaded!";
 }
