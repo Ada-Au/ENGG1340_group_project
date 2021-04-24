@@ -194,20 +194,24 @@ void setupScreen(Player &player, int &isPlay) {
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     renderNpc("Charon", "What's your name?");
     cout << "My name is: ";
-    // cin.ignore();    // ignore new line so that set up can start
+    cin.ignore();    // ignore new line form homepage.cpp - menu()
     getline(cin, player.name);
     cout << endl;
     renderNpc("Charon", "Welcome " + player.name + ".");
-    introduction(key);
+    introduction(key);    // start Charon's introduction
     PrintInform(player);
     PrintChoice();
     cin >> key;
+    // restrict player's input within 'N'/'n', 'Q'/'q', '1', '2', '3'
     while (((key[0] != 'n' && key[0] != 'N') && (key[0] != 'q' && key[0] != 'Q') && key[0] != '1' && key[0] != '2' && key[0] != '3') || key[1] != '\0') {
         cout << "Enter again: ";
         cin >> key;
         cout << endl;
     }
+    // if player enters 'N'/'n', player starts game
+    // if player enters 'Q'/'q', player quits game
     while (key[0] != 'n' && key[0] != 'N' && key[0] != 'Q' && key[0] != 'q') {
+        // restrict player only input one character
         if (key[1] == '\0') {
             switch (key[0]) {
             case '1': {
@@ -230,9 +234,10 @@ void setupScreen(Player &player, int &isPlay) {
             }
             case 'q':
             case 'Q':
-                isPlay = 0;
+                isPlay = 0;    // set isPlay = 0 as to quit game in main.cpp
                 break;
             }
+            // print player's information again if player doesn't quit game
             if (key[0] != 'Q' && key[0] != 'q') {
                 PrintInform(player);
                 PrintChoice();
@@ -248,6 +253,7 @@ void setupScreen(Player &player, int &isPlay) {
         isPlay = 0;
 }
 
+// print boats shop screen
 void printBoats() {
     string boats[11] = {"1 - trash", "0 G",
                         "2 - wooden boat", "2 G",
@@ -258,13 +264,14 @@ void printBoats() {
     for (int i = 0; i < 10; i++) {
         if (i == 0)
             cout << "Boats" << setfill(' ') << setw(36) << "Price" << endl;
-        if (i % 2 == 0)
+        if (i % 2 == 0)    // print boats if i is even
             cout << boats[i] << setfill(' ') << setw(40 - boats[i].length());
-        else
+        else    // print prices of boats if i is odd
             cout << boats[i] << endl;
     }
 }
 
+// Session of player needs to buy boat before game start
 void boatScreen() {
     renderNpc("Charon", "Before you go on, you have to buy a boat.");
     cout << "\nYou search through your pocket...\n";
@@ -280,10 +287,12 @@ void boatScreen() {
     renderNpc("Charon", "Choose one here.");
     printBoats();
     string choice = "";
+    // restrict player's choice within '1', '2', '3', '4' and '5'
     while ((choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5') || choice[1] != '\0') {
         cout << "Enter your choice: ";
         cin >> choice;
     }
+    // limit player to buy trash as player.coin < prices of other boats
     while (choice[0] != '1') {
         while ((choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5') || choice[1] != '\0') {
             renderNpc("Charon", "No such choice.");
@@ -291,10 +300,12 @@ void boatScreen() {
             cout << "Enter your choice: ";
             cin >> choice;
         }
+        // Charon being more sarcastic if player select diamond boat
         if (choice[0] == '5') {
             renderNpc("Charon", "Look at how much money you have!");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             renderNpc("Charon", "Why do you think you can afford that!?");
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
         } else
             renderNpc("Charon", "You got no money to buy that.");
         printBoats();
