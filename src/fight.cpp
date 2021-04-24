@@ -58,7 +58,7 @@ bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, boo
                     cout << "Player: Miss!" << endl;
                 }
 
-                if ((!escape && rand() % 10 >= 1) || rand() % 10 >= 3) {
+                if ((!escape && rand() % 100 < monster.rate + 10) || rand() % 100 < monster.rate) {
                     float criticalHit = 1;
                     bool critical = false;
                     if (rand() % 100 <= 6) {    // rate of critical hit = 6%
