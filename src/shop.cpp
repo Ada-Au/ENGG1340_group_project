@@ -46,11 +46,16 @@ void sortShopItems(vector<ShopItem> &shopItems) {
                 shopItems.erase(shopItems.begin() + j);    // erase redundant shop item
 }
 
+// generate shop items
 void generateShopItems(Player player, vector<ShopItem> &shopItems) {
     srand(player.gameLevel + time(NULL));
+    // shop items will be generated until there are 12 items in vector<ShopItem> shopItems
     while (shopItems.size() < 12) {
-        //items that only sold in shop
+        // generate one item that only sold in shop
+        // (10 - player.level)% for generation of one weapon
+        // (10 - player.level)% as player can have larger chance to get better items
         if (rand() % 100 > 90 - player.level) {
+            // each weapon got same percent to be generated
             if (rand() % 7 == 0) {
                 shopItems.push_back({"vorpan", "(+10 ATK, -10 Energy/atk)", 1, 202, 3819});
             } else if (rand() % 7 == 1) {
@@ -66,12 +71,14 @@ void generateShopItems(Player player, vector<ShopItem> &shopItems) {
             } else if (rand() % 7 == 6) {
                 shopItems.push_back({"diamond sword", "(Best weapon you can have!)", 1, 4999, 99999});
             }
+            // (25 - player.level)% for the generation of one armor
         } else if (rand() % 100 > 75 - player.level) {
             if (rand() % 2 == 0) {
                 shopItems.push_back({"diamond shield", "(Best armor you can have!)", 1, 2999, 9999});
             } else {
                 shopItems.push_back({"golden shield", "(+20 DFS)", 1, 180, 1980});
             }
+            // (25 - player.level)% for the generation of one healing
         } else if (rand() % 100 > 50 - player.level) {
             if (rand() % 2 == 0) {
                 shopItems.push_back({"high healing", "(+100 HP)", (1 + rand() % 3), 125, 420});
@@ -80,75 +87,85 @@ void generateShopItems(Player player, vector<ShopItem> &shopItems) {
             }
         }
         //generate healings
-        if (rand() % 100 <= 90) {
+        if (rand() % 100 <= 90) {    // 90 % to generate monster meat
             shopItems.push_back({"monster meat", "(Are you sure to eat that?)", (1 + rand() % 20), 5, 12});
         }
-        if (rand() % 100 <= 50) {
+        if (rand() % 100 <= 50) {    // 50 % to generate bread
             shopItems.push_back({"bread", "(You're \"toast\".)", (1 + rand() % 10), 12, 30});
         }
-        if (rand() % 100 >= 25) {
+        if (rand() % 100 >= 25) {    // 75 % to genrate poor healing
             shopItems.push_back({"poor healing", "(+10 HP)", (1 + rand() % 20), 25, 65});
         }
-        if (rand() % 100 >= 50) {
+        if (rand() % 100 >= 50) {    // 50 % to generate average healing
             shopItems.push_back({"average healing", "(+20 HP)", (1 + rand() % 15), 37, 90});
         }
-        if (rand() % 100 >= 75) {
+        if (rand() % 100 >= 75) {    // 25 % to generate decent healing
             shopItems.push_back({"decent healing", "(+50 HP)", (1 + rand() % 10), 60, 145});
         }
         //generate armors
-        if (rand() % 50 <= 45) {
+        if (rand() % 50 <= 45) {    // 90 % to generate boat remains
             shopItems.push_back({"boat remains", "(...)", (1 + rand() % 50), 2, 15});
         }
-        if (rand() % 50 <= 30) {
-            shopItems.push_back({"wood shield", "(+5 DFS)", 1, 25, 150});
-        } else if (rand() % 50 <= 25) {
-            shopItems.push_back({"leather shield", "(+10 DFS)", 1, 100, 550});
-        } else if (rand() % 50 <= 10) {
+        // only generate one type of shield
+        if (rand() % 50 <= 10) {    //  20 % to generate silver shield
             shopItems.push_back({"silver shield", "(+15 DFS)", 1, 150, 900});
+        } else if (rand() % 50 <= 25) {    // 30 % to generate leather shield
+            shopItems.push_back({"leather shield", "(+10 DFS)", 1, 100, 550});
+        } else {    // 50 % to generate wood shield
+            shopItems.push_back({"wood shield", "(+5 DFS)", 1, 25, 150});
         }
-        //generate weapons
-        if (rand() % 25 >= 22) {
+        //generate weapon: hammer, great sword, long sword
+        if (rand() % 25 >= 22) {    // 12 % to generate hammer
             shopItems.push_back({"hammer", "(+10 ATK, -30 Energy/atk)", 1, 92, 592});
-        } else if (rand() % 25 >= 20) {
+        } else if (rand() % 25 >= 20) {    // 28 % to generate great sword
             shopItems.push_back({"great sword", "(+8 ATK, -15 Energy/atk)", 1, 45, 290});
-        } else if (rand() % 25 >= 12) {
+        } else if (rand() % 25 >= 12) {    // 24 % to generate long sword
             shopItems.push_back({"long sword", "(+4.5 ATK, -5 Energy/atk)", 1, 37, 204});
         }
-        if (rand() % 25 <= 20) {
+        // generate weapon: sword, wand, spear
+        if (rand() % 25 >= 15) {    // 40 % to generate sword
             shopItems.push_back({"sword", "(+2 ATK, -0.5 Energy/atk)", 1, 12, 169});
-        } else if (rand() % 25 <= 12) {
+        } else if (rand() % 25 >= 10) {    // 20 %  to generate wand
             shopItems.push_back({"wand", "(+8 ATK, -15 MP/atk)", 1, 100, 474});
-        } else {
+        } else {    // 20 % to generate spear
             shopItems.push_back({"spear", "(+6 ATK, -10 Energy/atk)", 1, 30, 200});
         }
     }
+    // erase redundant items
     sortShopItems(shopItems);
 }
 
+// display shop items
 void displayShopItems(vector<ShopItem> shopItems) {
-    std::cout << "Items\t\t\t\tDescription\t\t\t\tNumber\t\tPrice" << endl;
+    cout << "Items\t\t\t\tDescription\t\t\t\tNumber\t\tPrice" << endl;
     for (int i = 0; i < shopItems.size(); i++) {
-        std::cout << (i + 1) << "  " << shopItems[i].name << setfill(' ')
-                  << setw(30 - shopItems[i].name.length() - to_string(i + 1).length() + shopItems[i].desc.length())
-                  << shopItems[i].desc << setw(44 - shopItems[i].desc.length()) << shopItems[i].amount << "\t\t" << shopItems[i].price << " G" << endl;
+        cout << (i + 1) << "  " << shopItems[i].name << setfill(' ')
+             << setw(30 - shopItems[i].name.length() - to_string(i + 1).length() + shopItems[i].desc.length())
+             << shopItems[i].desc << setw(44 - shopItems[i].desc.length()) << shopItems[i].amount << "\t\t" << shopItems[i].price << " G" << endl;
     }
 }
 
+// read player's input again if player enters invalid input in talk screen
+// Input: string str: Charon's log
+//        bool isTalking: determine whether talk screen ends
+//        int c: switch string choice to int in order to prevent errors (e.g. unallocated space of char array/ not enough space for storing char )
+//        bool isFirst: check whether player first meet Charon in shop
 void talkAgain(string str, bool &isTalking, int &c, bool isFirst) {
-    string choice = " ";
+    string choice = " ";    // player's choice
+    // restrict player's choice within '1', '2', '3', '4' and '5'
     while ((choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5') || choice[1] != '\0') {
         renderNpc("Charon", str);
-        std::cout << "1 - Say Hello";
+        cout << "1 - Say Hello";
         if (!isFirst) {
             cout << " (again)";
         }
-        std::cout << "\n"
-                  << "2 - What to do here?\n"
-                  << "3 - Why are you here?\n"
-                  << "4 - Life advice(?)\n"
-                  << "5 - (Nothing to ask)\n";
-        std::cout << "Enter choice: ";
-        std::cin >> choice;
+        cout << "\n"
+             << "2 - What to do here?\n"
+             << "3 - Why are you here?\n"
+             << "4 - Life advice(?)\n"
+             << "5 - (Nothing to ask)\n";
+        cout << "Enter choice: ";
+        cin >> choice;
     }
     switch (choice[0]) {
     case '1':
@@ -170,108 +187,123 @@ void talkAgain(string str, bool &isTalking, int &c, bool isFirst) {
     }
 }
 
+// deal player's input in shop screen
+// if player doesn't enter valid option, system requires player to enter again
 void tryAgainInShop(string &key) {
     key = "";
     while (key[0] != '1' && key[0] != '2' && key[0] != '3' && key[0] != '4' || key[1] != '\0') {
         renderNpc("Charon", "Welcome, have a look.");
-        std::cout << "ACTION (please input number 1-4)" << endl
-                  << "1 - Sell                    2 - Buy " << endl
-                  << "3 - Talk                    4 - Exit" << endl;
-        std::cin >> key;
-        std::cout << endl;
+        cout << "ACTION (please input number 1-4)" << endl
+             << "1 - Sell                    2 - Buy " << endl
+             << "3 - Talk                    4 - Exit" << endl;
+        cin >> key;
+        cout << endl;
     }
 }
 
+// display shop screen and deal with player's input in choosing actions
 void shopScreen(Player &player, vector<Item> &items) {
-    shopItems.clear();
-    string key = "";
-    bool bought = false;
+    shopItems.clear();      // clear vector<shopItems> shopItems for each time opening shop
+    string key = "";        // string for player's choice in action
+    bool bought = false;    // determine whether player buys items
     tryAgainInShop(key);
-    while (key != "4") {
-        string choice;    // string for two digit nums
-        int pos;
-        int amount;
+    while (key != "4") {    // while player doesn't choose quit
+        string choice;      // string for two digit nums that players has to select items
+        int pos;            // int for postion of items in backpack/shop
+        int amount;         // int for amount that player buys or sells
         switch (key[0]) {
-        case '1':
+        case '1':    // sell
             renderNpc("Charon", "Sell something?");
             displayBackpack(items, true);
-            std::cout << "You have " << player.coin << " G." << endl;
-            std::cout << "Press [number] to sell or [Q] to quit.\n"
-                      << "Enter your choice: ";
-            std::cin >> choice;
-            if (choice == "q" || choice == "Q") {
-                renderNpc("Charon", "Just looking? :(");
+            cout << "You have " << player.coin << " G." << endl;
+            cout << "Press [number] to sell or [Q] to quit.\n"
+                 << "Enter your choice: ";
+            cin >> choice;
+            if (choice == "q" || choice == "Q") {    // 'q'/'Q' to quit current screen
+                renderNpc("Charon", "Just looking? :-(");
                 break;
             }
+            // restrict player only enter integer index of items within backpack
             while (!isNumber(choice) || !isWithinBackpack(items, choice)) {
-                std::cout << "No such item, please select again: ";
-                std::cin >> choice;
+                cout << "No such item, please select again: ";
+                cin >> choice;
                 if (choice == "q" || choice == "Q") {
-                    renderNpc("Charon", "Just looking? :(");
-                    cout << "test\n";
+                    renderNpc("Charon", "Just looking? :-(");
                     break;
                 }
             }
-            for (pos = 0; pos < maxSpace; pos++) {
+            for (pos = 0; pos < items.size(); pos++) {
+                // find player's choice in backpack
                 if (choice == to_string(pos + 1)) {
-                    std::cout << "Amount to sell: ";
-                    std::cin >> amount;
+                    cout << "Amount to sell: ";
+                    cin >> amount;
+                    // restrict player's input within the amount of item he/she has
                     while (amount > items[pos].num || amount < 0) {
-                        std::cout << "Exceeds amount, please enter a valid number: ";
-                        std::cin >> amount;
+                        cout << "Exceeds amount, please enter a valid number: ";
+                        cin >> amount;
                     }
                     updateItems(items[pos].name, amount, items[pos].cost, 'D', items);
-                    player.coin += items[pos].cost * amount;
-                    std::cout << "You gain " << items[pos].cost * amount << " G.\n\n";
+                    player.coin += items[pos].cost * amount;    // update player's coin number
+                    cout << "You gain " << items[pos].cost * amount << " G.\n\n";
                     break;
                 }
             }
             break;
-        case '2':
+        case '2':    //buy
+            // generate vector needs time, so a line to notice player to wait
             if (shopItems.empty())
                 cout << "searching for shop items... " << endl;
+            // create shop items until the amount of shop items reaches 12
             while (shopItems.size() < 12)
                 generateShopItems(player, shopItems);
             displayShopItems(shopItems);
-            std::cout << "You have " << player.coin << " G." << endl;
+            cout << "You have " << player.coin << " G." << endl;
             renderNpc("Charon", "What do you wanna buy?");
-            std::cout << "Press [number] to buy or [Q] to quit.\n"
-                      << "Enter your choice: ";
-            std::cin >> choice;
+            cout << "Press [number] to buy or [Q] to quit.\n"
+                 << "Enter your choice: ";
+            cin >> choice;
             if (choice == "q" || choice == "Q") {
                 renderNpc("Charon", "Just looking? :(");
                 break;
             }
+            // restrict player only enter integer index of items within shop
             while (!isNumber(choice) || !isWithinShop(shopItems, choice)) {
-                std::cout << "No such item, please select again: ";
-                std::cin >> choice;
+                cout << "No such item, please select again: ";
+                cin >> choice;
                 if (choice == "q" || choice == "Q") {
-                    renderNpc("Charon", "Just looking? :(");
+                    renderNpc("Charon", "Just looking? :-(");
                     break;
                 }
             }
             for (pos = 0; pos < shopItems.size(); pos++) {
+                // find player's choice in shop
                 if (choice == to_string(pos + 1)) {
+                    // if player's coin number is less than price of that choice
                     if (player.coin < shopItems[pos].price) {
                         renderNpc("Charon", "That's not enough money.");
                         renderNpc("Charon", "YOU CAN'T EVEN BUY ONE!!");
                         break;
                     }
-                    std::cout << "Amount to buy: ";
-                    std::cin >> amount;
+                    cout << "Amount to buy: ";
+                    cin >> amount;
+                    // if amount exceeds amount of shop items, require player to input a valid number again
                     while (amount > shopItems[pos].amount || amount < 0) {
                         renderNpc("Charon", "I have not that much.");
-                        std::cout << "Amount to buy: ";
-                        std::cin >> amount;
+                        cout << "Amount to buy: ";
+                        cin >> amount;
                     }
-                    for (int i = 0; i < maxSpace; i++) {
+
+                    // check amount of player's selected item
+                    for (int i = 0; i < items.size(); i++) {
                         if (items[i].name == shopItems[pos].name) {
+                            // if total amount of selected item is larger than 99
                             if ((items[i].num + amount) > maxStack)
                                 renderNpc("Charon", "You're carrying too much.");
+                            // demand player to enter valide number (i.e. total amount of player's selected item <= 99)
                             while (items[i].num + amount > maxStack) {
-                                std::cout << "(Remaining space for " << items[i].name << " = " << (99 - items[i].num) << ')' << endl;
-                                std::cout << "Amount to buy: ";
-                                std::cin >> amount;
+                                cout << "(Remaining space for " << items[i].name << " = " << (99 - items[i].num) << ')' << endl;
+                                cout << "Amount to buy: ";
+                                cin >> amount;
                             }
                             break;
                         }
@@ -280,12 +312,15 @@ void shopScreen(Player &player, vector<Item> &items) {
                         renderNpc("Charon", "Just looking? :(");
                         break;
                     }
+                    // check whether player gets enough money to buy items
+                    // if yes, update player's status
+                    // else, Charon tell player he/she doesn't have enough money
                     if (player.coin >= (shopItems[pos].price * amount)) {
                         updateItems(shopItems[pos].name, amount, shopItems[pos].cost, 'A', items);
                         bought = true;
                         shopItems[pos].amount -= amount;
                         player.coin -= shopItems[pos].price * amount;
-                        std::cout << "You spend " << shopItems[pos].price * amount << " G.\n\n";
+                        cout << "You spend " << shopItems[pos].price * amount << " G.\n\n";
                         renderNpc("Charon", "Thanks for purchase. :D");
                     } else {
                         renderNpc("Charon", "That's not enough money.");
@@ -294,19 +329,24 @@ void shopScreen(Player &player, vector<Item> &items) {
                 }
             }
             break;
-        case '3':
-            if (player.isFirst && !bought) {    //talk before buying
+        case '3':    //talk
+            // player talk before buying and first meet Charon
+            if (player.isFirst && !bought) {
                 renderNpc("Charon", "Why do I need to talk to someone");
+                cout << "<Press Enter to Continue>";
+                cin.ignore(1024, '\n');
                 renderNpc("Charon", "that even haven't bought anything.");
+                cout << "<Press Enter to Continue>";
+                cin.ignore(1024, '\n');
                 break;
             } else {
-                int c;
-                bool isTalking = true;
+                int c;                    // int for player's choice of actions
+                bool isTalking = true;    // bool for determine whether player closes talking
                 while (isTalking) {
-                    srand(time(NULL));
+                    srand(time(NULL));    // seed random for generating Charon's log
                     talkAgain("Don't waste much time.", isTalking, c, player.isFirst);
                     switch (c) {
-                    case 1:
+                    case 1:    //say hello
                         if (player.isFirst) {
                             string logs[3] = {"Hmmm", "What?", "..."};
                             renderNpc("Charon", logs[rand() % 3]);
@@ -319,7 +359,7 @@ void shopScreen(Player &player, vector<Item> &items) {
                             break;
                         }
                         break;
-                    case 2:
+                    case 2:    // what can I do?
                         renderNpc("Charon", "You want to know what to do here?");
                         cout << "<Press Enter to Continue>";
                         cin.ignore(1024, '\n');
@@ -342,7 +382,7 @@ void shopScreen(Player &player, vector<Item> &items) {
                         cout << endl;
                         renderNpc("Charon", "Earn money and GIVE them to ME :D");
                         break;
-                    case 3:
+                    case 3:    // What are you doing?
                         renderNpc("Charon", "Huh?");
                         cout << "<Press Enter to Continue>";
                         cin.ignore(1024, '\n');
@@ -361,7 +401,7 @@ void shopScreen(Player &player, vector<Item> &items) {
                         cout << endl;
                         renderNpc("Charon", "Money is never enough.");
                         break;
-                    case 4:
+                    case 4:    // Life(?)
                         renderNpc("Charon", "Earn Money.");
                         cout << "<Press Enter to Continue>";
                         cin.ignore(1024, '\n');
@@ -376,13 +416,14 @@ void shopScreen(Player &player, vector<Item> &items) {
                         cout << endl;
                         renderNpc("Charon", "although you had been dead ;)");
                         break;
-                    case 5:
+                    case 5:    // (Nothing to ask)
                         break;
                     }
                 }
             }
             break;
         }
+        // deal with player's choice in action
         tryAgainInShop(key);
     }
     renderNpc("Charon", "Bye now, little buddy.");

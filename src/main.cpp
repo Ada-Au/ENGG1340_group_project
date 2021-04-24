@@ -40,7 +40,7 @@ int main() {
     return 0;
 }
 
-// std::cout << "COLOR" << std::endl
+// cout << "COLOR" << std::endl
 //           << BLACK << " BLACK" << RED << " RED" << GREEN << " GREEN"
 //           << YELLOW << " YELLOW" << BLUE << " BLUE" << MAGENTA << " MAGENTA"
 //           << CYAN << " CYAN" << WHITE << " WHITE" << std::endl
