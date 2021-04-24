@@ -1,7 +1,6 @@
 #include "fight.h"
 #include "map.h"
 #include "npc.h"
-// #include "things.h"
 #include <iomanip>
 #include <iostream>
 #include <math.h>
@@ -9,6 +8,7 @@
 
 using namespace std;
 
+// print the player's HP, monster's HP and image and the action choices for player
 void displayStats(float mHp, float mMaxHp, Player player, string mName, bool escape = false) {
     int showMHp = mHp / mMaxHp * 50;
     int showHp = player.hp / player.maxHp * 50;
@@ -30,14 +30,18 @@ void displayStats(float mHp, float mMaxHp, Player player, string mName, bool esc
     cout << endl;
 }
 
+// fight screen for player
 bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, bool escape = false) {
     char key;
     while (mHp > 0 && player.hp > 0) {
+        // add fluctuation to monster's damage
         float mDamage = monster.damage + (rand() % 100 - 50) / 50.0;
+        // Show player's and monster's status
         displayStats(mHp, monster.hp, player, monster.name, escape);
         cin >> key;
         switch (key) {
         case '1':
+            // Allow allow attack if player have enough energy and mp
             if (player.energy - player.weapon.energy > 0 && player.mp - player.weapon.mp > 0) {
                 if (rand() % 10 >= 1) {    // rate of player's hitting >= 90%
                     float criticalHit = 1;
@@ -46,18 +50,20 @@ bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, boo
                         criticalHit = 1.5;
                         critical = true;
                     }
+                    // Deduct energy and mp after using weapon
                     player.energy -= player.weapon.energy;
                     player.mp -= player.weapon.mp;
+                    // tell player their damage
                     cout << "Player: Successfully make " << (player.weapon.damage * criticalHit * (1 + player.damage / 50.0));
                     if (critical)
                         cout << " critical";
                     cout << " damage." << endl;
                     mHp -= player.weapon.damage * criticalHit * (1 + player.damage / 50.0);
-
                 } else {
                     cout << "Player: Miss!" << endl;
                 }
 
+                // set monster damage
                 if ((!escape && rand() % 100 < monster.rate + 10) || rand() % 100 < monster.rate) {
                     float criticalHit = 1;
                     bool critical = false;
@@ -65,6 +71,7 @@ bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, boo
                         criticalHit = 1.2;
                         critical = true;
                     }
+                    // print monster damage
                     cout << monster.name << ": Successfully make " << monster.damage * criticalHit;
                     if (critical)
                         cout << " critical";
@@ -74,11 +81,14 @@ bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, boo
                     cout << monster.name << ": Miss!" << endl;
                 }
             } else {
+                // Warn player have no energy or mp when it drop to zero
                 cout << RED << "You have no energy to attack now." << RESET << endl;
             }
             break;
 
         case '2':
+            // Set player defense, if player defense is higher than monster damage, then no damage will be deal
+            // else player get a chance to defense some damage base on their defense level
             if (mHp > 0) {
                 if (monster.damage - player.aDefense * (1 + player.defense / 50.0) <= 0 || rand() % 10 >= 8) {    // 100% if player defense is higher than monster attack
                     player.hp -= monster.damage - player.aDefense * (1 + player.defense / 50.0);                  // When lower, 80% defense part of attack, 20% defense all
@@ -95,8 +105,9 @@ bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, boo
             cout << endl;
 
         case '4':
+            // player have a 30 chance of escaping
             if (escape) {
-                if (rand() % 100 < 30) {
+                if (rand() % 100 <= 30) {
                     return true;
                 } else {
                     cout << "You didn't escape! " << monster.name << " hit you with " << mDamage << '!' << endl;
@@ -112,6 +123,7 @@ bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, boo
     return false;
 }
 
+// Boss Screen for printing dialog of boss and set up if its ending
 void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd) {
     srand(time(NULL));
     Monster boss;
@@ -172,15 +184,15 @@ void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd)
     }
     float mHp = boss.hp;
     fight(player, items, boss, mHp);
-    if (player.hp <= 0) {
+    if (player.hp <= 0) {    // check if player die
         cout << endl;
-    } else if (mHp <= 0 && bossIndex == 12) {
+    } else if (mHp <= 0 && bossIndex == 12) {    // check for ending
         isEnd = true;
     } else if (mHp <= 0) {
         cout << "You kill " << boss.name << '!' << endl;
         cout << fixed << setprecision(2) << "You gain " << boss.exp << " XP!" << endl;
         player.exp += boss.exp;
-        generateDrops(items, player);    //annouce what player got after battle save in generateDrops(item)
+        generateDrops(items, player);    //generate what player got after battle
         upgradePlayer(player);
         if (bossIndex == 11)
             bossScreen(player, items, 12, isEnd);
@@ -189,6 +201,7 @@ void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd)
     }
 }
 
+// setup monster status base on player levels and game level they are on
 Monster setUpMonster(Player player) {
     int monsterN = rand() % monsterSize;
     float hp = rand() % player.gameLevel + (rand() % 100) / 100.0 + (pow(0.4 * player.gameLevel, 2) / 2) + (monsters[monsterN].hp * pow(player.gameLevel, 0.5));    //monster's Hp range ~ gameLevel
@@ -206,6 +219,7 @@ Monster setUpMonster(Player player) {
     return {monsters[monsterN].name, hp, damage, rate, exp};
 }
 
+// fightScreen for player step on monster
 void fightScreen(Player &player, vector<Item> &items, bool &isEscape) {
     srand(time(NULL));
     int monsterN;
