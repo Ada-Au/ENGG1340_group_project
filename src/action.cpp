@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <thread>
 
+// Include conio for Windows and a web version of the code for Mac and Linux
+// As conio is a library only work in Windows system
 #if defined _WIN32 || defined _WIN64
 #include <conio.h>
 #else
@@ -22,8 +24,11 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
     scr.log = "Press WASD to move or press [H] for help";
     while (key != 'q') {
         bool wall = false, isValid = true;
-        key = getch();
+        key = getch();    // Get char when player press any char without newline to allow easy navigation in map
+        // Clean screen everytime map is updated
+        // To avoid mutiple maps and the same time and diffcult of keeping track of player pos
         clearScreen();
+        // handle player's input and prevent player walking into walls
         switch (key) {
         case 'w':
         case 'W':
@@ -54,7 +59,6 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                 player.x++;
             break;
         case 'b':
-        case 'B':
             openBackpack(items, player);
             break;
         case 'h':
@@ -63,21 +67,28 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
             cin.get();
             break;
         default:
+            // Handle invalid input and tell player to input again
             if (player.hp > 0)
                 scr.log = "Please input again or press [H] for help";
+            // To prevent input to be handled
             isValid = false;
         }
+        // Render screen to let player to see effect of input
         scr.renderScreen(map, player);
 
         if (isValid) {
+            // Check for is player on stair
             if (map.layout[player.y][player.x] == 'S') {
                 player.gameLevel++;
+                // To check for is it the last level
                 bool isEnd = true;
                 if (player.gameLevel % 5 == 0) {
                     cout << player.gameLevel / 5;
+                    // Player has to fight a boss every 5 level of the game
                     bossScreen(player, items, player.gameLevel / 5, isEnd);
-                    // player.gameLevel++;
+                    // Save game after fighting boss
                     saveGame(player, items);
+                    // If player defeat the last boss (on level 55) will show end screen
                     if (isEnd) {
                         ending();
                         cout << "\nYou win the game! Wanna play again??\ny - Yes, what a fun game!\tn - No, I have better things to do with my life." << endl;
@@ -85,50 +96,70 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                         break;
                     }
                 }
+                // Re-render the map for a new level
                 map.fill();
+                // Reset player position
                 player.x = 1;
                 player.y = 1;
+                // Check for is player on monster
             } else if (map.layout[player.y][player.x] == 'M') {
+                // tell player they meet monster
                 scr.log = "Monster!";
                 clearScreen();
                 scr.renderScreen(map, player);
+                // wait for 1 sec and then go into fight screen
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                 clearScreen();
+                // Use for checking if player escape monster
                 bool isEscape = false;
                 fightScreen(player, items, isEscape);
+                // If player does not escape, the monster on map will be removed
                 if (!isEscape) {
                     map.removeMapIcon(player.x, player.y);
                 }
+                // Print screen for player to see
                 scr.renderScreen(map, player);
+                // Check for is player on chest
             } else if (map.layout[player.y][player.x] == 'C') {
+                // Tell player that a golden chest is found
                 scr.log = "Find a golden chest!";
                 clearScreen();
                 scr.renderScreen(map, player);
+                // generate chest item and put it into player item
                 generateChestItems(items, player);
+                // The chest on map will be removed
                 map.removeMapIcon(player.x, player.y);
             } else if (map.layout[player.y][player.x] == 'N') {
+                // Tell player they meet Charon (NPC for shop)
                 scr.log = "Hey Charon!";
                 clearScreen();
                 scr.renderScreen(map, player);
+                // Go into shop screen
                 shopScreen(player, items);
+                // The shop on map will be removed
                 map.removeMapIcon(player.x, player.y);
             } else {
+                // If nothing happened, the monster will move on map
                 map.update(player.x, player.y);
             }
 
+            // Check if player die
             if (player.hp <= 0) {
                 cout << "You die:( Wanna try again?\ny - Yes, I want to try again!\tn - No, I suck at this game." << endl;
                 tryAgain("Please input again:\ny - Yes, I want to try again!\tn - No, I suck at this game.", isReplay);
                 break;
             }
 
+            // check if player is walking into a wall
             if (wall)
                 scr.log = "There is a wall in my way";
+            // If not then energy will be reduced by one, if energy is 0, it will start to reduce HP
             else {
                 if (player.energy > 0)
                     player.energy--;
                 else
                     player.hp--;
+                // update buff status
                 updateOnBuff(player);
             }
         }
