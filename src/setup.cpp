@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// print the player's information
 void PrintInform(Player player) {
     string ID[6] = {"------------------------------------------",
                     "> Name: " + player.name,
@@ -21,6 +22,7 @@ void PrintInform(Player player) {
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
+// print player's choice in setting up player's information
 void PrintChoice() {
     cout << "Do you have anything to change for your ID?\n"
          << "1 - Pick a ROLE\n"
@@ -31,6 +33,7 @@ void PrintChoice() {
          << "Enter your choice: ";
 }
 
+// print choices of roles
 void PrintRole() {
     cout << setfill('-') << setw(50) << "\n";
     cout << "\nPick a role or profession\n\n";
@@ -42,6 +45,7 @@ void PrintRole() {
     cout << "* - Random\n";
 }
 
+// print choices of race
 void PrintRace() {
     cout << setfill('-') << setw(50) << "\n";
     cout << "\nWhat's your race?\n\n";
@@ -53,6 +57,7 @@ void PrintRace() {
     cout << "* - Random\n";
 }
 
+// print choices of gender
 void PrintGender() {
     cout << setfill('-') << setw(50) << "\n";
     cout << "\nWhat's your gender?\n\n";
@@ -63,6 +68,10 @@ void PrintGender() {
     cout << "* - Random\n";
 }
 
+// print player's question in Charon's introduction
+// and read player's choices
+// Input: bool repeat: determine whether player entered invalid input
+//                     if yes, Charon appears to ask "What do you say?"
 void DealQuestion(bool repeat, string &key) {
     if (repeat) {
         cout << "1 - Who are you?\n"
@@ -80,8 +89,10 @@ void DealQuestion(bool repeat, string &key) {
     cout << endl;
 }
 
+// Charon's introduction at the beginning of game
 void introduction(string key) {
     DealQuestion(true, key);
+    // Require player enter again after he/she enters invalid input
     while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[0] != '3')) {
         DealQuestion(false, key);
     }
@@ -95,30 +106,39 @@ void introduction(string key) {
             break;
         }
         DealQuestion(true, key);
+        // Avoid reading invalid inputs again
         while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[0] != '3' && key[1] == '\0')) {
             DealQuestion(false, key);
         }
     }
 }
 
+// set up data of player
 void setData(string key, int choice, Player &player) {
+    // Avoid player's random input
     while (key[1] != '\0') {
         cout << "Please input again: ";
         cin >> key;
     }
-    int i = key[0];
+    int i = key[0];    // index for list of race/role/gender
+    // convert player's choice form char to int
+    // if player's input is lower-case
     if (key[0] >= 'a')
         i -= 'a';
+    // else if player's input is upper-case
     else
         i -= 'A';
     srand(time(NULL));
-    string log = "";
+    string log = "";    // Charon's log after player's selecting race
     switch (choice) {
     case 1:    // role
+        // allow player's input is lower-case and upper-case
         if ((key[0] >= 'a' && key[0] <= 'a' + max_role) || (key[0] >= 'A' && key[0] <= 'A' + max_role))
             player.role = roleList[i];
+        // randomly generate if player input '*'
         else if (key[0] == '*')
             player.role = roleList[rand() % max_role];
+        // require player to enter again if he/she entered invalid choice
         else {
             cout << "Please input again: ";
             cin >> key;
@@ -135,7 +155,7 @@ void setData(string key, int choice, Player &player) {
             cin >> key;
             setData(key, choice, player);
         }
-
+        // set up Charon's log after player's selecting race
         if (player.race == "elf") {
             log = "Hundred years of virginity make you an elf?";
         } else if (player.race == "drawf") {
@@ -143,6 +163,7 @@ void setData(string key, int choice, Player &player) {
         } else if (player.race == "orc") {
             log = "So you are a brute in human face. Got it.";
         }
+        // print Charon if player selects race other than human
         if (log != "") {
             renderNpc("Charon", log);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -162,16 +183,18 @@ void setData(string key, int choice, Player &player) {
     }
 }
 
+// set up player's information at the beginning of the game
+// int isPlay: to determine whether player starts/load/quit game
 void setupScreen(Player &player, int &isPlay) {
-    string key;
-    srand(time(NULL));
+    string key;           // string to store player's choice
+    srand(time(NULL));    // seed random for randomly setting up player's role and gender
     player.role = roleList[rand() % max_role];
     player.gender = genderList[rand() % max_gender];
     renderNpc("Charon", "YOU DIED, Welcome to the Hell!");
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     renderNpc("Charon", "What's your name?");
     cout << "My name is: ";
-    cin.ignore();
+    // cin.ignore();    // ignore new line so that set up can start
     getline(cin, player.name);
     cout << endl;
     renderNpc("Charon", "Welcome " + player.name + ".");
