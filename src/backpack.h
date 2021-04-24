@@ -54,7 +54,7 @@ const Armor armors[maxArmorNum] = {{"boat remains", "(+1 DFS)", 1, 1, 15},
                                    {"leather shield", "(+10 DFS)", 10, 40, 550},
                                    {"silver shield", "(+15 DFS)", 15, 60, 900},
                                    {"golden shield", "(+20 DFS)", 20, 72, 1980},
-                                   {"diamond shield", "(+100 DFS)", 100, 999, 999999}};
+                                   {"diamond shield", "(+100 DFS)", 100, 999, 9999}};
 
 const Weapon weapons[maxWeaponNum] = {{"hammer", "(+10 ATK, -30 Energy/atk)", 10, 30, 0, 37, 592},
                                       {"great sword", "(+8 ATK, -15 Energy/atk)", 8, 15, 0, 18, 290},
@@ -68,7 +68,7 @@ const Weapon weapons[maxWeaponNum] = {{"hammer", "(+10 ATK, -30 Energy/atk)", 10
                                       {"war spear", "(+12 Atk, -7 Energy/atk)", 12, 7, 0, 39, 3647},
                                       {"blood katana", "(+18 Atk, -20 Energy/atk)", 18, 20, 0, 42, 4536},
                                       {"toothpick", "(+15 Atk, -25 Energy/atk)", 15, 25, 0, 40, 3840},
-                                      {"diamond sword", "(+30 ATK, -5 Energy/atk)", 30, 5, 0, 1999, 9999999}};
+                                      {"diamond sword", "(+30 ATK, -5 Energy/atk)", 30, 5, 0, 1999, 99999}};
 
 struct Item {
     string name;
