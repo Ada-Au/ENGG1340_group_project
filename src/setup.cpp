@@ -63,8 +63,8 @@ void PrintGender() {
     cout << "* - Random\n";
 }
 
-void DealQuestion(int repeat, char key[]) {
-    if (repeat == 0) {
+void DealQuestion(bool repeat, char key[]) {
+    if (repeat) {
         cout << "1 - Who are you?\n"
              << "2 - Where am I?\n"
              << "3 - (Nothing want to ask)\n"
@@ -81,9 +81,9 @@ void DealQuestion(int repeat, char key[]) {
 }
 
 void introduction(char key[]) {
-    DealQuestion(0, key);
+    DealQuestion(true, key);
     while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[0] != '3')) {
-        DealQuestion(1, key);
+        DealQuestion(false, key);
     }
     while (key[0] != '3') {
         switch (key[0]) {
@@ -94,15 +94,14 @@ void introduction(char key[]) {
             renderNpc("Charon", "I've just said-- Welcome to HELL.");
             break;
         }
-        DealQuestion(0, key);
-        while (key[1] != '\0') {
-            DealQuestion(1, key);
+        DealQuestion(true, key);
+        while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[1] == '\0')) {
+            DealQuestion(false, key);
         }
     }
 }
 
 void setData(char key[], int choice, Player &player) {
-    string log;
     // To-do: avoid player's lengthen input
     while (key[1] != '\0') {
         cout << "Please input again: ";
@@ -114,6 +113,7 @@ void setData(char key[], int choice, Player &player) {
     else
         i -= 'A';
     srand(time(NULL));
+    string log = "";
     switch (choice) {
     case 1:    // role
         if ((key[0] >= 'a' && key[0] <= 'a' + max_role) || (key[0] >= 'A' && key[0] <= 'A' + max_role))
@@ -148,6 +148,7 @@ void setData(char key[], int choice, Player &player) {
             renderNpc("Charon", log);
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
+
         break;
     case 3:    // gender
         if ((key[0] >= 'a' && key[0] <= 'a' + max_gender) || (key[0] >= 'A' && key[0] <= 'A' + max_gender))
@@ -257,19 +258,19 @@ void boatScreen() {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     renderNpc("Charon", "Choose one here.");
     printBoats();
-    char c[2] = {'6'};
-    while ((c[0] != '1' && c[0] != '2' && c[0] != '3' && c[0] != '4' && c[0] != '5') || c[1] != '\0') {
+    string choice = "";
+    while ((choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5') || choice[1] != '\0') {
         cout << "Enter your choice: ";
-        cin >> c;
+        cin >> choice;
     }
-    while (c[0] != '1') {
-        while ((c[0] != '1' && c[0] != '2' && c[0] != '3' && c[0] != '4' && c[0] != '5') || c[1] != '\0') {
+    while (choice[0] != '1') {
+        while ((choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5') || choice[1] != '\0') {
             renderNpc("Charon", "No such choice.");
             printBoats();
             cout << "Enter your choice: ";
-            cin >> c;
+            cin >> choice;
         }
-        if (c[0] == '5') {
+        if (choice[0] == '5') {
             renderNpc("Charon", "Look at how much money you have!");
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             renderNpc("Charon", "Why do you think you can afford that!?");
@@ -277,7 +278,7 @@ void boatScreen() {
             renderNpc("Charon", "You got no money to buy that.");
         printBoats();
         cout << "Enter your choice: ";
-        cin >> c;
+        cin >> choice;
     }
     renderNpc("Charon", "To my surprise, you bought trash.");
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));

@@ -32,6 +32,10 @@ void generateDrops(vector<Item> &items, Player &player) {
         weapon = "spear";
         healsNum = rand() % 3;
     } else if (randNum <= 90) {
+        int temp = rand() % 4 + 1;
+        cout << "poor healing x " << temp << " GET!\n";
+        cout << heals[2].cost;
+        updateItems("poor healing", temp, heals[2].cost, 'A', items);
         heal = "monster meat";
         weapon = "sword";
         healsNum = rand() % 7;
