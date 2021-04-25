@@ -234,8 +234,13 @@ void fightScreen(Player &player, vector<Item> &items, bool &isEscape) {
         cout << "You kill a monster!" << endl;
         cout << fixed << setprecision(2) << "You gain " << monster.exp << " XP!" << endl;
         player.exp += monster.exp;
-        generateDrops(items, player);    //annouce what player got after battle save in generateDrops(item)
+        generateDrops(items, player);    // annouce what player got after battle save in generateDrops(item)
         upgradePlayer(player);           // upgrade player's level and skills
+        if (rand() % 20 == 1) {          // monster have a 5% chance of giving the player a debuff
+            string buffName = allDebuffs[rand() % maxDebuff].name;
+            cout << "The monster give you a curse of" << buffName << "right before it die." << endl;
+            addBuff(false, buffName, player);
+        }
     }
     cout << endl;
 }
