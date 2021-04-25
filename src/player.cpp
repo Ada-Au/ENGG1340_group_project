@@ -22,7 +22,9 @@ Player::Player() {
 }
 
 void addBuff(bool isBuff, string name, Player &player) {
+    // check for if its buff or debuff
     if (isBuff) {
+        // check for if buff exist
         bool flag = true;
         for (int i = 0; i < player.buffs.size(); i++) {
             if (player.buffs[i].name == name) {
@@ -30,7 +32,7 @@ void addBuff(bool isBuff, string name, Player &player) {
                 break;
             }
         }
-
+        // if exist, add buff to player
         if (flag)
             for (int i = 0; i < maxBuff; i++) {
                 if (allBuffs[i].name == name) {
@@ -39,6 +41,7 @@ void addBuff(bool isBuff, string name, Player &player) {
                 }
             }
     } else {
+        // same as above
         bool flag = true;
         for (int i = 0; i < player.debuffs.size(); i++) {
             if (player.debuffs[i].name == name) {
@@ -114,6 +117,7 @@ void upgradePlayer(Player &player) {
     }
 }
 
+// Update user status by buff effect and count down timer for buff
 void updateOnBuff(Player &player) {
     for (int i = player.debuffs.size() - 1; i >= 0; i--) {
         player.hp += player.debuffs[i].hp;

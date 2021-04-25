@@ -52,6 +52,6 @@ void renderNpc(string npc, string talk) {
     } else if (npc == "Nightmare") {
         printNpc(talk, nightmare);
     } else if (npc == "Hades(calm)" || npc == "Hades(angry)") {
-        cout << "yup, i've got no face:D" << endl;
+        printNpc(talk, hades);
     }
 }
