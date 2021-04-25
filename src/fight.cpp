@@ -133,19 +133,24 @@ void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd)
     case 1:
         boss = boss1;
         renderNpc(boss.name, "AH! Don't kill me please QwQ");
+        addBuff(false, "Freezing", player);
         break;
     case 2:
         boss = boss2;
         renderNpc(boss.name, "Burn! Flame! Blaze! Hahaha");
+        addBuff(false, "Burning", player);
         break;
     case 3:
         boss = boss3;
         renderNpc(boss.name, "Oh hi. Don't 'die' so quick :D");
+        addBuff(false, "Poison", player);
         break;
     case 4:
         boss = boss4;
         renderNpc(boss.name, "Sha du lulu ~ oh --BI--");
         renderNpc(boss.name, "Why are you here??");
+        addBuff(false, "Freezing", player);
+        addBuff(false, "Burning", player);
         break;
     case 5:
         boss = boss5;
@@ -154,20 +159,24 @@ void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd)
     case 6:
         boss = boss6;
         renderNpc(boss.name, "Hello! CAN I SWALLOW YOU?");
+        addBuff(false, "Hunger", player);
         break;
     case 7:
         boss = boss7;
         renderNpc(boss.name, "...I want your body(O r O)");
+        addBuff(false, "Bleeding", player);
         break;
     case 8:
         boss = boss8;
         renderNpc(boss.name, "People call me the Death.");
         renderNpc(boss.name, "But I'd like to call myself...");
         renderNpc(boss.name, "a slave of death (;_;)");
+        addBuff(false, "Bleeding", player);
         break;
     case 9:
         boss = boss9;
         renderNpc(boss.name, "GLORY TO THE AFTERLIFE!!");
+        addBuff(false, "Bleeding", player);
         break;
     case 10:
         boss = boss10;
@@ -176,7 +185,7 @@ void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd)
         break;
     case 11:
         boss = boss11[0];
-        renderNpc(boss.name, "");
+        renderNpc(boss.name, "What brings you here?");
         break;
     case 12:
     default:
