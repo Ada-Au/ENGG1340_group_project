@@ -36,7 +36,7 @@ In this game, you control a dead man who falls into hell with plenty of monsters
 
 2. **Data structures for storing game status**
     - Class Player defines all the status of player, it contains:
-        - player's status (inc. mp, hp, energy, maxMp, maxHp, maxEnergy, maxExp, damage, denfese, level, game level and coin)
+        - player's status (inc. mp, hp, energy, maxMp, maxHp, maxEnergy, maxExp, damage, defense, level, game level and coin)
         - vector of player's buffs and debuffs
         - player x, y coordination
         - player's name, role, gender
