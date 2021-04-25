@@ -91,7 +91,8 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                     bossScreen(player, items, player.gameLevel / 5, isEnd);
                     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                     // Save game after fighting boss
-                    saveGame(player, items);
+                    if (player.hp > 0)
+                        saveGame(player, items);
                     // If player defeat the last boss (on level 55) will show end screen
                     if (isEnd) {
                         ending(player);
