@@ -20,19 +20,19 @@ int main() {
         isReplay = false;
         player = Player();
         vector<Item> items;
-        // menu(isPlay, player, items);
-        // if (isPlay == 3) {
-        //     isReplay = true;
-        //     continue;
-        // }
-        // if (isPlay == 0)
-        //     return 0;
-        // else if (isPlay != 2) {
-        //     setupScreen(player, isPlay);
-        //     if (isPlay == 0)
-        //         return 0;
-        //     boatScreen();
-        // }
+        menu(isPlay, player, items);
+        if (isPlay == 3) {
+            isReplay = true;
+            continue;
+        }
+        if (isPlay == 0)
+            return 0;
+        else if (isPlay != 2) {
+            setupScreen(player, isPlay);
+            if (isPlay == 0)
+                return 0;
+            boatScreen();
+        }
         map.fill();
         cout << endl
              << "Start your adventure!" << endl;
