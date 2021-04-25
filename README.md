@@ -18,7 +18,7 @@ In this game, you control a dead man who falls into hell with plenty of monsters
 4. When MP or Energy goes zero, player cannot attack in battle<br>
 5. When Energy goes zero, there are random punishment for the player. (i.e. player's HP decreases 1 per action)<br>
 6. Energy decreases when player makes any steps on map.<br>
-7. Game goal: defeat all the bosses and achieve different ending.<br>
+7. Game goal: defeat all the bosses and achieve different endings.<br>
 
 ## Features
 - Level-up system with skill points & experience level to upgrade player's ability <br>
