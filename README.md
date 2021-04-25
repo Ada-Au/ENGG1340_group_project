@@ -20,47 +20,60 @@ In this game, you control a dead man who falls into hell with plenty of monsters
 6. Energy decreases when time passes/ player makes any steps.<br>
 
 ## Features
-- Level-up system with points/experience level to upgrade player's ability <br>
+- Level-up system with skill points & experience level to upgrade player's ability <br>
 - Total 10 levels in the dungeon (hell). Different levels of the dungeon offer a range of difficulty in monsters corresponding with the range of value in treasure.<br>
 - Generally, the difficulty in monsters increases with procedurally generated levels of the dungeon.<br>
-- Rare treasures could be found in secret places.<br>
-- Each level has a different theme and boss. Also, there are 3 floors for each level.<br>
+- Chests could be found on map.<br>
+- Each level has a different theme and boss. Also, there are 5 floors for each level.<br>
 - NO AUTO SAVING and permadeath(i.e. player character loses all health are considered as dead and cannot be used anymore), is included. <br>
 - But there is a saving point after defeating the boss for each level.<br>
-- The difficulty (or type) of monsters and the rareness of equipments are shown in different colors.<br>
+- Monsters, NPC and chests are shown in different colors.<br>
 
 ## How do the features match requirements
 1. **Generation of random game sets or events**
-    - Generation of map, monsters, NPCs and equipments, such as weapons and tools, is random <br>
-    - The values of attack, the dodge chance of player and the damages to player etc. are generated randomly according to the ability of player and the monsters<br>
+    - Generation of map, monsters, NPCs and items, such as weapons and armors, is random <br>
+    - The attack value of player and the monster's damages to player are generated randomly according to the ability of player and the monsters<br>
 
 2. **Data structures for storing game status**
-    - A class is used to define all the status of player, it contains:
-        - array for saving plenty of player's status and items
+    - Class Player defines all the status of player, it contains:
+        - player's status (inc. mp, hp, energy, maxMp, maxHp, maxEnergy, maxExp, damage, denfese, level, game level and coin)
+        - vector of player's buffs and debuffs
         - player x, y coordination
-        - player name, role, gender
-    - Map is store in a 2D array for the landscape and monsters location
+        - player's name, role, gender
+    - Structures for items, healing, armor and weapon, they contain:
+        - name
+        - description
+        - functions
+        - cost and price
+    - Class Map stores in a 2D array for the landscape, generation of map and removing icons
+    - Vectors to store player's items and shop items
+    - Structure to store NPCs information and array of string to store NPCs' figures
 
 3. **Dynamic memory management**
     - array and pointer using in map generation
-    - more array for player status, image, interaction, items
+    - Array for player status, interaction, items
 
 4. **File input/output**
-    - savings are the file input and output. Savings should include the following types of information:<br>
+    - savings is file output and loading is file input. Saving includes the following types of information:<br>
         1. Level of the player<br>
-        2. The game progress and X, Y world location of the player<br>
-        3. The states (inc. health, MP and energy) of the player<br>
-        4. The ability of players (inc. strength, intelligence, luck etc.)<br>
-        5. The items in player's backpack (inc. money, weapons, armor, food, special tools like a boat, keys)<br>
-        6. The seed of the map (confirm the player is on the current floor)<br>
+        2. The game progress of player<br>
+        3. The states (inc. HP, MP and energy...) of the player<br>
+        4. The ability of players (inc. damage and defense etc.)<br>
+        5. The items in player's backpack (inc. money, weapons, armors, healings)<br>
+        6. Player's equipment (player's armor and player's weapon)<br>
 5. **Program codes in multiple files**
-    - programs are planned to be divided into:
-        - movement of player character
-        - states of player character
-        - generation of map, monsters and NPCs
-        - generation of items
-        - random output of the monsters' attack damage/ defense/ dodge according; and the probability of items appearing on map/ sold by special NPC
-        - interface of home page
-        - interface for battles
-        - interface for backpack
-        - interface for map
+    - programs are divided into:
+        - action.cpp & action.h: movement of player character; ending of game
+        - backpack.cpp & backpack.h: generation and storage of items; interface for backpack; interactions between players and backpack
+        - fight.cpp & fight.h: interface for battles; deal with player's actions in battle; set up of monsters' ability according to player game progress
+        - homepage.cpp & homepage.h: menu for player to save/load/quit game
+        - map.cpp & map.h: generation of map, monsters, NPCs and chests
+        - npc.cpp & npc.h: render NPC with talk screen; NPCs' ability and figure
+        - player.cpp & player.h: states of player character; upgrade of player; add & update buffs/debuffs on player
+        - saving.cpp & saving.h: save game and load game (game file is in [player's name].txt); deal wtih repeat of player's name in creating files
+        - screen.cpp & screen.h: render map screen; print player's status on right side of map; help menu
+        - setup.cpp & setup.h: set up player's information and storyline at begining
+        - shop.cpp & shop.h: render shop screen; generate shop items; deal with player's actions in shop
+        - main.cpp: execute file 
+## List of non-standard C/C++ libraries
+   - conio.h: 
