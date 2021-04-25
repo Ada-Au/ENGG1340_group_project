@@ -86,7 +86,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                 // To check for is it the last level
                 bool isEnd = true;
                 if (player.gameLevel % 5 == 0) {
-                    cout << player.gameLevel / 5;
+                    player.gameLevel++;
                     // Player has to fight a boss every 5 level of the game
                     bossScreen(player, items, player.gameLevel / 5, isEnd);
                     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -141,6 +141,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                 scr.renderScreen(map, player);
                 // Go into shop screen
                 shopScreen(player, items);
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                 // The shop on map will be removed
                 map.removeMapIcon(player.x, player.y);
             } else {
@@ -174,6 +175,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
 // Let player input their choice after the game has ended
 void tryAgain(string str, bool &isReplay) {
     string choice;
+    cin.ignore();
     do {
         getline(cin, choice);
         if (choice == "n" || choice == "N") {

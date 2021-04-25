@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const int maxDebuff = 12, maxBuff = 2;    // these 2 + 8 is the min map size
+const int maxDebuff = 5, maxBuff = 2;    // these 2 + 8 is the min map size
 
 struct Buff {
     string name;

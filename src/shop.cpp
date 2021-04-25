@@ -333,6 +333,7 @@ void shopScreen(Player &player, vector<Item> &items) {
         case '3':    //talk
             // player talk before buying and first meeting Charon
             if (player.isFirst && !bought) {
+                cin.ignore();
                 renderNpc("Charon", "Why do I need to talk to someone");
                 cout << "<Press Enter to Continue>";
                 cin.ignore(1024, '\n');
@@ -361,6 +362,7 @@ void shopScreen(Player &player, vector<Item> &items) {
                         }
                         break;
                     case 2:    // what can I do?
+                        cin.ignore();
                         renderNpc("Charon", "You want to know what to do here?");
                         cout << "<Press Enter to Continue>";
                         cin.ignore(1024, '\n');
@@ -384,6 +386,7 @@ void shopScreen(Player &player, vector<Item> &items) {
                         renderNpc("Charon", "Earn money and GIVE them to ME :D");
                         break;
                     case 3:    // What are you doing?
+                        cin.ignore();
                         renderNpc("Charon", "Huh?");
                         cout << "<Press Enter to Continue>";
                         cin.ignore(1024, '\n');
@@ -403,6 +406,7 @@ void shopScreen(Player &player, vector<Item> &items) {
                         renderNpc("Charon", "Money is never enough.");
                         break;
                     case 4:    // Life(?)
+                        cin.ignore();
                         renderNpc("Charon", "Earn Money.");
                         cout << "<Press Enter to Continue>";
                         cin.ignore(1024, '\n');

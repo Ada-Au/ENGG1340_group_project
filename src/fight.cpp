@@ -90,9 +90,10 @@ bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, boo
             // Set player defense, if player defense is higher than monster damage, then no damage will be deal
             // else player get a chance to defense some damage base on their defense level
             if (mHp > 0) {
-                if (monster.damage - player.aDefense * (1 + player.defense / 50.0) <= 0 || rand() % 10 >= 8) {    // 100% if player defense is higher than monster attack
-                    player.hp -= monster.damage - player.aDefense * (1 + player.defense / 50.0);                  // When lower, 80% defense part of attack, 20% defense all
-                    cout << monster.name << ": Got you! Make " << monster.damage - player.aDefense * (1 + player.defense / 50.0) << " damage!" << endl;
+                float defensed = monster.damage - player.aDefense * (1 + player.defense / 50.0);
+                if ((rand() % 20 == 1 && defensed < monster.damage) || player.aDefense == 0) {    // 100% if player defense is higher than monster attack
+                    player.hp -= defensed;                                                        // When lower, 95% defense part of attack, 5% defense all
+                    cout << monster.name << ": Got you! Make " << defensed << " damage!" << endl;
                 } else {
                     cout << "Player: Successfully defensed." << endl;
                 }
