@@ -14,7 +14,7 @@ In this game, you control a dead man who falls into hell with plenty of monsters
 1. Enjoy is the first most important :D<br>
 2. Turn-based battles with your strategy<br>
 2. WASD for movement control<br>
-3. When HP goes zero, player dies with permadeath<br>
+3. When HP goes zero, player dies with perma-death<br>
 4. When MP goes zero, player cannot release any magic skills<br>
 5. When Energy goes zero, there are random debuffs for the player. (e.g. max. strength & movement speed decrease...)<br>
 6. Energy decreases when time passes/ player makes any steps.<br>
@@ -25,7 +25,7 @@ In this game, you control a dead man who falls into hell with plenty of monsters
 - Generally, the difficulty in monsters increases with procedurally generated levels of the dungeon.<br>
 - Chests could be found on map.<br>
 - Each level has a different theme and boss. Also, there are 5 floors for each level.<br>
-- NO AUTO SAVING and permadeath(i.e. player character loses all health are considered as dead and cannot be used anymore), is included. <br>
+- NO AUTO SAVING and perma-death(i.e. player character loses all health are considered as dead and cannot be used anymore), is included. <br>
 - But there is a saving point after defeating the boss for each level.<br>
 - Monsters, NPC and chests are shown in different colors.<br>
 
@@ -69,10 +69,10 @@ In this game, you control a dead man who falls into hell with plenty of monsters
         - homepage.cpp & homepage.h: menu for player to save/load/quit game
         - map.cpp & map.h: generation of map, monsters, NPCs and chests; monster's movement
         - npc.cpp & npc.h: render NPC with talk screen; NPCs' ability and figure
-        - player.cpp & player.h: states of player character; upgrade of player; add & update buffs/debuffs on player
-        - saving.cpp & saving.h: save game and load game (game file is in [player's name].txt); deal wtih repeat of player's name in creating files
+        - player.cpp & player.h: status of player character; upgrade of player; add & update buffs/debuffs on player
+        - saving.cpp & saving.h: save game and load game (game file is in [player's name].txt); deal with repeat of player's name in creating files
         - screen.cpp & screen.h: render map screen; print player's status on right side of map; help menu; clear screen
-        - setup.cpp & setup.h: set up player's information and storyline at begining
+        - setup.cpp & setup.h: set up player's information and storyline at beginning
         - shop.cpp & shop.h: render shop screen; generate shop items; deal with player's actions in shop
         - main.cpp: execute file 
 ## List of non-standard C/C++ libraries

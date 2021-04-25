@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <iostream>
 
+// print NPC with their face and if they have anything to say
 void printNpc(string talk, const string npc[npcSize]) {
     bool isTalk = talk.length() > 0;
     for (int i = 0; i < npcSize - 5; i++) {
@@ -26,6 +27,7 @@ void printNpc(string talk, const string npc[npcSize]) {
     }
 }
 
+// allow other place to print NPC with only the NPC's name
 void renderNpc(string npc, string talk) {
     if (npc == "Monster" || npc == "Monster (enchanted)")
         printNpc(talk, monster);

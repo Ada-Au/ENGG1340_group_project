@@ -6,10 +6,13 @@
 
 using namespace std;
 
+// save player status and item they have
 void saveGame(Player player, vector<Item> &items) {
+    // only open file without create a new one
     ifstream file;
     file.open(player.name + ".txt");
     char key = ' ';
+    // check if file already exist and ask player want to cover the file or create a new one
     if (!file.fail()) {
         cout << "File name exist, do you want to cover the existing file? [y/n]" << endl;
         cin >> key;
@@ -20,7 +23,9 @@ void saveGame(Player player, vector<Item> &items) {
     }
     file.close();
 
+    // set player name as the file name
     string fileName = player.name;
+    // If file exist and player chose not to cover the old file, ask to create new file name
     if (key == 'n' || key == 'N') {
         cout << "Do you want to create a new file? [y/n]" << endl;
         cin >> key;
@@ -38,6 +43,7 @@ void saveGame(Player player, vector<Item> &items) {
         }
     }
 
+    // create file and save all player status and items
     ofstream saveFile;
     saveFile.open(fileName + ".txt");
 
@@ -72,12 +78,15 @@ void saveGame(Player player, vector<Item> &items) {
     cout << "File Saved <Press Enter to continue>";
 }
 
+// Load game
 void getSavedGame(Player &player, vector<Item> &items, int &isPlay) {
     string fileName;
+    // get file name they want to read
     cout << "Please input the file name you want to continue: ";
     cin >> fileName;
     ifstream file;
     file.open(fileName + ".txt");
+    // ask new file name or allow player to quit loading
     while (file.fail()) {
         cout << "File not exist. Please input again or press [Q] to starting screen: ";
         cin >> fileName;
@@ -89,6 +98,7 @@ void getSavedGame(Player &player, vector<Item> &items, int &isPlay) {
         }
     }
 
+    // get data from file
     string tempName;
     file >> player.mp >> player.hp >> player.energy >> player.exp >> player.maxExp >> player.maxMp >> player.maxEnergy >> player.damage >> player.defense >> player.maxHp;
     file >> player.level >> player.gameLevel >> player.coin;
