@@ -80,9 +80,9 @@ In this game, you control a dead man who falls into hell with plenty of monsters
    - conio.h: 
 
 ## Compilation and Execution Instructions
-    - Our game are supported in all kinds of operating systems (i.e. Mac, Window, and Linux)
+   - Our game are supported in all kinds of operating systems (i.e. Mac, Window, and Linux)
     ** Download & Set up **
-    - Open terminal on your PC and go the directory that contains our game
-    - In Mac and Linux, you can create our game execute file by typing "make main". In Window, you can create it by typing "./Makefile".
-    - In Mac and Linux, you can open our game execute file by typing "./main". In Window, main.exe is created instead of main. Thus, please open our game by typing "./main.exe" in Window.
-    - Load game: 
+   - Open terminal on your PC and go the directory that contains our game
+   - In Mac and Linux, you can create our game execute file by typing "make main". In Window, you can create it by typing "./Makefile".
+   - In Mac and Linux, you can open our game execute file by typing "./main". In Window, main.exe is created instead of main. Thus, please open our game by typing "./main.exe" in Window.
+   - Load game: 
