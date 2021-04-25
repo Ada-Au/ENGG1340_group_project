@@ -67,11 +67,11 @@ In this game, you control a dead man who falls into hell with plenty of monsters
         - backpack.cpp & backpack.h: generation and storage of items; interface for backpack; interactions between players and backpack
         - fight.cpp & fight.h: interface for battles; deal with player's actions in battle; set up of monsters' ability according to player game progress
         - homepage.cpp & homepage.h: menu for player to save/load/quit game
-        - map.cpp & map.h: generation of map, monsters, NPCs and chests
+        - map.cpp & map.h: generation of map, monsters, NPCs and chests; monster's movement
         - npc.cpp & npc.h: render NPC with talk screen; NPCs' ability and figure
         - player.cpp & player.h: states of player character; upgrade of player; add & update buffs/debuffs on player
         - saving.cpp & saving.h: save game and load game (game file is in [player's name].txt); deal wtih repeat of player's name in creating files
-        - screen.cpp & screen.h: render map screen; print player's status on right side of map; help menu
+        - screen.cpp & screen.h: render map screen; print player's status on right side of map; help menu; clear screen
         - setup.cpp & setup.h: set up player's information and storyline at begining
         - shop.cpp & shop.h: render shop screen; generate shop items; deal with player's actions in shop
         - main.cpp: execute file 
