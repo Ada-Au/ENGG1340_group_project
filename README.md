@@ -85,8 +85,8 @@ In this game, you control a dead man who falls into hell with plenty of monsters
        - Open terminal on your PC and go the directory that contains our game<br>
        - In Mac and Linux, you can create our game execute file by typing "make main". In Window, you can create it by typing "./Makefile".<br>
    **2. Start game: ** <br>
-   - In Mac and Linux, you can open our game execute file by typing "./main". In Window, main.exe is created instead of main. Thus, please open our game by typing "./main.exe" in Window.<br>
-   - Start game by entering '1' in our game menu <br>
+       - In Mac and Linux, you can open our game execute file by typing "./main". In Window, main.exe is created instead of main. Thus, please open our game by typing "./main.exe" in Window.<br>
+       - Start game by entering '1' in our game menu <br>
    **3. Load game: ** <br>
-   - if you already started our game and defeated a boss, you can load your game file by entering '2' in our game menu.<br>
-   - to load your file, please fill in your character's name in your game (* no need to type in .txt).<br>
+       - if you already started our game and defeated a boss, you can load your game file by entering '2' in our game menu.<br>
+       - to load your file, please fill in your character's name in your game (* no need to type in .txt).<br>
