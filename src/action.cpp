@@ -79,12 +79,17 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
             // Check for is player on stair
             if (map.layout[player.y][player.x] == 'S') {
                 player.gameLevel++;
+                string buffName = allBuffs[rand() % maxBuff].name;
+                cout << GREEN << "Another adventurer give you a blessing of " << buffName << "." << endl
+                     << RESET << endl;
+                addBuff(true, buffName, player);
                 // To check for is it the last level
                 bool isEnd = true;
                 if (player.gameLevel % 5 == 0) {
                     cout << player.gameLevel / 5;
                     // Player has to fight a boss every 5 level of the game
                     bossScreen(player, items, player.gameLevel / 5, isEnd);
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                     // Save game after fighting boss
                     saveGame(player, items);
                     // If player defeat the last boss (on level 55) will show end screen
@@ -116,6 +121,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                 if (!isEscape) {
                     map.removeMapIcon(player.x, player.y);
                 }
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                 // Print screen for player to see
                 scr.renderScreen(map, player);
                 // Check for is player on chest
@@ -165,6 +171,7 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
     }
 }
 
+// Let player input their choice after the game has ended
 void tryAgain(string str, bool &isReplay) {
     string choice;
     do {

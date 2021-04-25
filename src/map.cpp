@@ -89,27 +89,36 @@ void Map::fill() {
     cout << "\ndone:D\tPress enter to continue...\n\n\n ";
 }
 
+// Update map monster every step player take
 void Map::update(int x, int y) {
     srand(time(NULL));
     char newMap[map_height][map_width];
+    // create an empty map
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
             newMap[h][w] = ' ';
         }
     }
+    // copy the current map to the empty map with monster position updated
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
+            // do not update the new map when there is already monster on that position so monster will not be on another monster
             if (newMap[h][w] != 'M') {
+                // copy everything on map
                 newMap[h][w] = layout[h][w];
+                // monster have a 50% chance to move
                 if (layout[h][w] == 'M' && rand() % 10 < 6) {
+                    // get a random direction to move
                     int randomN = rand() % 4;
                     int randomDirection[2] = {directions[randomN][0],
                                               directions[randomN][1]};
+                    // check if the new position is empty
                     if (layout[h + randomDirection[0]]
                               [w + randomDirection[1]] == ' ' &&
                         newMap[h + randomDirection[0]]
                               [w + randomDirection[1]] != 'M' &&
                         (h + randomDirection[0]) != y && (w + randomDirection[1]) != x) {
+                        // update new map
                         newMap[h][w] = ' ';
                         newMap[h + randomDirection[0]][w + randomDirection[1]] = 'M';
                     }
@@ -117,6 +126,7 @@ void Map::update(int x, int y) {
             }
         }
     }
+    // copy new map to layout
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
             layout[h][w] = newMap[h][w];
@@ -124,4 +134,5 @@ void Map::update(int x, int y) {
     }
 }
 
+// remove anything that is on the given position
 void Map::removeMapIcon(int x, int y) { layout[y][x] = ' '; }
