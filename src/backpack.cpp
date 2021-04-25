@@ -35,7 +35,6 @@ void generateDrops(vector<Item> &items, Player &player) {
     } else if (randNum <= 90) {    // 40% to generate poor healing, monster meat and sword
         int temp = rand() % 4 + 1;
         cout << "poor healing x " << temp << " GET!\n";
-        cout << heals[2].cost;
         updateItems("poor healing", temp, heals[2].cost, 'A', items);
         heal = "monster meat";
         weapon = "sword";

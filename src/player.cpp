@@ -61,7 +61,9 @@ void addBuff(bool isBuff, string name, Player &player) {
 
 // level-up mechanism of player's max experience point & skills system
 void nextLevel(Player &player) {
-    player.maxExp = (0.85 * pow(player.level, 3) + 0.04 * pow(player.level, 2) + 2 * player.level);
+    // player.maxExp = (0.85 * pow(player.level, 3) + 0.04 * pow(player.level, 2) + 2 * player.level); TODO
+    player.maxExp += 5;
+    player.exp -= player.maxExp;
     int point = (player.level / 20) + 2;    // every 20 level add one more skill point for each upgrade
     while (point != 0) {                    // until player uses up all skill points
         char key;
