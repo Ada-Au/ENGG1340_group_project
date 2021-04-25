@@ -11,6 +11,7 @@ using namespace std;
 
 void Screen::renderScreen(Map map, Player player) {
     const int statSize = 18;
+    // show player status on the right side of the map
     string stat[statSize] = {"[ " + player.name + " ]",
                              "",
                              "Level: " + to_string(player.level),
@@ -30,6 +31,7 @@ void Screen::renderScreen(Map map, Player player) {
                              "",
                              "Buffs: "};
 
+    // print map with coloured icons
     int debuffSize = player.debuffs.size();
     for (int h = 0; h < map_height; h++) {
         for (int w = 0; w < map_width; w++) {
@@ -52,6 +54,7 @@ void Screen::renderScreen(Map map, Player player) {
             }
         }
 
+        // print player status and add a square around the status
         cout << "      ";
         if (h == 0 || h == map_height - 1) {    // print player's status
             cout << "*******************************" << endl;
@@ -83,6 +86,7 @@ void Screen::renderScreen(Map map, Player player) {
     log = "";
 }
 
+// print help screen
 void printHelp() {
     cout << "Keyboard shortcuts" << setfill(' ') << setw(map_width - 15) << "NPC Icons" << endl
          << "- [W]\t move Up" << setw(map_width - 19) << RED << "- M\t monster" << RESET << endl
