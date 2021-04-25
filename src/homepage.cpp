@@ -21,12 +21,12 @@ void menu(int &isPlay, Player &player, vector<Item> &items) {
         cin >> choice;
     }
     switch (choice[0]) {
-    case '1':    // start a new game
+    case '1':    // start new game
         cout << "START! :D\n\n";
-        updateItems("bread", 3, 2, 'A', items);    // give breads and coin to player in the beginning
+        updateItems("bread", 3, 2, 'A', items);    // give breads and 1 coin to player in the beginning
         player.coin = 1;
         break;
-    case '2':    // load a game
+    case '2':    // load game
         cout << "Selected LOAD\n";
         isPlay = 2;
         getSavedGame(player, items, isPlay);

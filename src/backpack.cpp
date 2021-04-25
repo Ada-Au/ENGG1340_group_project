@@ -86,7 +86,8 @@ void sortItems(vector<Item> &items) {
 }
 
 // Display player's backpack item
-// Input: isShop: boolean to determine whether to display items' costs and operator
+// Input: isShop: boolean for checking player opens backpack in map/shop
+//                is to determine whether to display items' costs and operator
 void displayBackpack(vector<Item> &items, bool isShop) {
     sortItems(items);
     cout << "Items\t\t\t\t\t\tNumber";
@@ -110,6 +111,8 @@ void displayBackpack(vector<Item> &items, bool isShop) {
 }
 
 // Update player's state if plater use healing
+// Input: string object: name of the selected items
+//        int num: amount of used items
 void updateState(Player &player, string object, int number) {
     for (int i = 0; i < maxHealNum; i++) {
         if (object == heals[i].name) {
@@ -124,6 +127,9 @@ void updateState(Player &player, string object, int number) {
         player.energy = player.maxEnergy;
 }
 
+// find items in backpack
+// if selected item already in backpack, return its index in backpack
+// else return -1
 int findItem(string name, vector<Item> &items) {
     for (int i = 0; i < items.size(); i++) {
         if (name == items[i].name)
@@ -151,6 +157,7 @@ void updateItems(string name, int number, int cost, char flag, vector<Item> &ite
             // Update item's number if item already exists in backpack
         } else {
             items[pos].num += number;
+            // limit number of player's item to 99
             if (items[pos].num > maxStack) {
                 items[pos].num = maxStack;
                 cout << "You cannot have more than 99 " << items[pos].name << '.';
@@ -159,7 +166,7 @@ void updateItems(string name, int number, int cost, char flag, vector<Item> &ite
     }
 }
 
-// choose items in backpack to use
+// choose items in backpack to use/sell
 void openBackpack(vector<Item> &items, Player &player) {
     string choice;    // string for two digit nums
     displayBackpack(items, false);
@@ -174,16 +181,21 @@ void openBackpack(vector<Item> &items, Player &player) {
             // Find item if it's healing
             for (int i = 0; i < maxHealNum; i++) {
                 if (items[pos].name == heals[i].name) {
+                    // tell player his/her selection and the function of selected healing
                     cout << items[pos].name + " is selected.\t" + heals[i].desc << endl;
+                    // require player to input how many he/she will use
                     cout << "Amount to use: ";
                     int amount;
                     cin >> amount;
+                    // restrict player's input is valid (i.e. player's input < amount of items in backpack && player's input > 0)
                     while (amount > items[pos].num || amount < 0) {
                         cout << "Exceeds amount, please enter a valid number: ";
                         cin >> amount;
                     }
                     cout << "\n\n";
+                    // Delete used items in backpack
                     updateItems(items[pos].name, amount, heals[i].cost, 'D', items);
+                    // update player's state
                     updateState(player, items[pos].name, amount);
                     break;
                 }
@@ -191,6 +203,7 @@ void openBackpack(vector<Item> &items, Player &player) {
             // Find item if it's armor
             for (int i = 0; i < maxArmorNum; i++) {
                 if (items[pos].name == armors[i].name) {
+                    // tell player his/her selection and the function of selected armor
                     cout << items[pos].name + " is equipped.\t" + armors[i].desc + "\n\n";
                     // Add player's old armor in backpack if player is wearing armor
                     if (player.armor != "") {
@@ -201,6 +214,7 @@ void openBackpack(vector<Item> &items, Player &player) {
                             }
                         }
                     }
+                    // wear new armor
                     player.armor = items[pos].name;
                     // Update player's armor defense
                     for (int i = 0; i < maxArmorNum; i++) {
@@ -216,6 +230,7 @@ void openBackpack(vector<Item> &items, Player &player) {
             }
             // Find item if it's weapon
             for (int i = 0; i < maxWeaponNum; i++) {
+                // tell player his/her selection and the function of selected weapon
                 if (items[pos].name == weapons[i].name) {
                     cout << items[pos].name + " is equipped.\t" + weapons[i].desc + "\n\n";
                     // Add player's old weapon in backpack if player is equipping weapon
@@ -227,6 +242,7 @@ void openBackpack(vector<Item> &items, Player &player) {
                             }
                         }
                     }
+                    // wear new weapon
                     player.weapon.name = items[pos].name;
                     // Update player's weapon damage, energy loss of weapon and mp loss of weapon
                     for (int i = 0; i < maxWeaponNum; i++) {
@@ -244,7 +260,7 @@ void openBackpack(vector<Item> &items, Player &player) {
             }
             // Disequip player's armor
         } else if (choice == "a" || choice == "A") {
-            // Add player's old armor in backpack &if player is disequipping armor
+            // Add player's old armor in backpack if player is disequipping armor
             if (player.armor != "Empty") {
                 for (int i = 0; i < maxArmorNum; i++) {
                     if (player.armor == armors[i].name) {
@@ -252,6 +268,7 @@ void openBackpack(vector<Item> &items, Player &player) {
                         break;
                     }
                 }
+                // empty player's armor & set player's armor defense to 0
                 player.armor = "Empty";
                 player.aDefense = 0;
                 // Else if player doesn't have armor on hand
@@ -268,6 +285,7 @@ void openBackpack(vector<Item> &items, Player &player) {
                         break;
                     }
                 }
+                // empty player's weapon
                 player.weapon = {"Empty", 2, 0, 1};
                 // Else if player doesn't have weapon on hand
             } else {
@@ -283,7 +301,7 @@ void openBackpack(vector<Item> &items, Player &player) {
     }
 }
 
-// Generate item in chest and update player's  backpack
+// Generate item in chest and update player's backpack
 // Chest only generates armors and coins
 void generateChestItems(vector<Item> &items, Player &player) {
     string armor = "";

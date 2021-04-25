@@ -100,6 +100,7 @@ bool fight(Player &player, vector<Item> &items, Monster monster, float &mHp, boo
             break;
 
         case '3':
+            // Open player's backpack and let player uses items
             openBackpack(items, player);
             break;
             cout << endl;
@@ -204,10 +205,10 @@ void bossScreen(Player &player, vector<Item> &items, int bossIndex, bool &isEnd)
 // setup monster status base on player levels and game level they are on
 Monster setUpMonster(Player player) {
     int monsterN = rand() % monsterSize;
-    float hp = rand() % player.gameLevel + (rand() % 100) / 100.0 + (pow(0.4 * player.gameLevel, 2) / 2) + (monsters[monsterN].hp * pow(player.gameLevel, 0.5));    //monster's Hp range ~ gameLevel
-    float damage = rand() % player.gameLevel + (pow(0.4 * player.gameLevel, 2) / 2) + (monsters[monsterN].damage * pow(player.gameLevel, 0.5));
-    float rate = monsters[monsterN].rate - (player.gameLevel / 2);
-    float exp = ((log(player.gameLevel) / log(2)) * (0.4 * player.gameLevel) + 5);
+    float hp = rand() % player.gameLevel + (rand() % 100) / 100.0 + (pow(0.4 * player.gameLevel, 2) / 2) + (monsters[monsterN].hp * pow(player.gameLevel, 0.5));    //monster's Hp range based on gameLevel
+    float damage = rand() % player.gameLevel + (pow(0.4 * player.gameLevel, 2) / 2) + (monsters[monsterN].damage * pow(player.gameLevel, 0.5));                     // monster's damage range based on gameLevel
+    float rate = monsters[monsterN].rate - (player.gameLevel / 2);                                                                                                  // monster hitting rate increases with increase of player's game leveel
+    float exp = ((log(player.gameLevel) / log(2)) * (0.4 * player.gameLevel) + 5);                                                                                  // monster's experience points to player increases with player's gameLevel
     // mExp reward and penalty based on the difference of level between player and game
     if (monsterN == 1)
         exp *= 1.5;
@@ -234,7 +235,7 @@ void fightScreen(Player &player, vector<Item> &items, bool &isEscape) {
         cout << fixed << setprecision(2) << "You gain " << monster.exp << " XP!" << endl;
         player.exp += monster.exp;
         generateDrops(items, player);    //annouce what player got after battle save in generateDrops(item)
-        upgradePlayer(player);
+        upgradePlayer(player);           // upgrade player's level and skills
     }
     cout << endl;
 }

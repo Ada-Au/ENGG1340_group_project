@@ -8,7 +8,7 @@
 
 using namespace std;
 
-// print the player's information
+// print the player's information: name, role, race and gender
 void PrintInform(Player player) {
     string ID[6] = {"------------------------------------------",
                     "> Name: " + player.name,
@@ -61,6 +61,7 @@ void PrintRace() {
 void PrintGender() {
     cout << setfill('-') << setw(50) << "\n";
     cout << "\nWhat's your gender?\n\n";
+
     for (char i = 'a'; i < 'a' + max_gender; i++) {
         int j = i - 'a';
         cout << i << " - " << genderList[j] << "\n";
@@ -71,7 +72,7 @@ void PrintGender() {
 // print player's question in Charon's introduction
 // and read player's choices
 // Input: bool repeat: determine whether player entered invalid input
-//                     if invalid, Charon appears to ask "What do you say?"
+//                     if input is invalid, Charon asks "What do you say?"
 void DealQuestion(bool repeat, string &key) {
     if (repeat) {
         cout << "1 - Who are you?\n"
@@ -91,6 +92,7 @@ void DealQuestion(bool repeat, string &key) {
 
 // Charon's introduction at the beginning of game
 void introduction(string key) {
+    // read player's input of kwy
     DealQuestion(true, key);
     // Require player enter again after he/she enters invalid input
     while (key[1] != '\0' || (key[0] != '1' && key[0] != '2' && key[0] != '3')) {
@@ -128,8 +130,8 @@ void setData(string key, int choice, Player &player) {
     // else if player's input is upper-case
     else
         i -= 'A';
-    srand(time(NULL));
-    string log = "";    // Charon's log after player's selecting race
+    srand(time(NULL));    // seed random for next random generation of role, race and gender
+    string log = "";      // Charon's log after player's selecting race
     switch (choice) {
     case 1:    // role
         // allow player's input is lower-case and upper-case
@@ -185,20 +187,22 @@ void setData(string key, int choice, Player &player) {
 }
 
 // set up player's information at the beginning of the game
-// int isPlay: to determine whether player starts/load/quit game
+// int isPlay: to determine player starts/load/quit game
 void setupScreen(Player &player, int &isPlay) {
-    string key;           // string to store player's choice
+    string key;           // string for player's choice
     srand(time(NULL));    // seed random for randomly setting up player's role and gender
     player.role = roleList[rand() % max_role];
     player.gender = genderList[rand() % max_gender];
+
     renderNpc("Charon", "YOU DIED, Welcome to the Hell!");
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     renderNpc("Charon", "What's your name?");
     cout << "My name is: ";
-    cin.ignore();    // ignore new line form homepage.cpp - menu()
-    getline(cin, player.name);
+    cin.ignore();          // ignore new line form homepage.cpp - menu()
+    cin >> player.name;    // player's name = name of saving file in saving.cpp
     cout << endl;
     renderNpc("Charon", "Welcome " + player.name + ".");
+
     introduction(key);    // start Charon's introduction
     PrintInform(player);
     PrintChoice();
