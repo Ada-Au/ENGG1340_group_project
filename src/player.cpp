@@ -56,10 +56,11 @@ void addBuff(bool isBuff, string name, Player &player) {
     }
 }
 
+// level-up mechanism of player's max experience point & skills system
 void nextLevel(Player &player) {
     player.maxExp = (0.85 * pow(player.level, 3) + 0.04 * pow(player.level, 2) + 2 * player.level);
     int point = (player.level / 20) + 2;    // every 20 level add one more skill point for each upgrade
-    while (point != 0) {
+    while (point != 0) {                    // until player uses up all skill points
         char key;
         cout << "\nYou have " << point << " points to upgrade!" << endl
              << "z - Maximum MP (+2): " << player.maxMp << endl
@@ -68,24 +69,25 @@ void nextLevel(Player &player) {
              << "v - Defense level (+2% defense per level): " << player.defense << endl
              << "Input character to upgrade: ";
         cin >> key;
+        // restrict player's choice within 'Z'/'z', 'X'/'x', 'C'/'c', 'V'/'v'
         while (key != 'z' && key != 'Z' && key != 'x' && key != 'X' && key != 'c' && key != 'C' && key != 'v' && key != 'V') {
             cout << "Please input a valid character to upgrade: ";
             cin >> key;
         }
         switch (key) {
-        case 'z':
+        case 'z':    // increase max.mp
         case 'Z':
             player.maxMp += 2;
             break;
-        case 'x':
+        case 'x':    //increase max.energy
         case 'X':
             player.maxEnergy += 2;
             break;
-        case 'c':
+        case 'c':    // increase atk
         case 'C':
             player.damage++;
             break;
-        case 'v':
+        case 'v':    // increase dfs
         case 'V':
             player.defense++;
             break;
@@ -95,13 +97,17 @@ void nextLevel(Player &player) {
     cout << endl;
 }
 
+// player's upgrade after level up
 void upgradePlayer(Player &player) {
+    // player's experience points won't be clear after level up
+    // instead, player's experience points accumulate
+    // max. player level is 100
     if (player.exp >= player.maxExp && player.level <= 100) {
         player.level++;
-        player.maxHp += 2;    // maxHp plus 2 for every level
+        player.maxHp += 2;    // max.Hp plus 2 for every level
         cout << "\n\nYou are now level " << player.level << "!!\n";
-        nextLevel(player);    // upgrade of skills
-        // restore of energy, hp and mp for every level upgrade (optional)
+        nextLevel(player);    // upgrade of skills & max.exp
+        // restore of energy, hp and mp for every level upgrade
         player.energy = player.maxEnergy;
         player.hp = player.maxHp;
         player.mp = player.maxMp;
