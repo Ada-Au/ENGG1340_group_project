@@ -162,6 +162,10 @@ void action(Screen scr, Map map, Player player, vector<Item> &items, bool &isRep
                 scr.log = "There is a wall in my way";
             // If not then energy will be reduced by one, if energy is 0, it will start to reduce HP
             else {
+                if (player.hp > 10)
+                    scr.log = "Mind your HP!";
+                if (player.energy > 10)
+                    scr.log = "Mind your energy!";
                 if (player.energy > 0)
                     player.energy--;
                 else
